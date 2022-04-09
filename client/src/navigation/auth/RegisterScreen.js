@@ -13,14 +13,14 @@ import {
   VStack,
 } from "native-base";
 
-import CustomButton from "./../../components/general/actionButton/CustomButton";
-import CustomLayout from "./../../components/general/CustomLayout";
+import CustomButton from "../../components/general/actionButton/CustomButton";
+import CustomLayout from "../../components/general/CustomLayout";
 import Icon from "react-native-vector-icons/FontAwesome";
-import colors from "./../../styles/colors";
-import { space } from "./../../styles/layout";
+import colors from "../../styles/colors";
+import { space } from "../../styles/layout";
 
-const LoginScreen = ({ navigation }) => {
-  const loginForm = (
+const RegisterScreen = ({ navigation }) => {
+  const form = (
     <Center w="100%">
       <Box safeArea w="100%">
         <VStack space={space.xs}>
@@ -28,7 +28,7 @@ const LoginScreen = ({ navigation }) => {
             Xin chào
           </Heading>
           <Heading size="xs" fontWeight="medium">
-            Đăng nhập để tiếp tục
+            Đăng ký để tiếp tục
           </Heading>
         </VStack>
         <VStack space={space.m} mt={space.xxl} mb={space.xl}>
@@ -37,20 +37,20 @@ const LoginScreen = ({ navigation }) => {
           </FormControl>
           <FormControl>
             <Input variant="rounded" type="password" placeholder="Mật khẩu" />
-            <Link
-              mt={space.s}
-              alignSelf="flex-end"
-              _text={{ color: colors.primary }}
-            >
-              Quên mật khẩu?
-            </Link>
+          </FormControl>
+          <FormControl>
+            <Input
+              variant="rounded"
+              type="password"
+              placeholder="Nhập lại mật khẩu"
+            />
           </FormControl>
         </VStack>
         <VStack space={space.m}>
           <CustomButton
-            text="Đăng nhập"
+            text="Đăng ký"
             onPress={() => {
-              navigation.replace("HomeScreen");
+              navigation.navigate("HomeScreen");
             }}
           />
           <Button
@@ -58,23 +58,23 @@ const LoginScreen = ({ navigation }) => {
             rounded="full"
             colorScheme="muted"
             leftIcon={<Icon name="google" color={colors.primary} />}
-            // onPress={() => navigation.navigate("HomeScreen")}
+            onPress={() => navigation.navigate("HomeScreen")}
           >
-            Đăng nhập với Google
+            Đăng ký với Google
           </Button>
         </VStack>
         <HStack mt="6" justifyContent="center">
-          <Text>Chưa có tài khoản. </Text>
+          <Text>Đã có tài khoản. </Text>
           <Link
             _text={{ color: colors.primary }}
-            onPress={() => navigation.navigate("RegisterScreen")}
+            onPress={() => navigation.navigate("LoginScreen")}
           >
-            Đăng ký
+            Đăng nhập
           </Link>
         </HStack>
       </Box>
     </Center>
   );
-  return <CustomLayout child={loginForm} />;
+  return <CustomLayout child={form} />;
 };
-export default LoginScreen;
+export default RegisterScreen;

@@ -28,12 +28,6 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <NativeBaseProvider theme={theme}>
-        {/* <NavigationContainer>
-          <Stack.Navigator screenOptions={{ headerShown: false, contentStyle: { backgroundColor: "white" }, }}>
-            <Stack.Screen name="LoginScreen" component={LoginScreen} />
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
-          </Stack.Navigator>
-        </NavigationContainer> */}
         <Navigation />
       </NativeBaseProvider>
     </SafeAreaProvider>
