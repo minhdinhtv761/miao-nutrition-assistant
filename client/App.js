@@ -2,6 +2,7 @@ import { NativeBaseProvider, extendTheme } from "native-base";
 
 import Navigation from "./Navigation";
 import React from "react";
+import { SSRProvider } from "@react-aria/ssr";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
@@ -25,8 +26,10 @@ export default function App() {
     components: {},
   });
   return (
-    <NativeBaseProvider theme={theme}>
-      <Navigation />
-    </NativeBaseProvider>
+    <SSRProvider>
+      <NativeBaseProvider theme={theme}>
+        <Navigation />
+      </NativeBaseProvider>
+    </SSRProvider>
   );
 }

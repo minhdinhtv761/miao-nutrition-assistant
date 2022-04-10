@@ -1,4 +1,4 @@
-import { HomeScreen, LoginScreen, RegisterScreen } from "./src/navigation";
+import { HomeScreen, LoginScreen, RegisterScreen } from "./src/features";
 
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";

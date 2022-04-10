@@ -13,30 +13,19 @@ import {
   VStack,
 } from "native-base";
 
-import CustomButton from "./../../components/general/actionButton/CustomButton";
-import CustomLayout from "./../../components/general/CustomLayout";
+import CustomButton from "../../components/general/actionButton/CustomButton";
+import CustomLayout from "../../components/general/CustomLayout";
 import Icon from "react-native-vector-icons/FontAwesome";
-import colors from "./../../styles/colors";
-import { space } from "./../../styles/layout";
+import colors from "../../styles/colors";
+import { space } from "../../styles/layout";
+import { validate } from "./validation";
 
-const LoginScreen = ({ navigation }) => {
+const RegisterScreen = ({ navigation }) => {
   const [authData, setAuthData] = React.useState({});
   const [errors, setErrors] = React.useState({});
 
-  const validate = () => {
-    if (!authData.email) {
-      setErrors({ email: "Tài khoản không được bỏ trống" });
-      return false;
-    }
-    if (!authData.password) {
-      setErrors({ password: "Mật khẩu không được bỏ trống" });
-      return false;
-    }
-    return true;
-  };
-
   const onSubmit = () => {
-    validate()
+    validate(authData, setErrors, true)
       ? navigation.navigate("HomeScreen")
       : console.log("Validation Failed");
   };
@@ -49,7 +38,7 @@ const LoginScreen = ({ navigation }) => {
             Xin chào
           </Heading>
           <Heading size="xs" fontWeight="medium">
-            Đăng nhập để tiếp tục
+            Đăng ký để tiếp tục
           </Heading>
         </VStack>
         <VStack space={space.m} mt={space.xxl} mb={space.xl}>
@@ -69,7 +58,9 @@ const LoginScreen = ({ navigation }) => {
           </FormControl>
           <FormControl
             isInvalid={
-              !("email" in errors) && !authData.password && "password" in errors
+              !("email" in errors) &&
+              (!authData.password || authData.password.length < 6) &&
+              "password" in errors
             }
           >
             <Input
@@ -81,23 +72,37 @@ const LoginScreen = ({ navigation }) => {
               }
             />
             {!("email" in errors) &&
-            !authData.password &&
+            (!authData.password || authData.password.length < 6) &&
             "password" in errors ? (
               <FormControl.ErrorMessage>
                 {errors.password}
               </FormControl.ErrorMessage>
             ) : null}
-            <Link
-              mt={space.s}
-              alignSelf="flex-end"
-              _text={{ color: colors.primary }}
-            >
-              Quên mật khẩu?
-            </Link>
+          </FormControl>
+          <FormControl
+            isInvalid={
+              !("email" in errors && "password" in errors) &&
+              "rePassword" in errors
+            }
+          >
+            <Input
+              variant="rounded"
+              type="password"
+              placeholder="Nhập lại mật khẩu"
+              onChangeText={(value) =>
+                setAuthData({ ...authData, rePassword: value })
+              }
+            />
+            {!("email" in errors && "password" in errors) &&
+            "rePassword" in errors ? (
+              <FormControl.ErrorMessage>
+                {errors.rePassword}
+              </FormControl.ErrorMessage>
+            ) : null}
           </FormControl>
         </VStack>
         <VStack space={space.m}>
-          <CustomButton text="Đăng nhập" onPress={onSubmit} />
+          <CustomButton text="Đăng ký" onPress={onSubmit} />
           <Button
             variant="outline"
             rounded="full"
@@ -108,12 +113,12 @@ const LoginScreen = ({ navigation }) => {
           </Button>
         </VStack>
         <HStack mt="6" justifyContent="center">
-          <Text>Chưa có tài khoản. </Text>
+          <Text>Đã có tài khoản. </Text>
           <Link
             _text={{ color: colors.primary }}
-            onPress={() => navigation.navigate("RegisterScreen")}
+            onPress={() => navigation.navigate("LoginScreen")}
           >
-            Đăng ký
+            Đăng nhập
           </Link>
         </HStack>
       </Box>
@@ -121,4 +126,4 @@ const LoginScreen = ({ navigation }) => {
   );
   return <CustomLayout child={loginForm} />;
 };
-export default LoginScreen;
+export default RegisterScreen;
