@@ -20,6 +20,27 @@ import colors from "./../../styles/colors";
 import { space } from "./../../styles/layout";
 
 const LoginScreen = ({ navigation }) => {
+  const [authData, setAuthData] = React.useState({});
+  const [errors, setErrors] = React.useState({});
+
+  const validate = () => {
+    if (!authData.email) {
+      setErrors({ email: "Tài khoản không được bỏ trống" });
+      return false;
+    }
+    if (!authData.password) {
+      setErrors({ password: "Mật khẩu không được bỏ trống" });
+      return false;
+    }
+    return true;
+  };
+
+  const onSubmit = () => {
+    validate()
+      ? navigation.navigate("HomeScreen")
+      : console.log("Validation Failed");
+  };
+
   const loginForm = (
     <Center w="100%">
       <Box safeArea w="100%">
@@ -32,11 +53,40 @@ const LoginScreen = ({ navigation }) => {
           </Heading>
         </VStack>
         <VStack space={space.m} mt={space.xxl} mb={space.xl}>
-          <FormControl>
-            <Input variant="rounded" placeholder="Tài khoản" />
+          <FormControl isInvalid={!authData.email && "email" in errors}>
+            <Input
+              variant="rounded"
+              placeholder="Tài khoản"
+              onChangeText={(value) =>
+                setAuthData({ ...authData, email: value })
+              }
+            />
+            {!authData.email && "email" in errors ? (
+              <FormControl.ErrorMessage>
+                {errors.email}
+              </FormControl.ErrorMessage>
+            ) : null}
           </FormControl>
-          <FormControl>
-            <Input variant="rounded" type="password" placeholder="Mật khẩu" />
+          <FormControl
+            isInvalid={
+              !("email" in errors) && !authData.password && "password" in errors
+            }
+          >
+            <Input
+              variant="rounded"
+              type="password"
+              placeholder="Mật khẩu"
+              onChangeText={(value) =>
+                setAuthData({ ...authData, password: value })
+              }
+            />
+            {!("email" in errors) &&
+            !authData.password &&
+            "password" in errors ? (
+              <FormControl.ErrorMessage>
+                {errors.password}
+              </FormControl.ErrorMessage>
+            ) : null}
             <Link
               mt={space.s}
               alignSelf="flex-end"
@@ -47,18 +97,12 @@ const LoginScreen = ({ navigation }) => {
           </FormControl>
         </VStack>
         <VStack space={space.m}>
-          <CustomButton
-            text="Đăng nhập"
-            onPress={() => {
-              navigation.replace("HomeScreen");
-            }}
-          />
+          <CustomButton text="Đăng nhập" onPress={onSubmit} />
           <Button
             variant="outline"
             rounded="full"
             colorScheme="muted"
-            leftIcon={<Icon name="google" color={colors.primary} />}
-            // onPress={() => navigation.navigate("HomeScreen")}
+            leftIcon={<Icon email="google" color={colors.primary} />}
           >
             Đăng nhập với Google
           </Button>

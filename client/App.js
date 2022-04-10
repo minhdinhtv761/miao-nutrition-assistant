@@ -1,8 +1,7 @@
 import { NativeBaseProvider, extendTheme } from "native-base";
 
-import Navigation from './Navigation';
+import Navigation from "./Navigation";
 import React from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
@@ -26,10 +25,8 @@ export default function App() {
     components: {},
   });
   return (
-    <SafeAreaProvider>
-      <NativeBaseProvider theme={theme}>
-        <Navigation />
-      </NativeBaseProvider>
-    </SafeAreaProvider>
+    <NativeBaseProvider theme={theme}>
+      <Navigation />
+    </NativeBaseProvider>
   );
 }
