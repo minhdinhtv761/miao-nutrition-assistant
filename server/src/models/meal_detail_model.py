@@ -1,7 +1,7 @@
 from mongoengine import *
-from models.recipe_model import Recipe
-from models.food_model import Food
-from models.nutrition_base_model import NutritionBase
+from server.src.models.nutrition_base_model import NutritionBase
+from server.src.models.recipe_model import Recipe
+from server.src.models.food_model import Food
 
 class MealDetail(NutritionBase):
     foodId = ReferenceField(Food, null=True)

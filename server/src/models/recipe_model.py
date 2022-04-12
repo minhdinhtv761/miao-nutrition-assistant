@@ -1,7 +1,7 @@
 from mongoengine import *
 from server.src.constants.enums import RecipeLevel
-from server.src.models.food_model import Food
 from server.src.models.nutrition_base_model import NutritionBase
+from server.src.models.food_model import Food
 
 class Recipe(NutritionBase):
     servingSizeQuantity = IntField(required=True, min_value=1)
