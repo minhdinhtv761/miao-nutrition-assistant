@@ -1,5 +1,5 @@
 from mongoengine import *
-from server.src.models.food_model import Food
+from models.food_model import Food
 
 class Diet(Document):
     dietName = StringField(required=True)

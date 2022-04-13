@@ -1,6 +1,6 @@
 from mongoengine import *
-from server.src.constants.enums import Activity
-from server.src.models.diet_model import Diet
+from constants.enums import Activity
+from models.diet_model import Diet
 
 class Goal(Document):
     startWeight = DecimalField(required=True, precision=2, min_value=0.01)
