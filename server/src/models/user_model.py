@@ -1,10 +1,10 @@
 from mongoengine import *
-from models.account_model import Account
-from constants.enums import Gender
-from models.body_composition_model import BodyComposition
-from models.daily_record_model import DailyRecord
-from models.food_model import Food
-from models.goal_model import Goal
+from src.models.account_model import Account
+from src.constants.enums import Gender
+from src.models.body_composition_model import BodyComposition
+from src.models.daily_record_model import DailyRecord
+from src.models.food_model import Food
+from src.models.goal_model import Goal
 
 class User(Document):
     acountId = ReferenceField(Account, required=True)

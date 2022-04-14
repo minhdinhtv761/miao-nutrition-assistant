@@ -1,5 +1,5 @@
-from controller.account_controller import ListAccountController, SpecificAccountController
+from src.controller.account_controller import AccountById, ListAccount
 
 def add_account_resrouce(api):
-    api.add_resource(ListAccountController, "/account")
-    api.add_resource(SpecificAccountController, "/account/<_id>")
+    api.add_resource(ListAccount, "/account")
+    api.add_resource(AccountById, "/account/<_id>")

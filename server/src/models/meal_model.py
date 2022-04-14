@@ -1,7 +1,7 @@
 from mongoengine import *
-from models.meal_detail_model import MealDetail
-from constants.enums import MealType
-from models.nutrition_base_model import NutritionBase
+from src.models.meal_detail_model import MealDetail
+from src.constants.enums import MealType
+from src.models.nutrition_base_model import NutritionBase
 
 class Meal(NutritionBase):
     mealType = EnumField(MealType, required=True)

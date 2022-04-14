@@ -1,20 +1,20 @@
 import json
 from flask_restful import Resource, reqparse, abort, fields, marshal_with
-from models.account_model import Account
+from src.models.account_model import Account
 
 register_args_parser = reqparse.RequestParser()
 register_args_parser.add_argument("email", type=str, help="account.email", required=True)
 register_args_parser.add_argument("password", type=str, help="account.password", required=True)
 register_args_parser.add_argument("re_password", type=str, help="account.re_password", required=True)
 
-# SpecificAccountController
-# shows a specific account and lets you delete or update an account
-class SpecificAccountController(Resource):
+# AccountById
+# shows a specific account by id and lets you delete or update an account
+class AccountById(Resource):
     pass
 
-# ListAccountController
+# ListAccount
 # shows a list of all accounts and lets you POST to add new accounts
-class ListAccountController(Resource):
+class ListAccount(Resource):
     #Register
     def post(self):
         args = register_args_parser.parse_args()

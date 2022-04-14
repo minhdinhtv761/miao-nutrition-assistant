@@ -1,8 +1,8 @@
 from mongoengine import *
-from models.account_model import Account
-from models.diet_model import Diet
-from models.menu_detail_model import MenuDetail
-from models.nutrition_base_model import NutritionBase
+from src.models.account_model import Account
+from src.models.diet_model import Diet
+from src.models.menu_detail_model import MenuDetail
+from src.models.nutrition_base_model import NutritionBase
 
 class Menu(NutritionBase):
     menuName = StringField(required=True)

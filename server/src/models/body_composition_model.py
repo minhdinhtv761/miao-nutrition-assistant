@@ -1,6 +1,6 @@
 import datetime
 from mongoengine import *
-from constants.enums import Activity
+from src.constants.enums import Activity
 
 class BodyComposition(Document):
     recordDate = DateTimeField(required=True, default=datetime.datetime.utcnow)
