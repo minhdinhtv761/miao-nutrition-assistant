@@ -8,7 +8,7 @@ class Goal(Document):
     targetWeight = DecimalField(required=True, precision=2, min_value=0.01)
     targetPercentBodyFat = IntField(min_value=0, max_value=100, null=True)
     targetActivity = EnumField(Activity, required=True)
-    weightPerWeek = DecimalField(required=True, precision=2, min_value=0.01)
+    weightPerWeek = DecimalField(required=True, precision=2, min_value=-1, max_value=0.50)
     dietId = ReferenceField(Diet, null=True)
     targetCalories = IntField(required=True, min_value=1)
     tagetCarbs = IntField(required=True, min_value=0, max_value=100)
