@@ -333,3 +333,7 @@ buck-out/
 # Ruby / CocoaPods
 /ios/Pods/
 /vendor/bundle/
+
+#[HTTP METHOD]
+*.http
+*.rest
