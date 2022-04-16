@@ -1,8 +1,8 @@
-import { Box, Center } from 'native-base';
+import { Box, Center } from "native-base";
 
 import React from "react";
 
-const CustomLayout = ({ child }) => {
+const CenterLayout = ({ child }) => {
   return (
     <Center w="100%" flex={1}>
       <Box safeArea width="100%" p={4}>
@@ -12,4 +12,4 @@ const CustomLayout = ({ child }) => {
   );
 };
 
-export default CustomLayout;
+export default CenterLayout;

@@ -1,13 +1,16 @@
 import { NativeBaseProvider, extendTheme } from "native-base";
 
 import Navigation from "./Navigation";
+import { Provider } from "react-redux";
 import React from "react";
 import { SSRProvider } from "@react-aria/ssr";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+// import store from "./src/redux/store";
+
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+function App() {
   const theme = extendTheme({
     colors: {
       primary: {
@@ -22,6 +25,7 @@ export default function App() {
         800: "#00885a",
         900: "#00784c",
       },
+  
     },
     components: {},
   });
@@ -33,3 +37,11 @@ export default function App() {
     </SSRProvider>
   );
 }
+
+export default () => {
+  return (
+    // <Provider store={store}>
+    <App />
+    // </Provider>
+  );
+};

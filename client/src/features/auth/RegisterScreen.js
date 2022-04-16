@@ -13,8 +13,9 @@ import {
   VStack,
 } from "native-base";
 
+import AuthHeading from "./../../components/auth/AuthHeading";
+import CenterLayout from "../../components/general/layout/CenterLayout";
 import CustomButton from "../../components/general/actionButton/CustomButton";
-import CustomLayout from "../../components/general/CustomLayout";
 import Icon from "react-native-vector-icons/FontAwesome";
 import colors from "../../styles/colors";
 import { space } from "../../styles/layout";
@@ -33,14 +34,7 @@ const RegisterScreen = ({ navigation }) => {
   const loginForm = (
     <Center w="100%">
       <Box safeArea w="100%">
-        <VStack space={space.xs}>
-          <Heading size="xl" color={colors.primary}>
-            Xin chào
-          </Heading>
-          <Heading size="xs" fontWeight="medium">
-            Đăng ký để tiếp tục
-          </Heading>
-        </VStack>
+        <AuthHeading h1="Xin chào" h2="Đăng ký để tiếp tục" />
         <VStack space={space.m} mt={space.xxl} mb={space.xl}>
           <FormControl isInvalid={!authData.email && "email" in errors}>
             <Input
@@ -124,6 +118,6 @@ const RegisterScreen = ({ navigation }) => {
       </Box>
     </Center>
   );
-  return <CustomLayout child={loginForm} />;
+  return <CenterLayout child={loginForm} />;
 };
 export default RegisterScreen;
