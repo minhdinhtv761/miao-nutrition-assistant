@@ -27,7 +27,7 @@ const RegisterScreen = ({ navigation }) => {
 
   const onSubmit = () => {
     validate(authData, setErrors, true)
-      ? navigation.navigate("HomeScreen")
+      ? navigation.navigate("OnBoardingScreen")
       : console.log("Validation Failed");
   };
 

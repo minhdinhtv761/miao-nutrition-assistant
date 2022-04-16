@@ -1,4 +1,4 @@
-import { HomeScreen, LoginScreen, RegisterScreen } from "./src/features";
+import { LoginScreen, OnBoardingScreen, RegisterScreen } from "./src/features";
 
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
@@ -17,7 +17,7 @@ const Navigation = () => {
       >
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -27,7 +27,7 @@ const LoginScreen = ({ navigation }) => {
 
   const onSubmit = () => {
     validate(authData, setErrors)
-      ? navigation.navigate("HomeScreen")
+      ? navigation.navigate("OnBoardingScreen")
       : console.log("Validation Failed");
   };
 
