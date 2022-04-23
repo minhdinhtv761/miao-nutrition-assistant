@@ -1,8 +1,13 @@
-import { HomeScreen, LoginScreen, OnBoardingScreen, RegisterScreen } from "./src/features";
+import {
+  HomeScreen,
+  LoginScreen,
+  OnBoardingScreen,
+  RegisterScreen,
+} from "./src/features";
 
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import colors from './src/styles/colors';
+import colors from "./src/styles/colors";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
@@ -16,7 +21,10 @@ const Navigation = () => {
           contentStyle: { backgroundColor: colors.background },
         }}
       >
-        <Stack.Screen name="HomeScreen" component={HomeScreen}/>
+        {/* Muốn xem giao diện cái nào thì cứ đưa cái đó lên đầu
+            Sau bỏ vào redux thì làm Navigation sau */}
+            
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} />
@@ -24,5 +32,4 @@ const Navigation = () => {
     </NavigationContainer>
   );
 };
-
 export default Navigation;
