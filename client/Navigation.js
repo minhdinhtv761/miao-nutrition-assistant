@@ -1,7 +1,8 @@
-import { LoginScreen, OnBoardingScreen, RegisterScreen } from "./src/features";
+import { HomeScreen, LoginScreen, OnBoardingScreen, RegisterScreen } from "./src/features";
 
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
+import colors from './src/styles/colors';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
@@ -12,9 +13,10 @@ const Navigation = () => {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          contentStyle: { backgroundColor: "transparents" },
+          contentStyle: { backgroundColor: colors.background },
         }}
       >
+        <Stack.Screen name="HomeScreen" component={HomeScreen}/>
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} />

@@ -2,9 +2,8 @@ import { Box, VStack } from "native-base";
 import { Dimensions, FlatList } from "react-native";
 
 import AuthHeading from "../../components/auth/AuthHeading";
-import CenterLayout from "../../components/general/layout/CenterLayout";
 import Indicator from "./../../components/onboarding/Indicator";
-import MainLayout from "../../components/general/layout/MainLayout";
+import MainContentLayout from "../../components/general/layout/MainContentLayout";
 import RadioButton from "../../components/general/actionButton/RadioButton";
 import React from "react";
 import { slide } from "../../constants/slide";
@@ -72,7 +71,7 @@ const OnBoardingScreen = ({ navigation }) => {
       ))} */}
     </Box>
   );
-  return <MainLayout child={child} />;
+  return <MainContentLayout child={child} />;
 };
 
 export default OnBoardingScreen;
