@@ -1,7 +1,7 @@
 import { Box, Center, HStack, Progress, Text, VStack } from "native-base";
 
+import Colors from "./../../styles/colors";
 import React from "react";
-import colors from "./../../styles/colors";
 import { space } from "./../../styles/layout";
 
 export const DetailNutrition = ({ style }) => {
@@ -13,14 +13,14 @@ export const DetailNutrition = ({ style }) => {
         <Box w="100%">
           <Progress
             size="sm"
-            bg="coolGray.100"
+            bg={Colors.backgroundProgress}
             _filledTrack={{
               bg:
                 type === "Carbs"
-                  ? colors.carbColor
+                  ? Colors.carbColor
                   : type === "Fat"
-                  ? colors.fatColor
-                  : colors.proteinColor,
+                  ? Colors.fatColor
+                  : Colors.proteinColor,
             }}
             value={percent}
           />
