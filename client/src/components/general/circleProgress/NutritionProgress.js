@@ -1,4 +1,3 @@
-import { HStack, VStack } from "native-base";
 import { StyleSheet, TextInput, View } from "react-native";
 import Svg, { Circle, G } from "react-native-svg";
 import {
@@ -9,18 +8,30 @@ import {
 import Colors from "../../../styles/colors";
 import React from "react";
 
-export const CircleProgress = ({ percentage, radius = 40 }) => {
+export const NutritionProgress = ({
+  carbPercent = 50,
+  fatPercent = 25,
+  proteinPercent = 25,
+  caloriesLeft = 0,
+  radius = 40,
+}) => {
   const strokeWidth = getStrokeWidth(radius);
   const circumference = 2 * Math.PI * radius;
   const halfCircle = radius + strokeWidth;
-  const strokeDashoffset = getStrokeDashoffset(circumference, percentage);
 
-  const getColorFromPercent = () => {
-    if (percentage == 0 || undefined || null) return Colors.backgroundProgress;
-    if (percentage < 100) return Colors.underColor;
-    else return Colors.normalColor;
+  const strokeDashoffset = (type) => {
+    switch (type) {
+      case "carb":
+        return getStrokeDashoffset(circumference, carbPercent);
+      case "fat":
+        return getStrokeDashoffset(circumference, carbPercent + fatPercent);
+      default:
+        return getStrokeDashoffset(
+          circumference,
+          carbPercent + fatPercent + proteinPercent
+        );
+    }
   };
-
   return (
     <View style={{ width: radius * 2, height: radius * 2 }}>
       <Svg
@@ -37,45 +48,55 @@ export const CircleProgress = ({ percentage, radius = 40 }) => {
             stroke={Colors.backgroundProgress}
             strokeWidth={strokeWidth}
             strokeLinejoin="round"
-            // strokeOpacity=".1"
           />
           <Circle
             cx="50%"
             cy="50%"
             r={radius}
             fill="transparent"
-            stroke={getColorFromPercent()}
+            stroke={Colors.proteinColor}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
-            strokeDashoffset={percentage > 100 ? 0 : strokeDashoffset}
+            strokeDashoffset={strokeDashoffset("protein")}
             strokeDasharray={circumference}
           />
-          {percentage > 100 ? (
-            <Circle
-              cx="50%"
-              cy="50%"
-              r={radius}
-              fill="transparent"
-              stroke={Colors.overColor}
-              strokeWidth={strokeWidth}
-              strokeLinecap="round"
-              strokeDashoffset={strokeDashoffset}
-              strokeDasharray={circumference}
-            />
-          ) : null}
+          <Circle
+            cx="50%"
+            cy="50%"
+            r={radius}
+            fill="transparent"
+            stroke={Colors.fatColor}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeDashoffset={strokeDashoffset("fat")}
+            strokeDasharray={circumference}
+          />
+          <Circle
+            cx="50%"
+            cy="50%"
+            r={radius}
+            fill="transparent"
+            stroke={Colors.carbColor}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeDashoffset={strokeDashoffset("carb")}
+            strokeDasharray={circumference}
+          />
         </G>
       </Svg>
-
+      {/* <G> */}
       <TextInput
         underlineColorAndroid="transparent"
         editable={false}
-        defaultValue={`${percentage}`}
+        defaultValue={`${caloriesLeft}`}
         style={[
           StyleSheet.absoluteFillObject,
-          { fontSize: radius / 3, color: Colors.black },
+          { fontSize: radius / 2, color: Colors.white },
           styles.text,
         ]}
       />
+
+      {/* </G> */}
     </View>
   );
 };

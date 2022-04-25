@@ -1,14 +1,8 @@
 import {
   Box,
-  Button,
   Center,
   HStack,
   Heading,
-  IconButton,
-  NativeBaseProvider,
-  StatusBar,
-  Text,
-  VStack,
 } from "native-base";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
