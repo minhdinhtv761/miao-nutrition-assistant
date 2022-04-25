@@ -9,11 +9,17 @@ import { space } from "./../../styles/layout";
 
 export const BottomHomeScreen = () => {
   return (
-    <VStack>
-      <HStack marginY={space.xl}>
-        <MenuTitle title="Bữa ăn" action="Chi tiết" onPressAction={() => {}} />
-      </HStack>
-      <MealItem />
+    <VStack marginY={space.xl} space={space.m}>
+      <MenuTitle title="Bữa ăn" action="Chi tiết" onPressAction={() => {}} />
+      <VStack w="100%" borderRadius="xl" bg="white" p={space.m}>
+        <MealItem
+          title="Bữa sáng"
+          value={500}
+          maxValue={600}
+          subtitle="Yến mạch, Chuối,..."
+        />
+        <MealItem subtitle="Gợi ý bữa ăn 500 kcal" />
+      </VStack>
     </VStack>
   );
 };

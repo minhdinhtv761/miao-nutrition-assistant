@@ -1,4 +1,3 @@
-import { HStack, VStack } from "native-base";
 import { StyleSheet, TextInput, View } from "react-native";
 import Svg, { Circle, G } from "react-native-svg";
 import {
@@ -9,7 +8,8 @@ import {
 import Colors from "../../../styles/colors";
 import React from "react";
 
-export const CircleProgress = ({ percentage, radius = 40 }) => {
+export const CircleProgress = ({ value, maxValue, radius = 40 }) => {
+  const percentage = Math.round((value / maxValue) * 100);
   const strokeWidth = getStrokeWidth(radius);
   const circumference = 2 * Math.PI * radius;
   const halfCircle = radius + strokeWidth;
@@ -69,7 +69,7 @@ export const CircleProgress = ({ percentage, radius = 40 }) => {
       <TextInput
         underlineColorAndroid="transparent"
         editable={false}
-        defaultValue={`${percentage}`}
+        defaultValue={`${value}`}
         style={[
           StyleSheet.absoluteFillObject,
           { fontSize: radius / 3, color: Colors.black },

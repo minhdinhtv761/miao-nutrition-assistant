@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, VStack, View } from "native-base";
+import { Box, Divider, Flex, HStack, VStack } from "native-base";
 import { space, widthImageOfList } from "./../../styles/layout";
 
 import { CircleProgress } from "../general/circleProgress/CircleProgress";
@@ -10,64 +10,45 @@ import TextOfList from "../general/typography/TextOfList";
 
 export const MealItem = ({
   title = "Thêm món mới",
-  percentage = 0,
+  value = 0,
+  maxValue = 1,
   subtitle,
 }) => {
   const widthCircle = widthImageOfList();
   const isCreateNew = title === "Thêm món mới";
 
-  // const MealItem = () => (
-  //   <HStack background="white" space={space.m} alignItems="center">
-  //     <CircleProgress percentage={percentage} radius={widthCircle / 2} />
-  //     <TextOfList title={title} subtile={subtitle} />
-  //   </HStack>
-  // );
-
-  // const CreateNewItem = () => (
-  //   <HStack
-  //     w="100%"
-  //     background="white"
-  //     alignItems="center"
-  //     justifyContent="space-between"
-  //   >
-  //     <HStack space={space.m} alignItems="center">
-  //       <CircleProgress percentage={0} radius={widthCircle / 2} />
-  //       <TextOfList
-  //         title="Thêm bữa ăn"
-  //         subtile="Chuối, Bơ,..."
-  //         titleColor={true}
-  //       />
-  //     </HStack>
-  //     <Icon.Button
-  //       name="control-point"
-  //       color={Colors.primary}
-  //       backgroundColor="transparent"
-  //     />
-  //   </HStack>
-  // );
-
   return (
-    <HStack
-      w="100%"
-      background="white"
-      alignItems="center"
-      justifyContent="space-between"
-    >
-      <HStack space={space.m} alignItems="center">
-        <CircleProgress percentage={percentage} radius={widthCircle / 2} />
-        <TextOfList
-          title={title}
-          subtile={subtitle}
-          titleColor={isCreateNew}
-        />
+    <Box>
+      <HStack w="100%" alignItems="center" justifyContent="space-between">
+        <HStack space={space.m} alignItems="center">
+          <CircleProgress
+            value={value}
+            maxValue={maxValue}
+            radius={widthCircle / 2}
+          />
+          <TextOfList
+            title={title}
+            subtile={subtitle}
+            titleColor={isCreateNew}
+          />
+        </HStack>
+        {isCreateNew ? (
+          <Icon.Button
+            name="control-point"
+            color={Colors.primary}
+            backgroundColor="transparent"
+          />
+        ) : null}
       </HStack>
-      {isCreateNew ? (
-        <Icon.Button
-          name="control-point"
-          color={Colors.primary}
-          backgroundColor="transparent"
+      {isCreateNew ? null : (
+        <Divider
+          my="2"
+          _light={{
+            bg: Colors.backgroundProgress,
+          }}
+         
         />
-      ) : null}
-    </HStack>
+      )}
+    </Box>
   );
 };

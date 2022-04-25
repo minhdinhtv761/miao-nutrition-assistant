@@ -7,10 +7,10 @@ import React from "react";
 const TextOfList = ({ title, titleColor, subtile }) => {
   return (
     <VStack>
-      <Text fontSize="lg" color={titleColor ? Colors.primary : Colors.black}>
+      <Text fontSize="md" color={titleColor ? Colors.primary : Colors.black}>
         {title}
       </Text>
-      <Text color={Colors.textLight}>{subtile}</Text>
+      <Text fontSize="sm" color={Colors.textLight}>{subtile}</Text>
     </VStack>
   );
 };

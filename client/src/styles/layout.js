@@ -15,3 +15,5 @@ export const space = {
 export const widthImageOfList = () => {
   return Dimensions.get("window").width / 5;
 };
+
+export const getRadius = (height) => height * 0.6;
