@@ -11,7 +11,7 @@ class User(Document):
     birthday = DateTimeField(required=True)
     allergenicFoodsId = ListField(GenericReferenceField(), null=True)
     backgroundDiseases = StringField(null=True)
-    bodyCompositionId = ListField(ReferenceField(BodyComposition), null=True)
+    bodyCompositionId = ListField(ReferenceField(BodyComposition, reverse_delete_rule=PULL), null=True)
     dailyRecordId = ListField(ReferenceField(DailyRecord), null=True)
 
     meta = {
