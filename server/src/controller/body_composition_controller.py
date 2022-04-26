@@ -55,19 +55,23 @@ class BodyCompositionById(Resource):
             return {"message": str(e)}, 500
 
     def delete(self, userId, _id):
-        user = User.objects().get(id=userId)
+        try:
+            User.objects().get(Q(id=userId) & Q(bodyCompositionId=_id))
 
-        if not user:
-            return {"message": "User not found"}, 404
+            data = BodyComposition.objects().get(id=_id)
 
-        data = BodyComposition.objects(userId=user, id=_id)
+            data.delete()
 
-        if not data:
-            return {"message": "Body composition not found"}, 404
+            return data, 200
 
-        data.delete()
+        except DoesNotExist as e:
+            return {"message": str(e)}, 404
 
-        return data, 200
+        except (ValidationError, exceptions.BadRequest) as e:
+            return {"message": str(e)}, 400
+
+        except Exception as e:
+            return {"message": str(e)}, 500
 
 ####################
 ####################
