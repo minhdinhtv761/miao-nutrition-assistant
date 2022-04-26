@@ -5,7 +5,7 @@ from src.models.implement_models.general_models.body_composition_model import Bo
 from src.models.implement_models.general_models.daily_record_model import DailyRecord
 
 class User(Document):
-    acountId = ReferenceField(Account, required=True)
+    accountId = ReferenceField(Account, required=True)
     username = StringField(required=True)
     gender = EnumField(Gender, required=True)
     birthday = DateTimeField(required=True)
