@@ -12,6 +12,7 @@ python-dotenv = "*"
 requests = "*"
 dnspython = "*"
 python-dateutil = "*"
+colorama = "*"
 
 [dev-packages]
 
