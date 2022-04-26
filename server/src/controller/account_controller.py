@@ -1,5 +1,7 @@
 from flask_restful import Resource, reqparse
-from src.models.account_model import Account
+from mongoengine import DoesNotExist, ValidationError
+from werkzeug import exceptions
+from src.models.implement_models.general_models.account_model import Account
 
 # For Login function arguments
 login_args_parser = reqparse.RequestParser()
@@ -23,38 +25,33 @@ register_args_parser.add_argument("re_password", type=str, help="Invalid re_pass
 class AccountById(Resource):
     # Change password function
     def patch(self, _id):
-        data = Account.objects(id=_id).first()
-
-        if not data:
-            return {"message": "No account found"}, 404
-
         args = change_password_args_parser.parse_args()
         email = args["email"]
         password = args["password"]
         new_password = args["new_password"]
         re_password = args["re_password"]
 
-        if not email:
-            return {"message": ""}, 400
+        try:
+            data = Account.objects().get(id=_id)
 
-        if not password:
-            return {"message": ""}, 400
+            if email != data.email or password != data.password:
+                return {"message": "Email or password is not correct"}, 400
 
-        if email != data.email or password != data.password:
-            return {"message": "Email or password is not correct"}, 400
-        
-        if not new_password:
-            return {"message": ""}, 400
-        
-        if not re_password:
-            return {"message": ""}, 400
+            if not new_password == re_password:
+                return {"message": "Password and re_password do not match"}, 400
 
-        if not new_password == re_password:
-            return {"message": "Password and re_password do not match"}, 400
+            data.modify(password=new_password)
 
-        data.modify(password=new_password)
+            return data, 200
 
-        return data, 200
+        except DoesNotExist as e:
+            return {"message": str(e)}, 404
+
+        except (ValidationError, exceptions.BadRequest) as e:
+            return {"message": str(e)}, 400
+            
+        except Exception as e:
+            return {"message": str(e)}, 500
 
 ####################
 ####################
@@ -69,25 +66,24 @@ class ListAccount(Resource):
         password = args["password"]
         re_password = args["re_password"]
 
-        if not email:
-            return {"message": ""}, 400
+        try:
+            Account.objects().get(email=email)
 
-        if not password:
-            return {"message": ""}, 400
-        
-        if not re_password:
-            return {"message": ""}, 400
-
-        check_account_exist = Account.objects(email=email).first()
-
-        if check_account_exist:
             return {"message": "Account exist"}, 400
+        
+        except DoesNotExist as e:
+            if not password == re_password:
+                return {"message": "Password and re_password do not match"}, 400
 
-        if not password == re_password:
-            return {"message": "Password and re_password do not match"}, 400
+            data = Account(email=email, password=password).save()
 
-        data = Account(email=email, password=password).save()
-        return data, 201
+            return data, 201
+
+        except (ValidationError, exceptions.BadRequest) as e:
+            return {"message": str(e)}, 400
+            
+        except Exception as e:
+            return {"message": str(e)}, 500
 
 ####################
 ####################
@@ -95,28 +91,25 @@ class ListAccount(Resource):
 
 # Define all functions for auth
 class Auth(Resource):
-    # For testing, no purpose
-    def get(self):
-        return Account.objects()
-
     # Login function
     def post(self):
         args = login_args_parser.parse_args()
         email = args["email"]
         password = args["password"]
 
-        if not email:
-            return {"message": ""}, 400
+        try:
+            data = Account.objects().get(email=email)
 
-        if not password:
-            return {"message": ""}, 400
+            if password != data.password:
+                return {"message": "Email or password is not correct"}, 400
 
-        data = Account.objects(email=email).first()
-
-        if not data:
+            return data, 200
+            
+        except DoesNotExist as e:
             return {"message": "Email or password is not correct"}, 400
 
-        if password != data.password:
-            return {"message": "Email or password is not correct"}, 400
-
-        return data, 200
+        except (ValidationError, exceptions.BadRequest) as e:
+            return {"message": str(e)}, 400
+            
+        except Exception as e:
+            return {"message": str(e)}, 500
