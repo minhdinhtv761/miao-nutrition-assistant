@@ -1,4 +1,4 @@
-from src.controller.body_composition_controller import BodyCompositionById, BodyCompositionByUserId
+from src.controllers.general_case_controllers.body_composition_controller import BodyCompositionById, BodyCompositionByUserId
 
 def add_body_composition_resrouce(api):
     api.add_resource(BodyCompositionByUserId, "/user/<userId>/body_composition")
