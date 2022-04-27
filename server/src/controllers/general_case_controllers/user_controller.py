@@ -2,8 +2,8 @@ from flask_restful import Resource, reqparse
 from mongoengine import DoesNotExist, ValidationError
 from werkzeug import exceptions
 from src.constants.enums import Gender
-from src.models.implement_models.general_models.account_model import Account
-from src.models.implement_models.general_models.user_model import User
+from src.models.implement_models.general_case_models.account_model import Account
+from src.models.implement_models.general_case_models.user_model import User
 
 # User function arguments
 user_args_parser = reqparse.RequestParser()
