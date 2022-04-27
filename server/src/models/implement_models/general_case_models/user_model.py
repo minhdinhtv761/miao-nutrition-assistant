@@ -16,8 +16,8 @@ class User(Document):
     backgroundDiseases = StringField(null=True)
     bodyCompositionId = ListField(ReferenceField(BodyComposition, reverse_delete_rule=PULL), null=True)
     dailyRecordId = ListField(ReferenceField(DailyRecord, reverse_delete_rule=PULL), null=True)
-    UserFoodId = ListField(ReferenceField(UserFood, reverse_delete_rule=PULL), null=True)
-    UserRecipeId = ListField(ReferenceField(UserRecipe, reverse_delete_rule=PULL), null=True)
+    userFoodId = ListField(ReferenceField(UserFood, reverse_delete_rule=PULL), null=True)
+    userRecipeId = ListField(ReferenceField(UserRecipe, reverse_delete_rule=PULL), null=True)
 
     meta = {
         "db_alias": "miao",
