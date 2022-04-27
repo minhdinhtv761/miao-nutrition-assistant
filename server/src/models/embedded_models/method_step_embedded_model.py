@@ -2,7 +2,7 @@ from mongoengine import *
 
 class MethodStep(EmbeddedDocument):
     description = StringField(require=True)
-    images = ListField(ImageField(), required=True)
+    images = ListField(ImageField(), null=True)
 
     meta = {
         "db_alias": "miao",
