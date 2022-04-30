@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from mongoengine import DoesNotExist, ValidationError
 from werkzeug import exceptions
-from src.models.implement_models.general_models.account_model import Account
+from src.models.implement_models.general_case_models.account_model import Account
 
 # For Login function arguments
 login_args_parser = reqparse.RequestParser()

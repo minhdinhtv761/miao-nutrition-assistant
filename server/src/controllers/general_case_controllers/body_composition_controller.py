@@ -5,8 +5,8 @@ from werkzeug import exceptions
 from mongoengine.queryset.visitor import Q
 from src.calcs.body_composition_mapper import bmi_calculator, bmr_calculator, tdee_calculator
 from src.constants.enums import Activity
-from src.models.implement_models.general_models.body_composition_model import BodyComposition
-from src.models.implement_models.general_models.user_model import User
+from src.models.implement_models.general_case_models.body_composition_model import BodyComposition
+from src.models.implement_models.general_case_models.user_model import User
 
 # Body composition function arguments
 body_composition_args_parser = reqparse.RequestParser()

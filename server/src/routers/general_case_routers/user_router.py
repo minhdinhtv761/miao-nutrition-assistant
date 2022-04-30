@@ -1,4 +1,4 @@
-from src.controller.user_controller import UserByAccountId, UserById
+from src.controllers.general_case_controllers.user_controller import UserByAccountId, UserById
 
 def add_user_resource(api):
     api.add_resource(UserByAccountId, "/account/<accountId>/user"),
