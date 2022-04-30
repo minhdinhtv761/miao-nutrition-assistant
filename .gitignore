@@ -337,3 +337,6 @@ buck-out/
 #[HTTP METHOD]
 *.http
 *.rest
+
+#[VSCODE]
+*.vscode
