@@ -136,13 +136,11 @@ class UserFoodByUserId(Resource):
 
             if not user.userFoodId:
                 user.modify(userFoodId=[data])
-
-                return data, 201
             else:
                 user.userFoodId.append(data)
                 user.save()
 
-                return data, 201
+            return data, 201
 
         except DoesNotExist as e:
             return {"message": str(e)}, 404
