@@ -1,12 +1,11 @@
-import { Box, Center, HStack, Heading, View, useSafeArea } from "native-base";
+import { Box, Center, HStack, Heading } from "native-base";
+import React, { Children, cloneElement, isValidElement } from "react";
 import { headerHeight, topBannerHeight } from "../../../constants/sizes";
 
-import Icon from "react-native-vector-icons/MaterialIcons";
-import React from "react";
 import colors from "../../../styles/colors";
 
 export default TopAppBar = (props) => {
-  const { scrollA, backgroundColor, leftChildren } = props;
+  const { scrollA, backgroundColor, leftIcon, rightChildren } = props;
   const isFloating = !!scrollA;
   const [isScrolling, setScrolling] = React.useState(isFloating);
 
@@ -21,51 +20,53 @@ export default TopAppBar = (props) => {
     return () => scrollA.removeListener(listenerId);
   });
 
-  function isChangingColor() {
-    if (backgroundColor === "primary.500") return false;
-    if (backgroundColor === "white") return false;
-    return true;
-  }
-
+  const isChangingColor = !(
+    backgroundColor === "primary.500" || backgroundColor === "white"
+  );
   return (
     <Center w="100%">
       <Box safeArea />
       <HStack
         h={headerHeight()}
         px="2"
-        bg={!isScrolling && isChangingColor() ? "white" : backgroundColor}
+        bg={!isScrolling && isChangingColor ? "white" : backgroundColor}
         shadow={isScrolling ? "none" : "1"}
         justifyContent="space-between"
         alignItems="center"
         w="100%"
       >
-        <Icon.Button
-          name="menu"
-          color={colorContent(isScrolling, isChangingColor, backgroundColor)}
-          backgroundColor="transparent"
-        />
+        {Children.map(leftIcon, (child) =>
+          cloneElement(child, {
+            ...child.props,
+            color: colorContent(isScrolling, isChangingColor, backgroundColor),
+            backgroundColor: "transparent",
+          })
+        )}
         <Heading
-          color={colorContent(isScrolling, isChangingColor, backgroundColor)}
           size="md"
+          color={colorContent(isScrolling, isChangingColor, backgroundColor)}
         >
           Home
         </Heading>
-        <View
-          color={colorContent(isScrolling, isChangingColor, backgroundColor)}
-        >
-      {/* {leftChildren} */}
-          <Icon.Button
-            name="calendar-today"
-            // color={...styles}
-            backgroundColor="transparent"
-          />
-        </View>
+        <HStack>
+          {Children.map(rightChildren, (child) => {
+            if (!isValidElement(child)) return null;
+            return cloneElement(child, {
+              ...child.props,
+              color: colorContent(
+                isScrolling,
+                isChangingColor,
+                backgroundColor
+              ),
+              backgroundColor: "transparent",
+            });
+          })}
+        </HStack>
       </HStack>
     </Center>
   );
 };
-
 const colorContent = (isScrolling, isChangingColor, backgroundColor) =>
-  (!isScrolling && isChangingColor()) || backgroundColor === "white"
+  (!isScrolling && isChangingColor) || backgroundColor === "white"
     ? colors.black
     : "white";
