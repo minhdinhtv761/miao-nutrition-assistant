@@ -4,6 +4,7 @@ from src.models.abstract_models.nutrition_base_model import NutritionBase
 from src.models.embedded_models.method_step_embedded_model import MethodStep
 
 class Recipe(NutritionBase):
+    recipeName = StringField(required=True)
     servingSizeQuantity = IntField(required=True, min_value=1)
     cookingTime = IntField(required=True, min_value=0)
     level = EnumField(RecipeLevel, required=True)
