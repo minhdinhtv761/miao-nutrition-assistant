@@ -18,6 +18,30 @@ export const BottomHomeScreen = () => {
           maxValue={600}
           subtitle="Yến mạch, Chuối,..."
         />
+        <MealItem
+          title="Bữa sáng"
+          value={500}
+          maxValue={600}
+          subtitle="Yến mạch, Chuối,..."
+        />
+        <MealItem
+          title="Bữa sáng"
+          value={500}
+          maxValue={600}
+          subtitle="Yến mạch, Chuối,..."
+        />
+        <MealItem
+          title="Bữa sáng"
+          value={500}
+          maxValue={600}
+          subtitle="Yến mạch, Chuối,..."
+        />
+        <MealItem
+          title="Bữa sáng"
+          value={500}
+          maxValue={600}
+          subtitle="Yến mạch, Chuối,..."
+        />
         <MealItem subtitle="Gợi ý bữa ăn 500 kcal" />
       </VStack>
     </VStack>

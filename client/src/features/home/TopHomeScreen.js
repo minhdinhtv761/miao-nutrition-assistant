@@ -6,11 +6,13 @@ import { Dimensions } from "react-native";
 import { NutritionProgress } from "./../../components/general/circleProgress/NutritionProgress";
 import React from "react";
 import { space } from "./../../styles/layout";
+import { subBoxHeight } from "./../../constants/sizes";
+import { topBannerHeight } from "../../constants/sizes";
 
 export const TopHomeScreen = () => {
-  const heightBox = Dimensions.get("window").height / 4;
-  const heightDetailBox = Dimensions.get("window").height / 8;
-
+  var heightBox = topBannerHeight();
+  var heightDetailBox = subBoxHeight();
+  
   const TextElement = ({ calo, text }) => {
     return (
       <VStack alignItems="center">
@@ -38,9 +40,7 @@ export const TopHomeScreen = () => {
             w="100%"
           >
             <TextElement calo={1500} text="Tổng cộng" />
-            <NutritionProgress
-              radius={(heightBox * 0.6) / 2}
-            />
+            <NutritionProgress radius={(heightBox * 0.6) / 2} />
 
             <TextElement calo={1500} text="Đã ăn" />
           </HStack>

@@ -1,21 +1,30 @@
-import AppBar from "../../components/general/appbar/TopAppBar";
+import { Animated, Dimensions, ScrollView } from "react-native";
+import { Box, View } from "native-base";
+
 import { BottomHomeScreen } from "./BottomHomeScreen";
-import { Box } from "native-base";
 import Colors from "./../../styles/colors";
-import { Dimensions } from "react-native";
 import MainContentLayout from "./../../components/general/layout/MainContentLayout";
 import React from "react";
+import TopAppBar from "../../components/general/appbar/TopAppBar";
 import { TopHomeScreen } from "./TopHomeScreen";
 
 const HomeScreen = () => {
-  const heightBox = Dimensions.get("window").height / 4;
-  const heightDetailBox = Dimensions.get("window").height / 8;
+  const scrollA = React.useRef(new Animated.Value(0)).current;
+
   return (
-    <Box backgroundColor={Colors.background} h="100%">
-      <AppBar />
-      <TopHomeScreen />
-      <MainContentLayout child={<BottomHomeScreen />} />
-    </Box>
+    <View backgroundColor={Colors.background} h="100%">
+      <TopAppBar scrollA={scrollA} backgroundColor="primary.500" />
+      <Animated.ScrollView
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollA } } }],
+          { useNativeDriver: true }
+        )}
+        scrollEventThrottle={16}
+      >
+        <TopHomeScreen />
+        <MainContentLayout child={<BottomHomeScreen />} />
+      </Animated.ScrollView>
+    </View>
   );
 };
 

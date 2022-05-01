@@ -1,4 +1,5 @@
-import { Box } from "native-base";
+import { Box, Container } from "native-base";
+
 import React from "react";
 
 const MainContentLayout = ({ child }) => {
