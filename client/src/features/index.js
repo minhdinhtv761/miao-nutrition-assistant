@@ -1,6 +1,6 @@
 import HomeScreen from "./home/HomeScreen";
 import LoginScreen from "./auth/LoginScreen";
-import NewMealScreen from "./meal/NewMealScreen";
+import MealChoosingScreen from './meal/MealChoosingScreen';
 import OnBoardingScreen from "./onboarding/OnBoardingScreen";
 import RegisterScreen from "./auth/RegisterScreen";
 
@@ -9,5 +9,5 @@ export {
   RegisterScreen,
   OnBoardingScreen,
   HomeScreen,
-  NewMealScreen,
+  MealChoosingScreen
 };

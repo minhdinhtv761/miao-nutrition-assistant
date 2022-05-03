@@ -14,6 +14,7 @@ const HomeScreen = () => {
   return (
     <View backgroundColor={Colors.background} h="100%">
       <TopAppBar
+        title="Home"
         backgroundColor="primary.500"
         leftIcon={
           <Icon
@@ -27,7 +28,7 @@ const HomeScreen = () => {
           <Icon size="sm" as={MaterialCommunityIcons} name="calendar-blank" />
         }
         scrollA={scrollA}
-      ></TopAppBar>
+      />
       <Animated.ScrollView
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollA } } }],

@@ -1,20 +1,20 @@
-import { Button, Center, Icon, Text, View } from "native-base";
-import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Button, Center, View } from "native-base";
 
 import { Animated } from "react-native";
-import { CustomTabView } from "./../../components/general/tabView/CustomTabView";
-import FoodList from './FoodList';
+import { CustomTabView } from "../../components/general/tabView/CustomTabView";
+import FoodList from "../../components/newMeal/choosing/FoodList";
 import MainContentLayout from "../../components/general/layout/MainContentLayout";
 import React from "react";
-import SearchBar from "./../../components/general/input/SearchBar";
+import SearchBar from "../../components/general/input/SearchBar";
 import TopAppBar from "../../components/general/appbar/TopAppBar";
+import { TurnBackButton } from "./../../components/general/buttons/iconButtons/TurnBackButton";
 
 const SecondRoute = () => (
   <Center flex={1} my="4">
     This is Tab 2
   </Center>
 );
-const NewMealScreen = () => {
+const MealChoosingScreen = () => {
   const scrollA = React.useRef(new Animated.Value(0)).current;
   const tabList = [
     {
@@ -39,23 +39,9 @@ const NewMealScreen = () => {
   return (
     <View backgroundColor="white" h="100%">
       <TopAppBar
+        title="Thêm bữa ăn"
         backgroundColor="white"
-        leftIcon={
-          <Icon
-            size="sm"
-            as={Entypo}
-            name="chevron-thin-left"
-            onPress={() => {}}
-          />
-        }
-        // leftIcon={
-        //   <Icon
-        //     size="sm"
-        //     as={MaterialCommunityIcons}
-        //     name="menu"
-        //     onPress={() => {}}
-        //   />
-        // }
+        leftIcon={<TurnBackButton />}
         rightChildren={
           <Button variant="ghost" onPress={() => {}}>
             Tiếp
@@ -68,4 +54,4 @@ const NewMealScreen = () => {
   );
 };
 
-export default NewMealScreen;
+export default MealChoosingScreen;

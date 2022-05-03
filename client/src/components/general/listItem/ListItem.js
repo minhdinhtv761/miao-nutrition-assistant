@@ -42,22 +42,12 @@ export const ListItem = ({
               primaryColor={onPress}
             />
           </HStack>
-          <HStack space={space.m} alignItems="center">
-            {Children.map(rightChildren, (child) => {
-              if (!isValidElement(child)) return null;
-              return cloneElement(child, {
-                ...child.props,
-              });
-            })}
-            {isAddingButton ? (
-              <Icon
-                size="sm"
-                as={AntDesign}
-                name="pluscircleo"
-                color="primary.500"
-              />
-            ) : null}
-          </HStack>
+          {Children.map(rightChildren, (child) => {
+            if (!isValidElement(child)) return null;
+            return cloneElement(child, {
+              ...child.props,
+            });
+          })}
         </HStack>
         {isAddingButton ? null : (
           <Divider

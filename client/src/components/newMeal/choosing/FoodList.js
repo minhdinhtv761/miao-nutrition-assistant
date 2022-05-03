@@ -1,7 +1,7 @@
-import { FoodItem } from "../../components/newMeal/FoodItem";
+import { FoodItem } from "./FoodItem";
 import React from "react";
 import { VStack } from "native-base";
-import { space } from "./../../styles/layout";
+import { space } from './../../../styles/layout';
 
 const FoodList = () => {
   return (
@@ -17,7 +17,7 @@ const FoodList = () => {
         title="Tạo mới món ăn"
         subtitle="100 gr"
         onPress={() => {}}
-        addingNewFoodButton
+        createNewFoodButton
       />
     </VStack>
   );

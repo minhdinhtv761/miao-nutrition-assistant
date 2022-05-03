@@ -3,7 +3,7 @@ import Svg, { Circle, G } from "react-native-svg";
 import {
   getStrokeDashoffset,
   getStrokeWidth,
-} from "../../../features/utils/CircleProgress";
+} from "../../../utils/CircleProgress";
 
 import Colors from "../../../styles/colors";
 import React from "react";

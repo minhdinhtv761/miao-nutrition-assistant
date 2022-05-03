@@ -5,7 +5,7 @@ import { headerHeight, topBannerHeight } from "../../../constants/sizes";
 import colors from "../../../styles/colors";
 
 export default TopAppBar = (props) => {
-  const { scrollA, backgroundColor, leftIcon, rightChildren } = props;
+  const { title, scrollA, backgroundColor, leftIcon, rightChildren } = props;
   const isFloating = !!scrollA;
   const [isScrolling, setScrolling] = React.useState(isFloating);
 
@@ -30,7 +30,7 @@ export default TopAppBar = (props) => {
         h={headerHeight()}
         px="4"
         bg={!isScrolling && isChangingColor ? "white" : backgroundColor}
-        shadow={isScrolling ? "none" : "1"}
+        shadow="1"
         justifyContent="space-between"
         alignItems="center"
         w="100%"
@@ -47,7 +47,7 @@ export default TopAppBar = (props) => {
           size="md"
           color={colorContent(isScrolling, isChangingColor, backgroundColor)}
         >
-          Home
+          {title}
         </Heading>
         <HStack>
           {Children.map(rightChildren, (child) => {
