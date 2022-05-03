@@ -33,6 +33,7 @@ export const FoodItem = ({
       subtitle={subtitle}
       starIcon={isFavourite}
       onPress={onPress}
+      isAddingButton={createNewFoodButton}
       rightChildren={
         !createNewFoodButton ? (
           <HStack space={space.m} alignItems="center">

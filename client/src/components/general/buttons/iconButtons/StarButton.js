@@ -1,30 +1,30 @@
-import { Center, IconButton, NativeBaseProvider, VStack } from "native-base";
-
 import { AntDesign } from "@expo/vector-icons";
-import Colors from "../../../../styles/colors";
+import { Icon } from "native-base";
 import React from "react";
 
-export const StarButton = () => {
+export const StarButton = (props) => {
   const [pressed, setPressed] = React.useState(false);
-  const normalStyle = {
-    as: AntDesign,
-    name: "staro",
-    bg: Colors.textLight,
-  };
-  const pressedStyle = {
-    as: AntDesign,
-    name: "star",
-    bg: "yellow.500",
-  };
+
   function handleOnPress() {
     setPressed(!pressed);
+    props.onPress();
   }
 
-  return (
-    <IconButton
-      variant={ghost}
-      _icon={pressed ? pressedStyle : normalStyle}
+  return pressed ? (
+    <Icon
       onPress={handleOnPress}
+      size="sm"
+      as={AntDesign}
+      name="star"
+      color="yellow.500"
+    />
+  ) : (
+    <Icon
+      onPress={handleOnPress}
+      size="sm"
+      as={AntDesign}
+      name="staro"
+      color={props.color}
     />
   );
 };

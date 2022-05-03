@@ -30,16 +30,12 @@ export const ListItem = ({
         <HStack w="100%" alignItems="center" justifyContent="space-between">
           <HStack space={space.m} alignItems="center">
             {image}
-            {/* <CircleProgress
-            value={value}
-            maxValue={maxValue}
-            radius={widthCircle / 2}
-          /> */}
+
             <TextOfList
               title={title}
               subtile={subtitle}
               starIcon={starIcon}
-              primaryColor={onPress}
+              primaryColor={isAddingButton}
             />
           </HStack>
           {Children.map(rightChildren, (child) => {
@@ -48,6 +44,14 @@ export const ListItem = ({
               ...child.props,
             });
           })}
+          {isAddingButton ? (
+            <Icon
+              size="sm"
+              as={AntDesign}
+              name="pluscircleo"
+              color="primary.500"
+            />
+          ) : null}
         </HStack>
         {isAddingButton ? null : (
           <Divider

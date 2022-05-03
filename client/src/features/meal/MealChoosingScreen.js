@@ -6,7 +6,6 @@ import FoodList from "../../components/newMeal/choosing/FoodList";
 import MainContentLayout from "../../components/general/layout/MainContentLayout";
 import React from "react";
 import SearchBar from "../../components/general/input/SearchBar";
-import TopAppBar from "../../components/general/appbar/TopAppBar";
 import { TurnBackButton } from "./../../components/general/buttons/iconButtons/TurnBackButton";
 
 const SecondRoute = () => (

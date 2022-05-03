@@ -26,16 +26,7 @@ export const MealItem = ({
       title={title}
       subtitle={subtitle}
       onPress={onPress}
-      rightChildren={
-        addingNewMealButton ? (
-          <Icon
-            size="sm"
-            as={AntDesign}
-            name="pluscircleo"
-            color="primary.500"
-          />
-        ) : null
-      }
+      isAddingButton={addingNewMealButton}
     />
   );
 };

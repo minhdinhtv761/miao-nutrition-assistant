@@ -3,11 +3,14 @@ import React, { Children, cloneElement, isValidElement } from "react";
 import { headerHeight, topBannerHeight } from "../../../constants/sizes";
 
 import colors from "../../../styles/colors";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default TopAppBar = (props) => {
   const { title, scrollA, backgroundColor, leftIcon, rightChildren } = props;
   const isFloating = !!scrollA;
   const [isScrolling, setScrolling] = React.useState(isFloating);
+  const safeArea = useSafeAreaInsets();
+  const heightAppBar = headerHeight() + safeArea.top;
 
   React.useEffect(() => {
     if (!scrollA) {
@@ -25,10 +28,10 @@ export default TopAppBar = (props) => {
   );
   return (
     <Center w="100%">
-      <Box safeArea />
       <HStack
-        h={headerHeight()}
+        h={heightAppBar}
         px="4"
+        pt={safeArea.top}
         bg={!isScrolling && isChangingColor ? "white" : backgroundColor}
         shadow="1"
         justifyContent="space-between"
@@ -52,15 +55,20 @@ export default TopAppBar = (props) => {
         <HStack>
           {Children.map(rightChildren, (child) => {
             if (!isValidElement(child)) return null;
-            return cloneElement(child, {
-              ...child.props,
-              color: colorContent(
-                isScrolling,
-                isChangingColor,
-                backgroundColor
-              ),
-              backgroundColor: "transparent",
-            });
+            console.log(child.props);
+            return cloneElement(
+              child,
+              {
+                ...child.props,
+                color: colorContent(
+                  isScrolling,
+                  isChangingColor,
+                  backgroundColor
+                ),
+                backgroundColor: "transparent",
+              },
+              null
+            );
           })}
         </HStack>
       </HStack>

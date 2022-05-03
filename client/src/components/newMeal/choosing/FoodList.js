@@ -15,7 +15,6 @@ const FoodList = () => {
       />
       <FoodItem
         title="Tạo mới món ăn"
-        subtitle="100 gr"
         onPress={() => {}}
         createNewFoodButton
       />
