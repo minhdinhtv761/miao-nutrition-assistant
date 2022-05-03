@@ -1,4 +1,5 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
 import colors from "./colors";
 import { typography } from "./typography";
 
@@ -10,3 +11,4 @@ export const space = {
   xl: 6,
   xxl: 10,
 };
+

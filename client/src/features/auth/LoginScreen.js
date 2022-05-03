@@ -15,7 +15,7 @@ import {
 
 import AuthHeading from "../../components/auth/AuthHeading";
 import CenterLayout from "../../components/general/layout/CenterLayout";
-import CustomButton from "../../components/general/actionButton/CustomButton";
+import CustomButton from "../../components/general/buttons/CustomButton";
 import Icon from "react-native-vector-icons/FontAwesome";
 import colors from "../../styles/colors";
 import { space } from "../../styles/layout";

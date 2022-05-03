@@ -1,7 +1,6 @@
 import { NativeBaseProvider, extendTheme } from "native-base";
 
 import Navigation from "./Navigation";
-import { Provider } from "react-redux";
 import React from "react";
 import { SSRProvider } from "@react-aria/ssr";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -25,7 +24,6 @@ function App() {
         800: "#00885a",
         900: "#00784c",
       },
-  
     },
     components: {},
   });
