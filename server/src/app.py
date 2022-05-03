@@ -1,9 +1,15 @@
 import json
 from flask import Flask, make_response
 from flask_restful import Api
+from mongoengine.base.datastructures import BaseList
 from src.connection.mongodb_setup import mongodb_setup
-from src.models.account_model import Account
-from src.routers.account_router import add_account_resrouce
+from src.routers.general_case_routers.account_router import add_account_resrouce
+from src.routers.general_case_routers.body_composition_router import add_body_composition_resrouce
+from src.routers.sample_case_routers.sample_food_router import add_sample_food_resource
+from src.routers.sample_case_routers.sample_recipe_router import add_sample_recipe_resource
+from src.routers.user_case_routers.user_food_router import add_user_food_resrouce
+from src.routers.user_case_routers.user_recipe_router import add_user_recipe_resrouce
+from src.routers.general_case_routers.user_router import add_user_resource
 
 def create_app():
     # Make use of flask and flask_restful
@@ -15,8 +21,13 @@ def create_app():
     def output_json(data, code, headers=None):
         if type(data) == str:
             resp = make_response({'response' : json.loads(data)}, code)
-        elif type(data) == dict:
+        elif type(data) == dict or type(data) == list:
             resp = make_response({'response' : json.loads(json.dumps(data))}, code)
+        elif type(data) == BaseList:
+            listData = []
+            for d in data:
+                listData.append(json.loads(d.to_json()))
+            resp = make_response({'response' : json.loads(json.dumps(listData))}, code)
         else:
             resp = make_response({'response' : json.loads(data.to_json())}, code)
             
@@ -28,5 +39,11 @@ def create_app():
 
     # Make RESTful api available
     add_account_resrouce(api)
+    add_body_composition_resrouce(api)
+    add_sample_food_resource(api)
+    add_sample_recipe_resource(api)
+    add_user_food_resrouce(api)
+    add_user_recipe_resrouce(api)
+    add_user_resource(api)
 
     return app

@@ -13,6 +13,7 @@ requests = "*"
 dnspython = "*"
 python-dateutil = "*"
 colorama = "*"
+pillow = "*"
 
 [dev-packages]
 
