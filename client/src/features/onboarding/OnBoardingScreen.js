@@ -4,7 +4,7 @@ import { Dimensions, FlatList } from "react-native";
 import AuthHeading from "../../components/auth/AuthHeading";
 import Indicator from "./../../components/onboarding/Indicator";
 import MainContentLayout from "../../components/general/layout/MainContentLayout";
-import RadioButton from "../../components/general/actionButton/RadioButton";
+import RadioButton from "../../components/general/buttons/RadioButton";
 import React from "react";
 import { slide } from "../../constants/slide";
 import { space } from "../../styles/layout";

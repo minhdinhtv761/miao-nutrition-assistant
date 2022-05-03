@@ -1,16 +1,27 @@
-import { Text, VStack } from "native-base";
+import { HStack, Icon, Text, VStack } from "native-base";
 
+import { AntDesign } from "@expo/vector-icons";
 import Colors from "./../../../styles/colors";
-import { Heading } from "native-base";
 import React from "react";
+import { space } from "./../../../styles/layout";
 
-const TextOfList = ({ title, titleColor, subtile }) => {
+const TextOfList = ({ title, starIcon, primaryColor, subtile }) => {
   return (
     <VStack>
-      <Text fontSize="md" color={titleColor ? Colors.primary : Colors.black}>
-        {title}
+      <HStack alignItems="center" space={space.s}>
+        <Text
+          fontSize="md"
+          color={primaryColor ? Colors.primary : Colors.black}
+        >
+          {title}
+        </Text>
+        {starIcon ? (
+          <Icon as={AntDesign} size="xs" name="star" color="yellow.500" />
+        ) : null}
+      </HStack>
+      <Text fontSize="sm" color={Colors.textLight}>
+        {subtile}
       </Text>
-      <Text fontSize="sm" color={Colors.textLight}>{subtile}</Text>
     </VStack>
   );
 };

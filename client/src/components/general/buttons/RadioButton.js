@@ -2,7 +2,7 @@ import { Box, Button, Center, VStack } from "native-base";
 
 import CustomButton from "./CustomButton";
 import React from "react";
-import { space } from "./../../../styles/layout";
+import { space } from "../../../styles/layout";
 
 const RadioButton = ({ list, value, setValue }) => {
   return (

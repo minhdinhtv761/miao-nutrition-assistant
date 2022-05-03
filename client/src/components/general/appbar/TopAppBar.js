@@ -28,7 +28,7 @@ export default TopAppBar = (props) => {
       <Box safeArea />
       <HStack
         h={headerHeight()}
-        px="2"
+        px="4"
         bg={!isScrolling && isChangingColor ? "white" : backgroundColor}
         shadow={isScrolling ? "none" : "1"}
         justifyContent="space-between"

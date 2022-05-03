@@ -54,33 +54,47 @@
 //   );
 // };
 
-import { CircleProgress } from "../general/circleProgress/CircleProgress";
+import { Image, Text } from "native-base";
+
+import Colors from "./../../styles/colors";
 import { ListItem } from "./../general/listItem/ListItem";
 import React from "react";
 import { widthImageOfList } from "../../constants/sizes";
 
-export const MealItem = ({
+export const FoodItem = ({
   title,
   subtitle,
-  value = 0,
-  maxValue = 1,
+  isFavourite,
+  calo,
   onPress,
-  addingNewMealButton,
+  addingNewFoodButton,
 }) => {
-  const radiusCircle = widthImageOfList() / 2;
+  const widthImage = widthImageOfList();
   return (
     <ListItem
       image={
-        <CircleProgress
-          value={value}
-          maxValue={maxValue}
-          radius={radiusCircle}
-        />
+        !addingNewFoodButton ? (
+          <Image
+            source={{
+              uri: "https://wallpaperaccess.com/full/317501.jpg",
+            }}
+            h={widthImage}
+            w={widthImage}
+          />
+        ) : null
       }
       title={title}
       subtitle={subtitle}
+      starIcon={isFavourite}
       onPress={onPress}
-      isAddingButton={addingNewMealButton}
+      rightChildren={
+        !addingNewFoodButton ? (
+          <Text fontSize="sm" color={Colors.black}>
+            {calo} kcal
+          </Text>
+        ) : null
+      }
+      isAddingButton={addingNewFoodButton}
     />
   );
 };

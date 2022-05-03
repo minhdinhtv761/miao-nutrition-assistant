@@ -15,23 +15,26 @@ const SecondRoute = () => (
   </Center>
 );
 
-const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-});
+function Route(key, title) {
+  this.key = key;
+  this.title = title;
+}
 
-export const CustomTabView = () => {
+export const CustomTabView = ({ tabList }) => {
   const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    {
-      key: "first",
-      title: "Tab 1",
-    },
-    {
-      key: "second",
-      title: "Tab 2",
-    },
-  ]);
+  const [routes, setRoutes] = React.useState([]);
+  const [scene] = React.useState({});
+
+  React.useEffect(() => {
+    var newRoutes = [];
+    tabList.forEach((child, index) => {
+      newRoutes.push(new Route(index, child.title));
+      scene[index] = child.tab;
+    });
+    setRoutes(newRoutes);
+  }, [tabList, scene, setRoutes]);
+
+  const renderScene = SceneMap(scene);
 
   const renderTabBar = (props) => {
     return (

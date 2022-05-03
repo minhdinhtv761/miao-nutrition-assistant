@@ -16,20 +16,15 @@ const HomeScreen = () => {
       <TopAppBar
         backgroundColor="primary.500"
         leftIcon={
-          <IconButton
-            icon={<Icon size="sm" as={MaterialCommunityIcons} name="menu" />}
+          <Icon
+            size="sm"
+            as={MaterialCommunityIcons}
+            name="menu"
+            onPress={() => {}}
           />
         }
         rightChildren={
-          <IconButton
-            icon={
-              <Icon
-                size="sm"
-                as={MaterialCommunityIcons}
-                name="calendar-blank"
-              />
-            }
-          />
+          <Icon size="sm" as={MaterialCommunityIcons} name="calendar-blank" />
         }
         scrollA={scrollA}
       ></TopAppBar>

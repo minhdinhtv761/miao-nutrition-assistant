@@ -14,35 +14,34 @@ export const BottomHomeScreen = () => {
       <VStack w="100%" borderRadius="xl" bg="white" p={space.m}>
         <MealItem
           title="Bữa sáng"
+          subtitle="Yến mạch, Chuối,..."
           value={500}
           maxValue={600}
-          subtitle="Yến mạch, Chuối,..."
         />
         <MealItem
           title="Bữa sáng"
+          subtitle="Yến mạch, Chuối,..."
           value={500}
           maxValue={600}
-          subtitle="Yến mạch, Chuối,..."
         />
         <MealItem
           title="Bữa sáng"
+          subtitle="Yến mạch, Chuối,..."
           value={500}
           maxValue={600}
-          subtitle="Yến mạch, Chuối,..."
         />
         <MealItem
           title="Bữa sáng"
+          subtitle="Yến mạch, Chuối,..."
           value={500}
           maxValue={600}
-          subtitle="Yến mạch, Chuối,..."
         />
         <MealItem
-          title="Bữa sáng"
-          value={500}
-          maxValue={600}
-          subtitle="Yến mạch, Chuối,..."
+          title="Thêm bữa ăn"
+          subtitle="Gợi ý bữa ăn 500 kcal"
+          onPress={() => {console.log("Adding new meal")}}
+          addingNewMealButton
         />
-        <MealItem subtitle="Gợi ý bữa ăn 500 kcal" />
       </VStack>
     </VStack>
   );
