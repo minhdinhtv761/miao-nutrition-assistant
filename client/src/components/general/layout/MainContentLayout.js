@@ -4,7 +4,7 @@ import React from "react";
 
 const MainContentLayout = ({ child }) => {
   return (
-    <Box safeArea width="100%" p={4}>
+    <Box safeArea width="100%" h="100%" px={4}>
       {child}
     </Box>
   );

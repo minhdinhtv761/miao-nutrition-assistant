@@ -1,6 +1,7 @@
 import {
   HomeScreen,
   LoginScreen,
+  NewMealScreen,
   OnBoardingScreen,
   RegisterScreen,
 } from "./src/features";
@@ -25,10 +26,12 @@ const Navigation = () => {
           {/* Muốn xem giao diện cái nào thì cứ đưa cái đó lên đầu
             Sau bỏ vào redux thì làm Navigation sau */}
 
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="NewMealScreen" component={NewMealScreen} />
+         
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-          <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} />
+          <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} /> 
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
   );

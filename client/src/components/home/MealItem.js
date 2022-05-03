@@ -1,5 +1,4 @@
 import { Box, Divider, Flex, HStack, VStack } from "native-base";
-import { space, widthImageOfList } from "./../../styles/layout";
 
 import { CircleProgress } from "../general/circleProgress/CircleProgress";
 import Colors from "../../styles/colors";
@@ -7,6 +6,8 @@ import { Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import React from "react";
 import TextOfList from "../general/typography/TextOfList";
+import { space } from "./../../styles/layout";
+import { widthImageOfList } from "../../constants/sizes";
 
 export const MealItem = ({
   title = "Thêm món mới",

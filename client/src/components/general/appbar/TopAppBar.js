@@ -35,13 +35,14 @@ export default TopAppBar = (props) => {
         alignItems="center"
         w="100%"
       >
-        {Children.map(leftIcon, (child) =>
-          cloneElement(child, {
+        {Children.map(leftIcon, (child) => {
+          if (!isValidElement(child)) return null;
+          return cloneElement(child, {
             ...child.props,
             color: colorContent(isScrolling, isChangingColor, backgroundColor),
             backgroundColor: "transparent",
-          })
-        )}
+          });
+        })}
         <Heading
           size="md"
           color={colorContent(isScrolling, isChangingColor, backgroundColor)}
