@@ -27,11 +27,14 @@ export default TopAppBar = (props) => {
     backgroundColor === "primary.500" || backgroundColor === "white"
   );
   return (
-    <Center w="100%">
+    <Center 
+    w="100%"
+    >
       <HStack
         h={heightAppBar}
         px="4"
-        pt={safeArea.top}
+        // pt={safeArea.top}
+        safeAreaTop
         bg={!isScrolling && isChangingColor ? "white" : backgroundColor}
         shadow="1"
         justifyContent="space-between"

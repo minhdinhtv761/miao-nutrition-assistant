@@ -37,6 +37,18 @@ export const BottomHomeScreen = () => {
           maxValue={600}
         />
         <MealItem
+          title="Bữa sáng"
+          subtitle="Yến mạch, Chuối,..."
+          value={500}
+          maxValue={600}
+        />
+        <MealItem
+          title="Bữa sáng"
+          subtitle="Yến mạch, Chuối,..."
+          value={500}
+          maxValue={600}
+        />
+        <MealItem
           title="Thêm bữa ăn"
           subtitle="Gợi ý bữa ăn 500 kcal"
           onPress={() => {console.log("Adding new meal")}}
