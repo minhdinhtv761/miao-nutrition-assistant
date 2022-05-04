@@ -26,7 +26,7 @@ const Navigation = () => {
         {/* Muốn xem giao diện cái nào thì cứ đưa cái đó lên đầu
             Sau bỏ vào redux thì làm Navigation sau */}
 
-        {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen
           name="FoodMealEditingScreen"
           component={FoodMealEditingScreen}
