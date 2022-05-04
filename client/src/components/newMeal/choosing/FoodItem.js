@@ -9,7 +9,6 @@ import { widthImageOfList } from "../../../constants/sizes";
 export const FoodItem = ({
   title,
   subtitle,
-  isFavourite,
   calo,
   onPress,
   createNewFoodButton,
@@ -31,7 +30,6 @@ export const FoodItem = ({
       }
       title={title}
       subtitle={subtitle}
-      starIcon={isFavourite}
       onPress={onPress}
       isAddingButton={createNewFoodButton}
       rightChildren={
