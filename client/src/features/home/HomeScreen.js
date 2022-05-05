@@ -14,11 +14,6 @@ const HomeScreen = () => {
   const scrollA = React.useRef(new Animated.Value(0)).current;
   return (
     <View backgroundColor={Colors.background}  h="100%"
-    // style={{
-    //   flex: 1,
-    //   alignItems: "center",
-    //   justifyContent: "center"
-    // }}
     >
       <TopAppBar
         title="Home"
@@ -50,7 +45,7 @@ const HomeScreen = () => {
         />
         
       </Animated.ScrollView>
-      <BottomAppBar/>
+      {/* <BottomAppBar/> */}
     </View>
   );
 };
