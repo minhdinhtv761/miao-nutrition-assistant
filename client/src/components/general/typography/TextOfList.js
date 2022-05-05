@@ -7,17 +7,9 @@ import { space } from "./../../../styles/layout";
 const TextOfList = ({ title, starIcon, primaryColor, subtile }) => {
   return (
     <VStack>
-      <HStack alignItems="center" space={space.s}>
-        <Text
-          fontSize="md"
-          color={primaryColor ? Colors.primary : Colors.black}
-        >
-          {title}
-        </Text>
-        {starIcon ? (
-          <Icon as={AntDesign} size="xs" name="star" color="yellow.500" />
-        ) : null}
-      </HStack>
+      <Text fontSize="md" color={primaryColor ? Colors.primary : Colors.black}>
+        {title}
+      </Text>
       <Text fontSize="sm" color={Colors.textLight}>
         {subtile}
       </Text>

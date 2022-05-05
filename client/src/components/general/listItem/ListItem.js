@@ -34,7 +34,6 @@ export const ListItem = ({
             <TextOfList
               title={title}
               subtile={subtitle}
-              starIcon={starIcon}
               primaryColor={isAddingButton}
             />
           </HStack>
