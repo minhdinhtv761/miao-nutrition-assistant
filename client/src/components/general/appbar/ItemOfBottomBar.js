@@ -14,7 +14,7 @@ export const ItemOfBottomBar = ({
   return (
     <View
       style={{
-        top: 10,
+        top: 8,
         opacity: focused ? 1 : 0.5,
       }}
     >

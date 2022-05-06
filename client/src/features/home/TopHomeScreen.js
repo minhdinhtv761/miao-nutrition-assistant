@@ -24,7 +24,7 @@ export const TopHomeScreen = () => {
     );
   };
   return (
-    <View backgroundColor="black">
+    <View >
       <Box
         style={{
           position: "relative",
