@@ -1,125 +1,115 @@
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  Box,
-  Center,
-  HStack,
-  Icon,
-  IconButton,
-  NativeBaseProvider,
-  Pressable,
-  Text,
-} from "native-base";
-
-import Colors from "../../../styles/colors";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { IconButton, Pressable } from "native-base";
 import React from "react";
-import { headerHeight } from "../../../constants/sizes";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  FoodMealEditingScreen,
+  HomeScreen,
+  LoginScreen,
+  MealChoosingScreen,
+  OnBoardingScreen
+} from "../../../features";
+import Colors from "../../../styles/colors";
+import { ItemOfBottomBar } from "./ItemOfBottomBar";
+const Tab = createBottomTabNavigator();
 
 export const BottomAppBar = (props) => {
-  const [selected, setSelected] = React.useState(1);
-
+  const DisabledTabBarButton = ({ ...props }) => (
+    <Pressable disabled {...props} />
+  );
   const onPress = () => {
     console.log("long");
   };
   return (
-    <HStack bg="white" alignItems="center" shadow={6}>
-      <Pressable
-        opacity={selected === 0 ? 1 : 0.5}
-        py="2"
-        flex={1}
-        onPress={() => setSelected(0)}
-        focused
-      >
-        <Center>
-          <Icon
-            mb="1"
-            as={<MaterialCommunityIcons name="home-outline" />}
-            color="black"
-            size="sm"
-          />
-          <Text color="black" fontSize="12">
-            Trang chủ
-          </Text>
-        </Center>
-      </Pressable>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarShowLabel: false,
 
-      <Pressable
-        opacity={selected === 1 ? 1 : 0.5}
-        py="2"
-        flex={1}
-        onPress={() => setSelected(1)}
-      >
-        <Center>
-          <Icon
-            mb="1"
-            as={<MaterialCommunityIcons name="silverware-fork-knife" />}
-            color="black"
-            size="sm"
-          />
-          <Text color="black" fontSize="12">
-            Thực đơn
-          </Text>
-        </Center>
-      </Pressable>
+        headerShown: false,
+      }}
+    >
+      <Tab.Screen
+        name="Trang chủ"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <ItemOfBottomBar
+              focused={focused}
+              icon={<MaterialCommunityIcons name="home-outline" />}
+              title="Trang chủ"
+            />
+          ),
+        }}
+      />
 
-      <Pressable py="2" flex={1}>
-        <Center>
-          <IconButton
-            variant="solid"
-            borderRadius="full"
-            bg={Colors.normalColor}
-            size="lg" //Sửa nhỏ thôi
-            _icon={{
-              as: AntDesign,
-              name: "plus",
-              color: "white",
-            }}
-            _pressed={{
-              bg: Colors.normalColor,
-              opacity: 0.5,
-            }}
-            onPress={onPress}
-          />
-        </Center>
-      </Pressable>
+      <Tab.Screen
+        name="Thực đơn"
+        component={FoodMealEditingScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <ItemOfBottomBar
+              focused={focused}
+              icon={<MaterialCommunityIcons name="silverware-fork-knife" />}
+              title="Thực đơn"
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Long"
+        component={LoginScreen}
+        options={{
+          tabBarButton: DisabledTabBarButton,
 
-      <Pressable
-        opacity={selected === 3 ? 1 : 0.6}
-        py="2"
-        flex={1}
-        onPress={() => setSelected(3)}
-      >
-        <Center>
-          <Icon
-            mb="1"
-            as={<MaterialCommunityIcons name="book-open-variant" />}
-            color="black"
-            size="sm"
-          />
-          <Text color="black" fontSize="12">
-            Kế hoạch
-          </Text>
-        </Center>
-      </Pressable>
-
-      <Pressable
-        opacity={selected === 4 ? 1 : 0.5}
-        py="2"
-        flex={1}
-        onPress={() => setSelected(4)}
-      >
-        <Center>
-          <Icon
-            mb="1"
-            as={<MaterialCommunityIcons name="account-outline" />}
-            color="black"
-            size="sm"
-          />
-          <Text color="black" fontSize="12">
-            Cá nhân
-          </Text>
-        </Center>
-      </Pressable>
-    </HStack>
+          tabBarIcon: () => (
+            
+            <Pressable py="2" flex={1}>
+              <IconButton
+                variant="solid"
+                borderRadius="full"
+                bg={Colors.normalColor}
+                size="lg"
+                _icon={{
+                  as: AntDesign,
+                  name: "plus",
+                  color: "white",
+                }}
+                _pressed={{
+                  bg: Colors.normalColor,
+                  opacity: 0.5,
+                }}
+                onPress={onPress}
+              />
+            </Pressable>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Kế hoạch"
+        component={MealChoosingScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <ItemOfBottomBar
+              focused={focused}
+              icon={<MaterialCommunityIcons name="book-open-variant" />}
+              title="Kế hoạch"
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Cá nhân"
+        component={OnBoardingScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <ItemOfBottomBar
+              focused={focused}
+              icon={<MaterialCommunityIcons name="account-outline" />}
+              title="Cá nhân"
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 };

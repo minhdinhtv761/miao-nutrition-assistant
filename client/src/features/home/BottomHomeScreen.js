@@ -23,6 +23,7 @@ export const BottomHomeScreen = () => {
           subtitle="Yến mạch, Chuối,..."
           value={500}
           maxValue={600}
+          
         />
         <MealItem
           title="Bữa sáng"
@@ -47,6 +48,7 @@ export const BottomHomeScreen = () => {
           subtitle="Yến mạch, Chuối,..."
           value={500}
           maxValue={600}
+          
         />
         <MealItem
           title="Thêm bữa ăn"

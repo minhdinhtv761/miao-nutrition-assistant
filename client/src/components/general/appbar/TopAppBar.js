@@ -58,7 +58,6 @@ export default TopAppBar = (props) => {
         <HStack>
           {Children.map(rightChildren, (child) => {
             if (!isValidElement(child)) return null;
-            console.log(child.props);
             return cloneElement(
               child,
               {
