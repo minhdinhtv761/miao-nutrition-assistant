@@ -1,3 +1,4 @@
+import Colors, { NutrtionColors } from "../../../styles/colors";
 import { StyleSheet, TextInput, View } from "react-native";
 import Svg, { Circle, G } from "react-native-svg";
 import {
@@ -5,15 +6,16 @@ import {
   getStrokeWidth,
 } from "../../../utils/CircleProgress";
 
-import Colors from "../../../styles/colors";
+import { NutritionLable } from "../../../constants/enums";
 import React from "react";
 
-export const NutritionProgress = ({
+export const FullNutritionProgress = ({
   carbPercent = 50,
   fatPercent = 25,
   proteinPercent = 25,
-  caloriesLeft = 0,
+  calories = 0,
   radius = 40,
+  textColor,
 }) => {
   const strokeWidth = getStrokeWidth(radius);
   const circumference = 2 * Math.PI * radius;
@@ -21,7 +23,7 @@ export const NutritionProgress = ({
 
   const strokeDashoffset = (type) => {
     switch (type) {
-      case "carb":
+      case "carbs":
         return getStrokeDashoffset(circumference, carbPercent);
       case "fat":
         return getStrokeDashoffset(circumference, carbPercent + fatPercent);
@@ -49,49 +51,33 @@ export const NutritionProgress = ({
             strokeWidth={strokeWidth}
             strokeLinejoin="round"
           />
-          <Circle
-            cx="50%"
-            cy="50%"
-            r={radius}
-            fill="transparent"
-            stroke={Colors.proteinColor}
-            strokeWidth={strokeWidth}
-            strokeLinecap="round"
-            strokeDashoffset={strokeDashoffset("protein")}
-            strokeDasharray={circumference}
-          />
-          <Circle
-            cx="50%"
-            cy="50%"
-            r={radius}
-            fill="transparent"
-            stroke={Colors.fatColor}
-            strokeWidth={strokeWidth}
-            strokeLinecap="round"
-            strokeDashoffset={strokeDashoffset("fat")}
-            strokeDasharray={circumference}
-          />
-          <Circle
-            cx="50%"
-            cy="50%"
-            r={radius}
-            fill="transparent"
-            stroke={Colors.carbColor}
-            strokeWidth={strokeWidth}
-            strokeLinecap="round"
-            strokeDashoffset={strokeDashoffset("carb")}
-            strokeDasharray={circumference}
-          />
+
+          {Object.keys(NutritionLable)
+            .slice(1, 3)
+            .reverse()
+            .map((element) => (
+              <Circle
+                key={element}
+                cx="50%"
+                cy="50%"
+                r={radius}
+                fill="transparent"
+                stroke={NutrtionColors[element]}
+                strokeWidth={strokeWidth}
+                strokeLinecap="round"
+                strokeDashoffset={strokeDashoffset(element)}
+                strokeDasharray={circumference}
+              />
+            ))}
         </G>
       </Svg>
-      {/* <G> */}
       <TextInput
         underlineColorAndroid="transparent"
         editable={false}
-        defaultValue={`${caloriesLeft}`}
+        defaultValue={`${calories}`}
         style={[
           StyleSheet.absoluteFillObject,
-          { fontSize: radius / 2, color: Colors.white },
+          { fontSize: radius / 2, color: textColor || Colors.white },
           styles.text,
         ]}
       />

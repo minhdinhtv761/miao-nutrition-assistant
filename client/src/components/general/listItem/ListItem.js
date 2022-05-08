@@ -1,26 +1,17 @@
-import {
-  Box,
-  Divider,
-  HStack,
-  Icon,
-  IconButton,
-  Pressable,
-  View,
-} from "native-base";
+import { Box, Divider, HStack, Icon, Pressable } from "native-base";
 import React, { Children, cloneElement, isValidElement } from "react";
 
 import { AntDesign } from "@expo/vector-icons";
 import Colors from "./../../../styles/colors";
+import { CustomDivider } from "../divider/CustomDivider";
 import TextOfList from "./../typography/TextOfList";
 import { space } from "./../../../styles/layout";
-import { widthImageOfList } from "../../../constants/sizes";
 
 export const ListItem = ({
   image,
   onPress,
   title,
   subtitle,
-  starIcon,
   rightChildren,
   isAddingButton,
 }) => {
@@ -52,14 +43,7 @@ export const ListItem = ({
             />
           ) : null}
         </HStack>
-        {isAddingButton ? null : (
-          <Divider
-            my="2"
-            _light={{
-              bg: Colors.backgroundProgress,
-            }}
-          />
-        )}
+        {isAddingButton ? null : <CustomDivider />}
       </Box>
     </Pressable>
   );

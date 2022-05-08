@@ -1,18 +1,17 @@
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
 import {
   FoodMealEditingScreen,
   HomeScreen,
   LoginScreen,
   MealChoosingScreen,
   OnBoardingScreen,
-  RegisterScreen,
+  RegisterScreen
 } from "./src/features";
-
-import { NavigationContainer } from "@react-navigation/native";
-import React from "react";
-import colors from "./src/styles/colors";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { BottomAppBar } from "./src/components/general/appbar/BottomAppBar";
 import MenuScreen from "./src/features/menu/MenuScreen";
+import colors from "./src/styles/colors";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -29,11 +28,11 @@ const Navigation = () => {
       >
         {/* Muốn xem giao diện cái nào thì cứ đưa cái đó lên đầu.   Sau bỏ vào redux thì làm Navigation sau */}
 
-        {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
-        {/* <Stack.Screen
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen
           name="FoodMealEditingScreen"
           component={FoodMealEditingScreen}
-        /> */}
+        /> 
         <Stack.Screen
           name="MenuScreen"
           component={MenuScreen}

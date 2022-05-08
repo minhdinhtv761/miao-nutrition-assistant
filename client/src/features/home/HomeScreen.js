@@ -1,6 +1,7 @@
-import { Button, Icon, IconButton, View } from "native-base";
-
 import { Animated, Text } from "react-native";
+import { Box, Button, Icon, IconButton, View } from "native-base";
+
+import { BottomAppBar } from "../../components/general/appbar/BottomAppBar";
 import { BottomHomeScreen } from "./BottomHomeScreen";
 import Colors from "./../../styles/colors";
 import MainContentLayout from "./../../components/general/layout/MainContentLayout";
@@ -8,7 +9,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import TopAppBar from "../../components/general/appbar/TopAppBar";
 import { TopHomeScreen } from "./TopHomeScreen";
-import { BottomAppBar } from "../../components/general/appbar/BottomAppBar";
 
 const HomeScreen = () => {
   const scrollA = React.useRef(new Animated.Value(0)).current;
@@ -40,12 +40,9 @@ const HomeScreen = () => {
         
       >
         <TopHomeScreen />
-        <MainContentLayout 
-        child={<BottomHomeScreen />} 
-        />
-        
+        <Box safeArea background="transparent" />
+        <MainContentLayout child={<BottomHomeScreen />} />
       </Animated.ScrollView>
-
     </View>
   );
 };

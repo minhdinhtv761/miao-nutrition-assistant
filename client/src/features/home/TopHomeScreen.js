@@ -1,18 +1,17 @@
 import { Box, Center, HStack, Heading, Text, VStack, View } from "native-base";
+import { getSubboxHeight, getTopBannerHeight } from "./../../constants/sizes";
 
 import Colors from "./../../styles/colors";
 import { DetailNutrition } from "../../components/home/DetailNutrition";
 import { Dimensions } from "react-native";
-import { NutritionProgress } from "./../../components/general/circleProgress/NutritionProgress";
+import { FullNutritionProgress } from "../../components/general/progress/FullNutritionProgress";
 import React from "react";
 import { space } from "./../../styles/layout";
-import { subBoxHeight } from "./../../constants/sizes";
-import { topBannerHeight } from "../../constants/sizes";
 
 export const TopHomeScreen = () => {
-  var heightBox = topBannerHeight();
-  var heightDetailBox = subBoxHeight();
-  
+  var heightBox = getTopBannerHeight();
+  var heightDetailBox = getSubboxHeight();
+
   const TextElement = ({ calo, text }) => {
     return (
       <VStack alignItems="center">
@@ -40,7 +39,7 @@ export const TopHomeScreen = () => {
             w="100%"
           >
             <TextElement calo={1500} text="Tổng cộng" />
-            <NutritionProgress radius={(heightBox * 0.6) / 2} />
+            <FullNutritionProgress radius={(heightBox * 0.6) / 2} />
 
             <TextElement calo={1500} text="Đã ăn" />
           </HStack>
