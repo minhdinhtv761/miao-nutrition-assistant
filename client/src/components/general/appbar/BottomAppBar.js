@@ -1,7 +1,4 @@
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { IconButton, Pressable } from "native-base";
-import React from "react";
 import {
   FoodMealEditingScreen,
   HomeScreen,
@@ -9,8 +6,13 @@ import {
   MealChoosingScreen,
   OnBoardingScreen
 } from "../../../features";
+import { IconButton, Pressable } from "native-base";
+
 import Colors from "../../../styles/colors";
 import { ItemOfBottomBar } from "./ItemOfBottomBar";
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 const Tab = createBottomTabNavigator();
 
 export const BottomAppBar = (props) => {
@@ -18,7 +20,6 @@ export const BottomAppBar = (props) => {
     <Pressable disabled {...props} />
   );
   const onPress = () => {
-    console.log("long");
   };
   return (
     <Tab.Navigator
