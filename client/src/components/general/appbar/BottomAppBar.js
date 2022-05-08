@@ -1,17 +1,14 @@
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  FoodMealEditingScreen,
-  HomeScreen,
-  LoginScreen,
-  MealChoosingScreen,
-  OnBoardingScreen
-} from "../../../features";
-import { IconButton, Pressable } from "native-base";
-
-import Colors from "../../../styles/colors";
-import { ItemOfBottomBar } from "./ItemOfBottomBar";
-import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Icon, IconButton, Pressable } from "native-base";
+import React from "react";
+import {
+  HomeScreen,
+  LoginScreen
+} from "../../../features";
+import MenuScreen from "../../../features/menu/MenuScreen";
+import Colors from "../../../styles/colors";
+
 
 const Tab = createBottomTabNavigator();
 
@@ -19,17 +16,24 @@ export const BottomAppBar = (props) => {
   const DisabledTabBarButton = ({ ...props }) => (
     <Pressable disabled {...props} />
   );
-  const onPress = () => {
-  };
+  const onPress = () => {};
   return (
     <Tab.Navigator
+      initialRouteName="HomeScreen"
+      // tabBarOptions={{
+      //   height: 90,
+      //   position: "absolute",
+      //   bottom: 25,
+      // }}
       screenOptions={{
-        tabBarShowLabel: false,
-
+        tabBarActiveTintColor: "black",
+        // tabBarStyle: { height: "8%" },
+        tabBarItemStyle: { padding: 5 },
+        inactiveColor: "black",
         headerShown: false,
       }}
     >
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Trang chủ"
         component={HomeScreen}
         options={{
@@ -41,17 +45,35 @@ export const BottomAppBar = (props) => {
             />
           ),
         }}
-      />
-
+      /> */}
       <Tab.Screen
-        name="Thực đơn"
-        component={FoodMealEditingScreen}
+        name="HomeScreen"
+        component={HomeScreen}
         options={{
+          tabBarLabel: "Trang chủ",
           tabBarIcon: ({ focused }) => (
-            <ItemOfBottomBar
-              focused={focused}
-              icon={<MaterialCommunityIcons name="silverware-fork-knife" />}
-              title="Thực đơn"
+            <Icon
+              mb="1"
+              as={<MaterialCommunityIcons name="home-outline" />}
+              color="black"
+              opacity={focused ? 1 : 0.5}
+              size="sm"
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="MenuScreen"
+        component={MenuScreen}
+        options={{
+          tabBarLabel: "Thực đơn",
+          tabBarIcon: ({ focused }) => (
+            <Icon
+              mb="1"
+              as={<MaterialCommunityIcons name="silverware-fork-knife" />}
+              color="black"
+              opacity={focused ? 1 : 0.5}
+              size="sm"
             />
           ),
         }}
@@ -61,33 +83,67 @@ export const BottomAppBar = (props) => {
         component={LoginScreen}
         options={{
           tabBarButton: DisabledTabBarButton,
-
+          tabBarLabelStyle: { display: "none" },
           tabBarIcon: () => (
-            
-            <Pressable py="2" flex={1}>
-              <IconButton
-                variant="solid"
-                borderRadius="full"
-                bg={Colors.normalColor}
-                size="lg"
-                _icon={{
-                  as: AntDesign,
-                  name: "plus",
-                  color: "white",
-                }}
-                _pressed={{
-                  bg: Colors.normalColor,
-                  opacity: 0.5,
-                }}
-                onPress={onPress}
-              />
-            </Pressable>
+            <IconButton
+              style={{
+                position: "absolute",
+                bottom: "20%",
+                elevation: 4
+              }}
+              variant="solid"
+              borderRadius="full"
+              bg={Colors.normalColor}
+              size="lg"
+              _icon={{
+                as: AntDesign,
+                name: "plus",
+                color: "white",
+              }}
+              _pressed={{
+                bg: Colors.normalColor,
+                opacity: 0.5,
+              }}
+              onPress={onPress}
+            />
           ),
         }}
       />
       <Tab.Screen
         name="Kế hoạch"
-        component={MealChoosingScreen}
+        component={MenuScreen}
+        options={{
+          tabBarLabel: "Kế hoạch",
+          tabBarIcon: ({ focused }) => (
+            <Icon
+              mb="1"
+              as={<MaterialCommunityIcons name="book-open-variant" />}
+              color="black"
+              opacity={focused ? 1 : 0.5}
+              size="sm"
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Cá nhân"
+        component={MenuScreen}
+        options={{
+          tabBarLabel: "Cá nhân",
+          tabBarIcon: ({ focused }) => (
+            <Icon
+              mb="1"
+              as={<MaterialCommunityIcons name="account-outline" />}
+              color="black"
+              opacity={focused ? 1 : 0.5}
+              size="sm"
+            />
+          ),
+        }}
+      />
+      {/* <Tab.Screen
+        name="Kế hoạch"
+        component={FoodMealEditingScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <ItemOfBottomBar
@@ -110,7 +166,7 @@ export const BottomAppBar = (props) => {
             />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };

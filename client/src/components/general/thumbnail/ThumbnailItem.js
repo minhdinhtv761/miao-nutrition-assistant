@@ -37,6 +37,7 @@ export const ThumbnailItem = ({ image, name, time, kcal }) => {
           icon={<MaterialIcons name="history-toggle-off" />}
           iconColor= {Colors.fatColor}
           title={time + " ngày"}
+          titleColor= {Colors.fatColor}
         />
          <IconAndText
           icon={<MaterialIcons name="local-fire-department" />}
