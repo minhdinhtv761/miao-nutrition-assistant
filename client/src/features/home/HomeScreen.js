@@ -45,7 +45,7 @@ const HomeScreen = () => {
         />
         
       </Animated.ScrollView>
-      {/* <BottomAppBar/> */}
+
     </View>
   );
 };

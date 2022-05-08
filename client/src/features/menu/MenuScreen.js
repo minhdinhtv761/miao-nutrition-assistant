@@ -7,7 +7,7 @@ import FoodList from "../../components/newMeal/choosing/FoodList";
 import MainContentLayout from "../../components/general/layout/MainContentLayout";
 import SearchBar from "../../components/general/input/SearchBar";
 import { TurnBackButton } from "./../../components/general/buttons/iconButtons/TurnBackButton";
-import MenuTitle from "../../components/general/typography/MenuTitle";
+import { ThumbnailList } from "../../components/general/listItem/ThumbnailList";
 
 const SecondRoute = () => (
   <Center flex={1} my="4">
@@ -17,10 +17,23 @@ const SecondRoute = () => (
 
 const MenuScreen = () => {
   const scrollA = React.useRef(new Animated.Value(0)).current;
+  const scrollThumbnail = () => {
+    return (
+      <Animated.ScrollView
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollA } } }],
+          { useNativeDriver: true }
+        )}
+        scrollEventThrottle={16}
+      >
+        <ThumbnailList />
+      </Animated.ScrollView>
+    );
+  };
   const tabList = [
     {
       title: "Thực đơn",
-      tab: FoodList,
+      tab: scrollThumbnail,
     },
     {
       title: "Công thức",
@@ -31,9 +44,8 @@ const MenuScreen = () => {
   const Content = () => {
     return (
       <View h="100%">
-          <SearchBar />
-          <CustomTabView tabList={tabList} />
-        
+        <SearchBar />
+        <CustomTabView tabList={tabList} />
       </View>
     );
   };
@@ -50,6 +62,7 @@ const MenuScreen = () => {
         }
         scrollA={scrollA}
       />
+
       <MainContentLayout child={<Content />} />
     </View>
   );

@@ -38,10 +38,10 @@ const Navigation = () => {
           name="MenuScreen"
           component={MenuScreen}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="MealChoosingScreen"
           component={MealChoosingScreen}
-        /> */}
+        />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} />
