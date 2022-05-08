@@ -1,4 +1,4 @@
-import { Button, Icon, IconButton, View } from "native-base";
+import { Box, Button, Icon, IconButton, View } from "native-base";
 
 import { Animated } from "react-native";
 import { BottomHomeScreen } from "./BottomHomeScreen";
@@ -37,6 +37,7 @@ const HomeScreen = () => {
         scrollEventThrottle={16}
       >
         <TopHomeScreen />
+        <Box safeArea background="transparent" />
         <MainContentLayout child={<BottomHomeScreen />} />
       </Animated.ScrollView>
     </View>

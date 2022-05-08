@@ -1,26 +1,33 @@
 import { Box, Image } from "native-base";
+import React, { Children, cloneElement, isValidElement } from "react";
+import { getHeaderHeight, getTopBannerHeight } from "./../../../constants/sizes";
 
-import React from "react";
-import { headerHeight } from "./../../../constants/sizes";
-import { topBannerHeight } from "../../../constants/sizes";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export const ImageBox = (props) => {
+// import { imgLinearGradient } from "./../../../constants/image";
+
+export const ImageBox = ({ uri, aboveChildren }) => {
   const safeArea = useSafeAreaInsets();
-  const heightImage = topBannerHeight() + headerHeight() + safeArea.top;
+  const heightImage = getTopBannerHeight() + getHeaderHeight() + safeArea.top;
   return (
     <Box position="absolute" left={0} h={heightImage} w="100%">
-      <Box
+      {/* <Image
+        source={{
+          uri: imgLinearGradient,
+        }}
         position="absolute"
         left={0}
-        background="linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%)"
-        opacity={20}
+        // opacity={30}
+        h="100%"
         w="100%"
-        height="100%"
-      />
+      /> */}
+      {Children.map(aboveChildren, (child) => {
+        if (!isValidElement(child)) return null;
+        return cloneElement(child, child.props, null);
+      })}
       <Image
         source={{
-          uri: props.uri,
+          uri: uri,
         }}
         h="100%"
         w="100%"

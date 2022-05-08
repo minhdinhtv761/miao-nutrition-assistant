@@ -1,10 +1,7 @@
-import { HStack, VStack } from "native-base";
-
-import { CircleProgress } from "./../../components/general/circleProgress/CircleProgress";
 import { MealItem } from "./../../components/home/MealItem";
 import MenuTitle from "../../components/general/typography/MenuTitle";
 import React from "react";
-import TextOfList from "./../../components/general/typography/TextOfList";
+import { VStack } from "native-base";
 import { space } from "./../../styles/layout";
 
 export const BottomHomeScreen = () => {

@@ -11,6 +11,7 @@ const SearchBar = () => {
       placeholder="Search"
       variant="filled"
       width="100%"
+      px={space.m}
       borderRadius="full"
       borderWidth="0"
       fontSize={14}

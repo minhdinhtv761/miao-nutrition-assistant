@@ -1,9 +1,8 @@
-import { HStack, Icon, Text, VStack } from "native-base";
+import { Text, VStack } from "native-base";
 
-import { AntDesign } from "@expo/vector-icons";
 import Colors from "./../../../styles/colors";
 import React from "react";
-import { space } from "./../../../styles/layout";
+import { Subtitle } from "./Subtitle";
 
 const TextOfList = ({ title, starIcon, primaryColor, subtile }) => {
   return (
@@ -11,9 +10,7 @@ const TextOfList = ({ title, starIcon, primaryColor, subtile }) => {
       <Text fontSize="md" color={primaryColor ? Colors.primary : Colors.black}>
         {title}
       </Text>
-      <Text fontSize="sm" color={Colors.textLight}>
-        {subtile}
-      </Text>
+      <Subtitle text={subtile} />
     </VStack>
   );
 };
