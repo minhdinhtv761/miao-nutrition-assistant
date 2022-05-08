@@ -15,4 +15,9 @@ const Colors = {
   normalColor: "#40B68E",
 };
 
+export const NutrtionColors = {
+  carbs: "#FFDF9B",
+  fat: "#FF8E47",
+  protein: "#9AD48C",
+};
 export default Colors;

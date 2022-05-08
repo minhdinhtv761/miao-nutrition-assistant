@@ -1,6 +1,6 @@
 import { Box, Center, HStack, Heading } from "native-base";
 import React, { Children, cloneElement, isValidElement } from "react";
-import { headerHeight, topBannerHeight } from "../../../constants/sizes";
+import { getHeaderHeight, getTopBannerHeight } from "../../../constants/sizes";
 
 import colors from "../../../styles/colors";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -10,14 +10,14 @@ export default TopAppBar = (props) => {
   const isFloating = !!scrollA;
   const [isScrolling, setScrolling] = React.useState(isFloating);
   const safeArea = useSafeAreaInsets();
-  const heightAppBar = headerHeight() + safeArea.top;
+  const heightAppBar = getHeaderHeight() + safeArea.top;
 
   React.useEffect(() => {
     if (!scrollA) {
       return;
     }
     const listenerId = scrollA.addListener((a) => {
-      const topNaviOffset = topBannerHeight() - headerHeight();
+      const topNaviOffset = getTopBannerHeight() - getHeaderHeight();
       isScrolling !== a.value < topNaviOffset && setScrolling(!isScrolling);
     });
     return () => scrollA.removeListener(listenerId);

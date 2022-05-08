@@ -1,14 +1,11 @@
 import { Dimensions } from "react-native";
 
-export const headerHeight = () => Dimensions.get("window").height * 0.07;
-export const topBannerHeight = () => Dimensions.get("window").height / 4;
-export const subBoxHeight = () => Dimensions.get("window").height / 8;
+export const getHeaderHeight = () => Dimensions.get("window").height * 0.07;
+export const getTopBannerHeight = () => Dimensions.get("window").height / 4;
+export const getSubboxHeight = () => Dimensions.get("window").height / 8;
 
-
-export const bottomHeight = () => Dimensions.get("window").height * 0.08;
-
-export const widthImageOfList = () => {
-  return (Dimensions.get("window").width / 5) * 0.9;
-};
+export const getWidthImageOfList = () =>
+  (Dimensions.get("window").width / 5) * 0.9;
+export const getBottomHeight = () => Dimensions.get("window").height * 0.08;
 
 // export const getRadius = (height) => height * 0.6;
