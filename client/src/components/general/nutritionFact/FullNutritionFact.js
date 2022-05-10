@@ -1,35 +1,14 @@
 import { Divider, HStack, Text, VStack } from "native-base";
 
 import Colors from "../../../styles/colors";
+import { IconAndText } from "../typography/IconAndText";
+import { MaterialIcons } from "@expo/vector-icons";
 import { NutritionLabel } from "../../../constants/enums";
 import { NutritionUnit } from "./../../../constants/enums";
+import { Pressable } from "react-native";
 import React from "react";
 import { Subtitle } from "../typography/Subtitle";
 import { space } from "./../../../styles/layout";
-
-// const totalFat = {saturatedFat, transFat};
-class NutritionItem {
-  constructor(title, type) {
-    this.title = title;
-    this.type = type;
-  }
-}
-const listInfo = [
-  new NutritionItem("totalFat", "mainParent"),
-  new NutritionItem("saturatedFat", "child"),
-  new NutritionItem("transFat", "child"),
-  new NutritionItem("cholesterol", "mainParent"),
-  new NutritionItem("natri", "mainParent"),
-  new NutritionItem("totalCarbohydrates", "mainParent"),
-  new NutritionItem("dietaryFiber", "child"),
-  new NutritionItem("sugars", "child"),
-  new NutritionItem("protein", "mainParent"),
-  new NutritionItem("vitaminA", "subParent"),
-  new NutritionItem("vitaminC", "subParent"),
-  new NutritionItem("canxi", "subParent"),
-  new NutritionItem("fe", "subParent"),
-  new NutritionItem("kali", "subParent"),
-];
 
 const InfoItem = ({ type, styleType, weight, rightText, divider }) => {
   return (
@@ -42,15 +21,14 @@ const InfoItem = ({ type, styleType, weight, rightText, divider }) => {
             {type === "calo" ? null : NutritionUnit[type]}
           </Text>
         </HStack>
-        <Text {...styles.mainParent}>
+        <Text {...(type === "calo" ? styles.calories : styles.mainParent)}>
           {rightText}
           {type === "calo" || type == "quantity" ? "" : "%"}
         </Text>
       </HStack>
       <Divider
-        my="1.5"
+        my="1"
         thickness={divider.size}
-        // h={divider.size}
         _light={{
           bg: divider.color,
         }}
@@ -58,17 +36,31 @@ const InfoItem = ({ type, styleType, weight, rightText, divider }) => {
     </VStack>
   );
 };
-export const FullNutritionFact = () => {
-  const lgDivider = { color: "black", size: "4" };
-  const mdDivider = { color: "black", size: "2" };
-  const smDivider = { color: Colors.backgroundProgress, size: "1" };
 
-  return (
+const showInfomation = [
+  <IconAndText
+    icon={<MaterialIcons name="keyboard-arrow-down" />}
+    title="Xem thêm dinh dưỡng"
+  />,
+  <IconAndText
+    icon={<MaterialIcons name="keyboard-arrow-up" />}
+    title="Thu gọn"
+  />,
+];
+
+export const FullNutritionFact = () => {
+  const [showInfo, setShowInfo] = React.useState(0);
+  function handleShowInfomation() {
+    setShowInfo(showInfo === 0 ? 1 : 0);
+  }
+
+  const NutritionFactTable = (
     <VStack
       p={space.s}
       borderColor="coolGray.300"
       borderWidth={1}
       borderRadius={2}
+      width="100%"
     >
       <InfoItem
         type="quantity"
@@ -105,9 +97,18 @@ export const FullNutritionFact = () => {
 
       <Subtitle
         text=" *Giá trị dinh dưỡng mỗi ngày dựa trên chế độ ăn chứa 2000 kcal.Giá trị
-        dinh dưỡng mội ngày của bạn có thể cao hơn hoặc thấp hơn tùy nhu cầu
-        calo của bạn."
+  dinh dưỡng mội ngày của bạn có thể cao hơn hoặc thấp hơn tùy nhu cầu
+  calo của bạn."
       />
+    </VStack>
+  );
+
+  return (
+    <VStack alignItems="center" space={space.s}>
+      {showInfo === 1 ? NutritionFactTable : null}
+      <Pressable onPress={handleShowInfomation}>
+        {showInfomation[showInfo]}
+      </Pressable>
     </VStack>
   );
 };
@@ -115,7 +116,7 @@ export const FullNutritionFact = () => {
 const styles = {
   calories: {
     fontWeight: "bold",
-    fontSize: "xl",
+    fontSize: "2xl",
   },
   mainParent: {
     fontWeight: "bold",
@@ -125,7 +126,34 @@ const styles = {
     fontSize: "md",
   },
   child: {
-    marginLeft: space.m * 4,
+    marginLeft: space.s * 4,
     fontSize: "md",
   },
 };
+
+const lgDivider = { color: "black", size: "4" };
+const mdDivider = { color: "black", size: "2" };
+const smDivider = { color: Colors.backgroundProgress, size: "1" };
+
+class NutritionItem {
+  constructor(title, type) {
+    this.title = title;
+    this.type = type;
+  }
+}
+const listInfo = [
+  new NutritionItem("totalFat", "mainParent"),
+  new NutritionItem("saturatedFat", "child"),
+  new NutritionItem("transFat", "child"),
+  new NutritionItem("cholesterol", "mainParent"),
+  new NutritionItem("natri", "mainParent"),
+  new NutritionItem("totalCarbohydrates", "mainParent"),
+  new NutritionItem("dietaryFiber", "child"),
+  new NutritionItem("sugars", "child"),
+  new NutritionItem("protein", "mainParent"),
+  new NutritionItem("vitaminA", "subParent"),
+  new NutritionItem("vitaminC", "subParent"),
+  new NutritionItem("canxi", "subParent"),
+  new NutritionItem("fe", "subParent"),
+  new NutritionItem("kali", "subParent"),
+];
