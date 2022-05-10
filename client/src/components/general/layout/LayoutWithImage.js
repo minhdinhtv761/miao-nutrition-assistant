@@ -4,6 +4,7 @@ import { Animated } from "react-native";
 import { ImageBox } from "../image/ImageBox";
 import MainContentLayout from "./MainContentLayout";
 import React from "react";
+import { ScrollViewLayout } from "./ScrollViewLayout";
 import TopAppBar from "../appbar/TopAppBar";
 import { TurnBackButton } from "../buttons/iconButtons/TurnBackButton";
 import { getHeaderHeight } from "./../../../constants/sizes";
@@ -24,17 +25,6 @@ export const LayoutWithImage = ({
 
   return (
     <View backgroundColor={backgroundColor || "white"} h="100%">
-      {/* {Children.map(topAppBar, (child) => {
-        if (!isValidElement(child)) return null;
-        return cloneElement(
-          child,
-          {
-            ...child.props,
-            scrollA: scrollA,
-          },
-          null
-        );
-      })} */}
       <TopAppBar
         title={title}
         backgroundColor={topAppBar.backgroundColor}
@@ -42,17 +32,11 @@ export const LayoutWithImage = ({
         rightChildren={rightChildren}
         scrollA={scrollA}
       />
-      <Animated.ScrollView
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollA } } }],
-          { useNativeDriver: true }
-        )}
-        scrollEventThrottle={16}
-      >
+      <ScrollViewLayout scrollA={scrollA}>
         <ImageBox uri={uriImage} aboveChildren={topBanner} />
         <Box safeArea height={heightImage} />
         <MainContentLayout child={children} />
-      </Animated.ScrollView>
+      </ScrollViewLayout>
     </View>
   );
 };

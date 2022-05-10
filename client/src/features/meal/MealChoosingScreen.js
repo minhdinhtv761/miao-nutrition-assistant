@@ -1,11 +1,9 @@
-import { Button, Center, View } from "native-base";
+import { Button, Center } from "native-base";
 
 import { Animated } from "react-native";
-import { CustomTabView } from "../../components/general/tabView/CustomTabView";
 import FoodList from "../../components/newMeal/choosing/FoodList";
-import MainContentLayout from "../../components/general/layout/MainContentLayout";
+import LayoutWithTabview from "../../components/general/layout/LayoutWithTabview";
 import React from "react";
-import SearchBar from "../../components/general/input/SearchBar";
 import { TurnBackButton } from "./../../components/general/buttons/iconButtons/TurnBackButton";
 
 const SecondRoute = () => (
@@ -14,43 +12,53 @@ const SecondRoute = () => (
   </Center>
 );
 const MealChoosingScreen = () => {
-  const scrollA = React.useRef(new Animated.Value(0)).current;
   const tabList = [
     {
       title: "Thực phẩm",
-      tab: FoodList,
+      tab: <FoodList />,
     },
     {
       title: "Công thức",
-      tab: SecondRoute,
+      tab: <SecondRoute />,
     },
-    { title: "Của tôi", tab: SecondRoute },
+    { title: "Của tôi", tab: <SecondRoute /> },
   ];
 
-  const Content = () => {
-    return (
-      <View h="100%">
-        <SearchBar />
-        <CustomTabView tabList={tabList} />
-      </View>
-    );
+  const topAppBar = {
+    title: "Thêm bữa ăn",
+    backgroundColor: "white",
+    leftIcon: <TurnBackButton />,
+    rightChildren: (
+      <Button variant="ghost" onPress={() => {}}>
+        Tiếp
+      </Button>
+    ),
   };
-  return (
-    <View backgroundColor="white" h="100%">
-      <TopAppBar
-        title="Thêm bữa ăn"
-        backgroundColor="white"
-        leftIcon={<TurnBackButton />}
-        rightChildren={
-          <Button variant="ghost" onPress={() => {}}>
-            Tiếp
-          </Button>
-        }
-        scrollA={scrollA}
-      />
-      <MainContentLayout child={<Content />} />
-    </View>
-  );
+  // const Content = () => {
+  //   return (
+  //     <View h="100%">
+  //       <SearchBar />
+  //       <CustomTabView tabList={tabList} />
+  //     </View>
+  //   );
+  // };
+  // return (
+  //   <View backgroundColor="white" h="100%" >
+  //     <TopAppBar
+  //       title="Thêm bữa ăn"
+  //       backgroundColor="white"
+  //       leftIcon={<TurnBackButton />}
+  //       rightChildren={
+  //         <Button variant="ghost" onPress={() => {}}>
+  //           Tiếp
+  //         </Button>
+  //       }
+  //       scrollA={scrollA}
+  //     />
+  //     <MainContentLayout child={<Content />} />
+  //   </View>
+  // );
+  return <LayoutWithTabview topAppBar={topAppBar} tabList={tabList} />;
 };
 
 export default MealChoosingScreen;

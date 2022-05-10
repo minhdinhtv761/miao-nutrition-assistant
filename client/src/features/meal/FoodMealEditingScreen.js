@@ -20,12 +20,12 @@ const FoodMealEditingScreen = () => {
       uriImage="https://wallpaperaccess.com/full/317501.jpg"
       children={
         <VStack space={space.xl}>
-          <Text >
+          <Heading size="xl" fontWeight="light">
             Bơ (quả)
-          </Text>
+          </Heading>
           <InputWithSelect label="Nhập lượng nạp vào và đơn vị" />
           <ShortNutritionTable />
-          <FullNutritionFact/>
+          <FullNutritionFact />
         </VStack>
       }
     />

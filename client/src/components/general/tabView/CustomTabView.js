@@ -7,14 +7,6 @@ import { SceneMap, TabView } from "react-native-tab-view";
 import Colors from "./../../../styles/colors";
 import { space } from "./../../../styles/layout";
 
-const FirstRoute = () => <Text>This is Tab 1</Text>;
-
-const SecondRoute = () => (
-  <Center flex={1} my="4">
-    This is Tab 2
-  </Center>
-);
-
 function Route(key, title) {
   this.key = key;
   this.title = title;

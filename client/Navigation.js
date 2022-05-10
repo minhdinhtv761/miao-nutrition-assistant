@@ -1,4 +1,12 @@
+import {
+  FoodMealEditingScreen,
+  HomeScreen,
+  MealChoosingScreen,
+} from "./src/features";
+
 import { BottomAppBar } from "./src/components/general/appbar/BottomAppBar";
+import Colors from "./src/styles/colors";
+import MenuScreen from "./src/features/menu/MenuScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -11,33 +19,27 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      <BottomAppBar />
-      {/* <SafeAreaView style={{ background: "white" }} /> 
-
+      {/* <BottomAppBar /> */}
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          contentStyle: { backgroundColor: colors.background },
+          contentStyle: { backgroundColor: Colors.background },
         }}
       >
-
-       <Stack.Screen name="HomeScreen" component={HomeScreen} /> 
+        {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
         <Stack.Screen
           name="FoodMealEditingScreen"
           component={FoodMealEditingScreen}
-        /> 
-        <Stack.Screen
-          name="MenuScreen"
-          component={MenuScreen}
         />
-        <Stack.Screen
+        {/* <Stack.Screen name="MenuScreen" component={MenuScreen} /> */}
+        {/* <Stack.Screen
           name="MealChoosingScreen"
           component={MealChoosingScreen}
-        />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        /> */}
+        {/* <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-        <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} />
-      </Stack.Navigator> */}
+        <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} /> */}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

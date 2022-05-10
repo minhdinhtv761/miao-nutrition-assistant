@@ -12,7 +12,54 @@ const FoodList = () => {
         calo={240}
         onPress={() => {}}
       />
-      <FoodItem title="Tạo mới món ăn" onPress={() => {}} createNewFoodButton />
+      <FoodItem
+        title="Bơ (quả)"
+        subtitle="100 gr"
+        calo={240}
+        onPress={() => {}}
+      />
+      <FoodItem
+        title="Bơ (quả)"
+        subtitle="100 gr"
+        calo={240}
+        onPress={() => {}}
+      />
+      <FoodItem
+        title="Bơ (quả)"
+        subtitle="100 gr"
+        calo={240}
+        onPress={() => {}}
+      />
+      <FoodItem
+        title="Bơ (quả)"
+        subtitle="100 gr"
+        calo={240}
+        onPress={() => {}}
+      />
+      <FoodItem
+        title="Bơ (quả)"
+        subtitle="100 gr"
+        calo={240}
+        onPress={() => {}}
+      />
+      <FoodItem
+        title="Bơ (quả)"
+        subtitle="100 gr"
+        calo={240}
+        onPress={() => {}}
+      />
+      <FoodItem
+        title="Bơ (quả)"
+        subtitle="100 gr"
+        calo={240}
+        onPress={() => {}}
+      />
+      <FoodItem
+        title="Tạo mới món ăn"
+        subtitle="Tạo mới món ăn và dinh dưỡng"
+        onPress={() => {}}
+        createNewFoodButton
+      />
     </VStack>
   );
 };

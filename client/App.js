@@ -32,6 +32,7 @@ function App() {
     <SSRProvider>
       <NativeBaseProvider theme={theme}>
         <Navigation />
+        <SafeAreaView/>
       </NativeBaseProvider>
     </SSRProvider>
   );

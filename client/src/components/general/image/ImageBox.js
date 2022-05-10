@@ -6,9 +6,8 @@ import {
 } from "./../../../constants/sizes";
 
 import { View } from "native-base";
+import { imgLinearGradient } from "./../../../constants/image";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
-// import { imgLinearGradient } from "./../../../constants/image";
 
 export const ImageBox = ({ uri, aboveChildren }) => {
   const safeArea = useSafeAreaInsets();
@@ -20,10 +19,20 @@ export const ImageBox = ({ uri, aboveChildren }) => {
         return cloneElement(child, child.props, null);
       })}
       <Image
-        source={{ uri: uri}}
+        source={imgLinearGradient}
         style={{
           width: "100%",
           height: "100%",
+          opacity: 0.2,
+        }}
+      />
+      <Image
+        source={{ uri: uri }}
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+          zIndex: -1,
         }}
       />
     </View>

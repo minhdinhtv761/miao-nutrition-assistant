@@ -1,2 +1,2 @@
 export const imgLinearGradient =
-  require('../../assets/linearGradient.png');
+  require("../../assets/linearGradient.png");

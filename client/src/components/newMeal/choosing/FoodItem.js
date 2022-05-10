@@ -3,8 +3,8 @@ import { HStack, Image, Text } from "native-base";
 import { ListItem } from "../../general/listItem/ListItem";
 import { PlusButton } from "../../general/buttons/iconButtons/PlusButton";
 import React from "react";
+import { getWidthImageOfList } from "../../../constants/sizes";
 import { space } from "./../../../styles/layout";
-import { widthImageOfList } from "../../../constants/sizes";
 
 export const FoodItem = ({
   title,
@@ -13,7 +13,7 @@ export const FoodItem = ({
   onPress,
   createNewFoodButton,
 }) => {
-  const widthImage = widthImageOfList();
+  const widthImage = getWidthImageOfList();
   return (
     <ListItem
       image={
