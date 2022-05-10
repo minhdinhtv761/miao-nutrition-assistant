@@ -1,7 +1,7 @@
 import { HStack, Text, VStack } from "native-base";
 
 import { FullNutritionProgress } from "../progress/FullNutritionProgress";
-import { NutritionLable } from "../../../constants/enums";
+import { NutritionLabel } from "../../../constants/enums";
 import { NutrtionColors } from "../../../styles/colors";
 import React from "react";
 import { Subtitle } from "../typography/Subtitle";
@@ -12,7 +12,7 @@ const InfoItem = ({ type, value, percent }) => (
   <VStack space={space.xs} alignItems="center">
     <Subtitle text={`${percent}%`} color={NutrtionColors[type]} />
     <Text fontSize="lg">{value}g</Text>
-    <Subtitle text={NutritionLable[type]} />
+    <Subtitle text={NutritionLabel[type]} />
   </VStack>
 );
 const ShortNutritionFact = () => {

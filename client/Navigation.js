@@ -1,10 +1,8 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React from "react";
-import {
-  useSafeAreaInsets
-} from "react-native-safe-area-context";
 import { BottomAppBar } from "./src/components/general/appbar/BottomAppBar";
+import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,17 +12,16 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <BottomAppBar />
-      {/* <SafeAreaView style={{ background: "white" }} /> */}
+      {/* <SafeAreaView style={{ background: "white" }} /> 
 
-      {/* <Stack.Navigator
+      <Stack.Navigator
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: colors.background },
         }}
       >
-        
 
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+       <Stack.Screen name="HomeScreen" component={HomeScreen} /> 
         <Stack.Screen
           name="FoodMealEditingScreen"
           component={FoodMealEditingScreen}

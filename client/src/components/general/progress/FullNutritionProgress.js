@@ -6,7 +6,7 @@ import {
   getStrokeWidth,
 } from "../../../utils/CircleProgress";
 
-import { NutritionLable } from "../../../constants/enums";
+import { NutritionLabel } from "../../../constants/enums";
 import React from "react";
 
 export const FullNutritionProgress = ({
@@ -52,8 +52,8 @@ export const FullNutritionProgress = ({
             strokeLinejoin="round"
           />
 
-          {Object.keys(NutritionLable)
-            .slice(1, 3)
+          {Object.keys(NutritionLabel)
+            .slice(1, 4)
             .reverse()
             .map((element) => (
               <Circle

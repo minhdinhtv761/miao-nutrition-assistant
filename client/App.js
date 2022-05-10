@@ -1,14 +1,15 @@
 import { NativeBaseProvider, extendTheme } from "native-base";
 
+import { Animated } from "react-native";
 import Navigation from "./Navigation";
 import React from "react";
 import { SSRProvider } from "@react-aria/ssr";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // import store from "./src/redux/store";
 
 const Stack = createNativeStackNavigator();
-
 function App() {
   const theme = extendTheme({
     colors: {
