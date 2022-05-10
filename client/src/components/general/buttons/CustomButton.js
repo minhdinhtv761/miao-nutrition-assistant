@@ -3,7 +3,12 @@ import React from "react";
 
 const CustomButton = ({ text, onPress, colorScheme }) => {
   return (
-    <Button rounded="full" onPress={onPress} colorScheme={colorScheme}>
+    <Button
+      rounded="full"
+      size="lg"
+      onPress={onPress}
+      colorScheme={colorScheme}
+    >
       {text}
     </Button>
   );
