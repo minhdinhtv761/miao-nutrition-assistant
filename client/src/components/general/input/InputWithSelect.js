@@ -16,10 +16,10 @@ import { Subtitle } from "../typography/Subtitle";
 import { space } from "./../../../styles/layout";
 
 const InputWithSelect = (props) => {
-  let [service, setService] = React.useState("gr");
+  let [service, setService] = React.useState("g");
   return (
     <VStack space={space.s}>
-      <Subtitle text={props.lable} />
+      <Subtitle text={props.label} />
       <HStack w="100%" alignItems="stretch" space={0.5}>
         <Input
           defaultValue="100"
@@ -51,7 +51,7 @@ const InputWithSelect = (props) => {
             }}
             onValueChange={(itemValue) => setService(itemValue)}
           >
-            <Select.Item label="gr" value="gr" />
+            <Select.Item label="g" value="g" />
             <Select.Item label="Web Development" value="web" />
             <Select.Item label="Cross Platform Development" value="cross" />
             <Select.Item label="UI Designing" value="ui" />

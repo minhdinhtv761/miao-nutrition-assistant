@@ -4,7 +4,7 @@ import { Text } from "native-base";
 
 export const Subtitle = ({ text, color }) => {
   return (
-    <Text {...this.props} fontSize="sm" color={color || Colors.textLight}>
+    <Text fontSize="sm" color={color || Colors.textLight}>
       {text}
     </Text>
   );

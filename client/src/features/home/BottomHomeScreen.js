@@ -1,3 +1,4 @@
+import Colors from "../../styles/colors";
 import { MealItem } from "./../../components/home/MealItem";
 import MenuTitle from "../../components/general/typography/MenuTitle";
 import React from "react";

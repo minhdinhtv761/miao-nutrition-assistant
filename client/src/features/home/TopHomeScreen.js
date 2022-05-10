@@ -1,5 +1,9 @@
 import { Box, Center, HStack, Heading, Text, VStack, View } from "native-base";
-import { getSubboxHeight, getTopBannerHeight } from "./../../constants/sizes";
+import {
+  getHeaderHeight,
+  getSubboxHeight,
+  getTopBannerHeight,
+} from "./../../constants/sizes";
 
 import Colors from "./../../styles/colors";
 import { DetailNutrition } from "../../components/home/DetailNutrition";
@@ -7,8 +11,11 @@ import { Dimensions } from "react-native";
 import { FullNutritionProgress } from "../../components/general/progress/FullNutritionProgress";
 import React from "react";
 import { space } from "./../../styles/layout";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export const TopHomeScreen = () => {
+  const safeArea = useSafeAreaInsets();
+  var heightHeader = getHeaderHeight() + safeArea.top;
   var heightBox = getTopBannerHeight();
   var heightDetailBox = getSubboxHeight();
 
@@ -23,10 +30,9 @@ export const TopHomeScreen = () => {
     );
   };
   return (
-    <View backgroundColor="black">
+    <View backgroundColor={Colors.background} paddingTop={heightHeader}>
       <Box
         style={{
-          position: "relative",
           backgroundColor: Colors.primary,
           height: heightBox,
         }}
@@ -50,7 +56,7 @@ export const TopHomeScreen = () => {
           //   backgroundColor:"black",
           position: "absolute",
           height: heightDetailBox,
-          top: heightBox - heightDetailBox / 2,
+          top: heightBox + heightHeader - heightDetailBox / 2,
           right: space.m * 4,
           left: space.m * 4,
         }}
