@@ -1,12 +1,10 @@
 import { Divider, HStack, Text, VStack } from "native-base";
 
 import Colors from "../../../styles/colors";
-import { IconAndText } from "../typography/IconAndText";
-import { MaterialIcons } from "@expo/vector-icons";
 import { NutritionLabel } from "../../../constants/enums";
 import { NutritionUnit } from "./../../../constants/enums";
-import { Pressable } from "react-native";
 import React from "react";
+import { ShowInfomationStatusLayout } from "../layout/ShowInfomationStatusLayout";
 import { Subtitle } from "../typography/Subtitle";
 import { space } from "./../../../styles/layout";
 
@@ -16,7 +14,7 @@ const InfoItem = ({ type, styleType, weight, rightText, divider }) => {
       <HStack width="100%" justifyContent="space-between" alignItems="center">
         <HStack space={space.s} alignItems="flex-end">
           <Text {...styles[styleType]}>{NutritionLabel[type]}</Text>
-          <Text fontSize="md">
+          <Text>
             {weight}
             {type === "calo" ? null : NutritionUnit[type]}
           </Text>
@@ -27,7 +25,7 @@ const InfoItem = ({ type, styleType, weight, rightText, divider }) => {
         </Text>
       </HStack>
       <Divider
-        my="1"
+        my="0.5"
         thickness={divider.size}
         _light={{
           bg: divider.color,
@@ -37,23 +35,7 @@ const InfoItem = ({ type, styleType, weight, rightText, divider }) => {
   );
 };
 
-const showInfomation = [
-  <IconAndText
-    icon={<MaterialIcons name="keyboard-arrow-down" />}
-    title="Xem thêm dinh dưỡng"
-  />,
-  <IconAndText
-    icon={<MaterialIcons name="keyboard-arrow-up" />}
-    title="Thu gọn"
-  />,
-];
-
 export const FullNutritionFact = () => {
-  const [showInfo, setShowInfo] = React.useState(0);
-  function handleShowInfomation() {
-    setShowInfo(showInfo === 0 ? 1 : 0);
-  }
-
   const NutritionFactTable = (
     <VStack
       p={space.s}
@@ -78,7 +60,7 @@ export const FullNutritionFact = () => {
         % Giá trị dinh dưỡng mỗi ngày*
       </Text>
       <Divider
-        my="1.5"
+        my="1"
         thickness={smDivider.size}
         _light={{
           bg: smDivider.color,
@@ -104,12 +86,11 @@ export const FullNutritionFact = () => {
   );
 
   return (
-    <VStack alignItems="center" space={space.s}>
-      {showInfo === 1 ? NutritionFactTable : null}
-      <Pressable onPress={handleShowInfomation}>
-        {showInfomation[showInfo]}
-      </Pressable>
-    </VStack>
+ 
+    <ShowInfomationStatusLayout
+      title="dinh dưỡng"
+      children={NutritionFactTable}
+    />
   );
 };
 
@@ -120,14 +101,10 @@ const styles = {
   },
   mainParent: {
     fontWeight: "bold",
-    fontSize: "md",
   },
-  subParent: {
-    fontSize: "md",
-  },
+  subParent: {},
   child: {
     marginLeft: space.s * 4,
-    fontSize: "md",
   },
 };
 
