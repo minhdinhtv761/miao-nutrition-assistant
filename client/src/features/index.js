@@ -4,6 +4,7 @@ import LoginScreen from "./auth/LoginScreen";
 import MealChoosingScreen from "./meal/MealChoosingScreen";
 import OnBoardingScreen from "./onboarding/OnBoardingScreen";
 import RegisterScreen from "./auth/RegisterScreen";
+import RecipeDetailScreen from "./recipe/RecipeDetailScreen";
 
 export {
   LoginScreen,
@@ -12,4 +13,5 @@ export {
   HomeScreen,
   MealChoosingScreen,
   FoodMealEditingScreen,
+  RecipeDetailScreen,
 };

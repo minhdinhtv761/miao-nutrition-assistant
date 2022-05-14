@@ -14,7 +14,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 export const LayoutWithImage = ({
   topAppBar,
   uriImage,
-  topBanner,
+  aboveChildren,
   children,
   backgroundColor,
 }) => {
@@ -33,8 +33,8 @@ export const LayoutWithImage = ({
         scrollA={scrollA}
       />
       <ScrollViewLayout scrollA={scrollA}>
-        <ImageBox uri={uriImage} aboveChildren={topBanner} />
-        <Box safeArea height={heightImage} />
+        <ImageBox uri={uriImage} aboveChildren={aboveChildren} />
+        {/* <Box safeArea height={heightImage} /> */}
         <MainContentLayout child={children} />
       </ScrollViewLayout>
     </View>

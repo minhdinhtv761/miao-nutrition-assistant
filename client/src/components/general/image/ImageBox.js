@@ -13,14 +13,21 @@ export const ImageBox = ({ uri, aboveChildren }) => {
   const safeArea = useSafeAreaInsets();
   const heightImage = getTopBannerHeight() + getHeaderHeight() + safeArea.top;
   return (
-    <View position="absolute" width="100%" height={heightImage}>
+    <View width="100%" height={heightImage}>
       {Children.map(aboveChildren, (child) => {
         if (!isValidElement(child)) return null;
-        return cloneElement(child, child.props, null);
+        return cloneElement(
+          child,
+          {
+            ...child.props,
+            zIndex: 1,
+          },
+        );
       })}
       <Image
         source={imgLinearGradient}
         style={{
+          position: "absolute",
           width: "100%",
           height: "100%",
           opacity: 0.2,

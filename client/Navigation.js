@@ -1,7 +1,11 @@
 import {
   FoodMealEditingScreen,
   HomeScreen,
+  LoginScreen,
   MealChoosingScreen,
+  OnBoardingScreen,
+  RecipeDetailScreen,
+  RegisterScreen,
 } from "./src/features";
 
 import { BottomAppBar } from "./src/components/general/appbar/BottomAppBar";
@@ -26,19 +30,23 @@ const Navigation = () => {
           contentStyle: { backgroundColor: Colors.background },
         }}
       >
-        {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
+        <Stack.Screen
+          name="RecipeDetailScreen"
+          component={RecipeDetailScreen}
+        />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen
           name="FoodMealEditingScreen"
           component={FoodMealEditingScreen}
         />
-        {/* <Stack.Screen name="MenuScreen" component={MenuScreen} /> */}
-        {/* <Stack.Screen
+        <Stack.Screen name="MenuScreen" component={MenuScreen} />
+        <Stack.Screen
           name="MealChoosingScreen"
           component={MealChoosingScreen}
-        /> */}
-        {/* <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-        <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} /> */}
+        <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

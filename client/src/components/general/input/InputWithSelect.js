@@ -32,7 +32,7 @@ const InputWithSelect = (props) => {
           borderWidth="0"
           fontSize={14}
           bgColor="coolGray.100"
-          type="number"
+          keyboardType="numeric"
         />
         <Box w="30%">
           <Select

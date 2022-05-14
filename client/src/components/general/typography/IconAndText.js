@@ -14,7 +14,7 @@ export const IconAndText = ({ icon, iconColor, title, titleColor }) => {
         position="absolute"
       />
 
-      <Subtitle ml={4} text={title} color={titleColor || Colors.textLight} />
+      <Subtitle ml={5} text={title} color={titleColor || Colors.textLight} />
     </HStack>
   );
 };
