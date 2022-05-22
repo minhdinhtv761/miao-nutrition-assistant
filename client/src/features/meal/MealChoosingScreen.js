@@ -1,17 +1,24 @@
 import { Button, Center, Icon } from "native-base";
+import { useDispatch, useSelector } from "react-redux";
 
 import FoodList from "../../components/newMeal/choosing/FoodList";
 import LayoutWithTabview from "../../components/general/layout/LayoutWithTabview";
-import { Octicons } from "@expo/vector-icons";
 import React from "react";
 import { TurnBackButton } from "./../../components/general/buttons/iconButtons/TurnBackButton";
+import { fetchFood } from "./../../redux/actions/foodActions";
 
-const SecondRoute = () => (
-  <Center flex={1} my="4">
-    This is Tab 2
-  </Center>
-);
 const MealChoosingScreen = () => {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(fetchFood.fetchFoodRequest());
+  }, [dispatch]);
+  
+  const SecondRoute = () => (
+    <Center flex={1} my="4">
+      This is Tab 2
+    </Center>
+  );
   const tabList = [
     {
       title: "Thực phẩm",

@@ -1,59 +1,25 @@
 import { FoodItem } from "./FoodItem";
+import { FoodState$ } from "../../../redux/selectors";
 import React from "react";
 import { VStack } from "native-base";
-import { space } from "./../../../styles/layout";
+import { useSelector } from "react-redux";
 
 const FoodList = () => {
+  const foodList = useSelector(FoodState$);
   return (
     <VStack w="100%" borderRadius="xl" bg="white">
-      <FoodItem
-        title="Bơ (quả)"
-        subtitle="100 gr"
-        calo={240}
-        onPress={() => {}}
-      />
-      <FoodItem
-        title="Bơ (quả)"
-        subtitle="100 gr"
-        calo={240}
-        onPress={() => {}}
-      />
-      <FoodItem
-        title="Bơ (quả)"
-        subtitle="100 gr"
-        calo={240}
-        onPress={() => {}}
-      />
-      <FoodItem
-        title="Bơ (quả)"
-        subtitle="100 gr"
-        calo={240}
-        onPress={() => {}}
-      />
-      <FoodItem
-        title="Bơ (quả)"
-        subtitle="100 gr"
-        calo={240}
-        onPress={() => {}}
-      />
-      <FoodItem
-        title="Bơ (quả)"
-        subtitle="100 gr"
-        calo={240}
-        onPress={() => {}}
-      />
-      <FoodItem
-        title="Bơ (quả)"
-        subtitle="100 gr"
-        calo={240}
-        onPress={() => {}}
-      />
-      <FoodItem
-        title="Bơ (quả)"
-        subtitle="100 gr"
-        calo={240}
-        onPress={() => {}}
-      />
+      {foodList.length
+        ? foodList.map((value, index) => (
+            <FoodItem
+              key={index}
+              title={value.TenKM}
+              subtitle="100 gr"
+              calo={240}
+              onPress={() => {}}
+            />
+          ))
+        : null}
+
       <FoodItem
         title="Tạo mới món ăn"
         subtitle="Tạo mới món ăn và dinh dưỡng"

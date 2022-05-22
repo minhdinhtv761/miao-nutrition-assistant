@@ -25,13 +25,13 @@ const Navigation = () => {
   const RecipeDetailScreen = () => <RecipeScreen editted />;
   return (
     <NavigationContainer>
-      <BottomAppBar />
-      {/* <Stack.Navigator
+      <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          contentStyle: { backgroundColor: Colors.background },
+          contentStyle: { backgroundColor: Colors.background }
         }}
       >
+        <Stack.Screen name="HomeScreen" component={BottomAppBar}/>
         <Stack.Screen name="MealAddingScreen" component={MealAddingScreen} />
         <Stack.Screen
           name="IngredientAddingScreen"
@@ -41,20 +41,18 @@ const Navigation = () => {
           name="RecipeDetailScreen"
           component={RecipeDetailScreen}
         />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen
           name="FoodMealEditingScreen"
           component={FoodMealEditingScreen}
         />
-        <Stack.Screen name="MenuScreen" component={MenuScreen} />
         <Stack.Screen
           name="MealChoosingScreen"
           component={MealChoosingScreen}
         />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        {/* <Stack.Screen name="LoginScreen" component={LoginScreen} /> */}
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} />
-      </Stack.Navigator> */}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };

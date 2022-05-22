@@ -1,5 +1,5 @@
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import { HomeScreen, LoginScreen } from "../../../features";
+import { HomeScreen, LoginScreen, MealAddingScreen, MealChoosingScreen } from "../../../features";
 import { Icon, IconButton, Pressable } from "native-base";
 
 import Colors from "../../../styles/colors";
@@ -89,7 +89,7 @@ export const BottomAppBar = (props) => {
       />
       <Tab.Screen
         name="PlanScreen"
-        component={MenuScreen}
+        component={MealChoosingScreen}
         options={{
           tabBarLabel: "Kế hoạch",
           tabBarIcon: ({ focused }) => (
