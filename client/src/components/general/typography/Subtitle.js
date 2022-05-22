@@ -4,7 +4,12 @@ import { Text } from "native-base";
 
 export const Subtitle = ({ text, color, ml }) => {
   return (
-    <Text ml={ml} fontSize="sm" color={color || Colors.textLight}>
+    <Text
+      ml={ml}
+      fontSize="sm"
+      color={color || Colors.textLight}
+      textAlign="justify"
+    >
       {text}
     </Text>
   );

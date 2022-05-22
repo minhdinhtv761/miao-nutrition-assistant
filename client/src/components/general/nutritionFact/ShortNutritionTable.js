@@ -11,10 +11,11 @@ import { space } from "./../../../styles/layout";
 export const ShortNutritionTable = () => {
   return (
     <VStack
-      p={space.s}
+      width="100%"
+      p={space.m}
       borderColor="coolGray.300"
       borderWidth={1}
-      borderRadius={2}
+      borderRadius="md"
       space={space.xs}
     >
       <ShortNutritionFact />

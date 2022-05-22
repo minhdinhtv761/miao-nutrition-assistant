@@ -9,6 +9,6 @@ export const space = {
   m: 4, 
   l: 5,
   xl: 6,
-  xxl: 10,
+  xxl: 8,
 };
 

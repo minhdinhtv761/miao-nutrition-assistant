@@ -49,6 +49,9 @@ const InputWithSelect = (props) => {
             _selectedItem={{
               bg: "coolGray.200",
             }}
+            // _actionSheetContent={{
+            //   borderRadius: "xl"
+            // }}
             onValueChange={(itemValue) => setService(itemValue)}
           >
             <Select.Item label="g" value="g" />

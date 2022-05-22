@@ -1,13 +1,14 @@
-import React from "react";
-import { Button, Center, View, Box } from "native-base";
+import { Box, Button, Center, View } from "native-base";
 
 import { Animated } from "react-native";
 import { CustomTabView } from "../../components/general/tabView/CustomTabView";
 import FoodList from "../../components/newMeal/choosing/FoodList";
+import LayoutWithTabview from "../../components/general/layout/LayoutWithTabview";
 import MainContentLayout from "../../components/general/layout/MainContentLayout";
+import React from "react";
 import SearchBar from "../../components/general/input/SearchBar";
-import { TurnBackButton } from "./../../components/general/buttons/iconButtons/TurnBackButton";
 import { ThumbnailList } from "../../components/general/listItem/ThumbnailList";
+import { TurnBackButton } from "./../../components/general/buttons/iconButtons/TurnBackButton";
 
 const SecondRoute = () => (
   <Center flex={1} my="4">
@@ -17,54 +18,45 @@ const SecondRoute = () => (
 
 const MenuScreen = () => {
   const scrollA = React.useRef(new Animated.Value(0)).current;
-  const scrollThumbnail = () => {
-    return (
-      <Animated.ScrollView
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollA } } }],
-          { useNativeDriver: true }
-        )}
-        scrollEventThrottle={16}
-      >
-        <ThumbnailList />
-      </Animated.ScrollView>
-    );
-  };
+
   const tabList = [
     {
       title: "Thực đơn",
-      tab: scrollThumbnail,
+      tab: <ThumbnailList />,
     },
     {
       title: "Công thức",
-      tab: SecondRoute,
+      tab: <SecondRoute />,
     },
   ];
 
-  const Content = () => {
-    return (
-      <View h="100%">
-        <SearchBar />
-        <CustomTabView tabList={tabList} />
-      </View>
-    );
+  const topAppBar = {
+    title: "Thực đơn",
+    backgroundColor: "white",
+    leftIcon: <TurnBackButton />,
+    rightChildren: (
+      <Button variant="ghost" color="primary.500">
+        Tiếp
+      </Button>
+    ),
   };
   return (
-    <View backgroundColor="white" h="100%">
-      <TopAppBar
-        title="Thực đơn"
-        backgroundColor="white"
-        leftIcon={<TurnBackButton />}
-        rightChildren={
-          <Button variant="ghost" onPress={() => {}}>
-            Tiếp
-          </Button>
-        }
-        scrollA={scrollA}
-      />
+    <LayoutWithTabview topAppBar={topAppBar} tabList={tabList} />
+    // <View backgroundColor="white" h="100%">
+    //   <TopAppBar
+    //     title="Thực đơn"
+    //     backgroundColor="white"
+    //     leftIcon={<TurnBackButton />}
+    //     rightChildren={
+    //       <Button variant="ghost" onPress={() => {}}>
+    //         Tiếp
+    //       </Button>
+    //     }
+    //     scrollA={scrollA}
+    //   />
 
-      <MainContentLayout child={<Content />} />
-    </View>
+    //   <MainContentLayout child={<Content />} />
+    // </View>
   );
 };
 

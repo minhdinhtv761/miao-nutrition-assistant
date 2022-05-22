@@ -1,10 +1,12 @@
 import {
   FoodMealEditingScreen,
   HomeScreen,
+  IngredientAddingScreen,
   LoginScreen,
+  MealAddingScreen,
   MealChoosingScreen,
   OnBoardingScreen,
-  RecipeDetailScreen,
+  RecipeScreen,
   RegisterScreen,
 } from "./src/features";
 
@@ -20,16 +22,21 @@ const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   const safeArea = useSafeAreaInsets();
-
+  const RecipeDetailScreen = () => <RecipeScreen editted />;
   return (
     <NavigationContainer>
-      {/* <BottomAppBar /> */}
-      <Stack.Navigator
+      <BottomAppBar />
+      {/* <Stack.Navigator
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: Colors.background },
         }}
       >
+        <Stack.Screen name="MealAddingScreen" component={MealAddingScreen} />
+        <Stack.Screen
+          name="IngredientAddingScreen"
+          component={IngredientAddingScreen}
+        />
         <Stack.Screen
           name="RecipeDetailScreen"
           component={RecipeDetailScreen}
@@ -47,7 +54,7 @@ const Navigation = () => {
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="OnBoardingScreen" component={OnBoardingScreen} />
-      </Stack.Navigator>
+      </Stack.Navigator> */}
     </NavigationContainer>
   );
 };

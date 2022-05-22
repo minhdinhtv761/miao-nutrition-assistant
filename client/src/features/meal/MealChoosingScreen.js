@@ -1,8 +1,8 @@
-import { Button, Center } from "native-base";
+import { Button, Center, Icon } from "native-base";
 
-import { Animated } from "react-native";
 import FoodList from "../../components/newMeal/choosing/FoodList";
 import LayoutWithTabview from "../../components/general/layout/LayoutWithTabview";
+import { Octicons } from "@expo/vector-icons";
 import React from "react";
 import { TurnBackButton } from "./../../components/general/buttons/iconButtons/TurnBackButton";
 
@@ -29,35 +29,12 @@ const MealChoosingScreen = () => {
     backgroundColor: "white",
     leftIcon: <TurnBackButton />,
     rightChildren: (
-      <Button variant="ghost" onPress={() => {}}>
+      <Button variant="ghost" color="primary.500">
         Tiếp
       </Button>
     ),
   };
-  // const Content = () => {
-  //   return (
-  //     <View h="100%">
-  //       <SearchBar />
-  //       <CustomTabView tabList={tabList} />
-  //     </View>
-  //   );
-  // };
-  // return (
-  //   <View backgroundColor="white" h="100%" >
-  //     <TopAppBar
-  //       title="Thêm bữa ăn"
-  //       backgroundColor="white"
-  //       leftIcon={<TurnBackButton />}
-  //       rightChildren={
-  //         <Button variant="ghost" onPress={() => {}}>
-  //           Tiếp
-  //         </Button>
-  //       }
-  //       scrollA={scrollA}
-  //     />
-  //     <MainContentLayout child={<Content />} />
-  //   </View>
-  // );
+
   return <LayoutWithTabview topAppBar={topAppBar} tabList={tabList} />;
 };
 

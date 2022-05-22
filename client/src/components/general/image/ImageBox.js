@@ -16,23 +16,22 @@ export const ImageBox = ({ uri, aboveChildren }) => {
     <View width="100%" height={heightImage}>
       {Children.map(aboveChildren, (child) => {
         if (!isValidElement(child)) return null;
-        return cloneElement(
-          child,
-          {
-            ...child.props,
-            zIndex: 1,
-          },
-        );
+        return cloneElement(child, {
+          ...child.props,
+          zIndex: 1,
+        });
       })}
-      <Image
-        source={imgLinearGradient}
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          opacity: 0.2,
-        }}
-      />
+      {uri ? (
+        <Image
+          source={imgLinearGradient}
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            opacity: 0.2,
+          }}
+        />
+      ) : null}
       <Image
         source={{ uri: uri }}
         style={{

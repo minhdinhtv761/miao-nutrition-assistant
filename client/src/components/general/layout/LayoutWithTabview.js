@@ -7,11 +7,15 @@ import React from "react";
 import { ScrollViewLayout } from "./ScrollViewLayout";
 import SearchBar from "../input/SearchBar";
 import TopAppBar from "./../appbar/TopAppBar";
+import { getHeaderHeight } from "./../../../constants/sizes";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 // { key: index,
 //     title: element.title,
 //     tab: <TabItem children={element.tab} scrollA={scrollA} />}
 const LayoutWithTabview = ({ topAppBar, tabList }) => {
+  const safeArea = useSafeAreaInsets();
+  const heightHeader = getHeaderHeight() + safeArea.top;
   const scrollA = React.useRef(new Animated.Value(0)).current;
 
   const scrollTabList = Array.from(tabList, (element) => {
@@ -42,8 +46,9 @@ const LayoutWithTabview = ({ topAppBar, tabList }) => {
         backgroundColor={topAppBar.backgroundColor}
         leftIcon={leftIcon}
         rightChildren={rightChildren}
-        scrollA={scrollA}
+        // scrollA={scrollA}
       />
+      <View height={heightHeader} />
       <MainContentLayout child={<Content />} />
     </View>
   );

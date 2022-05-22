@@ -17,7 +17,8 @@ export default TopAppBar = (props) => {
       return;
     }
     const listenerId = scrollA.addListener((a) => {
-      const topNaviOffset = getTopBannerHeight() - getHeaderHeight() - safeArea.top;
+      const topNaviOffset =
+        getTopBannerHeight() - getHeaderHeight() - safeArea.top;
       isScrolling !== a.value < topNaviOffset && setScrolling(!isScrolling);
     });
     return () => scrollA.removeListener(listenerId);
@@ -56,19 +57,10 @@ export default TopAppBar = (props) => {
       <HStack>
         {Children.map(rightChildren, (child) => {
           if (!isValidElement(child)) return null;
-          return cloneElement(
-            child,
-            {
-              ...child.props,
-              color: colorContent(
-                isScrolling,
-                isChangingColor,
-                backgroundColor
-              ),
-              backgroundColor: "transparent",
-            },
-            null
-          );
+          return cloneElement(child, {...child.props,
+            color: colorContent(isScrolling, isChangingColor, backgroundColor),
+            backgroundColor: "transparent",
+          });
         })}
       </HStack>
     </HStack>

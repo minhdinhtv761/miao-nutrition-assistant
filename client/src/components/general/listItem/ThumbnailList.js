@@ -1,7 +1,8 @@
-import { HStack, View, VStack, Flex } from "native-base";
+import { Flex, HStack, VStack, View } from "native-base";
+
+import MenuTitle from "../typography/MenuTitle";
 import React from "react";
 import { ThumbnailItem } from "../thumbnail/ThumbnailItem";
-import MenuTitle from "../typography/MenuTitle";
 
 export const ThumbnailList = () => {
   const datalist = [
@@ -57,7 +58,7 @@ export const ThumbnailList = () => {
       />
       <Flex flexWrap="wrap" direction="row" justifyContent="space-between" mt="3">
         {sliceData.map((data) => (
-          <View flexBasis="30%">
+          <View flexBasis="32%">
             <ThumbnailItem
               image={data.image}
               name={data.name}
@@ -66,7 +67,7 @@ export const ThumbnailList = () => {
             />
           </View>
         ))}
-        {n % 3 === 2 ? <View flexBasis="30%"></View> : null}
+        {n % 3 === 2 ? <View flexBasis="32%"></View> : null}
       </Flex>
     </View>
   );

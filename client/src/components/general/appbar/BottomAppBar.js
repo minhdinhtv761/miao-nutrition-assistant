@@ -1,14 +1,11 @@
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { HomeScreen, LoginScreen } from "../../../features";
 import { Icon, IconButton, Pressable } from "native-base";
-import React from "react";
-import {
-  HomeScreen,
-  LoginScreen
-} from "../../../features";
-import MenuScreen from "../../../features/menu/MenuScreen";
-import Colors from "../../../styles/colors";
 
+import Colors from "../../../styles/colors";
+import MenuScreen from "../../../features/menu/MenuScreen";
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,32 +17,13 @@ export const BottomAppBar = (props) => {
   return (
     <Tab.Navigator
       initialRouteName="HomeScreen"
-      // tabBarOptions={{
-      //   height: 90,
-      //   position: "absolute",
-      //   bottom: 25,
-      // }}
       screenOptions={{
         tabBarActiveTintColor: "black",
-        // tabBarStyle: { height: "8%" },
         tabBarItemStyle: { padding: 5 },
         inactiveColor: "black",
         headerShown: false,
       }}
     >
-      {/* <Tab.Screen
-        name="Trang chủ"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <ItemOfBottomBar
-              focused={focused}
-              icon={<MaterialCommunityIcons name="home-outline" />}
-              title="Trang chủ"
-            />
-          ),
-        }}
-      /> */}
       <Tab.Screen
         name="HomeScreen"
         component={HomeScreen}
@@ -79,7 +57,7 @@ export const BottomAppBar = (props) => {
         }}
       />
       <Tab.Screen
-        name="Long"
+        name="Plus"
         component={LoginScreen}
         options={{
           tabBarButton: DisabledTabBarButton,
@@ -89,7 +67,7 @@ export const BottomAppBar = (props) => {
               style={{
                 position: "absolute",
                 bottom: "20%",
-                elevation: 4
+                elevation: 4,
               }}
               variant="solid"
               borderRadius="full"
@@ -110,7 +88,7 @@ export const BottomAppBar = (props) => {
         }}
       />
       <Tab.Screen
-        name="Kế hoạch"
+        name="PlanScreen"
         component={MenuScreen}
         options={{
           tabBarLabel: "Kế hoạch",
@@ -126,7 +104,7 @@ export const BottomAppBar = (props) => {
         }}
       />
       <Tab.Screen
-        name="Cá nhân"
+        name="Profile"
         component={MenuScreen}
         options={{
           tabBarLabel: "Cá nhân",
@@ -141,32 +119,6 @@ export const BottomAppBar = (props) => {
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="Kế hoạch"
-        component={FoodMealEditingScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <ItemOfBottomBar
-              focused={focused}
-              icon={<MaterialCommunityIcons name="book-open-variant" />}
-              title="Kế hoạch"
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Cá nhân"
-        component={OnBoardingScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <ItemOfBottomBar
-              focused={focused}
-              icon={<MaterialCommunityIcons name="account-outline" />}
-              title="Cá nhân"
-            />
-          ),
-        }}
-      /> */}
     </Tab.Navigator>
   );
 };

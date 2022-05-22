@@ -1,15 +1,15 @@
-import { Box, HStack, Heading, Icon, Text, VStack, View } from "native-base";
+import { HStack, Heading, Icon, VStack } from "native-base";
 import {
   MaterialCommunityIcons,
   MaterialIcons,
   Octicons,
 } from "@expo/vector-icons";
 
+import BottomButton from "./../../components/general/buttons/BottomButton";
 import Colors from "../../styles/colors";
 import { FullNutritionFact } from "../../components/general/nutritionFact/FullNutritionFact";
 import { IconAndText } from "../../components/general/typography/IconAndText";
 import IngredientList from "./../../components/recipe/ingredient/IngredientList";
-import InputWithSelect from "../../components/general/input/InputWithSelect";
 import LayoutWithImage from "../../components/general/layout/LayoutWithImage";
 import NumericInput from "../../components/general/input/NumericInput";
 import React from "react";
@@ -20,11 +20,13 @@ import { Subtitle } from "../../components/general/typography/Subtitle";
 import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
 import { space } from "../../styles/layout";
 
-const RecipeDetailScreen = () => {
+const RecipeScreen = ({ editted }) => {
   const topAppBar = {
-    title: "Chi tiết công thức",
+    title: editted ? "Chỉnh sửa công thức" : "Chi tiết công thức",
     leftIcon: <TurnBackButton />,
-    rightChildren: <Icon as={<Octicons name="pencil" />} size="xs" />,
+    rightChildren: !editted ? (
+      <Icon as={<Octicons name="pencil" />} size="xs" />
+    ) : null,
     backgroundColor: "transparent",
   };
   const listIngre = [
@@ -79,18 +81,19 @@ const RecipeDetailScreen = () => {
             <Heading size="xl" fontWeight="light">
               Bơ (quả)
             </Heading>
-            <NumericInput label="Nhập lượng khẩu phần" />
+            {!editted ? <NumericInput label="Nhập lượng khẩu phần" /> : null}
             <ShortNutritionTable />
             <FullNutritionFact />
             <Subtitle text="Những ngày trời hanh nóng, làm ngay một ly sữa chua thạch lá dứa kết hợp cùng đào vải ngâm thì còn gì bằng. Cùng Cooky thực hiện món trắng miệng thơm ngon này nha!" />
-            <IngredientList ingredients={listIngre} editted />
+            <IngredientList ingredients={listIngre} editted={editted} />
             <StepList listStep={listStep} />
             <SafeAreaView />
           </VStack>
         }
       />
+      {editted ? <BottomButton text="Hoàn tất" /> : null}
     </>
   );
 };
 
-export default RecipeDetailScreen;
+export default RecipeScreen;

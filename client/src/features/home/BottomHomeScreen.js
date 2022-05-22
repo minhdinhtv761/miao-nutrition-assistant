@@ -7,7 +7,7 @@ import { space } from "./../../styles/layout";
 
 export const BottomHomeScreen = () => {
   return (
-    <VStack marginY={space.xl} space={space.m}>
+    <VStack marginY={space.xl} space={space.m} pt={space.l}>
       <MenuTitle title="Bữa ăn" action="Chi tiết" onPressAction={() => {}} />
       <VStack w="100%" borderRadius="xl" bg="white" p={space.m}>
         <MealItem

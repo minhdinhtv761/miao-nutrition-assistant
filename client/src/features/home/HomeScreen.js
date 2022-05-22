@@ -25,26 +25,10 @@ const HomeScreen = () => {
       <Icon size="sm" as={MaterialCommunityIcons} name="calendar-blank" />
     ),
   };
-  // <TopAppBar
-  //   title="Home"
-  //   backgroundColor="primary.500"
-  //   leftIcon={
-  //     <Icon
-  //       size="sm"
-  //       as={MaterialCommunityIcons}
-  //       name="menu"
-  //       onPress={() => {}}
-  //     />
-  //   }
-  //   rightChildren={
-  //     <Icon size="sm" as={MaterialCommunityIcons} name="calendar-blank" />
-  //   }
-  //   scrollA={scrollA}
-  // />
   return (
     <LayoutWithImage
       topAppBar={topAppBar}
-      topBanner={<TopHomeScreen />}
+      aboveChildren={<TopHomeScreen />}
       children={<BottomHomeScreen />}
       backgroundColor={Colors.background}
     />

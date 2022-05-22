@@ -20,7 +20,7 @@ const StepItem = (props) => {
         {number}
       </Center>
       <VStack flex={1} space={space.s}>
-        <Text>{description}</Text>
+        <Text textAlign="justify">{description}</Text>
         <HStack space={space.s} width="100%">
           {images.map((value) => (
             <Image

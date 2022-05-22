@@ -5,7 +5,7 @@ import { space } from "./../../../styles/layout";
 
 const FoodList = () => {
   return (
-    <VStack w="100%" borderRadius="xl" bg="white" p={space.m}>
+    <VStack w="100%" borderRadius="xl" bg="white">
       <FoodItem
         title="Bơ (quả)"
         subtitle="100 gr"

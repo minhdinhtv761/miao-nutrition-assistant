@@ -51,7 +51,7 @@ const NumericInput = (props) => {
           w="60%"
           px={space.m}
           borderWidth="0"
-          fontSize="lg"
+          fontSize="md"
           bgColor="coolGray.100"
           keyboardType="numeric"
           onChangeText={handleChange}
