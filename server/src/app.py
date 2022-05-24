@@ -2,17 +2,17 @@ import json
 from flask import Flask, make_response
 from flask_restful import Api
 from mongoengine.base.datastructures import BaseList
-from routers.user_case_routers.user_meal_router import add_user_meal_resrouce
 from src.connection.mongodb_setup import mongodb_setup
-from src.routers.general_case_routers.account_router import add_account_resrouce
-from src.routers.general_case_routers.body_composition_router import add_body_composition_resrouce
+from src.routers.general_case_routers.account_router import add_account_resource
+from src.routers.general_case_routers.body_composition_router import add_body_composition_resource
 from src.routers.sample_case_routers.sample_food_router import add_sample_food_resource
 from src.routers.sample_case_routers.sample_meal_router import add_sample_meal_resource
 from src.routers.sample_case_routers.sample_meal_detail_router import add_sample_meal_detail_resource
 from src.routers.sample_case_routers.sample_recipe_router import add_sample_recipe_resource
-from src.routers.user_case_routers.user_food_router import add_user_food_resrouce
-from src.routers.user_case_routers.user_meal_detail_router import add_user_meal_detail_resrouce
-from src.routers.user_case_routers.user_recipe_router import add_user_recipe_resrouce
+from src.routers.user_case_routers.user_food_router import add_user_food_resource
+from src.routers.user_case_routers.user_meal_router import add_user_meal_resource
+from src.routers.user_case_routers.user_meal_detail_router import add_user_meal_detail_resource
+from src.routers.user_case_routers.user_recipe_router import add_user_recipe_resource
 from src.routers.general_case_routers.user_router import add_user_resource
 
 def create_app():
@@ -42,16 +42,16 @@ def create_app():
     mongodb_setup()
 
     # Make RESTful api available
-    add_account_resrouce(api)
-    add_body_composition_resrouce(api)
+    add_account_resource(api)
+    add_body_composition_resource(api)
     add_sample_food_resource(api)
     add_sample_meal_resource(api)
     add_sample_meal_detail_resource(api)
     add_sample_recipe_resource(api)
-    add_user_food_resrouce(api)
-    add_user_meal_resrouce(api)
-    add_user_meal_detail_resrouce(api)
-    add_user_recipe_resrouce(api)
+    add_user_food_resource(api)
+    add_user_meal_resource(api)
+    add_user_meal_detail_resource(api)
+    add_user_recipe_resource(api)
     add_user_resource(api)
 
     return app
