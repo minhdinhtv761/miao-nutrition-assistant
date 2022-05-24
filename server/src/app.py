@@ -5,6 +5,7 @@ from mongoengine.base.datastructures import BaseList
 from src.connection.mongodb_setup import mongodb_setup
 from src.routers.general_case_routers.account_router import add_account_resource
 from src.routers.general_case_routers.body_composition_router import add_body_composition_resource
+from src.routers.general_case_routers.daily_record_router import add_daily_record_resource
 from src.routers.sample_case_routers.sample_food_router import add_sample_food_resource
 from src.routers.sample_case_routers.sample_meal_router import add_sample_meal_resource
 from src.routers.sample_case_routers.sample_meal_detail_router import add_sample_meal_detail_resource
@@ -44,6 +45,7 @@ def create_app():
     # Make RESTful api available
     add_account_resource(api)
     add_body_composition_resource(api)
+    add_daily_record_resource(api)
     add_sample_food_resource(api)
     add_sample_meal_resource(api)
     add_sample_meal_detail_resource(api)
