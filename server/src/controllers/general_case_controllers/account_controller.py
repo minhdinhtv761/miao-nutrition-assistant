@@ -10,7 +10,7 @@ login_args_parser.add_argument("password", type=str, help="Invalid password", re
 
 # For Change pasword function arguments
 change_password_args_parser = login_args_parser.copy()
-change_password_args_parser.add_argument("new_password", type=str, help="Invalid re_password", required=True)
+change_password_args_parser.add_argument("new_password", type=str, help="Invalid new_password", required=True)
 change_password_args_parser.add_argument("re_password", type=str, help="Invalid re_password", required=True)
 
 # For Register function arguments
