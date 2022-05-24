@@ -2,6 +2,7 @@ import json
 from flask import Flask, make_response
 from flask_restful import Api
 from mongoengine.base.datastructures import BaseList
+from routers.user_case_routers.user_meal_router import add_user_meal_resrouce
 from src.connection.mongodb_setup import mongodb_setup
 from src.routers.general_case_routers.account_router import add_account_resrouce
 from src.routers.general_case_routers.body_composition_router import add_body_composition_resrouce
@@ -48,6 +49,7 @@ def create_app():
     add_sample_meal_detail_resource(api)
     add_sample_recipe_resource(api)
     add_user_food_resrouce(api)
+    add_user_meal_resrouce(api)
     add_user_meal_detail_resrouce(api)
     add_user_recipe_resrouce(api)
     add_user_resource(api)
