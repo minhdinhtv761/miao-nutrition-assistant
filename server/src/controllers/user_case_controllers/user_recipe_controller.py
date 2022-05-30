@@ -27,11 +27,12 @@ class UserRecipeById(Resource):
         shortDescription = args["shortDescription"]
         foodId = args["foodId"]
         method = args["method"]
-        calories = args["calories"]
-        totalCarbohydrates = args["totalCarbohydrates"]
-        dietaryFiber = args["dietaryFiber"]
-        sugars = args["sugars"]
-        totalFat = args["totalFat"]
+        water = args["water"]
+        energy = args["energy"]
+        carbohydrate = args["carbohydrate"]
+        fiber = args["fiber"]
+        sugar = args["sugar"]
+        fat = args["fat"]
         saturatedFat = args["saturatedFat"]
         transFat = args["transFat"]
         protein = args["protein"]
@@ -41,14 +42,14 @@ class UserRecipeById(Resource):
         vitaminA = args["vitaminA"]
         vitaminC = args["vitaminC"]
         canxi = args["canxi"]
-        fe = args["fe"]
+        iron = args["iron"]
         
         try:
             User.objects().get(Q(id=userId) & Q(userRecipeId=_id))
 
             data = UserRecipe.objects().get(id=_id)
 
-            data.modify(recipeName=recipeName, servingSizeQuantity=servingSizeQuantity, cookingTime=cookingTime, level=level, shortDescription=shortDescription, calories=calories, totalCarbohydrates=totalCarbohydrates, dietaryFiber=dietaryFiber, sugars=sugars,totalFat=totalFat, saturatedFat=saturatedFat, transFat=transFat, protein=protein, cholesterol=cholesterol, natri=natri, kali=kali, vitaminA=vitaminA, vitaminC=vitaminC, canxi=canxi, fe=fe)
+            data.modify(recipeName=recipeName, servingSizeQuantity=servingSizeQuantity, cookingTime=cookingTime, level=level, shortDescription=shortDescription, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFat=saturatedFat, transFat=transFat, protein=protein, cholesterol=cholesterol, natri=natri, kali=kali, vitaminA=vitaminA, vitaminC=vitaminC, canxi=canxi, iron=iron)
 
             foods = []
 
@@ -141,11 +142,12 @@ class UserRecipeByUserId(Resource):
         shortDescription = args["shortDescription"]
         foodId = args["foodId"]
         method = args["method"]
-        calories = args["calories"]
-        totalCarbohydrates = args["totalCarbohydrates"]
-        dietaryFiber = args["dietaryFiber"]
-        sugars = args["sugars"]
-        totalFat = args["totalFat"]
+        water = args["water"]
+        energy = args["energy"]
+        carbohydrate = args["carbohydrate"]
+        fiber = args["fiber"]
+        sugar = args["sugar"]
+        fat = args["fat"]
         saturatedFat = args["saturatedFat"]
         transFat = args["transFat"]
         protein = args["protein"]
@@ -155,12 +157,12 @@ class UserRecipeByUserId(Resource):
         vitaminA = args["vitaminA"]
         vitaminC = args["vitaminC"]
         canxi = args["canxi"]
-        fe = args["fe"]
+        iron = args["iron"]
         
         try:
             user = User.objects().get(id=userId)
 
-            data = UserRecipe(recipeName=recipeName, servingSizeQuantity=servingSizeQuantity, cookingTime=cookingTime, level=level, shortDescription=shortDescription, calories=calories, totalCarbohydrates=totalCarbohydrates, dietaryFiber=dietaryFiber, sugars=sugars,totalFat=totalFat, saturatedFat=saturatedFat, transFat=transFat, protein=protein, cholesterol=cholesterol, natri=natri, kali=kali, vitaminA=vitaminA, vitaminC=vitaminC, canxi=canxi, fe=fe)
+            data = UserRecipe(recipeName=recipeName, servingSizeQuantity=servingSizeQuantity, cookingTime=cookingTime, level=level, shortDescription=shortDescription, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFat=saturatedFat, transFat=transFat, protein=protein, cholesterol=cholesterol, natri=natri, kali=kali, vitaminA=vitaminA, vitaminC=vitaminC, canxi=canxi, iron=iron)
             
             foods = []
 

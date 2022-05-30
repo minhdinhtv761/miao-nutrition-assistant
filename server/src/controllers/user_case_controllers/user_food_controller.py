@@ -21,28 +21,29 @@ class UserFoodById(Resource):
         servingSizeWeight = args["servingSizeWeight"]
         servingSizeUnit = args["servingSizeUnit"]
         images = args["images"]
-        calories = args["calories"]
-        totalCarbohydrates = args["totalCarbohydrates"]
-        dietaryFiber = args["dietaryFiber"]
-        sugars = args["sugars"]
-        totalFat = args["totalFat"]
-        saturatedFat = args["saturatedFat"]
-        transFat = args["transFat"]
+        water = args["water"]
+        energy = args["energy"]
         protein = args["protein"]
+        fat = args["fat"]
+        carbohydrate = args["carbohydrate"]
+        fiber = args["fiber"]
+        sugar = args["sugar"]
+        saturatedFattyAcid = args["saturatedFattyAcid"]
+        transFattyAcid = args["transFattyAcid"]
         cholesterol = args["cholesterol"]
-        natri = args["natri"]
-        kali = args["kali"]
         vitaminA = args["vitaminA"]
         vitaminC = args["vitaminC"]
-        canxi = args["canxi"]
-        fe = args["fe"]
+        calcium = args["calcium"]
+        iron = args["iron"]
+        potassium = args["potassium"]
+        sodium = args["sodium"]
         
         try:
             User.objects().get(Q(id=userId) & Q(userFoodId=_id))
 
             data = UserFood.objects().get(id=_id)
 
-            data.modify(foodName=foodName, servingSizeWeight=servingSizeWeight, servingSizeUnit=servingSizeUnit, images=images, calories=calories, totalCarbohydrates=totalCarbohydrates, dietaryFiber=dietaryFiber, sugars=sugars,totalFat=totalFat, saturatedFat=saturatedFat, transFat=transFat, protein=protein, cholesterol=cholesterol, natri=natri, kali=kali, vitaminA=vitaminA, vitaminC=vitaminC, canxi=canxi, fe=fe)
+            data.modify(foodName=foodName, servingSizeWeight=servingSizeWeight, servingSizeUnit=servingSizeUnit, images=images, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFattyAcid=saturatedFattyAcid, transFattyAcid=transFattyAcid, protein=protein, cholesterol=cholesterol, sodium=sodium, potassium=potassium, vitaminA=vitaminA, vitaminC=vitaminC, calcium=calcium, iron=iron)
             data.images.replace(images)
             
             data.save()
@@ -110,26 +111,27 @@ class UserFoodByUserId(Resource):
         servingSizeWeight = args["servingSizeWeight"]
         servingSizeUnit = args["servingSizeUnit"]
         images = args["images"]
-        calories = args["calories"]
-        totalCarbohydrates = args["totalCarbohydrates"]
-        dietaryFiber = args["dietaryFiber"]
-        sugars = args["sugars"]
-        totalFat = args["totalFat"]
-        saturatedFat = args["saturatedFat"]
-        transFat = args["transFat"]
+        water = args["water"]
+        energy = args["energy"]
         protein = args["protein"]
+        fat = args["fat"]
+        carbohydrate = args["carbohydrate"]
+        fiber = args["fiber"]
+        sugar = args["sugar"]
+        saturatedFattyAcid = args["saturatedFattyAcid"]
+        transFattyAcid = args["transFattyAcid"]
         cholesterol = args["cholesterol"]
-        natri = args["natri"]
-        kali = args["kali"]
         vitaminA = args["vitaminA"]
         vitaminC = args["vitaminC"]
-        canxi = args["canxi"]
-        fe = args["fe"]
+        calcium = args["calcium"]
+        iron = args["iron"]
+        potassium = args["potassium"]
+        sodium = args["sodium"]
         
         try:
             user = User.objects().get(id=userId)
 
-            data = UserFood(foodName=foodName, servingSizeWeight=servingSizeWeight, servingSizeUnit=servingSizeUnit, calories=calories, totalCarbohydrates=totalCarbohydrates, dietaryFiber=dietaryFiber, sugars=sugars,totalFat=totalFat, saturatedFat=saturatedFat, transFat=transFat, protein=protein, cholesterol=cholesterol, natri=natri, kali=kali, vitaminA=vitaminA, vitaminC=vitaminC, canxi=canxi, fe=fe)
+            data = UserFood(foodName=foodName, servingSizeWeight=servingSizeWeight, servingSizeUnit=servingSizeUnit, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFattyAcid=saturatedFattyAcid, transFattyAcid=transFattyAcid, protein=protein, cholesterol=cholesterol, sodium=sodium, potassium=potassium, vitaminA=vitaminA, vitaminC=vitaminC, calcium=calcium, iron=iron)
             data.images.put(images)
 
             data.save()
