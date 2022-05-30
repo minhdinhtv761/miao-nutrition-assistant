@@ -1,6 +1,7 @@
 import { Entypo } from "@expo/vector-icons";
 import { Icon } from "native-base";
 import React from "react";
+import { pop } from "../../../../utils/RootNavigation";
 
 export const TurnBackButton = ({ color }) => {
   return (
@@ -8,7 +9,7 @@ export const TurnBackButton = ({ color }) => {
       size="sm"
       as={Entypo}
       name="chevron-thin-left"
-      onPress={() => {}}
+      onPress={() => pop()}
       color={color}
     />
   );

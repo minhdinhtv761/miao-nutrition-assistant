@@ -13,7 +13,7 @@ const MealChoosingScreen = () => {
   React.useEffect(() => {
     dispatch(fetchFood.fetchFoodRequest());
   }, [dispatch]);
-  
+
   const SecondRoute = () => (
     <Center flex={1} my="4">
       This is Tab 2

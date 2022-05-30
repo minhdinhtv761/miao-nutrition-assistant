@@ -1,4 +1,5 @@
-export const FoodState$ = (state) => {
-  console.log("state.foodReducers.data",state.foodReducers.data);
-  return state.foodReducers.data;
+export const FoodState$ = (state) => state.foodReducers.data;
+
+export const MealTypeModal$ = (state) => {
+  return state.mealTypeModalReducer.isShow;
 };

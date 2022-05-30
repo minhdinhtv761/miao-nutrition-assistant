@@ -8,9 +8,11 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ShortNutritionTable } from "../../components/general/nutritionFact/ShortNutritionTable";
 import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
+import { sample_food } from "../../constants/dummy";
 import { space } from "../../styles/layout";
 
 const FoodMealEditingScreen = () => {
+  const [weight, setWeight] = React.useState(sample_food.quantity);
   const topAppBar = {
     title: "Chỉnh sửa khẩu phần",
     leftIcon: <TurnBackButton />,
@@ -26,7 +28,11 @@ const FoodMealEditingScreen = () => {
             <Heading size="xl" fontWeight="light">
               Bơ (quả)
             </Heading>
-            <InputWithSelect label="Nhập lượng nạp vào và đơn vị" />
+            <InputWithSelect
+              label="Nhập lượng nạp vào và đơn vị"
+              weight={weight}
+              setWeight={setWeight}
+            />
             <ShortNutritionTable />
             <FullNutritionFact />
             <SafeAreaView />

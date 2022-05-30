@@ -40,4 +40,11 @@ export const NutritionUnit = {
   vitaminC: "mg",
   canxi: "mg",
   fe: "mg",
-}
+};
+
+export const MealTypes = {
+  breakfast: "Bữa sáng",
+  lunch: "Bữa trưa",
+  dinner: "Bữa tối",
+  snack: "Bữa phụ",
+};

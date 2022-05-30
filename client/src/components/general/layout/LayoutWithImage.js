@@ -21,8 +21,6 @@ export const LayoutWithImage = ({
   const { title, leftIcon, rightChildren } = topAppBar;
   const safeArea = useSafeAreaInsets();
   const scrollA = React.useRef(new Animated.Value(0)).current;
-  const heightImage = getTopBannerHeight() + getHeaderHeight() + safeArea.top;
-
   return (
     <View backgroundColor={backgroundColor || "white"} h="100%">
       <TopAppBar

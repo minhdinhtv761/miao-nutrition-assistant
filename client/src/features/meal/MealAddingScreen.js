@@ -4,6 +4,7 @@ import BottomButton from "./../../components/general/buttons/BottomButton";
 import { CustomDatePicker } from "../../components/general/input/CustomDatePicker";
 import FoodList from "./../../components/newMeal/choosing/FoodList";
 import { LayoutWithHeader } from "./../../components/general/layout/LayoutWithHeader";
+import { MealTypes } from "../../constants/enums";
 import MenuTitle from "../../components/general/typography/MenuTitle";
 import React from "react";
 import SearchBar from "../../components/general/input/SearchBar";
@@ -25,8 +26,8 @@ const MealAddingScreen = () => {
               <Select
                 mx={{
                   base: 0,
-                  md: "auto"
-                }} 
+                  md: "auto",
+                }}
                 selectedValue={service}
                 variant="ghost"
                 defaultValue={service}
@@ -39,10 +40,9 @@ const MealAddingScreen = () => {
                 }}
                 onValueChange={(itemValue) => setService(itemValue)}
               >
-                <Select.Item label="Bữa sáng" value="breakfast" />
-                <Select.Item label="Bữa trưa" value="lunch" />
-                <Select.Item label="Bữa tối" value="dinner" />
-                <Select.Item label="Bữa phụ" value="snack" />
+                {Object.keys(MealTypes).map((key) => (
+                  <Select.Item key={key} value={key} label={MealTypes[key]} />
+                ))}
               </Select>
               <CustomDatePicker dateTime="08:00" />
             </VStack>

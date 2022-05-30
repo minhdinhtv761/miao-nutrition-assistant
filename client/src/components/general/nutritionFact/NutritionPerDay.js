@@ -28,7 +28,6 @@ export const NutritionPerDay = () => {
       alignItems="center"
       justifyContent="space-between"
       px={space.s}
-      mt={space.s}
     >
       {Object.keys(NutritionLabel)
         .slice(0, 4)

@@ -2,6 +2,7 @@ import { FoodItem } from "./FoodItem";
 import { FoodState$ } from "../../../redux/selectors";
 import React from "react";
 import { VStack } from "native-base";
+import { push } from "../../../utils/RootNavigation";
 import { useSelector } from "react-redux";
 
 const FoodList = () => {
@@ -15,7 +16,7 @@ const FoodList = () => {
               title={value.TenKM}
               subtitle="100 gr"
               calo={240}
-              onPress={() => {}}
+              onPress={() => push("FoodMealEditingScreen")}
             />
           ))
         : null}

@@ -1,17 +1,18 @@
 import { Animated } from "react-native";
-import { BottomHomeScreen } from "./BottomHomeScreen";
+import { BottomProfileScreen } from "./BottomProfileScreen";
 import Colors from "./../../styles/colors";
 import { Icon } from "native-base";
 import LayoutWithImage from "../../components/general/layout/LayoutWithImage";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { MealTypeModal } from "./../../components/modals/MealTypeModal";
 import React from "react";
-import { TopHomeScreen } from "./TopHomeScreen";
+import { TopProfileScreen } from "./TopProfileScreen";
+import { getTopBannerHeight } from "../../constants/sizes";
 
-const HomeScreen = () => {
+const ProfileScreen = () => {
   const scrollA = React.useRef(new Animated.Value(0)).current;
+  var heightBox = getTopBannerHeight() / 2;
   const topAppBar = {
-    title: "Home",
+    title: "Cá nhân",
     backgroundColor: "primary.500",
     leftIcon: (
       <Icon
@@ -21,21 +22,19 @@ const HomeScreen = () => {
         onPress={() => {}}
       />
     ),
-
-    rightChildren: (
-      <Icon size="sm" as={MaterialCommunityIcons} name="calendar-blank" />
-    ),
+    rightChildren: <Icon size="sm" as={MaterialCommunityIcons} name="pencil" />,
   };
+  console.log(TopProfileScreen.heightBox);
   return (
     <>
       <LayoutWithImage
         topAppBar={topAppBar}
-        aboveChildren={<TopHomeScreen />}
-        children={<BottomHomeScreen />}
+        aboveChildren={<TopProfileScreen heightBox={heightBox} />}
+        children={<BottomProfileScreen />}
         backgroundColor={Colors.background}
       />
     </>
   );
 };
 
-export default HomeScreen;
+export default ProfileScreen;

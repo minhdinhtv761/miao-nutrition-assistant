@@ -8,19 +8,25 @@ import ShortNutritionFact from "./ShortNutritionFact";
 import { Subtitle } from "../typography/Subtitle";
 import { space } from "./../../../styles/layout";
 
-export const ShortNutritionTable = () => {
+export const ShortNutritionTable = ({ inProfile }) => {
   return (
     <VStack
       width="100%"
       p={space.m}
       borderColor="coolGray.300"
-      borderWidth={1}
+      borderWidth={inProfile && 0}
       borderRadius="md"
-      space={space.xs}
+      space={space.s}
     >
       <ShortNutritionFact />
       <CustomDivider />
-      <Subtitle text="Theo mục tiêu trong ngày" />
+      <Subtitle
+        text={
+          inProfile
+            ? "Tỉ lệ giữa thực tế và mục tiêu"
+            : "Theo mục tiêu trong ngày"
+        }
+      />
       <NutritionPerDay />
     </VStack>
   );
