@@ -74,10 +74,12 @@ export const FullNutritionProgress = ({
       <TextInput
         underlineColorAndroid="transparent"
         editable={false}
-        defaultValue={`${calories}`}
+        multiline
+        textAlign="center"
+        defaultValue={`${calories}\nkcal`}
         style={[
           StyleSheet.absoluteFillObject,
-          { fontSize: radius / 2, color: textColor || Colors.white },
+          { fontSize: radius * 0.35, color: textColor || Colors.white },
           styles.text,
         ]}
       />
