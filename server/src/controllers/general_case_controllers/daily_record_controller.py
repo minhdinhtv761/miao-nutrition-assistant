@@ -2,25 +2,25 @@ from flask_restful import Resource
 from mongoengine import DoesNotExist, ValidationError
 from werkzeug import exceptions
 from mongoengine.queryset.visitor import Q
-from src.controllers.abstract_controllers.food_controller import food_args_parser
+from src.controllers.abstract_controllers.nutrition_base_controller import nutrition_base_args_parser
 from src.models.implement_models.general_case_models.user_model import User
-from src.models.implement_models.user_case_models.user_food_model import UserFood
+from src.models.implement_models.general_case_models.daily_record_model import DailyRecord
 
-# User food function arguments
-user_food_args_parser = food_args_parser.copy()
+# Daily record function arguments
+daily_record_args_parser = nutrition_base_args_parser.copy()
+daily_record_args_parser.add_argument("recordDate", type=str, help="Invalid recordDate", required=True)
+daily_record_args_parser.add_argument("mealId", type=list, help="Invalid mealId", required=True, location="json")
 
 ####################
 ####################
 ####################
 
-class UserFoodById(Resource):
-    # Modify user's food function
+class DailyRecordById(Resource):
+    # Modify user's daily record function
     def patch(self, userId, _id):
-        args = user_food_args_parser.parse_args()
-        foodName = args["foodName"]
-        servingSizeWeight = args["servingSizeWeight"]
-        servingSizeUnit = args["servingSizeUnit"]
-        images = args["images"]
+        args = daily_record_args_parser.parse_args()
+        recordDate = args["recordDate"]
+        mealId = args["mealId"]
         water = args["water"]
         energy = args["energy"]
         protein = args["protein"]
@@ -39,12 +39,11 @@ class UserFoodById(Resource):
         sodium = args["sodium"]
         
         try:
-            User.objects().get(Q(id=userId) & Q(userFoodId=_id))
+            User.objects().get(Q(id=userId) & Q(dailyRecordId=_id))
 
-            data = UserFood.objects().get(id=_id)
+            data = DailyRecord.objects().get(id=_id)
 
-            data.modify(foodName=foodName, servingSizeWeight=servingSizeWeight, servingSizeUnit=servingSizeUnit, images=images, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFattyAcid=saturatedFattyAcid, transFattyAcid=transFattyAcid, protein=protein, cholesterol=cholesterol, sodium=sodium, potassium=potassium, vitaminA=vitaminA, vitaminC=vitaminC, calcium=calcium, iron=iron)
-            data.images.replace(images)
+            data.modify(recordDate=recordDate, mealId=mealId, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFattyAcid=saturatedFattyAcid, transFattyAcid=transFattyAcid, protein=protein, cholesterol=cholesterol, sodium=sodium, potassium=potassium, vitaminA=vitaminA, vitaminC=vitaminC, calcium=calcium, iron=iron)
             
             data.save()
 
@@ -59,11 +58,12 @@ class UserFoodById(Resource):
         except Exception as e:
             return {"message": str(e)}, 500
 
+    # Delete user's daily record function
     def delete(self, userId, _id):
         try:
-            User.objects().get(Q(id=userId) & Q(userFoodId=_id))
+            User.objects().get(Q(id=userId) & Q(dailyRecordId=_id))
 
-            data = UserFood.objects().get(id=_id)
+            data = DailyRecord.objects().get(id=_id)
 
             data.delete()
 
@@ -82,14 +82,14 @@ class UserFoodById(Resource):
 ####################
 ####################
 
-class UserFoodByUserId(Resource):
-    # Get all user's foods function
+class DailyRecordByUserId(Resource):
+    # Get all user's daily records function
     def get(self, userId):
         try:
             user = User.objects().get(id=userId)
                 
-            if user.userFoodId:
-                data = user.userFoodId
+            if user.dailyRecordId:
+                data = user.dailyRecordId
             else:
                 data = []
 
@@ -104,13 +104,11 @@ class UserFoodByUserId(Resource):
         except Exception as e:
             return {"message": str(e)}, 500
 
-    # Create a new user's food function
+    # Create a new user's daily record function
     def post(self, userId):
-        args = user_food_args_parser.parse_args()
-        foodName = args["foodName"]
-        servingSizeWeight = args["servingSizeWeight"]
-        servingSizeUnit = args["servingSizeUnit"]
-        images = args["images"]
+        args = daily_record_args_parser.parse_args()
+        recordDate = args["recordDate"]
+        mealId = args["mealId"]
         water = args["water"]
         energy = args["energy"]
         protein = args["protein"]
@@ -131,15 +129,14 @@ class UserFoodByUserId(Resource):
         try:
             user = User.objects().get(id=userId)
 
-            data = UserFood(foodName=foodName, servingSizeWeight=servingSizeWeight, servingSizeUnit=servingSizeUnit, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFattyAcid=saturatedFattyAcid, transFattyAcid=transFattyAcid, protein=protein, cholesterol=cholesterol, sodium=sodium, potassium=potassium, vitaminA=vitaminA, vitaminC=vitaminC, calcium=calcium, iron=iron)
-            data.images.put(images)
+            data = DailyRecord(recordDate=recordDate, mealId=mealId, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFattyAcid=saturatedFattyAcid, transFattyAcid=transFattyAcid, protein=protein, cholesterol=cholesterol, sodium=sodium, potassium=potassium, vitaminA=vitaminA, vitaminC=vitaminC, calcium=calcium, iron=iron)
 
             data.save()
 
-            if not user.userFoodId:
-                user.modify(userFoodId=[data])
+            if not user.dailyRecordId:
+                user.modify(dailyRecordId=[data])
             else:
-                user.userFoodId.append(data)
+                user.dailyRecordId.append(data)
                 user.save()
 
             return data, 201

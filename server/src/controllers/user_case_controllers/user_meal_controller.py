@@ -2,25 +2,23 @@ from flask_restful import Resource
 from mongoengine import DoesNotExist, ValidationError
 from werkzeug import exceptions
 from mongoengine.queryset.visitor import Q
-from src.controllers.abstract_controllers.food_controller import food_args_parser
+from src.controllers.abstract_controllers.meal_controller import meal_args_parser
 from src.models.implement_models.general_case_models.user_model import User
-from src.models.implement_models.user_case_models.user_food_model import UserFood
+from src.models.implement_models.user_case_models.user_meal_model import UserMeal
 
-# User food function arguments
-user_food_args_parser = food_args_parser.copy()
+# User meal function arguments
+user_meal_args_parser = meal_args_parser.copy()
 
 ####################
 ####################
 ####################
 
-class UserFoodById(Resource):
-    # Modify user's food function
+class UserMealById(Resource):
+    # Modify user's meal function
     def patch(self, userId, _id):
-        args = user_food_args_parser.parse_args()
-        foodName = args["foodName"]
-        servingSizeWeight = args["servingSizeWeight"]
-        servingSizeUnit = args["servingSizeUnit"]
-        images = args["images"]
+        args = user_meal_args_parser.parse_args()
+        mealDetailId = args["mealDetailId"]
+        totalQuantity = args["totalQuantity"]
         water = args["water"]
         energy = args["energy"]
         protein = args["protein"]
@@ -39,12 +37,11 @@ class UserFoodById(Resource):
         sodium = args["sodium"]
         
         try:
-            User.objects().get(Q(id=userId) & Q(userFoodId=_id))
+            User.objects().get(Q(id=userId) & Q(userMealId=_id))
 
-            data = UserFood.objects().get(id=_id)
+            data = UserMeal.objects().get(id=_id)
 
-            data.modify(foodName=foodName, servingSizeWeight=servingSizeWeight, servingSizeUnit=servingSizeUnit, images=images, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFattyAcid=saturatedFattyAcid, transFattyAcid=transFattyAcid, protein=protein, cholesterol=cholesterol, sodium=sodium, potassium=potassium, vitaminA=vitaminA, vitaminC=vitaminC, calcium=calcium, iron=iron)
-            data.images.replace(images)
+            data.modify(mealDetailId=mealDetailId, totalQuantity=totalQuantity, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFattyAcid=saturatedFattyAcid, transFattyAcid=transFattyAcid, protein=protein, cholesterol=cholesterol, sodium=sodium, potassium=potassium, vitaminA=vitaminA, vitaminC=vitaminC, calcium=calcium, iron=iron)
             
             data.save()
 
@@ -59,11 +56,12 @@ class UserFoodById(Resource):
         except Exception as e:
             return {"message": str(e)}, 500
 
+    # Delete user's meal function
     def delete(self, userId, _id):
         try:
-            User.objects().get(Q(id=userId) & Q(userFoodId=_id))
+            User.objects().get(Q(id=userId) & Q(userMealId=_id))
 
-            data = UserFood.objects().get(id=_id)
+            data = UserMeal.objects().get(id=_id)
 
             data.delete()
 
@@ -82,14 +80,14 @@ class UserFoodById(Resource):
 ####################
 ####################
 
-class UserFoodByUserId(Resource):
-    # Get all user's foods function
+class UserMealByUserId(Resource):
+    # Get all user's meals function
     def get(self, userId):
         try:
             user = User.objects().get(id=userId)
                 
-            if user.userFoodId:
-                data = user.userFoodId
+            if user.userMealId:
+                data = user.userMealId
             else:
                 data = []
 
@@ -104,13 +102,11 @@ class UserFoodByUserId(Resource):
         except Exception as e:
             return {"message": str(e)}, 500
 
-    # Create a new user's food function
+    # Create a new user's meals function
     def post(self, userId):
-        args = user_food_args_parser.parse_args()
-        foodName = args["foodName"]
-        servingSizeWeight = args["servingSizeWeight"]
-        servingSizeUnit = args["servingSizeUnit"]
-        images = args["images"]
+        args = user_meal_args_parser.parse_args()
+        mealDetailId = args["mealDetailId"]
+        totalQuantity = args["totalQuantity"]
         water = args["water"]
         energy = args["energy"]
         protein = args["protein"]
@@ -131,15 +127,14 @@ class UserFoodByUserId(Resource):
         try:
             user = User.objects().get(id=userId)
 
-            data = UserFood(foodName=foodName, servingSizeWeight=servingSizeWeight, servingSizeUnit=servingSizeUnit, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFattyAcid=saturatedFattyAcid, transFattyAcid=transFattyAcid, protein=protein, cholesterol=cholesterol, sodium=sodium, potassium=potassium, vitaminA=vitaminA, vitaminC=vitaminC, calcium=calcium, iron=iron)
-            data.images.put(images)
+            data = UserMeal(mealDetailId=mealDetailId, totalQuantity=totalQuantity, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFattyAcid=saturatedFattyAcid, transFattyAcid=transFattyAcid, protein=protein, cholesterol=cholesterol, sodium=sodium, potassium=potassium, vitaminA=vitaminA, vitaminC=vitaminC, calcium=calcium, iron=iron)
 
             data.save()
 
-            if not user.userFoodId:
-                user.modify(userFoodId=[data])
+            if not user.userMealId:
+                user.modify(userMealId=[data])
             else:
-                user.userFoodId.append(data)
+                user.userMealId.append(data)
                 user.save()
 
             return data, 201

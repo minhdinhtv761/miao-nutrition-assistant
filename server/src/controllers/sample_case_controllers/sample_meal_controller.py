@@ -1,17 +1,17 @@
 from flask_restful import Resource
 from mongoengine import DoesNotExist, ValidationError
 from werkzeug import exceptions
-from src.models.implement_models.sample_case_models.sample_food_model import SampleFood
+from src.models.implement_models.sample_case_models.sample_meal_model import SampleMeal
 
 ####################
 ####################
 ####################
 
-class ListSampleFood(Resource):
-    # Get all user's foods function
+class ListSampleMeal(Resource):
+    # Get all sample's meals function
     def get(self):
         try:    
-            data = SampleFood.objects()
+            data = SampleMeal.objects()
 
             return data, 200
 
