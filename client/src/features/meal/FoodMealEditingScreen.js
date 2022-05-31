@@ -15,7 +15,6 @@ import { useSelector } from "react-redux";
 
 const FoodMealEditingScreen = () => {
   const food = useSelector(FoodDataState$);
-  console.log("foodChoseen", food);
   const [weight, setWeight] = React.useState(food.servingSizeWeight);
   const topAppBar = {
     title: "Chỉnh sửa khẩu phần",
@@ -28,7 +27,7 @@ const FoodMealEditingScreen = () => {
         topAppBar={topAppBar}
         uriImage="https://wallpaperaccess.com/full/317501.jpg"
         children={
-          <VStack space={space.xl}>
+          <VStack space={space.l}>
             <Heading size="xl" fontWeight="light">
               {food.foodName}
             </Heading>
@@ -37,8 +36,8 @@ const FoodMealEditingScreen = () => {
               weight={weight}
               setWeight={setWeight}
             />
-            <ShortNutritionTable/>
-            <FullNutritionFact/>
+            <ShortNutritionTable value={food} />
+            <FullNutritionFact data={food} />
             <SafeAreaView />
           </VStack>
         }

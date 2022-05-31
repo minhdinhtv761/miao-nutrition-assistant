@@ -18,7 +18,7 @@ const FoodList = () => {
             <FoodItem
               key={index}
               title={value.foodName}
-              subtitle={value.servingSizeWeight + value.servingSizeWeight}
+              subtitle={value.servingSizeWeight + value.servingSizeUnit}
               calo={value.energy}
               onPress={() => {
                 dispatch(passFoodData(value));

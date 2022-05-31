@@ -32,7 +32,7 @@ export const DetailNutrition = ({ style }) => {
     <Box style={style} bg="white" borderRadius="xl">
       <Center h="100%" px={space.m}>
         <HStack justifyContent="space-between" alignItems="center" w="100%">
-          <Item type="carbs" value={30} maxValue={100} />
+          <Item type="carbohydrate" value={30} maxValue={100} />
           <Item type="fat" value={30} maxValue={100} />
           <Item type="protein" value={30} maxValue={100} />
         </HStack>

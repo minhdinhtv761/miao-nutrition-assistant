@@ -4,6 +4,7 @@ import Colors from "../../../styles/colors";
 import { NutritionLabel } from "../../../constants/enums";
 import React from "react";
 import { Subtitle } from "../typography/Subtitle";
+import { calcPercent } from "./../../../utils/NutritionPercent";
 import { space } from "../../../styles/layout";
 
 const InfoItem = ({ type, value, maxValue }) => (
@@ -15,13 +16,19 @@ const InfoItem = ({ type, value, maxValue }) => (
       _filledTrack={{
         bg: "black",
       }}
-      value={50}
+      value={calcPercent(value, maxValue)}
       width="100%"
     />
     <Subtitle text={`${value}/${maxValue}`} color="black" />
   </VStack>
 );
-export const NutritionPerDay = () => {
+export const NutritionPerDay = ({ child, parent }) => {
+  const childValue = {
+    energy: child.energy,
+    carbohydrate: child.carbohydrate,
+    fat: child.fat,
+    protein: child.protein,
+  };
   return (
     <HStack
       w="100%"
@@ -32,7 +39,12 @@ export const NutritionPerDay = () => {
       {Object.keys(NutritionLabel)
         .slice(0, 4)
         .map((type) => (
-          <InfoItem key={type} type={type} value={150} maxValue={300} />
+          <InfoItem
+            key={type}
+            type={type}
+            value={childValue[type]}
+            maxValue={300}
+          />
         ))}
     </HStack>
   );

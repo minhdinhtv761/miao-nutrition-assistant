@@ -5,6 +5,7 @@ import { NutritionLabel } from "../../../constants/enums";
 import { NutrtionColors } from "../../../styles/colors";
 import React from "react";
 import { Subtitle } from "../typography/Subtitle";
+import { calcNutritionPercent } from "../../../utils/NutritionPercent";
 import { getWidthImageOfList } from "./../../../constants/sizes";
 import { space } from "../../../styles/layout";
 
@@ -15,14 +16,32 @@ const InfoItem = ({ type, value, percent }) => (
     <Subtitle text={NutritionLabel[type]} />
   </VStack>
 );
-const ShortNutritionFact = () => {
+const ShortNutritionFact = ({ value }) => {
   const widthCircleProgress = getWidthImageOfList();
+  const foodValue = calcNutritionPercent(value);
   return (
-    <HStack w="100%" alignItems="center" justifyContent="space-between" px={space.s} >
-      <FullNutritionProgress radius={widthCircleProgress / 2} textColor="black"/>
-      <InfoItem type="carbs" value={13} percent={50} />
-      <InfoItem type="fat" value={13} percent={50} />
-      <InfoItem type="protein" value={13} percent={50} />
+    <HStack
+      w="100%"
+      alignItems="center"
+      justifyContent="space-between"
+      px={space.s}
+    >
+      <FullNutritionProgress
+        radius={widthCircleProgress / 2}
+        textColor="black"
+        carbPercent={foodValue["carbohydrate"].percent}
+        fatPercent={foodValue["fat"].percent}
+        proteinPercent={foodValue["protein"].percent}
+        calories={value.energy}
+      />
+      {Object.keys(foodValue).map((type) => (
+        <InfoItem
+          key={type}
+          type={type}
+          value={foodValue[type].value}
+          percent={foodValue[type].percent}
+        />
+      ))}
     </HStack>
   );
 };

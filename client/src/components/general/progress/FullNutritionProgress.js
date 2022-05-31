@@ -23,7 +23,7 @@ export const FullNutritionProgress = ({
 
   const strokeDashoffset = (type) => {
     switch (type) {
-      case "carbs":
+      case "carbohydrate":
         return getStrokeDashoffset(circumference, carbPercent);
       case "fat":
         return getStrokeDashoffset(circumference, carbPercent + fatPercent);
