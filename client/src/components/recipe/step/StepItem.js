@@ -24,6 +24,7 @@ const StepItem = (props) => {
         <HStack space={space.s} width="100%">
           {images.map((value) => (
             <Image
+              key={value}
               source={{ uri: value }}
               width={widthImage}
               height={widthImage}

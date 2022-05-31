@@ -14,7 +14,7 @@ export const ShortNutritionTable = ({ inProfile }) => {
       width="100%"
       p={space.m}
       borderColor="coolGray.300"
-      borderWidth={inProfile && 0}
+      borderWidth={!inProfile ? 1 : 0}
       borderRadius="md"
       space={space.s}
     >
@@ -22,7 +22,7 @@ export const ShortNutritionTable = ({ inProfile }) => {
       <CustomDivider />
       <Subtitle
         text={
-          inProfile
+          !inProfile
             ? "Tỉ lệ giữa thực tế và mục tiêu"
             : "Theo mục tiêu trong ngày"
         }

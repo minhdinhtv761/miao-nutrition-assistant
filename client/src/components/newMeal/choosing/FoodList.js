@@ -1,22 +1,29 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import { FoodItem } from "./FoodItem";
 import { FoodState$ } from "../../../redux/selectors";
 import React from "react";
 import { VStack } from "native-base";
+import { passFoodData } from "../../../redux/actions";
 import { push } from "../../../utils/RootNavigation";
-import { useSelector } from "react-redux";
 
 const FoodList = () => {
   const foodList = useSelector(FoodState$);
+  const dispatch = useDispatch();
+
   return (
     <VStack w="100%" borderRadius="xl" bg="white">
       {foodList.length
         ? foodList.map((value, index) => (
             <FoodItem
               key={index}
-              title={value.TenKM}
-              subtitle="100 gr"
-              calo={240}
-              onPress={() => push("FoodMealEditingScreen")}
+              title={value.foodName}
+              subtitle={value.servingSizeWeight + value.servingSizeWeight}
+              calo={value.energy}
+              onPress={() => {
+                dispatch(passFoodData(value));
+                push("FoodMealEditingScreen");
+              }}
             />
           ))
         : null}

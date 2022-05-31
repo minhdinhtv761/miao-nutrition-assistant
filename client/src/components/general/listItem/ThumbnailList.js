@@ -57,8 +57,8 @@ export const ThumbnailList = () => {
         onPressAction={() => {}}
       />
       <Flex flexWrap="wrap" direction="row" justifyContent="space-between" mt="3">
-        {sliceData.map((data) => (
-          <View flexBasis="32%">
+        {sliceData.map((data, index) => (
+          <View flexBasis="32%" key={index}>
             <ThumbnailItem
               image={data.image}
               name={data.name}

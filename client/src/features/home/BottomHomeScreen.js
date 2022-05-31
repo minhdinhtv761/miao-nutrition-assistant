@@ -5,12 +5,10 @@ import { MealItem } from "./../../components/home/MealItem";
 import MenuTitle from "../../components/general/typography/MenuTitle";
 import React from "react";
 import { VStack } from "native-base";
-import { showMealTypeModal } from "./../../redux/actions/modals";
 import { space } from "./../../styles/layout";
 import { useDispatch } from "react-redux";
 
 export const BottomHomeScreen = () => {
-  const dispatch = useDispatch();
 
   const handleMealChoosing = React.useCallback(() => {
     RootNavigation.push("MealChoosingScreen");

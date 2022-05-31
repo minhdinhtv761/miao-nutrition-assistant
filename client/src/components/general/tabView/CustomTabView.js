@@ -42,6 +42,7 @@ export const CustomTabView = ({ tabList }) => {
           const bgColor = index === i ? "primary.500" : "coolGray.100";
           return (
             <Box
+              key={i}
               flex={1}
               alignItems="center"
               p="3"

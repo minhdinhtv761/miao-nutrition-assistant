@@ -8,11 +8,11 @@ from src.models.implement_models.sample_case_models.sample_food_model import Sam
 ####################
 
 class ListSampleFood(Resource):
+    print("get into")
     # Get all user's foods function
     def get(self):
         try:    
             data = SampleFood.objects()
-
             return data, 200
 
         except DoesNotExist as e:

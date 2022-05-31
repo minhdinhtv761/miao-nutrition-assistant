@@ -1,39 +1,26 @@
 import {
-  Actionsheet,
-  Box,
   Button,
-  FormControl,
-  HStack,
-  Heading,
-  Input,
-  Modal,
-  Radio,
-  VStack,
+  Radio
 } from "native-base";
-import { useDispatch, useSelector } from "react-redux";
 
 import { BottomActionSheet } from "./../general/actionsheet/BottomActionSheet";
-import CustomButton from "./../general/buttons/CustomButton";
-import { MealTypeModal$ } from "../../redux/selectors";
 import { MealTypes } from "../../constants/enums";
-import MenuTitle from "./../general/typography/MenuTitle";
 import React from "react";
-import { hideMealTypeModal } from "../../redux/actions";
 import { space } from "./../../styles/layout";
 
 export const MealTypeModal = () => {
-  const modalVisible = useSelector(MealTypeModal$);
+  // const modalVisible = useSelector(MealTypeModal$);
   const [value, setValue] = React.useState("breakfast");
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const onClose = React.useCallback(() => {
-    dispatch(hideMealTypeModal());
-  }, [dispatch]);
+  // const onClose = React.useCallback(() => {
+  //   dispatch(hideMealTypeModal());
+  // }, [dispatch]);
 
   return (
     <BottomActionSheet
       header="Loại bữa ăn"
-      isOpen={modalVisible}
+      isOpen={false}
       onClose={onClose}
       content={
         <Radio.Group

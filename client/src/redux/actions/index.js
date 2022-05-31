@@ -1,10 +1,9 @@
-import { hideMealTypeModal, showMealTypeModal } from "./modals";
+import { fetchFood, passFoodData } from "./foodActions";
 
 import { fetchDailyRecord } from "./dailyRecordActions";
-import { fetchFood } from "./foodActions";
 
 export const getType = (reduxAction) => {
   return reduxAction().type;
 };
 
-export { fetchDailyRecord, fetchFood, showMealTypeModal, hideMealTypeModal };
+export { fetchDailyRecord, fetchFood, passFoodData };

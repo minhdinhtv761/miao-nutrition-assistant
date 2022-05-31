@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import dailyRecordReducers from "./dailyRecordReducers";
+import foodDataReducers from './foodDataReducers';
 import foodReducers from "./foodReducers";
-import mealTypeModalReducer from "./modalReducers";
 
 export default combineReducers({
   dailyRecordReducers,
   foodReducers,
-  mealTypeModalReducer,
+  foodDataReducers
 });

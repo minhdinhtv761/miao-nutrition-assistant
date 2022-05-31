@@ -1,6 +1,7 @@
 import { Button, Heading, Text, VStack } from "native-base";
 
 import BottomButton from "../../components/general/buttons/BottomButton";
+import { FoodDataState$ } from "../../redux/selectors";
 import { FullNutritionFact } from "../../components/general/nutritionFact/FullNutritionFact";
 import InputWithSelect from "../../components/general/input/InputWithSelect";
 import LayoutWithImage from "../../components/general/layout/LayoutWithImage";
@@ -10,9 +11,12 @@ import { ShortNutritionTable } from "../../components/general/nutritionFact/Shor
 import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
 import { sample_food } from "../../constants/dummy";
 import { space } from "../../styles/layout";
+import { useSelector } from "react-redux";
 
 const FoodMealEditingScreen = () => {
-  const [weight, setWeight] = React.useState(sample_food.quantity);
+  const food = useSelector(FoodDataState$);
+  console.log("foodChoseen", food);
+  const [weight, setWeight] = React.useState(food.servingSizeWeight);
   const topAppBar = {
     title: "Chỉnh sửa khẩu phần",
     leftIcon: <TurnBackButton />,
@@ -26,15 +30,15 @@ const FoodMealEditingScreen = () => {
         children={
           <VStack space={space.xl}>
             <Heading size="xl" fontWeight="light">
-              Bơ (quả)
+              {food.foodName}
             </Heading>
             <InputWithSelect
               label="Nhập lượng nạp vào và đơn vị"
               weight={weight}
               setWeight={setWeight}
             />
-            <ShortNutritionTable />
-            <FullNutritionFact />
+            <ShortNutritionTable/>
+            <FullNutritionFact/>
             <SafeAreaView />
           </VStack>
         }

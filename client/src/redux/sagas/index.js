@@ -9,8 +9,13 @@ function* fetchDailyRecordSaga(action) {
 }
 
 function* fetchFoodSaga(action) {
-  const food = yield call(api.fetchFood);
-  yield put(actions.fetchFood.fetchFoodSuccess(food.data));
+  try {
+    const food = yield call(api.fetchFood);
+    yield put(actions.fetchFood.fetchFoodSuccess(food.data.response));
+  } catch (error) {
+    console.log(error);
+    yield put(actions.fetchFood.fetchFoodFailure(error));
+  }
 }
 export default function* mySaga() {
   yield takeLatest(

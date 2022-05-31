@@ -13,7 +13,7 @@ export const ImageBox = ({ uri, aboveChildren }) => {
   const safeArea = useSafeAreaInsets();
   const heightImage = getTopBannerHeight() + getHeaderHeight() + safeArea.top;
   return (
-    <View width="100%">
+    <View width="100%" height={uri ? heightImage : null}>
       {Children.map(aboveChildren, (child) => {
         if (!isValidElement(child)) return null;
         return cloneElement(child, {
@@ -27,7 +27,7 @@ export const ImageBox = ({ uri, aboveChildren }) => {
           style={{
             position: "absolute",
             width: "100%",
-            height: heightImage,
+            height: "100%",
 
             opacity: 0.2,
           }}
@@ -38,7 +38,7 @@ export const ImageBox = ({ uri, aboveChildren }) => {
         style={{
           position: "absolute",
           width: "100%",
-          height: heightImage,
+          height: "100%",
           zIndex: -1,
         }}
       />
