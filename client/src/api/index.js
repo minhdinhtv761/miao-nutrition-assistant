@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://10.0.163.52:5000";
+const URL = "http://192.168.2.132:5000";
 
 export const fetchDailyRecord = () => axios.get(`${URL}/DailyRecord`);
 

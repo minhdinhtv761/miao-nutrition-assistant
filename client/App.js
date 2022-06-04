@@ -12,6 +12,7 @@ import store from "./src/redux/store";
 LogBox.ignoreAllLogs();
 const Stack = createNativeStackNavigator();
 function App() {
+  
   const theme = extendTheme({
     colors: {
       primary: {

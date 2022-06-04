@@ -11,6 +11,7 @@ export const FoodItem = ({
   subtitle,
   calo,
   onPress,
+  onPressIcon,
   createNewFoodButton,
 }) => {
   const widthImage = getWidthImageOfList();
@@ -25,6 +26,7 @@ export const FoodItem = ({
             h={widthImage}
             w={widthImage}
             borderRadius="sm"
+            alt="description of image"
           />
         ) : null
       }
@@ -38,7 +40,7 @@ export const FoodItem = ({
             <Text fontSize="sm" color="black">
               {calo} kcal
             </Text>
-            <PlusButton />
+            <PlusButton onPress={onPressIcon} />
           </HStack>
         ) : null
       }

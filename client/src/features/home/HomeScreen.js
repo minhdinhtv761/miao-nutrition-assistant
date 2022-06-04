@@ -7,8 +7,16 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MealTypeModal } from "./../../components/modals/MealTypeModal";
 import React from "react";
 import { TopHomeScreen } from "./TopHomeScreen";
+import { fetchFood } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 
 const HomeScreen = () => {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(fetchFood.fetchFoodRequest());
+  }, [dispatch]);
+
   const scrollA = React.useRef(new Animated.Value(0)).current;
   const topAppBar = {
     title: "Home",

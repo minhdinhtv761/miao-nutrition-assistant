@@ -1,14 +1,18 @@
 import { Center, View } from "native-base";
+import {
+  SafeAreaFrameContext,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
 import { Animated } from "react-native";
 import { CustomTabView } from "./../tabView/CustomTabView";
 import MainContentLayout from "./MainContentLayout";
 import React from "react";
+import SafeAreaView from "react-native-safe-area-view";
 import { ScrollViewLayout } from "./ScrollViewLayout";
 import SearchBar from "../input/SearchBar";
 import TopAppBar from "./../appbar/TopAppBar";
 import { getHeaderHeight } from "./../../../constants/sizes";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 // { key: index,
 //     title: element.title,
@@ -20,7 +24,7 @@ const LayoutWithTabview = ({ topAppBar, tabList }) => {
 
   const scrollTabList = Array.from(tabList, (element) => {
     const newTab = () => (
-      <ScrollViewLayout scrollA={scrollA}> {element.tab} </ScrollViewLayout>
+      <ScrollViewLayout scrollA={scrollA}>{element.tab}</ScrollViewLayout>
     );
     return {
       title: element.title,
