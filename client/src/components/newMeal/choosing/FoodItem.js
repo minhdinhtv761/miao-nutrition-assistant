@@ -1,7 +1,7 @@
 import { HStack, Image, Text } from "native-base";
 
 import { ListItem } from "../../general/listItem/ListItem";
-import { PlusButton } from "../../general/buttons/iconButtons/PlusButton";
+import { PlusButton } from "./../../general/buttons/iconButtons/PlusButton";
 import React from "react";
 import { getWidthImageOfList } from "../../../constants/sizes";
 import { space } from "./../../../styles/layout";
@@ -11,6 +11,7 @@ export const FoodItem = ({
   subtitle,
   calo,
   onPress,
+  iconStatus,
   onPressIcon,
   createNewFoodButton,
 }) => {
@@ -40,7 +41,7 @@ export const FoodItem = ({
             <Text fontSize="sm" color="black">
               {calo} kcal
             </Text>
-            <PlusButton onPress={onPressIcon} />
+            <PlusButton pressed={iconStatus} onPress={onPressIcon} />
           </HStack>
         ) : null
       }

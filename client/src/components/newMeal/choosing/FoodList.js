@@ -1,15 +1,16 @@
 import { Box, VStack } from "native-base";
 import { addingMeal, passFoodData } from "../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FoodItem } from "./FoodItem";
+import { FoodState$ } from "../../../redux/selectors";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { push } from "../../../utils/RootNavigation";
-import { useDispatch } from "react-redux";
 
-const FoodList = ({ list }) => {
+const FoodList = ({ validationList }) => {
   const dispatch = useDispatch();
-  const handleOnChosing = React.useCallback(
+  const list = useSelector(FoodState$);
+  const onAddingFood = React.useCallback(
     (value, pressed) => {
       pressed
         ? dispatch(addingMeal.pushFood(value))
@@ -17,12 +18,11 @@ const FoodList = ({ list }) => {
     },
     [dispatch]
   );
-
   return (
     <>
       <VStack w="100%" borderRadius="xl" bg="white">
         {list.length
-          ? list.slice(0, 10).map((value, index) => (
+          ? list.slice(0, 20).map((value, index) => (
               <FoodItem
                 key={index}
                 id={value._id}
@@ -33,7 +33,8 @@ const FoodList = ({ list }) => {
                   dispatch(passFoodData(value));
                   push("FoodMealEditingScreen");
                 }}
-                onPressIcon={(pressed) => handleOnChosing(value, pressed)}
+                iconStatus={validationList.includes(value)}
+                onPressIcon={(pressed) => onAddingFood(value, pressed)}
               />
             ))
           : null}

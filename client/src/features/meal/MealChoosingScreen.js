@@ -11,28 +11,21 @@ import { space } from "../../styles/layout";
 
 const MealChoosingScreen = () => {
   const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(false);
-  const foodList = useSelector(FoodState$);
   const addedFoodList = useSelector(AddingMealState$);
-  console.log("isOpen", isOpen);
+
   const goBackAction = React.useCallback(() => {
     dispatch(addingMeal.resetFoodList());
   }, [dispatch]);
-
-  React.useEffect(() => {
-    if (addedFoodList.length !== 0) setIsOpen(true);
-  }, [addedFoodList.length]);
 
   const SecondRoute = () => (
     <Center flex={1} my="4">
       This is Tab 2
     </Center>
   );
-  const FirtRoute = () => <FoodList list={foodList} />;
   const tabList = [
     {
       title: "Thực phẩm",
-      tab: <FirtRoute />,
+      tab: <FoodList validationList={addedFoodList} />,
     },
     {
       title: "Công thức",
@@ -40,7 +33,6 @@ const MealChoosingScreen = () => {
     },
     { title: "Của tôi", tab: <SecondRoute /> },
   ];
-
   const topAppBar = {
     title: "Thêm bữa ăn",
     backgroundColor: "white",
@@ -55,7 +47,7 @@ const MealChoosingScreen = () => {
   return (
     <>
       <LayoutWithTabview topAppBar={topAppBar} tabList={tabList} />
-      <Slide in={isOpen} placement="bottom">
+      <Slide in={addedFoodList.length > 0} placement="bottom">
         <Box
           position="absolute"
           left={space.s}
