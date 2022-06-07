@@ -1,7 +1,12 @@
-import { Select, VStack, View } from "native-base";
+import { Button, Select, VStack, View } from "native-base";
+import { addingMeal, showSnackBarAction } from "../../redux/actions";
+import { navigate, pop, popToTop } from "./../../utils/RootNavigation";
+import { useDispatch, useSelector } from "react-redux";
 
+import { AddingMealState$ } from "../../redux/selectors";
 import BottomButton from "./../../components/general/buttons/BottomButton";
 import { CustomDatePicker } from "../../components/general/input/CustomDatePicker";
+import { FoodItem } from "../../components/newMeal/choosing/FoodItem";
 import FoodList from "./../../components/newMeal/choosing/FoodList";
 import { LayoutWithHeader } from "./../../components/general/layout/LayoutWithHeader";
 import { MealTypes } from "../../constants/enums";
@@ -9,13 +14,45 @@ import MenuTitle from "../../components/general/typography/MenuTitle";
 import React from "react";
 import SearchBar from "../../components/general/input/SearchBar";
 import { ShortNutritionTable } from "../../components/general/nutritionFact/ShortNutritionTable";
+import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
 import { space } from "../../styles/layout";
 
 const MealAddingScreen = () => {
+  const dispatch = useDispatch();
+  const { totalNutrition, list } = useSelector(AddingMealState$);
+
+  const [foodList, setFoodList] = React.useState(list);
+
+  const onCancel = React.useCallback(() => {
+    dispatch(addingMeal.resetFoodList());
+    popToTop();
+  }, [dispatch]);
+
+  const goBackAction = React.useCallback(() => {
+    dispatch(showSnackBarAction());
+    pop();
+  }, [dispatch]);
+
+  const onAddingFood = React.useCallback(
+    (value, pressed) => {
+      if (pressed) {
+        dispatch(addingMeal.pushFood(value));
+      } else dispatch(addingMeal.removeFood(value));
+    },
+    [dispatch, list.length]
+  );
+
   const topAppBar = {
     title: "Thêm bữa ăn",
+    leftIcon: <TurnBackButton goBackAction={goBackAction} />,
+    rightChildren: (
+      <Button variant="ghost" color="primary.500" onPress={onCancel}>
+        Hủy
+      </Button>
+    ),
   };
   let [service, setService] = React.useState("breakfast");
+
   return (
     <>
       <LayoutWithHeader
@@ -46,10 +83,22 @@ const MealAddingScreen = () => {
               </Select>
               <CustomDatePicker dateTime="08:00" />
             </VStack>
-            <ShortNutritionTable />
+            <ShortNutritionTable value={totalNutrition} />
             <VStack width="100%" space={space.m}>
               <MenuTitle title="Món ăn đã thêm" />
-              <FoodList />
+              <FoodList
+                foodList={foodList}
+                validationList={list}
+                onPressIcon={(value, pressed) => onAddingFood(value, pressed)}
+                lastElement={
+                  <FoodItem
+                    title="Thêm món ăn"
+                    subtitle="Gợi ý món ăn 30 kcal"
+                    onPress={goBackAction}
+                    createNewFoodButton
+                  />
+                }
+              />
             </VStack>
           </VStack>
         }

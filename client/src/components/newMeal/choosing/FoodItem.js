@@ -41,7 +41,9 @@ export const FoodItem = ({
             <Text fontSize="sm" color="black">
               {calo} kcal
             </Text>
-            <PlusButton pressed={iconStatus} onPress={onPressIcon} />
+            {onPressIcon ? (
+              <PlusButton pressed={iconStatus} onPress={onPressIcon} />
+            ) : null}
           </HStack>
         ) : null
       }

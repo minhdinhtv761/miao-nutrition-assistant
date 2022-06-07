@@ -1,10 +1,18 @@
+var validRegex =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
 export function validate(authData, setErrors, register) {
   if (!authData.email) {
-    setErrors({ email: "Tài khoản không được bỏ trống" });
+    setErrors({ email: "Email không được bỏ trống" });
     return false;
   }
   if (!authData.password && !register) {
     setErrors({ password: "Mật khẩu không được bỏ trống" });
+    return false;
+  }
+  if (!authData.email.match(validRegex)) {
+    console.log("as")
+    setErrors({email:"Vui lòng nhập đúng email"});
     return false;
   }
   if (register) {

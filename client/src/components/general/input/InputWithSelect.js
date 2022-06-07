@@ -1,28 +1,24 @@
-import { AntDesign, Ionicons } from "@expo/vector-icons";
 import {
   Box,
-  CheckIcon,
   HStack,
-  Icon,
   Input,
   Select,
-  Text,
-  VStack,
+  VStack
 } from "native-base";
 
-import Colors from "./../../../styles/colors";
 import React from "react";
 import { Subtitle } from "../typography/Subtitle";
 import { space } from "./../../../styles/layout";
 
 const InputWithSelect = (props) => {
   let [service, setService] = React.useState("g");
+  const [value, setValue] = React.useState(props.weight.toString());
   return (
     <VStack space={space.s}>
       <Subtitle text={props.label} />
       <HStack w="100%" alignItems="stretch" space={0.5}>
         <Input
-          defaultValue="100"
+          defaultValue={value}
           variant="filled"
           w="70%"
           px={space.m}
@@ -33,9 +29,8 @@ const InputWithSelect = (props) => {
           fontSize={14}
           bgColor="coolGray.100"
           keyboardType="numeric"
-          onChangeText={(text) => {
-            props.setWeight(text);
-          }}
+          onSubmitEditing={() => props.setWeight(value)}
+          onChangeText={(text) => setValue(text)}
         />
         <Box w="30%">
           <Select
@@ -55,10 +50,10 @@ const InputWithSelect = (props) => {
             onValueChange={(itemValue) => setService(itemValue)}
           >
             <Select.Item label="g" value="g" />
-            <Select.Item label="Web Development" value="web" />
+            {/* <Select.Item label="Web Development" value="web" />
             <Select.Item label="Cross Platform Development" value="cross" />
             <Select.Item label="UI Designing" value="ui" />
-            <Select.Item label="Backend Development" value="backend" />
+            <Select.Item label="Backend Development" value="backend" /> */}
           </Select>
         </Box>
       </HStack>

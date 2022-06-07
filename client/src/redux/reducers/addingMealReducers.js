@@ -1,20 +1,45 @@
 import { addingMeal, getType } from "../actions";
 
-const initState = [];
+const initState = {
+  totalNutrition: {
+    energy: 0,
+    carbohydrate: 0,
+    fat: 0,
+    protein: 0,
+  },
+  list: [],
+};
 
 export default function addingMealReducers(state = initState, action) {
+  let newList;
   switch (action.type) {
     case getType(addingMeal.pushFood):
-      return [...state, action.payload];
+      const newObject = state.list.find(
+        (item) => item._id === action.payload._id
+      );
+      newList = newObject
+        ? state.list.map((value) =>
+            value._id === newObject._id ? action.payload : value
+          )
+        : [...state.list, action.payload];
+      return { totalNutrition: calcTotal(newList), list: newList };
     case getType(addingMeal.removeFood):
-      return state.filter((item) => item != action.payload);
-    case getType(addingMeal.updateFood):
-      return state.map((item) => {
-        if (item === action.payload._id) item = action.payload;
-      });
+      newList = state.list.filter((item) => item._id !== action.payload._id);
+      return { totalNutrition: calcTotal(newList), list: newList };
     case getType(addingMeal.resetFoodList):
-      return [];
+      return initState;
     default:
       return state;
   }
 }
+
+const calcTotal = (list) => {
+  let result = { energy: 0, carbohydrate: 0, fat: 0, protein: 0 };
+  Object.keys(result).forEach((key) => {
+    list.forEach((element) => {
+      result[key] += element[key];
+      result[key] = Math.round(result[key] * 10) / 10;
+    });
+  });
+  return result;
+};

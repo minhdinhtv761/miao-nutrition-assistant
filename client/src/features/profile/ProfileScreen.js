@@ -24,7 +24,6 @@ const ProfileScreen = () => {
     ),
     rightChildren: <Icon size="sm" as={MaterialCommunityIcons} name="pencil" />,
   };
-  console.log(TopProfileScreen.heightBox);
   return (
     <>
       <LayoutWithImage

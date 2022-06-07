@@ -1,28 +1,30 @@
 import { Box, VStack } from "native-base";
-import { addingMeal, passFoodData } from "../../../redux/actions";
-import { useDispatch, useSelector } from "react-redux";
 
 import { FoodItem } from "./FoodItem";
-import { FoodState$ } from "../../../redux/selectors";
 import React from "react";
+import { passFoodData } from "../../../redux/actions";
 import { push } from "../../../utils/RootNavigation";
+import { useDispatch } from "react-redux";
 
-const FoodList = ({ validationList }) => {
+const FoodList = ({ foodList, validationList, onPressIcon, lastElement }) => {
   const dispatch = useDispatch();
-  const list = useSelector(FoodState$);
-  const onAddingFood = React.useCallback(
-    (value, pressed) => {
-      pressed
-        ? dispatch(addingMeal.pushFood(value))
-        : dispatch(addingMeal.removeFood(value));
-    },
-    [dispatch]
-  );
+  const [list, setList] = React.useState(foodList);
+
+  React.useEffect(() => {
+    if (validationList !== undefined && validationList.length > 0) {
+      let newList = foodList.map((item) => {
+        const newItem = validationList.find((item2) => item2._id === item._id);
+        return newItem ? { ...item, ...newItem } : item;
+      });
+      setList(newList);
+    }
+  }, [validationList, foodList]);
+
   return (
     <>
       <VStack w="100%" borderRadius="xl" bg="white">
         {list.length
-          ? list.slice(0, 20).map((value, index) => (
+          ? list.slice(0, 51).map((value, index) => (
               <FoodItem
                 key={index}
                 id={value._id}
@@ -33,17 +35,18 @@ const FoodList = ({ validationList }) => {
                   dispatch(passFoodData(value));
                   push("FoodMealEditingScreen");
                 }}
-                iconStatus={validationList.includes(value)}
-                onPressIcon={(pressed) => onAddingFood(value, pressed)}
+                iconStatus={
+                  validationList !== undefined
+                    ? Boolean(
+                        validationList.find((item) => item._id === value._id)
+                      )
+                    : null
+                }
+                onPressIcon={(pressed) => onPressIcon(value, pressed)}
               />
             ))
           : null}
-        <FoodItem
-          title="Tạo mới món ăn"
-          subtitle="Tạo mới món ăn và dinh dưỡng"
-          onPress={() => {}}
-          createNewFoodButton
-        />
+        {lastElement}
         <Box height={100} />
       </VStack>
     </>

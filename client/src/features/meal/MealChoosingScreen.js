@@ -1,20 +1,46 @@
 import { AddingMealState$, FoodState$ } from "../../redux/selectors";
-import { Box, Button, Center, Slide, Text } from "native-base";
-import React, { useState } from "react";
+import { Button, Center } from "native-base";
+import {
+  hideSnackBarAction,
+  showSnackBarAction,
+} from "./../../redux/actions/modalAction";
 import { useDispatch, useSelector } from "react-redux";
 
 import FoodList from "../../components/newMeal/choosing/FoodList";
 import LayoutWithTabview from "../../components/general/layout/LayoutWithTabview";
+import React from "react";
+import { SnackBar } from "../../components/modals/SnackBar";
 import { TurnBackButton } from "./../../components/general/buttons/iconButtons/TurnBackButton";
 import { addingMeal } from "../../redux/actions";
-import { space } from "../../styles/layout";
+import { push } from "../../utils/RootNavigation";
 
 const MealChoosingScreen = () => {
   const dispatch = useDispatch();
-  const addedFoodList = useSelector(AddingMealState$);
+  const foodList = useSelector(FoodState$);
+  const { list } = useSelector(AddingMealState$);
+
+  const onAddingFood = React.useCallback(
+    (value, pressed) => {
+      pressed
+        ? dispatch(addingMeal.pushFood(value))
+        : dispatch(addingMeal.removeFood(value));
+      if (list.length === 0 && pressed) {
+        dispatch(showSnackBarAction());
+      } else if (list.length === 1 && !pressed) {
+        dispatch(hideSnackBarAction());
+      }
+    },
+    [list.length]
+  );
 
   const goBackAction = React.useCallback(() => {
     dispatch(addingMeal.resetFoodList());
+    dispatch(hideSnackBarAction());
+  }, [dispatch]);
+
+  const goNextAction = React.useCallback(() => {
+    push("MealAddingScreen");
+    dispatch(hideSnackBarAction());
   }, [dispatch]);
 
   const SecondRoute = () => (
@@ -25,7 +51,13 @@ const MealChoosingScreen = () => {
   const tabList = [
     {
       title: "Thực phẩm",
-      tab: <FoodList validationList={addedFoodList} />,
+      tab: (
+        <FoodList
+          foodList={foodList}
+          validationList={list}
+          onPressIcon={(value, pressed) => onAddingFood(value, pressed)}
+        />
+      ),
     },
     {
       title: "Công thức",
@@ -38,7 +70,7 @@ const MealChoosingScreen = () => {
     backgroundColor: "white",
     leftIcon: <TurnBackButton goBackAction={goBackAction} />,
     rightChildren: (
-      <Button variant="ghost" color="primary.500">
+      <Button variant="ghost" color="primary.500" onPress={goNextAction}>
         Tiếp
       </Button>
     ),
@@ -47,20 +79,7 @@ const MealChoosingScreen = () => {
   return (
     <>
       <LayoutWithTabview topAppBar={topAppBar} tabList={tabList} />
-      <Slide in={addedFoodList.length > 0} placement="bottom">
-        <Box
-          position="absolute"
-          left={space.s}
-          bottom={0}
-          rounded="lg"
-          px={2}
-          py={1}
-          background="#323232"
-          width="96%"
-        >
-          <Text color="white">Đã chọn {addedFoodList.length}</Text>
-        </Box>
-      </Slide>
+      <SnackBar text={"Đã chọn " + list.length} />
     </>
   );
 };
