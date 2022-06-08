@@ -11,6 +11,7 @@ from src.routers.sample_case_routers.sample_food_router import add_sample_food_r
 from src.routers.sample_case_routers.sample_meal_router import add_sample_meal_resource
 from src.routers.sample_case_routers.sample_meal_detail_router import add_sample_meal_detail_resource
 from src.routers.sample_case_routers.sample_recipe_router import add_sample_recipe_resource
+from src.routers.user_case_routers.user_diet_router import add_user_diet_resource
 from src.routers.user_case_routers.user_food_router import add_user_food_resource
 from src.routers.user_case_routers.user_meal_router import add_user_meal_resource
 from src.routers.user_case_routers.user_meal_detail_router import add_user_meal_detail_resource
@@ -52,6 +53,7 @@ def create_app():
     add_sample_meal_resource(api)
     add_sample_meal_detail_resource(api)
     add_sample_recipe_resource(api)
+    add_user_diet_resource(api)
     add_user_food_resource(api)
     add_user_meal_resource(api)
     add_user_meal_detail_resource(api)
