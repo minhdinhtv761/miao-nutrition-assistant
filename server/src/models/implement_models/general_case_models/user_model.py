@@ -3,7 +3,9 @@ from src.constants.enums import Gender
 from src.models.implement_models.general_case_models.account_model import Account
 from src.models.implement_models.general_case_models.body_composition_model import BodyComposition
 from src.models.implement_models.general_case_models.daily_record_model import DailyRecord
+from src.models.implement_models.general_case_models.goal_model import Goal
 from src.models.implement_models.sample_case_models.sample_food_model import SampleFood
+from src.models.implement_models.user_case_models.user_diet_model import UserDiet
 from src.models.implement_models.user_case_models.user_food_model import UserFood
 from src.models.implement_models.user_case_models.user_recipe_model import UserRecipe
 
@@ -15,6 +17,8 @@ class User(Document):
     allergenicFoodsId = ListField(GenericReferenceField(choices=[UserFood, SampleFood]), null=True)
     backgroundDiseases = StringField(null=True)
     bodyCompositionId = ListField(ReferenceField(BodyComposition, reverse_delete_rule=PULL), null=True)
+    userDietId = ListField(ReferenceField(UserDiet, reverse_delete_rule=PULL), null=True)
+    goalId = ListField(ReferenceField(Goal, reverse_delete_rule=PULL), null=True)
     dailyRecordId = ListField(ReferenceField(DailyRecord, reverse_delete_rule=PULL), null=True)
     userFoodId = ListField(ReferenceField(UserFood, reverse_delete_rule=PULL), null=True)
     userRecipeId = ListField(ReferenceField(UserRecipe, reverse_delete_rule=PULL), null=True)

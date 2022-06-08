@@ -10,6 +10,5 @@ class Diet(Document):
     allergenicFoodsId = ListField(GenericReferenceField(choices=[UserFood, SampleFood]), null=True)
 
     meta = {
-        "db_alias": "miao",
-        "collection": "diets"
+        "abstract": True
     }
