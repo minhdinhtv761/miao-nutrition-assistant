@@ -21,28 +21,29 @@ class DailyRecordById(Resource):
         args = daily_record_args_parser.parse_args()
         recordDate = args["recordDate"]
         mealId = args["mealId"]
-        calories = args["calories"]
-        totalCarbohydrates = args["totalCarbohydrates"]
-        dietaryFiber = args["dietaryFiber"]
-        sugars = args["sugars"]
-        totalFat = args["totalFat"]
-        saturatedFat = args["saturatedFat"]
-        transFat = args["transFat"]
+        water = args["water"]
+        energy = args["energy"]
         protein = args["protein"]
+        fat = args["fat"]
+        carbohydrate = args["carbohydrate"]
+        fiber = args["fiber"]
+        sugar = args["sugar"]
+        saturatedFattyAcid = args["saturatedFattyAcid"]
+        transFattyAcid = args["transFattyAcid"]
         cholesterol = args["cholesterol"]
-        natri = args["natri"]
-        kali = args["kali"]
         vitaminA = args["vitaminA"]
         vitaminC = args["vitaminC"]
-        canxi = args["canxi"]
-        fe = args["fe"]
+        calcium = args["calcium"]
+        iron = args["iron"]
+        potassium = args["potassium"]
+        sodium = args["sodium"]
         
         try:
             User.objects().get(Q(id=userId) & Q(dailyRecordId=_id))
 
             data = DailyRecord.objects().get(id=_id)
 
-            data.modify(recordDate=recordDate, mealId=mealId, calories=calories, totalCarbohydrates=totalCarbohydrates, dietaryFiber=dietaryFiber, sugars=sugars,totalFat=totalFat, saturatedFat=saturatedFat, transFat=transFat, protein=protein, cholesterol=cholesterol, natri=natri, kali=kali, vitaminA=vitaminA, vitaminC=vitaminC, canxi=canxi, fe=fe)
+            data.modify(recordDate=recordDate, mealId=mealId, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFattyAcid=saturatedFattyAcid, transFattyAcid=transFattyAcid, protein=protein, cholesterol=cholesterol, sodium=sodium, potassium=potassium, vitaminA=vitaminA, vitaminC=vitaminC, calcium=calcium, iron=iron)
             
             data.save()
 
@@ -106,28 +107,29 @@ class DailyRecordByUserId(Resource):
     # Create a new user's daily record function
     def post(self, userId):
         args = daily_record_args_parser.parse_args()
-        dateRecord = args["dateRecord"]
+        recordDate = args["recordDate"]
         mealId = args["mealId"]
-        calories = args["calories"]
-        totalCarbohydrates = args["totalCarbohydrates"]
-        dietaryFiber = args["dietaryFiber"]
-        sugars = args["sugars"]
-        totalFat = args["totalFat"]
-        saturatedFat = args["saturatedFat"]
-        transFat = args["transFat"]
+        water = args["water"]
+        energy = args["energy"]
         protein = args["protein"]
+        fat = args["fat"]
+        carbohydrate = args["carbohydrate"]
+        fiber = args["fiber"]
+        sugar = args["sugar"]
+        saturatedFattyAcid = args["saturatedFattyAcid"]
+        transFattyAcid = args["transFattyAcid"]
         cholesterol = args["cholesterol"]
-        natri = args["natri"]
-        kali = args["kali"]
         vitaminA = args["vitaminA"]
         vitaminC = args["vitaminC"]
-        canxi = args["canxi"]
-        fe = args["fe"]
+        calcium = args["calcium"]
+        iron = args["iron"]
+        potassium = args["potassium"]
+        sodium = args["sodium"]
         
         try:
             user = User.objects().get(id=userId)
 
-            data = DailyRecord(dateRecord=dateRecord, mealId=mealId, calories=calories, totalCarbohydrates=totalCarbohydrates, dietaryFiber=dietaryFiber, sugars=sugars,totalFat=totalFat, saturatedFat=saturatedFat, transFat=transFat, protein=protein, cholesterol=cholesterol, natri=natri, kali=kali, vitaminA=vitaminA, vitaminC=vitaminC, canxi=canxi, fe=fe)
+            data = DailyRecord(recordDate=recordDate, mealId=mealId, water=water, energy=energy, carbohydrate=carbohydrate, fiber=fiber, sugar=sugar,fat=fat, saturatedFattyAcid=saturatedFattyAcid, transFattyAcid=transFattyAcid, protein=protein, cholesterol=cholesterol, sodium=sodium, potassium=potassium, vitaminA=vitaminA, vitaminC=vitaminC, calcium=calcium, iron=iron)
 
             data.save()
 
