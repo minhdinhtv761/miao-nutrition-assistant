@@ -34,11 +34,6 @@ const MenuScreen = () => {
     title: "Thực đơn",
     backgroundColor: "white",
     leftIcon: <TurnBackButton />,
-    rightChildren: (
-      <Button variant="ghost" color="primary.500">
-        Tiếp
-      </Button>
-    ),
   };
   return (
     <LayoutWithTabview topAppBar={topAppBar} tabList={tabList} />

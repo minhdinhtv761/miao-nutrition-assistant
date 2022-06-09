@@ -5,6 +5,7 @@ import { Icon } from "native-base";
 import LayoutWithImage from "../../components/general/layout/LayoutWithImage";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MealTypeModal } from "./../../components/modals/MealTypeModal";
+import { MenuButton } from './../../components/general/buttons/iconButtons/MenuButton';
 import React from "react";
 import { TopHomeScreen } from "./TopHomeScreen";
 import { fetchFood } from "../../redux/actions";
@@ -21,15 +22,15 @@ const HomeScreen = () => {
   const topAppBar = {
     title: "Home",
     backgroundColor: "primary.500",
-    leftIcon: (
-      <Icon
-        size="sm"
-        as={MaterialCommunityIcons}
-        name="menu"
-        onPress={() => {}}
-      />
-    ),
-
+    // leftIcon: (
+    //   <Icon
+    //     size="sm"
+    //     as={MaterialCommunityIcons}
+    //     name="menu"
+    //     onPress={() => {}}
+    //   />
+    // ),
+    leftIcon: <MenuButton/>,
     rightChildren: (
       <Icon size="sm" as={MaterialCommunityIcons} name="calendar-blank" />
     ),

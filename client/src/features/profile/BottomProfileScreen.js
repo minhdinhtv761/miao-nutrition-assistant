@@ -1,54 +1,16 @@
-import {
-  AntDesign,
-  MaterialCommunityIcons,
-  MaterialIcons,
-} from "@expo/vector-icons";
 import { Box, Divider, HStack, Heading, Icon, Text, VStack } from "native-base";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { boxStyle, space } from "../../styles/layout";
 
+import { AllergenicFoods } from "../../components/profile/AllergenicFoods";
 import Colors from "../../styles/colors";
 import { FoodItem } from "../../components/newMeal/choosing/FoodItem";
-import FoodList from "../../components/newMeal/choosing/FoodList";
+import { HealthInfo } from "./../../components/profile/HealthInfo";
 import MenuTitle from "./../../components/general/typography/MenuTitle";
 import React from "react";
-import ShortNutritionFact from "./../../components/general/nutritionFact/ShortNutritionFact";
 import { ShortNutritionTable } from "./../../components/general/nutritionFact/ShortNutritionTable";
 import { Subtitle } from "./../../components/general/typography/Subtitle";
-import { space } from "../../styles/layout";
 
-const listItems = [
-  {
-    title: "Cân nặng",
-    value: "45 kg",
-    icon: { as: MaterialCommunityIcons, name: "scale-bathroom" },
-  },
-  {
-    title: "Chiều cao",
-    value: "154 cm",
-    icon: { as: MaterialCommunityIcons, name: "human-male-height" },
-  },
-  {
-    title: "TDEE",
-    value: "1389",
-    icon: { as: MaterialIcons, name: "speed" },
-  },
-  {
-    title: "BMI",
-    value: "19.4",
-    icon: { as: AntDesign, name: "calculator" },
-  },
-];
-
-const TextElement = ({ title, text, icon }) => {
-  return (
-    <HStack alignItems="center" justifyContent="space-between">
-      <HStack space={space.s} alignItems="center">
-        <Icon size="xs" color={Colors.primary} as={icon.as} name={icon.name} />
-        <Text fontWeight="bold">{title}</Text>
-      </HStack>
-      <Text>{text}</Text>
-    </HStack>
-  );
-};
 export const BottomProfileScreen = () => {
   const allergenicFoodsId = [
     {
@@ -82,7 +44,7 @@ export const BottomProfileScreen = () => {
 
   return (
     <VStack space={space.m}>
-      <VStack {...styles} space={space.s}>
+      <VStack {...boxStyle} space={space.s}>
         <Text> Mục tiêu hiện tại</Text>
         <HStack alignItems="center" justifyContent="space-between">
           <Heading color={Colors.fatColor}>Giảm mỡ chậm</Heading>
@@ -90,53 +52,16 @@ export const BottomProfileScreen = () => {
         </HStack>
       </VStack>
       <MenuTitle title="Sức khỏe" />
-      <VStack {...styles}>
-        {listItems.map((value, index) => (
-          <>
-            <TextElement
-              key={index}
-              title={value.title}
-              text={value.value}
-              icon={value.icon}
-            />
-            {index < listItems.length - 1 ? (
-              <Divider
-                my="2.5"
-                _light={{
-                  bg: Colors.backgroundProgress,
-                }}
-              />
-            ) : null}
-          </>
-        ))}
-      </VStack>
+      <HealthInfo />
       <MenuTitle title="Dinh dưỡng" />
-      <Box {...styles} p={0}>
+      <Box {...boxStyle} p={0}>
         <ShortNutritionTable
           inProfile
           value={{ energy: 2000, carbohydrate: 250, fat: 44.4, protein: 150 }}
         />
       </Box>
       <MenuTitle title="Thực phẩm dị ứng" />
-      <VStack {...styles}>
-        {allergenicFoodsId.length
-          ? allergenicFoodsId.map((value, index) => (
-              <FoodItem
-                key={index}
-                id={value._id}
-                title={value.foodName}
-                subtitle={value.servingSizeWeight + value.servingSizeUnit}
-                calo={value.energy}
-                onPress={() => {
-                  dispatch(passFoodData(value));
-                  push("FoodMealEditingScreen");
-                }}
-              />
-            ))
-          : null}
-      </VStack>
+      <AllergenicFoods allergenicFoodsId={allergenicFoodsId} />
     </VStack>
   );
 };
-
-const styles = { width: "100%", borderRadius: "xl", bg: "white", p: space.m };

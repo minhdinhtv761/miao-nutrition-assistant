@@ -5,8 +5,8 @@ import { NutritionLabel } from "../../../constants/enums";
 import { NutrtionColors } from "../../../styles/colors";
 import React from "react";
 import { Subtitle } from "../typography/Subtitle";
+import { WIDTH_OF_IMAGE } from "./../../../constants/sizes";
 import { calcNutritionPercent } from "../../../utils/NutritionPercent";
-import { getWidthImageOfList } from "./../../../constants/sizes";
 import { space } from "../../../styles/layout";
 
 const InfoItem = ({ type, value, percent }) => (
@@ -17,7 +17,7 @@ const InfoItem = ({ type, value, percent }) => (
   </VStack>
 );
 const ShortNutritionFact = ({ value }) => {
-  const widthCircleProgress = getWidthImageOfList();
+  const widthCircleProgress = WIDTH_OF_IMAGE;
   const foodValue = calcNutritionPercent(value);
   return (
     <HStack

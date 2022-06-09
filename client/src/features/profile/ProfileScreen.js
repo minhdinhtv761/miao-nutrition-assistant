@@ -5,12 +5,12 @@ import { Icon } from "native-base";
 import LayoutWithImage from "../../components/general/layout/LayoutWithImage";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
+import { TOP_BANNER_HEIGHT } from "../../constants/sizes";
 import { TopProfileScreen } from "./TopProfileScreen";
-import { getTopBannerHeight } from "../../constants/sizes";
 
 const ProfileScreen = () => {
   const scrollA = React.useRef(new Animated.Value(0)).current;
-  var heightBox = getTopBannerHeight() / 2;
+  var heightBox = TOP_BANNER_HEIGHT / 2;
   const topAppBar = {
     title: "Cá nhân",
     backgroundColor: "primary.500",

@@ -1,4 +1,4 @@
-import { Button, Heading, Text, VStack } from "native-base";
+import { Heading, VStack } from "native-base";
 import { useDispatch, useSelector } from "react-redux";
 
 import BottomButton from "../../components/general/buttons/BottomButton";
@@ -12,7 +12,6 @@ import { ShortNutritionTable } from "../../components/general/nutritionFact/Shor
 import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
 import { addingMeal } from "../../redux/actions";
 import { pop } from "../../utils/RootNavigation";
-import { sample_food } from "../../constants/dummy";
 import { space } from "../../styles/layout";
 
 const FoodMealEditingScreen = () => {
@@ -40,7 +39,6 @@ const FoodMealEditingScreen = () => {
   );
 
   const handleOnSubmit = React.useCallback(() => {
-    console.log("nutrition", nutrition.servingSizeWeight);
     dispatch(addingMeal.pushFood(nutrition));
     pop();
   }, [dispatch, nutrition]);

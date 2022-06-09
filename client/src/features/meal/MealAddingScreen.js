@@ -29,7 +29,6 @@ const MealAddingScreen = () => {
   }, [dispatch]);
 
   const goBackAction = React.useCallback(() => {
-    dispatch(showSnackBarAction());
     pop();
   }, [dispatch]);
 

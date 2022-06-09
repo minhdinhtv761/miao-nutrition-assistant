@@ -10,11 +10,11 @@ import {
   View,
 } from "native-base";
 import {
+  HEADER_HEIGHT,
+  SUBBOX_HEIGHT,
+  TOP_BANNER_HEIGHT,
+  WIDTH_OF_IMAGE,
   WINDOW_WIDTH,
-  getHeaderHeight,
-  getSubboxHeight,
-  getTopBannerHeight,
-  getWidthImageOfList,
 } from "./../../constants/sizes";
 
 import Colors from "./../../styles/colors";
@@ -34,11 +34,11 @@ const TextElement = ({ title, text }) => {
 };
 export const TopProfileScreen = () => {
   const safeArea = useSafeAreaInsets();
-  var heightHeader = getHeaderHeight() + safeArea.top;
-  var heightBox = getTopBannerHeight() / 2;
-  var heightDetailBox = getSubboxHeight();
+  var heightHeader = HEADER_HEIGHT + safeArea.top;
+  var heightBox = TOP_BANNER_HEIGHT / 2;
+  var heightDetailBox = SUBBOX_HEIGHT;
   const heightView = heightHeader + heightBox + heightDetailBox / 2;
-  var widthImage = getWidthImageOfList();
+  var widthImage = WIDTH_OF_IMAGE;
 
   return (
     <View

@@ -3,7 +3,7 @@ import { CircleProgress } from "../general/progress/CircleProgress";
 import { Icon } from "native-base";
 import { ListItem } from "./../general/listItem/ListItem";
 import React from "react";
-import { getWidthImageOfList } from "../../constants/sizes";
+import { WIDTH_OF_IMAGE } from "../../constants/sizes";
 
 export const MealItem = ({
   title,
@@ -13,7 +13,7 @@ export const MealItem = ({
   onPress,
   addingNewMealButton,
 }) => {
-  const radiusCircle = getWidthImageOfList() / 2;
+  const radiusCircle = WIDTH_OF_IMAGE / 2;
   return (
     <ListItem
       image={

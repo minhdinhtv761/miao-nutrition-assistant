@@ -30,8 +30,8 @@ const Navigation = () => {
           contentStyle: { backgroundColor: Colors.background },
         }}
       >
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="HomeScreen" component={BottomAppBar} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="MealAddingScreen" component={MealAddingScreen} />
         <Stack.Screen
           name="IngredientAddingScreen"

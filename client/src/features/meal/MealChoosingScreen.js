@@ -1,69 +1,72 @@
-import { AddingMealState$, FoodState$ } from "../../redux/selectors";
-import { Button, Center } from "native-base";
 import {
-  hideSnackBarAction,
-  showSnackBarAction,
-} from "./../../redux/actions/modalAction";
+  AddingMealState$,
+  FoodsRemaining$
+} from "../../redux/selectors";
+import { Button, Center, Text } from "native-base";
+import { addingMeal, filterActions } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
+import Colors from "../../styles/colors";
 import FoodList from "../../components/newMeal/choosing/FoodList";
 import LayoutWithTabview from "../../components/general/layout/LayoutWithTabview";
 import React from "react";
-import { SnackBar } from "../../components/modals/SnackBar";
 import { TurnBackButton } from "./../../components/general/buttons/iconButtons/TurnBackButton";
-import { addingMeal } from "../../redux/actions";
 import { push } from "../../utils/RootNavigation";
 
 const MealChoosingScreen = () => {
   const dispatch = useDispatch();
-  const foodList = useSelector(FoodState$);
+  const foodList = useSelector(FoodsRemaining$);
   const { list } = useSelector(AddingMealState$);
-
   const onAddingFood = React.useCallback(
     (value, pressed) => {
       pressed
         ? dispatch(addingMeal.pushFood(value))
         : dispatch(addingMeal.removeFood(value));
-      if (list.length === 0 && pressed) {
-        dispatch(showSnackBarAction());
-      } else if (list.length === 1 && !pressed) {
-        dispatch(hideSnackBarAction());
-      }
     },
     [list.length]
   );
 
   const goBackAction = React.useCallback(() => {
     dispatch(addingMeal.resetFoodList());
-    dispatch(hideSnackBarAction());
+    dispatch(filterActions.searchText(""));
   }, [dispatch]);
 
   const goNextAction = React.useCallback(() => {
     push("MealAddingScreen");
-    dispatch(hideSnackBarAction());
   }, [dispatch]);
 
-  const SecondRoute = () => (
-    <Center flex={1} my="4">
-      This is Tab 2
-    </Center>
-  );
   const tabList = [
     {
       title: "Thực phẩm",
-      tab: (
-        <FoodList
-          foodList={foodList}
-          validationList={list}
-          onPressIcon={(value, pressed) => onAddingFood(value, pressed)}
-        />
-      ),
+      tab:
+        foodList.length === 0 ? (
+          <Text textAlign="center" color={Colors.textLight}>
+            Không có kết quả
+          </Text>
+        ) : (
+          <FoodList
+            foodList={foodList}
+            validationList={list}
+            onPressIcon={(value, pressed) => onAddingFood(value, pressed)}
+          />
+        ),
     },
     {
       title: "Công thức",
-      tab: <SecondRoute />,
+      tab: (
+        <Center flex={1} my="4">
+          This is Tab 2
+        </Center>
+      ),
     },
-    { title: "Của tôi", tab: <SecondRoute /> },
+    {
+      title: "Của tôi",
+      tab: (
+        <Center flex={1} my="4">
+          This is Tab 2
+        </Center>
+      ),
+    },
   ];
   const topAppBar = {
     title: "Thêm bữa ăn",
@@ -79,7 +82,7 @@ const MealChoosingScreen = () => {
   return (
     <>
       <LayoutWithTabview topAppBar={topAppBar} tabList={tabList} />
-      <SnackBar text={"Đã chọn " + list.length} />
+      {/* <SnackBar text={"Đã chọn " + list.length} /> */}
     </>
   );
 };

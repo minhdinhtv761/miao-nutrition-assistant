@@ -83,8 +83,7 @@ export const FullNutritionFact = ({ data }) => {
 
       <Subtitle
         text=" *Giá trị dinh dưỡng mỗi ngày dựa trên chế độ ăn chứa 2000 kcal.Giá trị
-  dinh dưỡng mội ngày của bạn có thể cao hơn hoặc thấp hơn tùy nhu cầu
-  energy của bạn."
+  dinh dưỡng mội ngày của bạn có thể cao hơn hoặc thấp hơn tùy nhu cầu năng lượng của bạn."
       />
     </VStack>
   );
