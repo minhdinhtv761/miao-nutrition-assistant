@@ -7,21 +7,28 @@ import React from "react";
 import ShortNutritionFact from "./ShortNutritionFact";
 import { Subtitle } from "../typography/Subtitle";
 import { space } from "./../../../styles/layout";
+import { useSelector } from "react-redux";
 
-export const ShortNutritionTable = () => {
+export const ShortNutritionTable = ({ inProfile, value }) => {
   return (
     <VStack
       width="100%"
       p={space.m}
       borderColor="coolGray.300"
-      borderWidth={1}
+      borderWidth={!inProfile ? 1 : 0}
       borderRadius="md"
-      space={space.xs}
+      space={space.s}
     >
-      <ShortNutritionFact />
-      <CustomDivider />
-      <Subtitle text="Theo mục tiêu trong ngày" />
-      <NutritionPerDay />
+      <ShortNutritionFact value={value} />
+      <CustomDivider value={value} />
+      <Subtitle
+        text={
+          !inProfile
+            ? "Theo mục tiêu trong ngày"
+            : "Tỉ lệ giữa thực tế và mục tiêu"
+        }
+      />
+      <NutritionPerDay child={value} />
     </VStack>
   );
 };

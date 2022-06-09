@@ -1,14 +1,14 @@
 import { Box, View } from "native-base";
 
 import { Animated } from "react-native";
+import { HEADER_HEIGHT } from "./../../../constants/sizes";
 import { ImageBox } from "../image/ImageBox";
 import MainContentLayout from "./MainContentLayout";
 import React from "react";
 import { ScrollViewLayout } from "./ScrollViewLayout";
+import { TOP_BANNER_HEIGHT } from "../../../constants/sizes";
 import TopAppBar from "../appbar/TopAppBar";
 import { TurnBackButton } from "../buttons/iconButtons/TurnBackButton";
-import { getHeaderHeight } from "./../../../constants/sizes";
-import { getTopBannerHeight } from "../../../constants/sizes";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export const LayoutWithImage = ({
@@ -21,8 +21,6 @@ export const LayoutWithImage = ({
   const { title, leftIcon, rightChildren } = topAppBar;
   const safeArea = useSafeAreaInsets();
   const scrollA = React.useRef(new Animated.Value(0)).current;
-  const heightImage = getTopBannerHeight() + getHeaderHeight() + safeArea.top;
-
   return (
     <View backgroundColor={backgroundColor || "white"} h="100%">
       <TopAppBar

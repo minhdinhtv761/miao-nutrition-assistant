@@ -12,7 +12,6 @@ class ListSampleFood(Resource):
     def get(self):
         try:    
             data = SampleFood.objects()
-
             return data, 200
 
         except DoesNotExist as e:

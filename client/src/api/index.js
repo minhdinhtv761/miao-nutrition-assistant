@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const URL = "http://localhost:5000";
+const URL = "http://192.168.137.1:5000";
 
-export const fetchDailyRecord = () => axios.get(`${URL}/DailyRecord`);
+export const loginAuth = (authData) => axios.post(`${URL}/auth`, authData);
 
-export const fetchFood = () =>
-  axios.get("https://nlmt-shop-management.herokuapp.com/KhuyenMais");
+export const fetchUserByAccountID = (accountID) =>axios.get(`${URL}/account/${accountID}/user`)
+
+export const fetchFood = () => axios.get(`${URL}/sample_food`);

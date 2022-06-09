@@ -1,9 +1,9 @@
 import { HStack, Image, Text } from "native-base";
 
 import { ListItem } from "../../general/listItem/ListItem";
-import { PlusButton } from "../../general/buttons/iconButtons/PlusButton";
+import { PlusButton } from "./../../general/buttons/iconButtons/PlusButton";
 import React from "react";
-import { getWidthImageOfList } from "../../../constants/sizes";
+import { WIDTH_OF_IMAGE } from "../../../constants/sizes";
 import { space } from "./../../../styles/layout";
 
 export const FoodItem = ({
@@ -11,9 +11,11 @@ export const FoodItem = ({
   subtitle,
   calo,
   onPress,
+  iconStatus,
+  onPressIcon,
   createNewFoodButton,
 }) => {
-  const widthImage = getWidthImageOfList();
+  const widthImage = WIDTH_OF_IMAGE;
   return (
     <ListItem
       image={
@@ -25,6 +27,7 @@ export const FoodItem = ({
             h={widthImage}
             w={widthImage}
             borderRadius="sm"
+            alt="description of image"
           />
         ) : null
       }
@@ -38,7 +41,9 @@ export const FoodItem = ({
             <Text fontSize="sm" color="black">
               {calo} kcal
             </Text>
-            <PlusButton />
+            {onPressIcon ? (
+              <PlusButton pressed={iconStatus} onPress={onPressIcon} />
+            ) : null}
           </HStack>
         ) : null
       }

@@ -3,12 +3,25 @@ import { Icon, Input } from "native-base";
 
 import Colors from "./../../../styles/colors";
 import React from "react";
+import { filterActions } from "../../../redux/actions";
 import { space } from "./../../../styles/layout";
+import { useDispatch } from "react-redux";
 
 const SearchBar = () => {
+  const dispatch = useDispatch();
+  const [searchText, setSearchText] = React.useState("");
+
+  const handleSearchTextChange = (text) => {
+    setSearchText(text);
+  };
+  const handleOnDone = React.useCallback(
+    () => dispatch(filterActions.searchText(searchText)),
+    [searchText]
+  );
+
   return (
     <Input
-      placeholder="Search"
+      placeholder="Nhập tên món ăn"
       variant="filled"
       width="100%"
       px={space.m}
@@ -18,6 +31,9 @@ const SearchBar = () => {
       _light={{
         bg: "coolGray.100",
       }}
+      value={searchText}
+      onChangeText={handleSearchTextChange}
+      onSubmitEditing={handleOnDone}
       InputLeftElement={
         <Icon
           ml={space.m}

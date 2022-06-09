@@ -1,9 +1,9 @@
 import { Animated, Image } from "react-native";
-import React, { Children, cloneElement, isValidElement } from "react";
 import {
-  getHeaderHeight,
-  getTopBannerHeight,
+  HEADER_HEIGHT,
+  TOP_BANNER_HEIGHT,
 } from "./../../../constants/sizes";
+import React, { Children, cloneElement, isValidElement } from "react";
 
 import { View } from "native-base";
 import { imgLinearGradient } from "./../../../constants/image";
@@ -11,9 +11,9 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export const ImageBox = ({ uri, aboveChildren }) => {
   const safeArea = useSafeAreaInsets();
-  const heightImage = getTopBannerHeight() + getHeaderHeight() + safeArea.top;
+  const heightImage = TOP_BANNER_HEIGHT + HEADER_HEIGHT + safeArea.top;
   return (
-    <View width="100%" height={heightImage}>
+    <View width="100%" height={uri ? heightImage : null}>
       {Children.map(aboveChildren, (child) => {
         if (!isValidElement(child)) return null;
         return cloneElement(child, {
@@ -28,6 +28,7 @@ export const ImageBox = ({ uri, aboveChildren }) => {
             position: "absolute",
             width: "100%",
             height: "100%",
+
             opacity: 0.2,
           }}
         />

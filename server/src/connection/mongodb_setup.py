@@ -12,7 +12,7 @@ def mongodb_setup():
     try:
         connect(
             alias="miao",
-            host=f"mongodb+srv://{USERNAME}:{PASSWORD}@miao.r1oin.mongodb.net/{DATABASE}?retryWrites=true&w=majority"
+            host=f"mongodb+srv://admin:2001@miao.r1oin.mongodb.net/miao_db?retryWrites=true&w=majority"
         )
     except:
         return {"message": "Fail to connect database"}

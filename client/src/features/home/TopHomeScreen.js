@@ -1,8 +1,8 @@
 import { Box, Center, HStack, Heading, Text, VStack, View } from "native-base";
 import {
-  getHeaderHeight,
-  getSubboxHeight,
-  getTopBannerHeight,
+  HEADER_HEIGHT,
+  SUBBOX_HEIGHT,
+  TOP_BANNER_HEIGHT,
 } from "./../../constants/sizes";
 
 import Colors from "./../../styles/colors";
@@ -15,9 +15,9 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export const TopHomeScreen = () => {
   const safeArea = useSafeAreaInsets();
-  var heightHeader = getHeaderHeight() + safeArea.top;
-  var heightBox = getTopBannerHeight();
-  var heightDetailBox = getSubboxHeight();
+  var heightHeader = HEADER_HEIGHT + safeArea.top;
+  var heightBox = TOP_BANNER_HEIGHT;
+  var heightDetailBox = SUBBOX_HEIGHT;
 
   const TextElement = ({ calo, text }) => {
     return (

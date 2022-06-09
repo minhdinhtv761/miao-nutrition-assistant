@@ -8,34 +8,44 @@ import { ShowInfomationStatusLayout } from "../layout/ShowInfomationStatusLayout
 import { Subtitle } from "../typography/Subtitle";
 import { space } from "./../../../styles/layout";
 
-const InfoItem = ({ type, styleType, weight, rightText, divider }) => {
-  return (
-    <VStack width="100%">
-      <HStack width="100%" justifyContent="space-between" alignItems="center">
-        <HStack space={space.s} alignItems="flex-end">
-          <Text {...styles[styleType]}>{NutritionLabel[type]}</Text>
-          <Text>
-            {weight}
-            {type === "calo" ? null : NutritionUnit[type]}
+export const FullNutritionFact = ({ data }) => {
+  const food = {
+    ...data,
+    totalCarbohydrate: data.carbohydrate,
+    totalFat: data.fat,
+  };
+  const InfoItem = ({ type, styleType, divider }) => {
+    const percent = food[type];
+    return (
+      <VStack width="100%">
+        <HStack width="100%" justifyContent="space-between" alignItems="center">
+          <HStack space={space.s} alignItems="flex-end">
+            <Text {...styles[styleType]}>{NutritionLabel[type]}</Text>
+            <Text>
+              {type === "energy" || type === "servingSizeWeight"
+                ? null
+                : food[type] + NutritionUnit[type]}
+            </Text>
+          </HStack>
+          <Text {...(type === "energy" ? styles.energy : styles.mainParent)}>
+            {food[type]}
+            {type === "energy"
+              ? ""
+              : type === "servingSizeWeight"
+              ? food.servingSizeUnit
+              : "%"}
           </Text>
         </HStack>
-        <Text {...(type === "calo" ? styles.calories : styles.mainParent)}>
-          {rightText}
-          {type === "calo" || type == "quantity" ? "" : "%"}
-        </Text>
-      </HStack>
-      <Divider
-        my="0.5"
-        thickness={divider.size}
-        _light={{
-          bg: divider.color,
-        }}
-      />
-    </VStack>
-  );
-};
-
-export const FullNutritionFact = () => {
+        <Divider
+          my="0.5"
+          thickness={divider.size}
+          _light={{
+            bg: divider.color,
+          }}
+        />
+      </VStack>
+    );
+  };
   const NutritionFactTable = (
     <VStack
       p={space.s}
@@ -45,17 +55,11 @@ export const FullNutritionFact = () => {
       width="100%"
     >
       <InfoItem
-        type="quantity"
+        type="servingSizeWeight"
         styleType="mainParent"
-        rightText="100g"
         divider={lgDivider}
       />
-      <InfoItem
-        type="calo"
-        styleType="calories"
-        rightText="240"
-        divider={mdDivider}
-      />
+      <InfoItem type="energy" styleType="energy" divider={mdDivider} />
       <Text {...styles.mainParent} textAlign="right">
         % Giá trị dinh dưỡng mỗi ngày*
       </Text>
@@ -66,27 +70,25 @@ export const FullNutritionFact = () => {
           bg: smDivider.color,
         }}
       />
-      {listInfo.map((item) => (
-        <InfoItem
-          key={item.title}
-          type={item.title}
-          styleType={item.type}
-          weight={26}
-          rightText={15}
-          divider={item.title === "protein" ? mdDivider : smDivider}
-        />
-      ))}
+      {listInfo.map((item) =>
+        food[item.title] !== null ? (
+          <InfoItem
+            key={item.title}
+            type={item.title}
+            styleType={item.type}
+            divider={item.title === "protein" ? mdDivider : smDivider}
+          />
+        ) : null
+      )}
 
       <Subtitle
         text=" *Giá trị dinh dưỡng mỗi ngày dựa trên chế độ ăn chứa 2000 kcal.Giá trị
-  dinh dưỡng mội ngày của bạn có thể cao hơn hoặc thấp hơn tùy nhu cầu
-  calo của bạn."
+  dinh dưỡng mội ngày của bạn có thể cao hơn hoặc thấp hơn tùy nhu cầu năng lượng của bạn."
       />
     </VStack>
   );
 
   return (
- 
     <ShowInfomationStatusLayout
       title="dinh dưỡng"
       children={NutritionFactTable}
@@ -95,7 +97,7 @@ export const FullNutritionFact = () => {
 };
 
 const styles = {
-  calories: {
+  energy: {
     fontWeight: "bold",
     fontSize: "2xl",
   },
@@ -120,17 +122,17 @@ class NutritionItem {
 }
 const listInfo = [
   new NutritionItem("totalFat", "mainParent"),
-  new NutritionItem("saturatedFat", "child"),
-  new NutritionItem("transFat", "child"),
+  new NutritionItem("saturatedFattyAcid", "child"),
+  new NutritionItem("transFattyAcid", "child"),
   new NutritionItem("cholesterol", "mainParent"),
-  new NutritionItem("natri", "mainParent"),
-  new NutritionItem("totalCarbohydrates", "mainParent"),
-  new NutritionItem("dietaryFiber", "child"),
-  new NutritionItem("sugars", "child"),
+  new NutritionItem("sodium", "mainParent"),
+  new NutritionItem("totalCarbohydrate", "mainParent"),
+  new NutritionItem("fiber", "child"),
+  new NutritionItem("sugar", "child"),
   new NutritionItem("protein", "mainParent"),
   new NutritionItem("vitaminA", "subParent"),
   new NutritionItem("vitaminC", "subParent"),
-  new NutritionItem("canxi", "subParent"),
-  new NutritionItem("fe", "subParent"),
-  new NutritionItem("kali", "subParent"),
+  new NutritionItem("calcium", "subParent"),
+  new NutritionItem("iron", "subParent"),
+  new NutritionItem("potassium", "subParent"),
 ];

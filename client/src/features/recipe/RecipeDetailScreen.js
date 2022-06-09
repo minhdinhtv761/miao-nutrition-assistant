@@ -20,11 +20,11 @@ import { Subtitle } from "../../components/general/typography/Subtitle";
 import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
 import { space } from "../../styles/layout";
 
-const RecipeScreen = ({ editted }) => {
+const RecipeScreen = ({ edited }) => {
   const topAppBar = {
-    title: editted ? "Chỉnh sửa công thức" : "Chi tiết công thức",
+    title: edited ? "Chỉnh sửa công thức" : "Chi tiết công thức",
     leftIcon: <TurnBackButton />,
-    rightChildren: !editted ? (
+    rightChildren: !edited ? (
       <Icon as={<Octicons name="pencil" />} size="xs" />
     ) : null,
     backgroundColor: "transparent",
@@ -81,17 +81,17 @@ const RecipeScreen = ({ editted }) => {
             <Heading size="xl" fontWeight="light">
               Bơ (quả)
             </Heading>
-            {!editted ? <NumericInput label="Nhập lượng khẩu phần" /> : null}
+            {!edited ? <NumericInput label="Nhập lượng khẩu phần" /> : null}
             <ShortNutritionTable />
             <FullNutritionFact />
             <Subtitle text="Những ngày trời hanh nóng, làm ngay một ly sữa chua thạch lá dứa kết hợp cùng đào vải ngâm thì còn gì bằng. Cùng Cooky thực hiện món trắng miệng thơm ngon này nha!" />
-            <IngredientList ingredients={listIngre} editted={editted} />
+            <IngredientList ingredients={listIngre} editted={edited} />
             <StepList listStep={listStep} />
             <SafeAreaView />
           </VStack>
         }
       />
-      {editted ? <BottomButton text="Hoàn tất" /> : null}
+      {edited ? <BottomButton text="Hoàn tất" /> : null}
     </>
   );
 };

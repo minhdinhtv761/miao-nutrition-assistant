@@ -69,7 +69,8 @@ export const CircleProgress = ({ value, maxValue, radius = 40 }) => {
       <TextInput
         underlineColorAndroid="transparent"
         editable={false}
-        defaultValue={`${value}`}
+        multiline
+        defaultValue={`${value}\nkcal`}
         style={[
           StyleSheet.absoluteFillObject,
           { fontSize: radius / 3, color: Colors.black },

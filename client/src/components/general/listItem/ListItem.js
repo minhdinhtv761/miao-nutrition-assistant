@@ -16,9 +16,9 @@ export const ListItem = ({
   isAddingButton,
 }) => {
   return (
-    <Pressable onPress={onPress}>
-      <Box>
-        <HStack w="100%" alignItems="center" justifyContent="space-between">
+    <Box>
+      <HStack w="100%" alignItems="center" justifyContent="space-between">
+        <Pressable onPress={onPress} maxW="70%">
           <HStack space={space.m} alignItems="center">
             {image}
 
@@ -28,23 +28,23 @@ export const ListItem = ({
               primaryColor={isAddingButton}
             />
           </HStack>
-          {Children.map(rightChildren, (child) => {
-            if (!isValidElement(child)) return null;
-            return cloneElement(child, {
-              ...child.props,
-            });
-          })}
-          {isAddingButton ? (
-            <Icon
-              size="sm"
-              as={AntDesign}
-              name="pluscircleo"
-              color="primary.500"
-            />
-          ) : null}
-        </HStack>
-        {isAddingButton ? null : <CustomDivider />}
-      </Box>
-    </Pressable>
+        </Pressable>
+        {Children.map(rightChildren, (child) => {
+          if (!isValidElement(child)) return null;
+          return cloneElement(child, {
+            ...child.props,
+          });
+        })}
+        {isAddingButton ? (
+          <Icon
+            size="sm"
+            as={AntDesign}
+            name="pluscircleo"
+            color="primary.500"
+          />
+        ) : null}
+      </HStack>
+      {isAddingButton ? null : <CustomDivider />}
+    </Box>
   );
 };

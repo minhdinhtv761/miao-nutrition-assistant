@@ -9,7 +9,7 @@ import React from "react";
 import { slide } from "../../constants/slide";
 import { space } from "../../styles/layout";
 
-const { width, height } = Dimensions.get("window");
+const { width, WINDOW_HEIGHT: height } = Dimensions.get("window");
 
 const OnBoardingScreen = ({ navigation }) => {
   const [value, setValue] = React.useState(0);
