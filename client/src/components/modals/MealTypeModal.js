@@ -8,15 +8,8 @@ import { MealTypes } from "../../constants/enums";
 import React from "react";
 import { space } from "./../../styles/layout";
 
-export const MealTypeModal = () => {
-  // const modalVisible = useSelector(MealTypeModal$);
+export const GenderTypeModal = () => {
   const [value, setValue] = React.useState("breakfast");
-  // const dispatch = useDispatch();
-
-  // const onClose = React.useCallback(() => {
-  //   dispatch(hideMealTypeModal());
-  // }, [dispatch]);
-
   return (
     <BottomActionSheet
       header="Loại bữa ăn"
