@@ -1,33 +1,98 @@
-import { Box, Divider, HStack, Heading, Icon, Text, VStack } from "native-base";
+import { Divider, HStack, Icon, Pressable, Text, VStack } from "native-base";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { boxStyle, space } from "../../styles/layout";
+import { useDispatch, useSelector } from "react-redux";
 
+import BirthdayModalBody from "./modals/BirthdayModalBody";
 import Colors from "../../styles/colors";
+import { GenderModalBody } from "./modals/GenderModalBody";
+import { ProfileEditingModal } from "./modals/ProfileEditingModal";
 import React from "react";
+import { UserState$ } from "../../redux/selectors";
+import { WeightHeightModalBody } from "./modals/WeightHeightModalBody";
+import moment from "moment";
+import { showProfileEditingModal } from "./../../redux/actions/modalAction";
 
-const listItems = [
-  {
-    title: "Giới tính",
-    value: "Nữ",
-    icon: { as: Ionicons, name: "person-outline" },
-  },
+export const HealthInfo = () => {
+  const dispatch = useDispatch();
+  const userData = useSelector(UserState$);
+  const [user, setUser] = React.useState({
+    ...userData,
+    weight: 45,
+    height: 154,
+    birthday: moment(userData.birthday.$date).format("DD/MM/YYYY"),
+  });
 
-  {
-    title: "Cân nặng",
-    value: "45 kg",
-    icon: { as: MaterialCommunityIcons, name: "scale-bathroom" },
-  },
-  {
-    title: "Chiều cao",
-    value: "154 cm",
-    icon: { as: MaterialCommunityIcons, name: "human-male-height" },
-  },
-  {
-    title: "Ngày sinh",
-    value: "29/09/2001",
-    icon: { as: MaterialCommunityIcons, name: "cake-variant-outline" },
-  },
-];
+  const listItems = {
+    gender: {
+      title: "Giới tính", 
+      icon: { as: Ionicons, name: "person" },
+      unit: "",
+      component: <GenderModalBody user={user} setUser={setUser} />,
+    },
+    weight: {
+      title: "Cân nặng",
+      icon: { as: MaterialCommunityIcons, name: "scale-bathroom" },
+      unit: "kg",
+      component: (
+        <WeightHeightModalBody user={user} setUser={setUser} unit="kg" />
+      ),
+    },
+    height: {
+      title: "Chiều cao",
+      unit: "cm",
+      icon: { as: MaterialCommunityIcons, name: "human-male-height" },
+      component: (
+        <WeightHeightModalBody user={user} setUser={setUser} unit="cm" />
+      ),
+    },
+    birthday: {
+      title: "Ngày sinh",
+      icon: { as: MaterialCommunityIcons, name: "cake-variant" },
+      unit: "",
+      component: <BirthdayModalBody user={user} setUser={setUser} />,
+    },
+  };
+
+  const handleOnChangeProfile = React.useCallback(
+    (payload) => {
+      dispatch(showProfileEditingModal(payload));
+    },
+    [dispatch]
+  );
+  return (
+    <VStack {...boxStyle}>
+      {Object.entries(listItems).map(([key, value], index) => (
+        <>
+          <Pressable
+            key={key}
+            onPress={() =>
+              handleOnChangeProfile({
+                component: value.component,
+                title: value.title,
+              })
+            }
+          >
+            <TextElement
+              title={value.title}
+              text={user[key] + value.unit}
+              icon={value.icon}
+            />
+          </Pressable>
+          {index < Object.entries(listItems).length - 1 ? (
+            <Divider
+              my="2.5"
+              _light={{
+                bg: Colors.backgroundProgress,
+              }}
+            />
+          ) : null}
+        </>
+      ))}
+      <ProfileEditingModal data={user} />
+    </VStack>
+  );
+};
 
 const TextElement = ({ title, text, icon }) => {
   return (
@@ -38,30 +103,5 @@ const TextElement = ({ title, text, icon }) => {
       </HStack>
       <Text>{text}</Text>
     </HStack>
-  );
-};
-
-export const HealthInfo = () => {
-  return (
-    <VStack {...boxStyle}>
-      {listItems.map((value, index) => (
-        <>
-          <TextElement
-            key={index}
-            title={value.title}
-            text={value.value}
-            icon={value.icon}
-          />
-          {index < listItems.length - 1 ? (
-            <Divider
-              my="2.5"
-              _light={{
-                bg: Colors.backgroundProgress,
-              }}
-            />
-          ) : null}
-        </>
-      ))}
-    </VStack>
   );
 };
