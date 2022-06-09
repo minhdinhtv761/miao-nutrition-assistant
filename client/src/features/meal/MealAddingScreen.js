@@ -1,6 +1,5 @@
-import { Button, Select, VStack, View } from "native-base";
-import { addingMeal, showSnackBarAction } from "../../redux/actions";
-import { navigate, pop, popToTop } from "./../../utils/RootNavigation";
+import { Button, Select, VStack } from "native-base";
+import { pop, popToTop } from "./../../utils/RootNavigation";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AddingMealState$ } from "../../redux/selectors";
@@ -12,9 +11,9 @@ import { LayoutWithHeader } from "./../../components/general/layout/LayoutWithHe
 import { MealTypes } from "../../constants/enums";
 import MenuTitle from "../../components/general/typography/MenuTitle";
 import React from "react";
-import SearchBar from "../../components/general/input/SearchBar";
 import { ShortNutritionTable } from "../../components/general/nutritionFact/ShortNutritionTable";
 import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
+import { addingMeal } from "../../redux/actions";
 import { space } from "../../styles/layout";
 
 const MealAddingScreen = () => {

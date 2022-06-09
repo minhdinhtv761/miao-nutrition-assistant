@@ -14,7 +14,6 @@ const PressedIcon = (
 
 export const PlusButton = ({ pressed, onPress }) => {
   const handleOnPress = () => {
-    console.log("onPress");
     onPress(!pressed);
   };
 

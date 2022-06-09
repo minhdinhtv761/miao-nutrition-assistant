@@ -4,17 +4,14 @@ import * as api from "../../api";
 import { call, put, takeLatest } from "redux-saga/effects";
 
 export default function* mySaga() {
-  yield takeLatest(
-    actions.fetchDailyRecord.fetchDailyRecordRequest,
-    fetchDailyRecordSaga
-  );
+  yield takeLatest(actions.fetchUser.fetchUserRequest, fetchUserSaga);
   yield takeLatest(actions.fetchFood.fetchFoodRequest, fetchFoodSaga);
   yield takeLatest(actions.authActions.loginRequest, loginSaga);
 }
 
-function* fetchDailyRecordSaga(action) {
-  const dailyRecord = yield call(api.fetchDailyRecord);
-  yield put(action.fetchDailyRecord.fetchDailyRecordSuccess(dailyRecord.data));
+function* fetchUserSaga(action) {
+  const userByAccountId = yield call(api.fetchUserByAccountID, action.payload.$oid);
+  yield put(actions.fetchUser.fetchUserSuccess(userByAccountId.data.response));
 }
 
 function* fetchFoodSaga(action) {

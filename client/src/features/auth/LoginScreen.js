@@ -14,16 +14,15 @@ import {
   Text,
   VStack,
 } from "native-base";
+import { authActions, fetchUser } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import AuthHeading from "../../components/auth/AuthHeading";
 import { AuthState$ } from "../../redux/selectors";
 import CenterLayout from "../../components/general/layout/CenterLayout";
-import Colors from "../../styles/colors";
 import CustomButton from "../../components/general/buttons/CustomButton";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Keyboard } from "react-native";
-import { authActions } from "../../redux/actions";
 import colors from "../../styles/colors";
 import { space } from "../../styles/layout";
 import { validate } from "./validation";
@@ -48,6 +47,7 @@ const LoginScreen = () => {
     loginForm = <Spinner size="lg" />;
   } else if (account) {
     navigation.replace("HomeScreen");
+    dispatch(fetchUser.fetchUserRequest(account._id));
   } else {
     loginForm = (
       <Center w="100%">

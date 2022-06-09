@@ -11,7 +11,6 @@ export function validate(authData, setErrors, register) {
     return false;
   }
   if (!authData.email.match(validRegex)) {
-    console.log("as")
     setErrors({email:"Vui lòng nhập đúng email"});
     return false;
   }

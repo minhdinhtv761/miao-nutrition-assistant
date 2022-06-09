@@ -1,10 +1,8 @@
-import { Box, Divider, HStack, Heading, Icon, Text, VStack } from "native-base";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Box, HStack, Heading, Text, VStack } from "native-base";
 import { boxStyle, space } from "../../styles/layout";
 
 import { AllergenicFoods } from "../../components/profile/AllergenicFoods";
 import Colors from "../../styles/colors";
-import { FoodItem } from "../../components/newMeal/choosing/FoodItem";
 import { HealthInfo } from "./../../components/profile/HealthInfo";
 import MenuTitle from "./../../components/general/typography/MenuTitle";
 import React from "react";
@@ -12,35 +10,6 @@ import { ShortNutritionTable } from "./../../components/general/nutritionFact/Sh
 import { Subtitle } from "./../../components/general/typography/Subtitle";
 
 export const BottomProfileScreen = () => {
-  const allergenicFoodsId = [
-    {
-      _id: {
-        $oid: "629625cddda5de344792f64a",
-      },
-      calcium: 32,
-      carbohydrate: 74.5,
-      cholesterol: 0,
-      energy: 344,
-      fat: 1.5,
-      fiber: 0.6,
-      foodName: "Gạo nếp",
-      images: {
-        $oid: "626b6aab60fc39eeb84a36a1",
-      },
-      iron: 1.2,
-      potassium: 282,
-      protein: 8.6,
-      saturatedFattyAcid: null,
-      servingSizeUnit: "g",
-      servingSizeWeight: 100,
-      sodium: 3,
-      sugar: null,
-      transFattyAcid: null,
-      vitaminA: 0,
-      vitaminC: 0,
-      water: 14,
-    },
-  ];
 
   return (
     <VStack space={space.m}>
@@ -61,7 +30,7 @@ export const BottomProfileScreen = () => {
         />
       </Box>
       <MenuTitle title="Thực phẩm dị ứng" />
-      <AllergenicFoods allergenicFoodsId={allergenicFoodsId} />
+      <AllergenicFoods />
     </VStack>
   );
 };

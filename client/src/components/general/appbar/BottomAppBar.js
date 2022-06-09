@@ -1,5 +1,11 @@
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import { HomeScreen, LoginScreen, MealAddingScreen, MealChoosingScreen, ProfileScreen } from "../../../features";
+import {
+  HomeScreen,
+  LoginScreen,
+  MealAddingScreen,
+  MealChoosingScreen,
+  ProfileScreen,
+} from "../../../features";
 import { Icon, IconButton, Pressable } from "native-base";
 
 import Colors from "../../../styles/colors";
@@ -32,7 +38,11 @@ export const BottomAppBar = (props) => {
           tabBarIcon: ({ focused }) => (
             <Icon
               mb="1"
-              as={<MaterialCommunityIcons name="home-outline" />}
+              as={
+                <MaterialCommunityIcons
+                  name={focused ? "home" : "home-outline"}
+                />
+              }
               color="black"
               opacity={focused ? 1 : 0.5}
               size="sm"
@@ -111,7 +121,11 @@ export const BottomAppBar = (props) => {
           tabBarIcon: ({ focused }) => (
             <Icon
               mb="1"
-              as={<MaterialCommunityIcons name="account-outline" />}
+              as={
+                <MaterialCommunityIcons
+                  name={focused ? "account" : "account-outline"}
+                />
+              }
               color="black"
               opacity={focused ? 1 : 0.5}
               size="sm"

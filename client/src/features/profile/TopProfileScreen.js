@@ -32,7 +32,7 @@ const TextElement = ({ title, text }) => {
     </HStack>
   );
 };
-export const TopProfileScreen = () => {
+export const TopProfileScreen = ({ name }) => {
   const safeArea = useSafeAreaInsets();
   var heightHeader = HEADER_HEIGHT + safeArea.top;
   var heightBox = TOP_BANNER_HEIGHT / 2;
@@ -79,7 +79,7 @@ export const TopProfileScreen = () => {
             }}
           />
           <VStack w="100%" space={space.sx} alignItems="flex-start">
-            <Heading fontSize="18px">Nguyễn Thị Phương Thảo</Heading>
+            <Heading fontSize="18px">{name}</Heading>
             <Button
               variant="ghost"
               rightIcon={<Feather name="arrow-right" color={Colors.primary} />}

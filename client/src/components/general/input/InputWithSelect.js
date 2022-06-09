@@ -1,10 +1,4 @@
-import {
-  Box,
-  HStack,
-  Input,
-  Select,
-  VStack
-} from "native-base";
+import { Box, HStack, Input, Select, VStack } from "native-base";
 
 import React from "react";
 import { Subtitle } from "../typography/Subtitle";
@@ -23,8 +17,7 @@ const InputWithSelect = (props) => {
           w="70%"
           px={space.m}
           borderRadius="full"
-          borderBottomRightRadius={0}
-          borderTopRightRadius={0}
+          borderRightRadius={0}
           borderWidth="0"
           fontSize={14}
           bgColor="coolGray.100"
@@ -39,8 +32,7 @@ const InputWithSelect = (props) => {
             borderWidth="0"
             defaultValue={service}
             borderRadius="full"
-            borderBottomLeftRadius={0}
-            borderTopLeftRadius={0}
+            borderLeftRadius={0}
             bgColor="coolGray.100"
             fontSize={14}
             textAlign="right"

@@ -7,9 +7,11 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import { TOP_BANNER_HEIGHT } from "../../constants/sizes";
 import { TopProfileScreen } from "./TopProfileScreen";
+import { UserState$ } from "../../redux/selectors";
+import { useSelector } from "react-redux";
 
 const ProfileScreen = () => {
-  const scrollA = React.useRef(new Animated.Value(0)).current;
+  const user = useSelector(UserState$);
   var heightBox = TOP_BANNER_HEIGHT / 2;
   const topAppBar = {
     title: "Cá nhân",
@@ -28,7 +30,9 @@ const ProfileScreen = () => {
     <>
       <LayoutWithImage
         topAppBar={topAppBar}
-        aboveChildren={<TopProfileScreen heightBox={heightBox} />}
+        aboveChildren={
+          <TopProfileScreen heightBox={heightBox} name={user.username} />
+        }
         children={<BottomProfileScreen />}
         backgroundColor={Colors.background}
       />
