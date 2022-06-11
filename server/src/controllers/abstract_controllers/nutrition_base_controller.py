@@ -1,12 +1,9 @@
 from flask_restful import reqparse
+from src.controllers.abstract_controllers.small_nutrition_base_controller import small_nutrition_base_args_parser
 
 # Nutrition base arguments
-nutrition_base_args_parser = reqparse.RequestParser()
+nutrition_base_args_parser = small_nutrition_base_args_parser.copy()
 nutrition_base_args_parser.add_argument("water", type=float, help="Invalid water", required=True)
-nutrition_base_args_parser.add_argument("energy", type=int, help="Invalid energy", required=True)
-nutrition_base_args_parser.add_argument("protein", type=float, help="Invalid protein", required=True)
-nutrition_base_args_parser.add_argument("fat", type=float, help="Invalid fat", required=True)
-nutrition_base_args_parser.add_argument("carbohydrate", type=float, help="Invalid carbohydrate", required=True)
 nutrition_base_args_parser.add_argument("fiber", type=float, help="Invalid fiber")
 nutrition_base_args_parser.add_argument("sugar", type=float, help="Invalid sugar")
 nutrition_base_args_parser.add_argument("saturatedFattyAcid", type=float, help="Invalid saturatedFattyAcid")
