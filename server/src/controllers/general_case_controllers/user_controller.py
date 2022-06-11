@@ -82,8 +82,6 @@ class UserById(Resource):
             # dailyRecord field handler
             fullDailyRecord = []
 
-            print(dailyRecord[0]["breakfast"])
-
             for item in dailyRecord:
                 itemEnergy = 0
                 itemProtein = 0
@@ -96,80 +94,12 @@ class UserById(Resource):
                 mealCarbohydrate = 0
                 mealDetailList = []
 
-                for mealDetail in item["breakfast"]["mealDetail"]:
-                    food = SampleFood.objects().get(id=mealDetail["itemId"])
-                    mealEnergy = mealEnergy + food.energy * mealDetail["servingSizeQuantity"]
-                    mealProtein = mealProtein + food.protein * mealDetail["servingSizeQuantity"]
-                    mealFat = mealFat + food.fat * mealDetail["servingSizeQuantity"]
-                    mealCarbohydrate = mealCarbohydrate + food.carbohydrate * mealDetail["servingSizeQuantity"]
+                breakfast = None
+                lunch = None
+                dinner = None
 
-                    mealDetailItem = MealDetail(itemId=food, servingSizeQuantity=mealDetail["servingSizeQuantity"], energy=food.energy * mealDetail["servingSizeQuantity"], protein=food.protein * mealDetail["servingSizeQuantity"], fat=food.fat * mealDetail["servingSizeQuantity"], carbohydrate=food.carbohydrate * mealDetail["servingSizeQuantity"])
-
-                    mealDetailList.append(mealDetailItem)
-
-                breakfast = UserMeal(time=item["breakfast"]["time"], mealDetail=mealDetailList, energy=mealEnergy, protein=mealProtein, fat=mealFat, carbohydrate=mealCarbohydrate)
-
-                itemEnergy = itemEnergy + mealEnergy
-                itemProtein = itemProtein + mealProtein
-                itemFat = itemFat + mealFat
-                itemCarbohydrate = itemCarbohydrate + mealCarbohydrate
-
-                mealEnergy = 0
-                mealProtein = 0
-                mealFat = 0
-                mealCarbohydrate = 0
-                mealDetailList = []
-                
-                for mealDetail in item["lunch"]["mealDetail"]:
-                    food = SampleFood.objects().get(id=mealDetail["itemId"])
-                    mealEnergy = mealEnergy + food.energy * mealDetail["servingSizeQuantity"]
-                    mealProtein = mealProtein + food.protein * mealDetail["servingSizeQuantity"]
-                    mealFat = mealFat + food.fat * mealDetail["servingSizeQuantity"]
-                    mealCarbohydrate = mealCarbohydrate + food.carbohydrate * mealDetail["servingSizeQuantity"]
-
-                    mealDetailItem = MealDetail(itemId=food, servingSizeQuantity=mealDetail["servingSizeQuantity"], energy=food.energy * mealDetail["servingSizeQuantity"], protein=food.protein * mealDetail["servingSizeQuantity"], fat=food.fat * mealDetail["servingSizeQuantity"], carbohydrate=food.carbohydrate * mealDetail["servingSizeQuantity"])
-
-                    mealDetailList.append(mealDetailItem)
-
-                lunch = UserMeal(time=item["lunch"]["time"], mealDetail=mealDetailList, energy=mealEnergy, protein=mealProtein, fat=mealFat, carbohydrate=mealCarbohydrate)
-
-                itemEnergy = itemEnergy + mealEnergy
-                itemProtein = itemProtein + mealProtein
-                itemFat = itemFat + mealFat
-                itemCarbohydrate = itemCarbohydrate + mealCarbohydrate
-
-                mealEnergy = 0
-                mealProtein = 0
-                mealFat = 0
-                mealCarbohydrate = 0
-                mealDetailList = []
-                
-                for mealDetail in item["dinner"]["mealDetail"]:
-                    food = SampleFood.objects().get(id=mealDetail["itemId"])
-                    mealEnergy = mealEnergy + food.energy * mealDetail["servingSizeQuantity"]
-                    mealProtein = mealProtein + food.protein * mealDetail["servingSizeQuantity"]
-                    mealFat = mealFat + food.fat * mealDetail["servingSizeQuantity"]
-                    mealCarbohydrate = mealCarbohydrate + food.carbohydrate * mealDetail["servingSizeQuantity"]
-
-                    mealDetailItem = MealDetail(itemId=food, servingSizeQuantity=mealDetail["servingSizeQuantity"], energy=food.energy * mealDetail["servingSizeQuantity"], protein=food.protein * mealDetail["servingSizeQuantity"], fat=food.fat * mealDetail["servingSizeQuantity"], carbohydrate=food.carbohydrate * mealDetail["servingSizeQuantity"])
-
-                    mealDetailList.append(mealDetailItem)
-
-                dinner = UserMeal(time=item["dinner"]["time"], mealDetail=mealDetailList, energy=mealEnergy, protein=mealProtein, fat=mealFat, carbohydrate=mealCarbohydrate)
-
-                itemEnergy = itemEnergy + mealEnergy
-                itemProtein = itemProtein + mealProtein
-                itemFat = itemFat + mealFat
-                itemCarbohydrate = itemCarbohydrate + mealCarbohydrate
-
-                mealEnergy = 0
-                mealProtein = 0
-                mealFat = 0
-                mealCarbohydrate = 0
-                mealDetailList = []
-
-                for other in item["others"]:
-                    for mealDetail in other["mealDetail"]:
+                if "breakfast" in item and item["breakfast"] != None:
+                    for mealDetail in item["breakfast"]["mealDetail"]:
                         food = SampleFood.objects().get(id=mealDetail["itemId"])
                         mealEnergy = mealEnergy + food.energy * mealDetail["servingSizeQuantity"]
                         mealProtein = mealProtein + food.protein * mealDetail["servingSizeQuantity"]
@@ -180,9 +110,7 @@ class UserById(Resource):
 
                         mealDetailList.append(mealDetailItem)
 
-                    otherItem = UserMeal(time=other["time"], mealDetail=mealDetailList, energy=mealEnergy, protein=mealProtein, fat=mealFat, carbohydrate=mealCarbohydrate)
-
-                    mealList.append(otherItem)
+                    breakfast = UserMeal(time=item["breakfast"]["time"], mealDetail=mealDetailList, energy=mealEnergy, protein=mealProtein, fat=mealFat, carbohydrate=mealCarbohydrate)
 
                     itemEnergy = itemEnergy + mealEnergy
                     itemProtein = itemProtein + mealProtein
@@ -194,6 +122,89 @@ class UserById(Resource):
                     mealFat = 0
                     mealCarbohydrate = 0
                     mealDetailList = []
+
+                
+                if "lunch" in item and item["lunch"] != None:
+                    for mealDetail in item["lunch"]["mealDetail"]:
+                        food = SampleFood.objects().get(id=mealDetail["itemId"])
+                        mealEnergy = mealEnergy + food.energy * mealDetail["servingSizeQuantity"]
+                        mealProtein = mealProtein + food.protein * mealDetail["servingSizeQuantity"]
+                        mealFat = mealFat + food.fat * mealDetail["servingSizeQuantity"]
+                        mealCarbohydrate = mealCarbohydrate + food.carbohydrate * mealDetail["servingSizeQuantity"]
+
+                        mealDetailItem = MealDetail(itemId=food, servingSizeQuantity=mealDetail["servingSizeQuantity"], energy=food.energy * mealDetail["servingSizeQuantity"], protein=food.protein * mealDetail["servingSizeQuantity"], fat=food.fat * mealDetail["servingSizeQuantity"], carbohydrate=food.carbohydrate * mealDetail["servingSizeQuantity"])
+
+                        mealDetailList.append(mealDetailItem)
+
+                    lunch = UserMeal(time=item["lunch"]["time"], mealDetail=mealDetailList, energy=mealEnergy, protein=mealProtein, fat=mealFat, carbohydrate=mealCarbohydrate)
+
+                    itemEnergy = itemEnergy + mealEnergy
+                    itemProtein = itemProtein + mealProtein
+                    itemFat = itemFat + mealFat
+                    itemCarbohydrate = itemCarbohydrate + mealCarbohydrate
+
+                    mealEnergy = 0
+                    mealProtein = 0
+                    mealFat = 0
+                    mealCarbohydrate = 0
+                    mealDetailList = []
+                else:
+                    lunch = None
+                
+                if "dinner" in item and item["dinner"] != None:
+                    for mealDetail in item["dinner"]["mealDetail"]:
+                        food = SampleFood.objects().get(id=mealDetail["itemId"])
+                        mealEnergy = mealEnergy + food.energy * mealDetail["servingSizeQuantity"]
+                        mealProtein = mealProtein + food.protein * mealDetail["servingSizeQuantity"]
+                        mealFat = mealFat + food.fat * mealDetail["servingSizeQuantity"]
+                        mealCarbohydrate = mealCarbohydrate + food.carbohydrate * mealDetail["servingSizeQuantity"]
+
+                        mealDetailItem = MealDetail(itemId=food, servingSizeQuantity=mealDetail["servingSizeQuantity"], energy=food.energy * mealDetail["servingSizeQuantity"], protein=food.protein * mealDetail["servingSizeQuantity"], fat=food.fat * mealDetail["servingSizeQuantity"], carbohydrate=food.carbohydrate * mealDetail["servingSizeQuantity"])
+
+                        mealDetailList.append(mealDetailItem)
+
+                    dinner = UserMeal(time=item["dinner"]["time"], mealDetail=mealDetailList, energy=mealEnergy, protein=mealProtein, fat=mealFat, carbohydrate=mealCarbohydrate)
+
+                    itemEnergy = itemEnergy + mealEnergy
+                    itemProtein = itemProtein + mealProtein
+                    itemFat = itemFat + mealFat
+                    itemCarbohydrate = itemCarbohydrate + mealCarbohydrate
+
+                    mealEnergy = 0
+                    mealProtein = 0
+                    mealFat = 0
+                    mealCarbohydrate = 0
+                    mealDetailList = []
+                else:
+                    dinner = None
+
+                if "others" in item and item["others"] != None:
+                    for other in item["others"]:
+                        for mealDetail in other["mealDetail"]:
+                            food = SampleFood.objects().get(id=mealDetail["itemId"])
+                            mealEnergy = mealEnergy + food.energy * mealDetail["servingSizeQuantity"]
+                            mealProtein = mealProtein + food.protein * mealDetail["servingSizeQuantity"]
+                            mealFat = mealFat + food.fat * mealDetail["servingSizeQuantity"]
+                            mealCarbohydrate = mealCarbohydrate + food.carbohydrate * mealDetail["servingSizeQuantity"]
+
+                            mealDetailItem = MealDetail(itemId=food, servingSizeQuantity=mealDetail["servingSizeQuantity"], energy=food.energy * mealDetail["servingSizeQuantity"], protein=food.protein * mealDetail["servingSizeQuantity"], fat=food.fat * mealDetail["servingSizeQuantity"], carbohydrate=food.carbohydrate * mealDetail["servingSizeQuantity"])
+
+                            mealDetailList.append(mealDetailItem)
+
+                        otherItem = UserMeal(time=other["time"], mealDetail=mealDetailList, energy=mealEnergy, protein=mealProtein, fat=mealFat, carbohydrate=mealCarbohydrate)
+
+                        mealList.append(otherItem)
+
+                        itemEnergy = itemEnergy + mealEnergy
+                        itemProtein = itemProtein + mealProtein
+                        itemFat = itemFat + mealFat
+                        itemCarbohydrate = itemCarbohydrate + mealCarbohydrate
+
+                        mealEnergy = 0
+                        mealProtein = 0
+                        mealFat = 0
+                        mealCarbohydrate = 0
+                        mealDetailList = []
 
                 dailyRecordItem = DailyRecord(recordDate = item["recordDate"], breakfast=breakfast, lunch=lunch, dinner=dinner, others=mealList, energy=itemEnergy, protein=itemProtein, fat=itemFat, carbohydrate=itemCarbohydrate)
 
