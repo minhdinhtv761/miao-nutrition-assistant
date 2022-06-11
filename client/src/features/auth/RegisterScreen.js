@@ -19,17 +19,17 @@ import CustomButton from "../../components/general/buttons/CustomButton";
 import Icon from "react-native-vector-icons/FontAwesome";
 import colors from "../../styles/colors";
 import { space } from "../../styles/layout";
-import { validate } from "./validation";
+import { validate } from './../../helpers/validation';
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterScreen = () => {
   const [authData, setAuthData] = React.useState({});
   const [errors, setErrors] = React.useState({});
 
-  const onSubmit = () => {
-    validate(authData, setErrors, true)
-      ? navigation.navigate("OnBoardingScreen")
-      : console.log("Validation Failed");
-  };
+  // const onSubmit = () => {
+  //   validate(authData, setErrors, true)
+  //     ? navigation.navigate("OnBoardingScreen")
+  //     : console.log("Validation Failed");
+  // };
 
   const loginForm = (
     <Center w="100%">

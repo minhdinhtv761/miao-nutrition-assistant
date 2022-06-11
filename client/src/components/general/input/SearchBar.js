@@ -16,10 +16,12 @@ const SearchBar = () => {
   const handleSearchTextChange = (text) => {
     setSearchText(text);
   };
-  const handleOnDone = React.useCallback(
-    () => dispatch(filterActions.searchText(searchText)),
-    [searchText]
-  );
+
+  React.useEffect(() => {
+    if (debouncedSearchTerm) {
+      dispatch(filterActions.searchText(text));
+    } 
+  }, [debouncedSearchTerm]);
 
   return (
     <Input
@@ -35,7 +37,7 @@ const SearchBar = () => {
       }}
       value={searchText}
       onChangeText={handleSearchTextChange}
-      onSubmitEditing={handleOnDone}
+      // onSubmitEditing={handleOnDone}
       InputLeftElement={
         <Icon
           ml={space.m}

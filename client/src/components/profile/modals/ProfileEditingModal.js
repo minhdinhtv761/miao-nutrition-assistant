@@ -15,7 +15,7 @@ export const ProfileEditingModal = ({ data }) => {
     let userData = { ...data };
     delete userData.weight;
     delete userData.height;
-    userData.birthday = moment(data.birthday, "DD/MM/YYYY").toDate();
+    userData.birthday = moment(data.birthday, "DD/MM/YYYY").toDate().toString();
     
     dispatch(updateUser.updateUserRequest(userData));
     handleOnClose();

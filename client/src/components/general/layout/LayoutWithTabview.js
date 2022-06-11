@@ -17,7 +17,7 @@ import TopAppBar from "./../appbar/TopAppBar";
 // { key: index,
 //     title: element.title,
 //     tab: <TabItem children={element.tab} scrollA={scrollA} />}
-const LayoutWithTabview = ({ topAppBar, tabList }) => {
+const LayoutWithTabview = ({ topAppBar, tabList, setIsSearching }) => {
   const safeArea = useSafeAreaInsets();
   const heightHeader = HEADER_HEIGHT + safeArea.top;
   const scrollA = React.useRef(new Animated.Value(0)).current;
@@ -36,7 +36,7 @@ const LayoutWithTabview = ({ topAppBar, tabList }) => {
 
   const Content = (
     <View h="100%">
-      <SearchBar />
+      <SearchBar/>
       <CustomTabView tabList={scrollTabList} />
     </View>
   );

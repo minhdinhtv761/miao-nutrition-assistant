@@ -25,7 +25,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Keyboard } from "react-native";
 import colors from "../../styles/colors";
 import { space } from "../../styles/layout";
-import { validate } from "./validation";
+import { validate } from './../../helpers/validation';
 
 const LoginScreen = () => {
   const [authData, setAuthData] = React.useState({});

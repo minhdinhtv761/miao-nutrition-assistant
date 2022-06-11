@@ -8,9 +8,9 @@ import MenuTitle from "./../../components/general/typography/MenuTitle";
 import React from "react";
 import { ShortNutritionTable } from "./../../components/general/nutritionFact/ShortNutritionTable";
 import { Subtitle } from "./../../components/general/typography/Subtitle";
+import { UserBodyInfomation } from "./../../components/profile/UserBodyInfomation";
 
 export const BottomProfileScreen = () => {
-
   return (
     <VStack space={space.m}>
       <VStack {...boxStyle} space={space.s}>
@@ -20,6 +20,7 @@ export const BottomProfileScreen = () => {
           <Subtitle text="0.5 kg/tuần" />
         </HStack>
       </VStack>
+      <UserBodyInfomation user={{ tdee: 1389, bmi: 19.4 }} />
       <MenuTitle title="Sức khỏe" />
       <HealthInfo />
       <MenuTitle title="Dinh dưỡng" />

@@ -1,7 +1,4 @@
-import {
-  AddingMealState$,
-  FoodsRemaining$
-} from "../../redux/selectors";
+import { AddingMealState$, FoodsRemaining$ } from "../../redux/selectors";
 import { Button, Center, Text } from "native-base";
 import { addingMeal, filterActions } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,13 +7,15 @@ import Colors from "../../styles/colors";
 import FoodList from "../../components/newMeal/choosing/FoodList";
 import LayoutWithTabview from "../../components/general/layout/LayoutWithTabview";
 import React from "react";
+import { SkeletonItem } from "./../../components/general/listItem/SkeletonItem";
 import { TurnBackButton } from "./../../components/general/buttons/iconButtons/TurnBackButton";
 import { push } from "../../utils/RootNavigation";
 
 const MealChoosingScreen = () => {
   const dispatch = useDispatch();
-  const foodList = useSelector(FoodsRemaining$);
   const { list } = useSelector(AddingMealState$);
+  const foodList = useSelector(FoodsRemaining$);
+
   const onAddingFood = React.useCallback(
     (value, pressed) => {
       pressed
@@ -81,8 +80,10 @@ const MealChoosingScreen = () => {
 
   return (
     <>
-      <LayoutWithTabview topAppBar={topAppBar} tabList={tabList} />
-      {/* <SnackBar text={"Đã chọn " + list.length} /> */}
+      <LayoutWithTabview
+        topAppBar={topAppBar}
+        tabList={tabList}
+      />
     </>
   );
 };

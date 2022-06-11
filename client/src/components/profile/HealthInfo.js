@@ -25,7 +25,7 @@ export const HealthInfo = () => {
 
   const listItems = {
     gender: {
-      title: "Giới tính", 
+      title: "Giới tính",
       icon: { as: Ionicons, name: "person" },
       unit: "",
       component: <GenderModalBody user={user} setUser={setUser} />,
@@ -81,6 +81,7 @@ export const HealthInfo = () => {
           </Pressable>
           {index < Object.entries(listItems).length - 1 ? (
             <Divider
+              key={index}
               my="2.5"
               _light={{
                 bg: Colors.backgroundProgress,
