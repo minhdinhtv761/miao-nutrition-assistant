@@ -14,12 +14,14 @@ def bmi_calculator(weight, height):
 
 def tdee_calculator(bmr, activity):
     if activity == "Rarely":
-        return bmr * 1.20
+        constNumber = 1.20
     if activity == "Occasionally":
-        return bmr * 1.375
+        constNumber = 1.375
     if activity == "Sometimes":
-        return bmr * 1.55
+        constNumber = 1.55
     if activity == "Normally":
-        return bmr * 1.725
+        constNumber = 1.725
     if activity == "Always":
-        return bmr * 1.90
+        constNumber = 1.90
+
+    return int(constNumber * bmr)
