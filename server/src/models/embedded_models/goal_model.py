@@ -5,8 +5,8 @@ from src.models.implement_models.sample_case_models.sample_diet_model import Sam
 class Goal(EmbeddedDocument):
     startWeight = DecimalField(required=True, precision=2, min_value=0)
     targetWeight = DecimalField(required=True, precision=2, min_value=0)
-    startPercentBodyFat = IntField(min_value=0, max_value=100)
-    targetPercentBodyFat = IntField(min_value=0, max_value=100)
+    startPercentBodyFat = IntField(min_value=0, max_value=100, null=True)
+    targetPercentBodyFat = IntField(min_value=0, max_value=100, null=True)
     weightPerWeek = DecimalField(required=True, precision=2, min_value=0)
     targetEnergy = IntField(required=True, min_value=0)
     targetProtein = DecimalField(required=True, precision=2, min_value=0)
