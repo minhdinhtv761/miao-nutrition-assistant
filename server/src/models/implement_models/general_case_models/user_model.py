@@ -18,7 +18,7 @@ class User(Document):
     backgroundDiseases = StringField(null=True)
     bodyComposition = ListField(EmbeddedDocumentField(BodyComposition), null=True)
     # userDietId = ListField(ReferenceField(UserDiet, reverse_delete_rule=PULL), null=True)
-    goal = ListField(EmbeddedDocumentField(BodyComposition), null=True)
+    goal = EmbeddedDocumentField(Goal, null=True)
     dailyRecordId = ListField(ReferenceField(DailyRecord, reverse_delete_rule=PULL), null=True)
     # userFoodId = ListField(ReferenceField(UserFood, reverse_delete_rule=PULL), null=True)
     # userRecipeId = ListField(ReferenceField(UserRecipe, reverse_delete_rule=PULL), null=True)

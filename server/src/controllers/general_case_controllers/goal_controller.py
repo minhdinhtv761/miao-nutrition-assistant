@@ -2,8 +2,7 @@ from flask_restful import Resource, reqparse
 from mongoengine import DoesNotExist, ValidationError
 from werkzeug import exceptions
 from mongoengine.queryset.visitor import Q
-from src.constants.enums import Activity
-from src.models.implement_models.general_case_models.goal_model import Goal
+from src.models.embedded_models.goal_model import Goal
 from src.models.implement_models.general_case_models.user_model import User
 
 # Goal function arguments
@@ -12,13 +11,12 @@ goal_args_parser.add_argument("startWeight", type=float, help="Invalid startWeig
 goal_args_parser.add_argument("targetWeight", type=float, help="Invalid targetWeight", required=True)
 goal_args_parser.add_argument("startPercentBodyFat", type=int, help="Invalid startPercentBodyFat", required=True)
 goal_args_parser.add_argument("targetPercentBodyFat", type=int, help="Invalid targetPercentBodyFat", required=True)
-goal_args_parser.add_argument("targetActivity", type=Activity, help="Invalid targetActivity", required=True)
 goal_args_parser.add_argument("weightPerWeek", type=float, help="Invalid weightPerWeek", required=True)
 goal_args_parser.add_argument("targetEnergy", type=int, help="Invalid targetEnergy", required=True)
 goal_args_parser.add_argument("targetProtein", type=float, help="Invalid targetProtein", required=True)
 goal_args_parser.add_argument("targetFat", type=float, help="Invalid targetFat", required=True)
 goal_args_parser.add_argument("targetCarbohydrate", type=float, help="Invalid targetCarbohydrate", required=True)
-goal_args_parser.add_argument("dietId", type=dict, help="Invalid dietId", required=True, location="json")
+goal_args_parser.add_argument("dietId", type=str, help="Invalid dietId", required=True, location="json")
 
 ####################
 ####################
@@ -32,7 +30,6 @@ class GoalById(Resource):
         targetWeight = args["targetWeight"]
         startPercentBodyFat = args["startPercentBodyFat"]
         targetPercentBodyFat = args["targetPercentBodyFat"]
-        targetActivity = args["targetActivity"]
         weightPerWeek = args["weightPerWeek"]
         targetEnergy = args["targetEnergy"]
         targetProtein = args["targetProtein"]
@@ -45,7 +42,7 @@ class GoalById(Resource):
 
             data = Goal.objects().get(id=_id)
 
-            data.modify(startWeight=startWeight, targetWeight=targetWeight, startPercentBodyFat=startPercentBodyFat, targetPercentBodyFat=targetPercentBodyFat, targetActivity=targetActivity, weightPerWeek=weightPerWeek, targetEnergy=targetEnergy, targetProtein=targetProtein, targetFat=targetFat, targetCarbohydrate=targetCarbohydrate, dietId=dietId)
+            data.modify(startWeight=startWeight, targetWeight=targetWeight, startPercentBodyFat=startPercentBodyFat, targetPercentBodyFat=targetPercentBodyFat, weightPerWeek=weightPerWeek, targetEnergy=targetEnergy, targetProtein=targetProtein, targetFat=targetFat, targetCarbohydrate=targetCarbohydrate, dietId=dietId)
             
             data.save()
 
@@ -113,7 +110,6 @@ class GoalByUserId(Resource):
         targetWeight = args["targetWeight"]
         startPercentBodyFat = args["startPercentBodyFat"]
         targetPercentBodyFat = args["targetPercentBodyFat"]
-        targetActivity = args["targetActivity"]
         weightPerWeek = args["weightPerWeek"]
         targetEnergy = args["targetEnergy"]
         targetProtein = args["targetProtein"]
@@ -124,7 +120,7 @@ class GoalByUserId(Resource):
         try:
             user = User.objects().get(id=userId)
 
-            data = Goal(startWeight=startWeight, targetWeight=targetWeight, startPercentBodyFat=startPercentBodyFat, targetPercentBodyFat=targetPercentBodyFat, targetActivity=targetActivity, weightPerWeek=weightPerWeek, targetEnergy=targetEnergy, targetProtein=targetProtein, targetFat=targetFat, targetCarbohydrate=targetCarbohydrate, dietId=dietId)
+            data = Goal(startWeight=startWeight, targetWeight=targetWeight, startPercentBodyFat=startPercentBodyFat, targetPercentBodyFat=targetPercentBodyFat, weightPerWeek=weightPerWeek, targetEnergy=targetEnergy, targetProtein=targetProtein, targetFat=targetFat, targetCarbohydrate=targetCarbohydrate, dietId=dietId)
 
             data.save()
 
