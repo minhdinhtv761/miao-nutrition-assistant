@@ -1,4 +1,4 @@
-import { fetchUser, getType } from "../actions";
+import { fetchUser, getType, updateUser } from "../actions";
 
 const initState = {
   isLoading: false,
@@ -13,6 +13,17 @@ export default function userReducers(state = initState, action) {
         isLoading: true,
       };
     case getType(fetchUser.fetchUserSuccess):
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload,
+      };
+    case getType(updateUser.updateUserRequest):
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case getType(updateUser.updateUserSuccess):
       return {
         ...state,
         isLoading: false,

@@ -1,4 +1,5 @@
 import { fetchFood, passFoodData } from "./foodActions";
+import { fetchUser, updateUser } from "./userActions";
 import {
   hideProfileEditingModal,
   hideSnackBarAction,
@@ -8,7 +9,6 @@ import {
 
 import { addingMeal } from "./dailyRecordActions";
 import { authActions } from "./authActions";
-import { fetchUser } from "./userActions";
 import { filterActions } from "./filterActions";
 
 export const getType = (reduxAction) => {
@@ -23,6 +23,7 @@ export {
   hideSnackBarAction,
   authActions,
   fetchUser,
+  updateUser,
   filterActions,
   showProfileEditingModal,
   hideProfileEditingModal,

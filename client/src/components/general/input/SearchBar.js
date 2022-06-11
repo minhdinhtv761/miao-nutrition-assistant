@@ -5,11 +5,13 @@ import Colors from "./../../../styles/colors";
 import React from "react";
 import { filterActions } from "../../../redux/actions";
 import { space } from "./../../../styles/layout";
+import { useDebounce } from "../../../hooks/useDebounce";
 import { useDispatch } from "react-redux";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [searchText, setSearchText] = React.useState("");
+  const debouncedSearchTerm = useDebounce(searchText, 500);
 
   const handleSearchTextChange = (text) => {
     setSearchText(text);

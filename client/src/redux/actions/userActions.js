@@ -5,3 +5,9 @@ export const fetchUser = createActions({
   fetchUserSuccess: (payload) => payload,
   fetchUserFailure: (err) => err,
 });
+
+export const updateUser = createActions({
+  updateUserRequest: (payload) => payload,
+  updateUserSuccess: (payload) => payload,
+  updateUserFailure: (err) => err,
+});
