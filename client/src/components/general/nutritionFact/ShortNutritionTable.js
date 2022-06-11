@@ -9,7 +9,7 @@ import { Subtitle } from "../typography/Subtitle";
 import { space } from "./../../../styles/layout";
 import { useSelector } from "react-redux";
 
-export const ShortNutritionTable = ({ inProfile, value }) => {
+export const ShortNutritionTable = ({ inProfile, value, maxValue }) => {
   return (
     <VStack
       width="100%"
@@ -20,7 +20,7 @@ export const ShortNutritionTable = ({ inProfile, value }) => {
       space={space.s}
     >
       <ShortNutritionFact value={value} />
-      <CustomDivider value={value} />
+      <CustomDivider/>
       <Subtitle
         text={
           !inProfile
@@ -28,7 +28,7 @@ export const ShortNutritionTable = ({ inProfile, value }) => {
             : "Tỉ lệ giữa thực tế và mục tiêu"
         }
       />
-      <NutritionPerDay child={value} />
+      <NutritionPerDay child={value} parent={maxValue}/>
     </VStack>
   );
 };

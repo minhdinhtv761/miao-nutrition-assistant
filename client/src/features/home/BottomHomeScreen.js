@@ -9,7 +9,7 @@ import { space } from "./../../styles/layout";
 
 export const BottomHomeScreen = ({ data }) => {
   const dailyRecords =
-    data && data.dailyRecordId !== null ? data.dailyRecordId : [];
+    data && data.dailyRecord !== null ? data.dailyRecord : [];
   const handleMealChoosing = React.useCallback(() => {
     RootNavigation.push("MealChoosingScreen");
   }, []);

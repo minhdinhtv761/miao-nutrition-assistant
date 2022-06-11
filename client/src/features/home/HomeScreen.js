@@ -1,9 +1,10 @@
-import { Icon, Spinner } from "native-base";
+import { Center, Icon, Spinner } from "native-base";
 
 import { Animated } from "react-native";
 import { BottomHomeScreen } from "./BottomHomeScreen";
 import Colors from "./../../styles/colors";
 import LayoutWithImage from "../../components/general/layout/LayoutWithImage";
+import { LoadingScreen } from "../../components/general/LoadingScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MenuButton } from "../../components/general/buttons/iconButtons/Menu/MenuButton";
 import React from "react";
@@ -47,7 +48,7 @@ const HomeScreen = () => {
       />
     </>
   ) : (
-    <Spinner size="lg" />
+    <LoadingScreen />
   );
 };
 

@@ -9,8 +9,7 @@ export const fetchUserByAccountID = (accountID) =>
 
 export const updateUser = (payload) => {
   const { userID, user } = payload;
-  console.log(user);
-  axios.patch(`${URL}/user/${userID}`, user);
+  return axios.patch(`${URL}/user/${userID}`, user);
 };
 
 export const fetchFood = () => axios.get(`${URL}/sample_food`);

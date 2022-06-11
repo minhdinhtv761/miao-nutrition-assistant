@@ -23,7 +23,6 @@ const InfoItem = ({ type, value, maxValue }) => (
   </VStack>
 );
 export const NutritionPerDay = ({ child, parent }) => {
- 
   return (
     <HStack
       w="100%"
@@ -38,7 +37,7 @@ export const NutritionPerDay = ({ child, parent }) => {
             key={type}
             type={type}
             value={child[type]}
-            maxValue={300}
+            maxValue={parent ? parent[type] : 300}
           />
         ))}
     </HStack>

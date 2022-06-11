@@ -3,6 +3,7 @@ import { BottomProfileScreen } from "./BottomProfileScreen";
 import Colors from "./../../styles/colors";
 import { Icon } from "native-base";
 import LayoutWithImage from "../../components/general/layout/LayoutWithImage";
+import { LoadingScreen } from "../../components/general/LoadingScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import { TOP_BANNER_HEIGHT } from "../../constants/sizes";
@@ -11,7 +12,7 @@ import { UserState$ } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 
 const ProfileScreen = () => {
-  const user = useSelector(UserState$).data;
+  const { data, isLoading } = useSelector(UserState$);
   var heightBox = TOP_BANNER_HEIGHT / 2;
   const topAppBar = {
     title: "Cá nhân",
@@ -26,17 +27,19 @@ const ProfileScreen = () => {
     ),
     rightChildren: <Icon size="sm" as={MaterialCommunityIcons} name="pencil" />,
   };
-  return (
+  return !isLoading ? (
     <>
       <LayoutWithImage
         topAppBar={topAppBar}
         aboveChildren={
-          <TopProfileScreen heightBox={heightBox} name={user.username} />
+          <TopProfileScreen heightBox={heightBox} name={data.username} />
         }
         children={<BottomProfileScreen />}
         backgroundColor={Colors.background}
       />
     </>
+  ) : (
+    <LoadingScreen />
   );
 };
 

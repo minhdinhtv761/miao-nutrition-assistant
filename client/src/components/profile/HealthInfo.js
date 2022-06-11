@@ -10,23 +10,20 @@ import { ProfileEditingModal } from "./modals/ProfileEditingModal";
 import React from "react";
 import { UserState$ } from "../../redux/selectors";
 import { WeightHeightModalBody } from "./modals/WeightHeightModalBody";
+import { convertDateObject } from "./../../helpers/ConvertData";
 import { getLastestElement } from "./../../utils/DataFunctions";
 import moment from "moment";
 import { showProfileEditingModal } from "./../../redux/actions/modalAction";
 
-export const HealthInfo = () => {
+export const HealthInfo = ({ user, setUser, bodyComposition }) => {
   const dispatch = useDispatch();
   const userData = useSelector(UserState$).data;
-  const [user, setUser] = React.useState({
-    ...userData,
-    birthday: new Date(userData.birthday.$date),
-  });
-  const bodyComposition = getLastestElement(user.bodyComposition);
+
   const listItems = {
     gender: {
       title: "Giới tính",
       icon: { as: Ionicons, name: "person" },
-      value: user.gender === "Female" ? "Nữ" : "Nam",
+      value: userData.gender === "Female" ? "Nữ" : "Nam",
       component: <GenderModalBody user={user} setUser={setUser} />,
     },
     weight: {

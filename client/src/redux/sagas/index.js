@@ -32,6 +32,7 @@ function* fetchUserSaga(action) {
 function* updateUserSaga(action) {
   try {
     const user = yield call(api.updateUser, action.payload);
+    console.log(user.data.response);
     yield put(actions.updateUser.updateUserSuccess(user.data.response));
   } catch (error) {
     console.log(error);

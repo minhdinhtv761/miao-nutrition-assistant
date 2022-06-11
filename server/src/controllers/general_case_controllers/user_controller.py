@@ -20,7 +20,7 @@ user_args_parser.add_argument("backgroundDiseases", type=str, help="Invalid back
 user_args_parser.add_argument("bodyComposition", type=list, help="Invalid bodyComposition", nullable=True, location="json")
 # user_args_parser.add_argument("userDietId", type=list, help="Invalid userDietId", nullable=True)
 user_args_parser.add_argument("goal", type=dict, help="Invalid goal", nullable=True, location="json")
-user_args_parser.add_argument("dailyRecordId", type=list, help="Invalid dailyRecordId", nullable=True)
+user_args_parser.add_argument("dailyRecord", type=list, help="Invalid dailyRecord", nullable=True)
 # user_args_parser.add_argument("userFoodId", type=list, help="Invalid userFoodId", nullable=True)
 # user_args_parser.add_argument("userRecipeId", type=list, help="Invalid userRecipeId", nullable=True)
 
@@ -42,7 +42,7 @@ class UserById(Resource):
         bodyComposition = args["bodyComposition"]
         # userDietId = args["userDietId"]
         goal = args["goal"]
-        dailyRecordId = args["dailyRecordId"]
+        dailyRecord = args["dailyRecord"]
         # userFoodId = args["userFoodId"]
         # userRecipeId = args["userRecipeId"]
         
@@ -72,15 +72,11 @@ class UserById(Resource):
             targetProtein = targetEnergy * dietItem.percentProtein / 400
             targetFat = targetEnergy * dietItem.percentFat / 900
             targetCarbohydrate = targetEnergy * dietItem.percentCarbohydrate / 400
-            print(targetEnergy)
-            print(targetCarbohydrate)
-            print(targetFat)
-            print(targetProtein)
-
+        
             goalItem = Goal(startWeight=goal["startWeight"], targetWeight=goal["targetWeight"], startPercentBodyFat=goal["startPercentBodyFat"], targetPercentBodyFat=goal["targetPercentBodyFat"], weightPerWeek=goal["weightPerWeek"], targetEnergy=targetEnergy, targetProtein=targetProtein, targetFat=targetFat, targetCarbohydrate=targetCarbohydrate, dietId=dietItem)
 
-            data.modify(username=username, gender=gender, birthday=birthday, backgroundDiseases=backgroundDiseases, bodyComposition=fullBodyComposition, goal=goalItem, dailyRecordId=dailyRecordId)
-
+            data.modify(username=username, gender=gender, birthday=birthday, backgroundDiseases=backgroundDiseases, bodyComposition=fullBodyComposition, goal=goalItem, dailyRecord=dailyRecord)
+            print(data)
             return data, 200
 
         except DoesNotExist as e:
@@ -125,14 +121,14 @@ class UserByAccountId(Resource):
         backgroundDiseases = args["backgroundDiseases"]
         # userDietId = args["userDietId"]
         goal = args["goal"]
-        dailyRecordId = args["dailyRecordId"]
+        dailyRecord = args["dailyRecord"]
         # userFoodId = args["userFoodId"]
         # userRecipeId = args["userRecipeId"]
 
         try:
             account = Account.objects().get(id=accountId)
 
-            data = User(accountId=account, username=username, gender=gender, birthday=birthday, backgroundDiseases=backgroundDiseases, goal=goal, dailyRecordId=dailyRecordId).save()
+            data = User(accountId=account, username=username, gender=gender, birthday=birthday, backgroundDiseases=backgroundDiseases, goal=goal, dailyRecord=dailyRecord).save()
 
             return data, 200
 

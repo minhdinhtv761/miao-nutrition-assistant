@@ -39,7 +39,7 @@ class DailyRecordById(Resource):
         sodium = args["sodium"]
         
         try:
-            User.objects().get(Q(id=userId) & Q(dailyRecordId=_id))
+            User.objects().get(Q(id=userId) & Q(dailyRecord=_id))
 
             data = DailyRecord.objects().get(id=_id)
 
@@ -61,7 +61,7 @@ class DailyRecordById(Resource):
     # Delete user's daily record function
     def delete(self, userId, _id):
         try:
-            User.objects().get(Q(id=userId) & Q(dailyRecordId=_id))
+            User.objects().get(Q(id=userId) & Q(dailyRecord=_id))
 
             data = DailyRecord.objects().get(id=_id)
 
@@ -88,8 +88,8 @@ class DailyRecordByUserId(Resource):
         try:
             user = User.objects().get(id=userId)
                 
-            if user.dailyRecordId:
-                data = user.dailyRecordId
+            if user.dailyRecord:
+                data = user.dailyRecord
             else:
                 data = []
 
@@ -133,10 +133,10 @@ class DailyRecordByUserId(Resource):
 
             data.save()
 
-            if not user.dailyRecordId:
-                user.modify(dailyRecordId=[data])
+            if not user.dailyRecord:
+                user.modify(dailyRecord=[data])
             else:
-                user.dailyRecordId.append(data)
+                user.dailyRecord.append(data)
                 user.save()
 
             return data, 201

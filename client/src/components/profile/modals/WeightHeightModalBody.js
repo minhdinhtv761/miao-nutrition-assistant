@@ -14,13 +14,13 @@ export const WeightHeightModalBody = ({ user, setUser, unit }) => {
     setText(text);
   };
   const handleOnDone = () => {
-    let newResult = { ...lastBodyComposition };
+    let newResult = { ...lastBodyComposition, recordDate: new Date() };
     if (unit === "kg") {
       newResult.weight = Number(text);
     } else {
       newResult.height = Number(text);
     }
-    const newBodyComposition = [...bodyComposition];
+    let newBodyComposition = [...user.bodyComposition];
     newBodyComposition.push(newResult);
     setUser({ ...user, bodyComposition: newBodyComposition });
   };

@@ -8,8 +8,19 @@ import React from "react";
 import { ShortNutritionTable } from "./../../components/general/nutritionFact/ShortNutritionTable";
 import { Subtitle } from "./../../components/general/typography/Subtitle";
 import { UserBodyInfomation } from "./../../components/profile/UserBodyInfomation";
+import { UserState$ } from "../../redux/selectors";
+import { convertDateObject } from "../../helpers/ConvertData";
+import { getLastestElement } from "../../utils/DataFunctions";
+import { useSelector } from "react-redux";
 
 export const BottomProfileScreen = () => {
+  const userData = useSelector(UserState$).data;
+  const [user, setUser] = React.useState({
+    ...userData,
+    birthday: convertDateObject(userData.birthday),
+  });
+  const bodyComposition = getLastestElement(userData.bodyComposition);
+  const { goal } = userData;
   return (
     <VStack space={space.m}>
       <VStack {...boxStyle} space={space.s}>
@@ -19,14 +30,26 @@ export const BottomProfileScreen = () => {
           <Subtitle text="0.5 kg/tuần" />
         </HStack>
       </VStack>
-      <UserBodyInfomation user={{ tdee: 1389, bmi: 19.4 }} />
+      <UserBodyInfomation
+        user={{ tdee: bodyComposition.TDEE, bmi: bodyComposition.BMI }}
+      />
       <MenuTitle title="Sức khỏe" />
-      <HealthInfo />
+      <HealthInfo
+        user={user}
+        setUser={setUser}
+        bodyComposition={bodyComposition}
+      />
       <MenuTitle title="Dinh dưỡng" />
       <Box {...boxStyle} p={0}>
         <ShortNutritionTable
           inProfile
           value={{ energy: 2000, carbohydrate: 250, fat: 44.4, protein: 150 }}
+          maxValue={{
+            energy: goal.targetEnergy,
+            carbohydrate: goal.targetCarbohydrate,
+            fat: goal.targetFat,
+            protein: goal.targetProtein,
+          }}
         />
       </Box>
       <MenuTitle title="Mức độ vận động" />
