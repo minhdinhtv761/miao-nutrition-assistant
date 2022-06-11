@@ -7,9 +7,10 @@ export const loginAuth = (authData) => axios.post(`${URL}/auth`, authData);
 export const fetchUserByAccountID = (accountID) =>
   axios.get(`${URL}/account/${accountID}/user`);
 
-export const updateUser = (user) => {
-  console.log("user in API", user);
-  axios.patch(`${URL}/user/${user._id.$oid}`, user);
+export const updateUser = (payload) => {
+  const { userID, user } = payload;
+  console.log(user);
+  axios.patch(`${URL}/user/${userID}`, user);
 };
 
 export const fetchFood = () => axios.get(`${URL}/sample_food`);

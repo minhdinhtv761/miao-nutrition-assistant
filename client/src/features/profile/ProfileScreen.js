@@ -11,7 +11,7 @@ import { UserState$ } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 
 const ProfileScreen = () => {
-  const user = useSelector(UserState$);
+  const user = useSelector(UserState$).data;
   var heightBox = TOP_BANNER_HEIGHT / 2;
   const topAppBar = {
     title: "Cá nhân",

@@ -8,7 +8,7 @@ import { populateArray } from "../../helpers/PopulateData";
 import { useSelector } from "react-redux";
 
 export const AllergenicFoods = () => {
-  const user = useSelector(UserState$);
+  const user = useSelector(UserState$).data;
   const foods = useSelector(FoodState$);
   const allergenicFoodsId = populateArray(foods, user.allergenicFoodsId);
  

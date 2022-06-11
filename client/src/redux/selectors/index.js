@@ -8,7 +8,7 @@ export const AddingMealState$ = (state) => state.addingMealReducers;
 
 export const AuthState$ = (state) => state.authReducers;
 
-export const UserState$ = (state) => state.userReducers.data;
+export const UserState$ = (state) => state.userReducers;
 
 export const FilterState$ = (state) => state.filterReducers;
 

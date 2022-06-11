@@ -1,17 +1,28 @@
 import { Input, InputGroup, InputRightAddon, Stack } from "native-base";
 
 import React from "react";
+import { getLastestElement } from "./../../../utils/DataFunctions";
 import { space } from "../../../styles/layout";
 
 export const WeightHeightModalBody = ({ user, setUser, unit }) => {
+  const lastBodyComposition = getLastestElement(user.bodyComposition);
   const [text, setText] = React.useState(
-    unit === "kg" ? user.weight : user.height
+    unit === "kg" ? lastBodyComposition.weight : lastBodyComposition.height
   );
+
   const handleOnTextChange = (text) => {
     setText(text);
   };
   const handleOnDone = () => {
-    setUser({ ...user, weight: text });
+    let newResult = { ...lastBodyComposition };
+    if (unit === "kg") {
+      newResult.weight = Number(text);
+    } else {
+      newResult.height = Number(text);
+    }
+    const newBodyComposition = [...bodyComposition];
+    newBodyComposition.push(newResult);
+    setUser({ ...user, bodyComposition: newBodyComposition });
   };
   return (
     <Stack alignItems="center" py={space.m}>

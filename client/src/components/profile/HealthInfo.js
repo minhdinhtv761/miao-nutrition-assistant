@@ -10,38 +10,37 @@ import { ProfileEditingModal } from "./modals/ProfileEditingModal";
 import React from "react";
 import { UserState$ } from "../../redux/selectors";
 import { WeightHeightModalBody } from "./modals/WeightHeightModalBody";
+import { getLastestElement } from "./../../utils/DataFunctions";
 import moment from "moment";
 import { showProfileEditingModal } from "./../../redux/actions/modalAction";
 
 export const HealthInfo = () => {
   const dispatch = useDispatch();
-  const userData = useSelector(UserState$);
+  const userData = useSelector(UserState$).data;
   const [user, setUser] = React.useState({
     ...userData,
-    weight: 45,
-    height: 154,
-    birthday: moment(userData.birthday.$date).format("DD/MM/YYYY"),
+    birthday: new Date(userData.birthday.$date),
   });
-
+  const bodyComposition = getLastestElement(user.bodyComposition);
   const listItems = {
     gender: {
       title: "Giới tính",
       icon: { as: Ionicons, name: "person" },
-      unit: "",
+      value: user.gender === "Female" ? "Nữ" : "Nam",
       component: <GenderModalBody user={user} setUser={setUser} />,
     },
     weight: {
       title: "Cân nặng",
       icon: { as: MaterialCommunityIcons, name: "scale-bathroom" },
-      unit: "kg",
+      value: bodyComposition.weight + "kg",
       component: (
         <WeightHeightModalBody user={user} setUser={setUser} unit="kg" />
       ),
     },
     height: {
       title: "Chiều cao",
-      unit: "cm",
       icon: { as: MaterialCommunityIcons, name: "human-male-height" },
+      value: bodyComposition.height * 100 + "cm",
       component: (
         <WeightHeightModalBody user={user} setUser={setUser} unit="cm" />
       ),
@@ -49,7 +48,7 @@ export const HealthInfo = () => {
     birthday: {
       title: "Ngày sinh",
       icon: { as: MaterialCommunityIcons, name: "cake-variant" },
-      unit: "",
+      value: moment(user.birthday).format("DD/MM/YYYY"),
       component: <BirthdayModalBody user={user} setUser={setUser} />,
     },
   };
@@ -75,7 +74,7 @@ export const HealthInfo = () => {
           >
             <TextElement
               title={value.title}
-              text={user[key] + value.unit}
+              text={value.value}
               icon={value.icon}
             />
           </Pressable>

@@ -1,15 +1,15 @@
 import * as RootNavigation from "../../utils/RootNavigation.js";
 
-import Colors from "../../styles/colors";
 import { MealItem } from "./../../components/home/MealItem";
 import MenuTitle from "../../components/general/typography/MenuTitle";
 import React from "react";
+import { SkeletonItem } from "../../components/general/listItem/SkeletonItem.js";
 import { VStack } from "native-base";
 import { space } from "./../../styles/layout";
-import { useDispatch } from "react-redux";
 
-export const BottomHomeScreen = () => {
-
+export const BottomHomeScreen = ({ data }) => {
+  const dailyRecords =
+    data && data.dailyRecordId !== null ? data.dailyRecordId : [];
   const handleMealChoosing = React.useCallback(() => {
     RootNavigation.push("MealChoosingScreen");
   }, []);
@@ -18,42 +18,14 @@ export const BottomHomeScreen = () => {
     <VStack marginY={space.xl} space={space.m} pt={space.l}>
       <MenuTitle title="Bữa ăn" action="Chi tiết" onPressAction={() => {}} />
       <VStack w="100%" borderRadius="xl" bg="white" p={space.m}>
-        <MealItem
-          title="Bữa sáng"
-          subtitle="Yến mạch, Chuối,..."
-          value={500}
-          maxValue={600}
-        />
-        <MealItem
-          title="Bữa sáng"
-          subtitle="Yến mạch, Chuối,..."
-          value={500}
-          maxValue={600}
-        />
-        <MealItem
-          title="Bữa sáng"
-          subtitle="Yến mạch, Chuối,..."
-          value={500}
-          maxValue={600}
-        />
-        <MealItem
-          title="Bữa sáng"
-          subtitle="Yến mạch, Chuối,..."
-          value={500}
-          maxValue={600}
-        />
-        <MealItem
-          title="Bữa sáng"
-          subtitle="Yến mạch, Chuối,..."
-          value={500}
-          maxValue={600}
-        />
-        <MealItem
-          title="Bữa sáng"
-          subtitle="Yến mạch, Chuối,..."
-          value={500}
-          maxValue={600}
-        />
+        {dailyRecords.map((value) => (
+          <MealItem
+            title="Bữa sáng"
+            subtitle="Yến mạch, Chuối,..."
+            value={500}
+            maxValue={600}
+          />
+        ))}
         <MealItem
           title="Thêm bữa ăn"
           subtitle="Gợi ý bữa ăn 500 kcal"

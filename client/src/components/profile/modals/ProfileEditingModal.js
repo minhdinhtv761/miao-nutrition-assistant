@@ -15,9 +15,14 @@ export const ProfileEditingModal = ({ data }) => {
     let userData = { ...data };
     delete userData.weight;
     delete userData.height;
-    userData.birthday = moment(data.birthday, "DD/MM/YYYY").toDate().toString();
-    
-    dispatch(updateUser.updateUserRequest(userData));
+    delete userData._id;
+    delete userData.accountId;
+    // userData.birthday=userData.birthday.toLocaleDateString();
+    userData.goal._id = userData.goal._id.$oid;
+    console.log(userData);
+    dispatch(
+      updateUser.updateUserRequest({ userID: data._id.$oid, user: userData })
+    );
     handleOnClose();
   }, [dispatch]);
 

@@ -5,7 +5,7 @@ import { NutritionLabel } from "../../constants/enums";
 import React from "react";
 import { space } from "./../../styles/layout";
 
-export const DetailNutrition = ({ style }) => {
+export const DetailNutrition = ({ style, value }) => {
   const Item = ({ type, value, maxValue }) => {
     var percent = Math.round((value / maxValue) * 100);
     return (
@@ -16,8 +16,7 @@ export const DetailNutrition = ({ style }) => {
             size="sm"
             bg={Colors.backgroundProgress}
             _filledTrack={{
-              bg:
-               NutrtionColors[type]
+              bg: NutrtionColors[type],
             }}
             value={percent}
           />
@@ -28,13 +27,18 @@ export const DetailNutrition = ({ style }) => {
       </VStack>
     );
   };
+  const { goal } = value;
   return (
     <Box style={style} bg="white" borderRadius="xl">
       <Center h="100%" px={space.m}>
         <HStack justifyContent="space-between" alignItems="center" w="100%">
-          <Item type="carbohydrate" value={30} maxValue={100} />
-          <Item type="fat" value={30} maxValue={100} />
-          <Item type="protein" value={30} maxValue={100} />
+          <Item
+            type="carbohydrate"
+            value={30}
+            maxValue={goal.targetCarbohydrate}
+          />
+          <Item type="fat" value={30} maxValue={goal.targetFat} />
+          <Item type="protein" value={30} maxValue={goal.targetProtein} />
         </HStack>
       </Center>
     </Box>

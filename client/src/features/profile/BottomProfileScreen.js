@@ -1,7 +1,6 @@
 import { Box, HStack, Heading, Text, VStack } from "native-base";
 import { boxStyle, space } from "../../styles/layout";
 
-import { AllergenicFoods } from "../../components/profile/AllergenicFoods";
 import Colors from "../../styles/colors";
 import { HealthInfo } from "./../../components/profile/HealthInfo";
 import MenuTitle from "./../../components/general/typography/MenuTitle";
@@ -30,8 +29,8 @@ export const BottomProfileScreen = () => {
           value={{ energy: 2000, carbohydrate: 250, fat: 44.4, protein: 150 }}
         />
       </Box>
-      <MenuTitle title="Thực phẩm dị ứng" />
-      <AllergenicFoods />
+      <MenuTitle title="Mức độ vận động" />
+      {/* <AllergenicFoods /> */}
     </VStack>
   );
 };

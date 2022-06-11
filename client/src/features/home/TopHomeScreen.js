@@ -1,4 +1,13 @@
-import { Box, Center, HStack, Heading, Text, VStack, View } from "native-base";
+import {
+  Box,
+  Center,
+  HStack,
+  Heading,
+  Skeleton,
+  Text,
+  VStack,
+  View,
+} from "native-base";
 import {
   HEADER_HEIGHT,
   SUBBOX_HEIGHT,
@@ -13,22 +22,12 @@ import React from "react";
 import { space } from "./../../styles/layout";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export const TopHomeScreen = () => {
+export const TopHomeScreen = ({ data }) => {
   const safeArea = useSafeAreaInsets();
   var heightHeader = HEADER_HEIGHT + safeArea.top;
   var heightBox = TOP_BANNER_HEIGHT;
   var heightDetailBox = SUBBOX_HEIGHT;
-
-  const TextElement = ({ calo, text }) => {
-    return (
-      <VStack alignItems="center">
-        <Heading size="lg" color={Colors.white} fontWeight="medium">
-          {calo}
-        </Heading>
-        <Text color={Colors.white}>{text}</Text>
-      </VStack>
-    );
-  };
+  const { goal } = data;
   return (
     <View backgroundColor={Colors.background} paddingTop={heightHeader}>
       <Box
@@ -44,10 +43,10 @@ export const TopHomeScreen = () => {
             px={space.l}
             w="100%"
           >
-            <TextElement calo={1500} text="Tổng cộng" />
+            <TextElement calo={goal.targetEnergy} text="Tổng cộng" />
             <FullNutritionProgress radius={(heightBox * 0.6) / 2} />
 
-            <TextElement calo={1500} text="Đã ăn" />
+            <TextElement calo={1500} text="Còn lại" />
           </HStack>
         </Center>
       </Box>
@@ -60,7 +59,18 @@ export const TopHomeScreen = () => {
           right: space.m * 4,
           left: space.m * 4,
         }}
+        value={{ goal: goal }}
       />
     </View>
+  );
+};
+const TextElement = ({ calo, text }) => {
+  return (
+    <VStack alignItems="center">
+      <Heading size="lg" color={Colors.white} fontWeight="medium">
+        {Math.round(calo * 10) / 10}
+      </Heading>
+      <Text color={Colors.white}>{text}</Text>
+    </VStack>
   );
 };
