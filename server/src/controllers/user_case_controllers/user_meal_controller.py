@@ -4,7 +4,7 @@ from werkzeug import exceptions
 from mongoengine.queryset.visitor import Q
 from src.controllers.abstract_controllers.meal_controller import meal_args_parser
 from src.models.implement_models.general_case_models.user_model import User
-from src.models.implement_models.user_case_models.user_meal_model import UserMeal
+from src.models.embedded_models.user_meal_model import UserMeal
 
 # User meal function arguments
 user_meal_args_parser = meal_args_parser.copy()

@@ -5,7 +5,7 @@ from mongoengine import DoesNotExist, ValidationError
 from werkzeug import exceptions
 from mongoengine.queryset.visitor import Q
 from src.controllers.abstract_controllers.meal_detail_controller import meal_detail_args_parser
-from src.models.implement_models.user_case_models.user_meal_detail_model import UserMealDetail
+from src.models.embedded_models.user_meal_detail_model import UserMealDetail
 
 user_meal_detail_args_parser = meal_detail_args_parser.copy()
 
