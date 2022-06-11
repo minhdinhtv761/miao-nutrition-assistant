@@ -20,7 +20,10 @@ import Colors from "../../../../../styles/colors";
 import CustomButton from "../../CustomButton";
 import MainContentLayout from "../../../layout/MainContentLayout";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { authActions } from "./../../../../../redux/actions/authActions";
+import { replace } from "../../../../../utils/RootNavigation";
 import { space } from "../../../../../styles/layout";
+import { useDispatch } from "react-redux";
 
 const listItems = [
   {
@@ -50,6 +53,12 @@ const listItems = [
 ];
 
 export const MenuSettingDrawer = ({ setIsOpen }) => {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(authActions.logoutRequest());
+    replace("LoginScreen");
+  };
   const children = (
     <VStack>
       <HStack
@@ -57,9 +66,7 @@ export const MenuSettingDrawer = ({ setIsOpen }) => {
         justifyContent="space-between"
         borderBottomColor="black"
       >
-        <Heading color={Colors.black}>
-          Menu
-        </Heading>
+        <Heading color={Colors.black}>Menu</Heading>
         <Icon
           size="sm"
           as={AntDesign}
@@ -89,12 +96,12 @@ export const MenuSettingDrawer = ({ setIsOpen }) => {
           ) : null}
         </View>
       ))}
-      <SafeAreaView/>
-      <CustomButton text="Đăng xuất"/>
+      <SafeAreaView />
+      <CustomButton text="Đăng xuất" onPress={handleLogout} />
     </VStack>
   );
   return (
-    <Box safeAreaTop bg="white" width={WINDOW_WIDTH * 0.8}>
+    <Box safeAreaTop bg={Colors.background} width={WINDOW_WIDTH}>
       <MainContentLayout child={children} />
     </Box>
   );

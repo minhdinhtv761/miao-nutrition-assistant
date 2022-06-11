@@ -1,5 +1,7 @@
 import { authActions, getType } from "../actions";
 
+import { showToast } from "../../hooks/useToast";
+
 const initState = {
   isLoading: false,
   error: "",
@@ -24,6 +26,15 @@ export default function authReducers(state = initState, action) {
         ...state,
         isLoading: false,
         error: action.payload,
+      };
+
+    case getType(authActions.logoutRequest):
+
+      return {
+        ...state,
+        isLoading: false,
+        account: null,
+        error: "",
       };
     default:
       return state;
