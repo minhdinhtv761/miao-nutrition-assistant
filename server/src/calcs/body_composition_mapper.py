@@ -5,9 +5,9 @@ def bmr_calculator(percentBodyFat, weight, height, gender, age):
         return 370 + 21.60 * weight * (1 - percentBodyFat / 100)
     else:
         if gender == Gender.FEMALE:
-            return 10.00 * weight + 6.25 * height - 5 * age - 161
+            return 10.00 * weight + 6.25 * height * 100 - 5 * age - 161
         if gender == Gender.MALE:
-            return 10.00 * weight + 6.25 * height - 5 * age + 5
+            return 10.00 * weight + 6.25 * height * 100 - 5 * age + 5
 
 def bmi_calculator(weight, height):
     return weight / (height * height)
