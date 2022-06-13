@@ -27,7 +27,7 @@ const FoodMealEditingScreen = () => {
   const handleChangeWeight = React.useCallback(
     (text) => {
       const ratio = Number(text) / food.servingSizeWeight;
-      let newFoodValue = { ...food };
+      let newFoodValue = { ...food, ratio: ratio };
       Object.entries(newFoodValue).forEach(([key, value]) => {
         if (!isNaN(value)) {
           newFoodValue[key] = Math.round(value * ratio * 10) / 10;

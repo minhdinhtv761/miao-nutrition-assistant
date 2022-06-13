@@ -5,8 +5,7 @@ import RNDateTimePicker from "@react-native-community/datetimepicker";
 import React from "react";
 import moment from "moment";
 
-export const CustomDatePicker = ({ dateTime }) => {
-  const [date, setDate] = React.useState(new Date());
+export const CustomDatePicker = ({ date, setDate }) => {
   const [open, setOpen] = React.useState(false);
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;

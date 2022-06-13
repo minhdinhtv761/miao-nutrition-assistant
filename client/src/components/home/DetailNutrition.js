@@ -27,18 +27,22 @@ export const DetailNutrition = ({ style, value }) => {
       </VStack>
     );
   };
-  const { goal } = value;
+  const { goal, current } = value;
   return (
     <Box style={style} bg="white" borderRadius="xl">
       <Center h="100%" px={space.m}>
         <HStack justifyContent="space-between" alignItems="center" w="100%">
           <Item
             type="carbohydrate"
-            value={30}
+            value={current.carbohydrate}
             maxValue={goal.targetCarbohydrate}
           />
-          <Item type="fat" value={30} maxValue={goal.targetFat} />
-          <Item type="protein" value={30} maxValue={goal.targetProtein} />
+          <Item type="fat" value={current.fat} maxValue={goal.targetFat} />
+          <Item
+            type="protein"
+            value={current.protein}
+            maxValue={goal.targetProtein}
+          />
         </HStack>
       </Center>
     </Box>

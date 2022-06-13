@@ -52,7 +52,11 @@ export const BottomProfileScreen = () => {
           }}
         />
       </Box>
-      <MenuTitle title="Mức độ vận động" />
+      {/* <MenuTitle title="Mức độ vận động" />
+      <Box {...boxStyle} p={0}>
+        <Icon size="md" color={Colors.primary} as={icon.as} name={icon.name} />
+      </Box> */}
+
       {/* <AllergenicFoods /> */}
     </VStack>
   );

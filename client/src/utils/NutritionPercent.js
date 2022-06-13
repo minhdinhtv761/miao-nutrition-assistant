@@ -3,7 +3,7 @@ export const calcPercent = (child, parent) =>
 export const calcNutritionPercent = (food) => {
   const carbPercent = calcPercent(food.carbohydrate * 4, food.energy);
   const fatPercent = calcPercent(food.fat * 9, food.energy);
-  const proteinPercent = food.energy ? 100 - carbPercent - fatPercent : 0;
+  const proteinPercent = calcPercent(food.protein * 4, food.energy);
   return {
     carbohydrate: {
       value: food.carbohydrate,

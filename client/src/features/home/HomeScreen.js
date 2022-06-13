@@ -10,18 +10,24 @@ import { MenuButton } from "../../components/general/buttons/iconButtons/Menu/Me
 import React from "react";
 import { TopHomeScreen } from "./TopHomeScreen";
 import { UserState$ } from "../../redux/selectors";
+import { defaultNutrition } from "./../../constants/enums";
 import { fetchFood } from "../../redux/actions";
+import { getTodayDailyRecord } from "../../helpers/CalcData";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const { isLoading, data } = useSelector(UserState$);
-  React.useEffect(() => {
-    dispatch(fetchFood.fetchFoodRequest());
-  }, [dispatch]);
+  const [today, setToday] = React.useState(defaultNutrition);
 
-  const scrollA = React.useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    if (data) {
+      setToday(getTodayDailyRecord(data.dailyRecord));
+    }
+    dispatch(fetchFood.fetchFoodRequest());
+  }, [dispatch, data]);
+  
   const topAppBar = {
     title: "Home",
     backgroundColor: "primary.500",
@@ -42,8 +48,8 @@ const HomeScreen = () => {
     <>
       <LayoutWithImage
         topAppBar={topAppBar}
-        aboveChildren={<TopHomeScreen data={data} />}
-        children={<BottomHomeScreen data={data} />}
+        aboveChildren={<TopHomeScreen goal={data.goal} today={today} />}
+        children={<BottomHomeScreen goal={data.goal} today={today} />}
         backgroundColor={Colors.background}
       />
     </>

@@ -11,6 +11,7 @@ import { LayoutWithHeader } from "./../../components/general/layout/LayoutWithHe
 import { MealTypes } from "../../constants/enums";
 import MenuTitle from "../../components/general/typography/MenuTitle";
 import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { ShortNutritionTable } from "../../components/general/nutritionFact/ShortNutritionTable";
 import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
 import { addingMeal } from "../../redux/actions";
@@ -19,6 +20,7 @@ import { space } from "../../styles/layout";
 const MealAddingScreen = () => {
   const dispatch = useDispatch();
   const { totalNutrition, list } = useSelector(AddingMealState$);
+  const [date, setDate] = React.useState(new Date());
 
   const [foodList, setFoodList] = React.useState(list);
 
@@ -79,7 +81,7 @@ const MealAddingScreen = () => {
                   <Select.Item key={key} value={key} label={MealTypes[key]} />
                 ))}
               </Select>
-              <CustomDatePicker dateTime="08:00" />
+              <CustomDatePicker date={date} setDate={setDate} />
             </VStack>
             <ShortNutritionTable value={totalNutrition} />
             <VStack width="100%" space={space.m}>
@@ -101,9 +103,11 @@ const MealAddingScreen = () => {
           </VStack>
         }
       />
-      <BottomButton text="Hoàn tất" />
+      <BottomButton text="Hoàn tất" onPress={goBackAction}/>
+      <SafeAreaView/>
     </>
   );
 };
 
 export default MealAddingScreen;
+

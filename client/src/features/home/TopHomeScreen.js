@@ -19,15 +19,22 @@ import { DetailNutrition } from "../../components/home/DetailNutrition";
 import { Dimensions } from "react-native";
 import { FullNutritionProgress } from "../../components/general/progress/FullNutritionProgress";
 import React from "react";
+import { calcNutritionPercent } from "../../utils/NutritionPercent";
+import { getTodayDailyRecord } from "../../helpers/CalcData";
 import { space } from "./../../styles/layout";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export const TopHomeScreen = ({ data }) => {
+export const TopHomeScreen = ({ goal, today }) => {
   const safeArea = useSafeAreaInsets();
   var heightHeader = HEADER_HEIGHT + safeArea.top;
   var heightBox = TOP_BANNER_HEIGHT;
   var heightDetailBox = SUBBOX_HEIGHT;
-  const { goal } = data;
+  const todayValue = calcNutritionPercent({
+    ...today,
+    energy: goal.targetEnergy,
+  });
+  const caloRemaining = goal.targetEnergy - today.energy;
+
   return (
     <View backgroundColor={Colors.background} paddingTop={heightHeader}>
       <Box
@@ -44,9 +51,18 @@ export const TopHomeScreen = ({ data }) => {
             w="100%"
           >
             <TextElement calo={goal.targetEnergy} text="Tổng cộng" />
-            <FullNutritionProgress radius={(heightBox * 0.6) / 2} />
+            <FullNutritionProgress
+              radius={(heightBox * 0.6) / 2}
+              carbPercent={todayValue["carbohydrate"].percent}
+              fatPercent={todayValue["fat"].percent}
+              proteinPercent={todayValue["protein"].percent}
+              calories={today.energy}
+            />
 
-            <TextElement calo={1500} text="Còn lại" />
+            <TextElement
+              calo={Math.abs(caloRemaining)}
+              text={caloRemaining > 0 ? "Còn lại" : "Dư"}
+            />
           </HStack>
         </Center>
       </Box>
@@ -59,7 +75,7 @@ export const TopHomeScreen = ({ data }) => {
           right: space.m * 4,
           left: space.m * 4,
         }}
-        value={{ goal: goal }}
+        value={{ goal: goal, current: today }}
       />
     </View>
   );

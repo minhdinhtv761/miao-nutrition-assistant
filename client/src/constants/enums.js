@@ -46,5 +46,12 @@ export const MealTypes = {
   breakfast: "Bữa sáng",
   lunch: "Bữa trưa",
   dinner: "Bữa tối",
-  snack: "Bữa phụ",
+  others: "Bữa phụ",
+};
+
+export const defaultNutrition = {
+  energy: 0,
+  fat: 0,
+  protein: 0,
+  carbohydrate: 0,
 };

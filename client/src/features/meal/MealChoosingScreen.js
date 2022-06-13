@@ -32,7 +32,7 @@ const MealChoosingScreen = () => {
 
   const goNextAction = React.useCallback(() => {
     push("MealAddingScreen");
-  }, [dispatch]);
+  }, []);
 
   const tabList = [
     {

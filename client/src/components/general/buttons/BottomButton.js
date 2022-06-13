@@ -9,7 +9,7 @@ const BottomButton = ({ text, onPress }) => {
     <View marginX={space.m}>
       <Button
         position="absolute"
-        bottom={0}
+        bottom={4}
         width="100%"
         size="lg"
         rounded="full"
