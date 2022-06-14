@@ -1,9 +1,9 @@
 import { createActions } from "redux-actions";
 
-export const fetchUser = createActions({
-  fetchUserRequest: (payload) => payload,
-  fetchUserSuccess: (payload) => payload,
-  fetchUserFailure: (err) => err,
+export const getUser = createActions({
+  getUserRequest: (payload) => payload,
+  getUserSuccess: (payload) => payload,
+  getUserFailure: (err) => err,
 });
 
 export const updateUser = createActions({

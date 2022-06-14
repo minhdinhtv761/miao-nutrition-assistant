@@ -14,7 +14,7 @@ import {
   Text,
   VStack,
 } from "native-base";
-import { authActions, fetchUser } from "../../redux/actions";
+import { authActions, getUser } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import AuthHeading from "../../components/auth/AuthHeading";
@@ -47,7 +47,7 @@ const LoginScreen = () => {
     loginForm = <Spinner size="lg" />;
   } else if (account) {
     navigation.replace("HomeScreen");
-    dispatch(fetchUser.fetchUserRequest(account._id));
+    dispatch(getUser.getUserRequest(account._id));
   } else {
     loginForm = (
       <Center w="100%">

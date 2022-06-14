@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "30mb" }));
 app.use(cors());
 
 app.use("/account", routers.account);
+app.use("/user", routers.user);
 
 mongoose
   .connect(databaseURI, {

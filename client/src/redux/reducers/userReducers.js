@@ -1,4 +1,4 @@
-import { fetchUser, getType, updateUser } from "../actions";
+import { getType, getUser, updateUser } from "../actions";
 
 const initState = {
   isLoading: false,
@@ -7,12 +7,12 @@ const initState = {
 
 export default function userReducers(state = initState, action) {
   switch (action.type) {
-    case getType(fetchUser.fetchUserRequest):
+    case getType(getUser.getUserRequest):
       return {
         ...state,
         isLoading: true,
       };
-    case getType(fetchUser.fetchUserSuccess):
+    case getType(getUser.getUserSuccess):
       return {
         ...state,
         isLoading: false,

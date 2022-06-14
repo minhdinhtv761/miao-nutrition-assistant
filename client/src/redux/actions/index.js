@@ -1,5 +1,5 @@
 import { fetchFood, passFoodData } from "./foodActions";
-import { fetchUser, updateUser } from "./userActions";
+import { getUser, updateUser } from "./userActions";
 import {
   hideProfileEditingModal,
   hideSnackBarAction,
@@ -22,7 +22,7 @@ export {
   showSnackBarAction,
   hideSnackBarAction,
   authActions,
-  fetchUser,
+  getUser,
   updateUser,
   filterActions,
   showProfileEditingModal,

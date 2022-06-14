@@ -15,25 +15,20 @@ export const getAccountByEmail = async (req, res) => {
     } else {
       return res.status(200).json(account);
     }
-
   } catch (error) {
-    
     return res.status(500).json({ error: error });
   }
 };
 
 export const createAccount = async (req, res) => {
-    try {
-      const data = req.body;
-      
-      const account = new AccountModel(data);
-      await account.save();
-      
-      return res.status(200).json(account)
-      
-    } catch (error) {
-      
-      return res.status(500).json({ error: error });
-    }
-  };
-  
+  try {
+    const data = req.body;
+
+    const account = new AccountModel(data);
+    await account.save();
+
+    return res.status(200).json(account);
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
+};

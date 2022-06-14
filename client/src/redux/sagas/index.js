@@ -4,7 +4,7 @@ import * as api from "../../api";
 import { call, put, takeLatest } from "redux-saga/effects";
 
 export default function* mySaga() {
-  yield takeLatest(actions.fetchUser.fetchUserRequest, fetchUserSaga);
+  yield takeLatest(actions.getUser.getUserRequest, getUserSaga);
   yield takeLatest(actions.updateUser.updateUserRequest, updateUserSaga);
   yield takeLatest(actions.fetchFood.fetchFoodRequest, fetchFoodSaga);
   yield takeLatest(actions.authActions.loginRequest, loginSaga);
@@ -21,12 +21,12 @@ function* loginSaga(action) {
 }
 
 /* #region  UserSaga */
-function* fetchUserSaga(action) {
+function* getUserSaga(action) {
   const userByAccountId = yield call(
-    api.fetchUserByAccountID,
+    api.getUserByAccountID,
     action.payload.$oid
   );
-  yield put(actions.fetchUser.fetchUserSuccess(userByAccountId.data.response));
+  yield put(actions.getUser.getUserSuccess(userByAccountId.data.response));
 }
 
 function* updateUserSaga(action) {
