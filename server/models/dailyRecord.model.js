@@ -68,4 +68,4 @@ const schema = new mongoose.Schema({
   fat: { type: Number },
   protein: { type: Number },
 });
-export const AccountModel = mongoose.model("dailyRecords", schema);
+export const DailyRecordModel = mongoose.model("daily_records", schema);

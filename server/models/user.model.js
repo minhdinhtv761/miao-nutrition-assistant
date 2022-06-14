@@ -103,9 +103,9 @@ const schema = new mongoose.Schema({
     type: [
       {
         type: Schema.Types.ObjectId,
-        ref: "dailyRecords",
+        ref: "daily_records",
       },
     ],
   },
 });
-export const AccountModel = mongoose.model("users", schema);
+export const UserModel = mongoose.model("users", schema);
