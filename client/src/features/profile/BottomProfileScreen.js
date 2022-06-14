@@ -9,18 +9,21 @@ import { ShortNutritionTable } from "./../../components/general/nutritionFact/Sh
 import { Subtitle } from "./../../components/general/typography/Subtitle";
 import { UserBodyInfomation } from "./../../components/profile/UserBodyInfomation";
 import { UserState$ } from "../../redux/selectors";
-import { convertDateObject } from "../../helpers/ConvertData";
 import { getLastestElement } from "../../utils/DataFunctions";
 import { useSelector } from "react-redux";
 
+s;
 export const BottomProfileScreen = () => {
   const userData = useSelector(UserState$).data;
+  const bodyComposition = getLastestElement(userData.bodyCompositions);
+
   const [user, setUser] = React.useState({
     ...userData,
-    birthday: convertDateObject(userData.birthday),
+    weight: bodyComposition.weight,
+    height: bodyComposition.height,
   });
-  const bodyComposition = getLastestElement(userData.bodyComposition);
   const { goal } = userData;
+  
   return (
     <VStack space={space.m}>
       <VStack {...boxStyle} space={space.s}>

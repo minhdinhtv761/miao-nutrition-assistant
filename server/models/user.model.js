@@ -8,6 +8,7 @@ const schema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "accounts",
     required: true,
+    unique: true,
   },
   username: {
     type: String,

@@ -10,8 +10,6 @@ import { ProfileEditingModal } from "./modals/ProfileEditingModal";
 import React from "react";
 import { UserState$ } from "../../redux/selectors";
 import { WeightHeightModalBody } from "./modals/WeightHeightModalBody";
-import { convertDateObject } from "./../../helpers/ConvertData";
-import { getLastestElement } from "./../../utils/DataFunctions";
 import moment from "moment";
 import { showProfileEditingModal } from "./../../redux/actions/modalAction";
 
@@ -37,7 +35,7 @@ export const HealthInfo = ({ user, setUser, bodyComposition }) => {
     height: {
       title: "Chiều cao",
       icon: { as: MaterialCommunityIcons, name: "human-male-height" },
-      value: bodyComposition.height * 100 + "cm",
+      value: bodyComposition.height + "cm",
       component: (
         <WeightHeightModalBody user={user} setUser={setUser} unit="cm" />
       ),
@@ -86,7 +84,7 @@ export const HealthInfo = ({ user, setUser, bodyComposition }) => {
           ) : null}
         </>
       ))}
-      <ProfileEditingModal data={user} />
+      <ProfileEditingModal user={user} />
     </VStack>
   );
 };
