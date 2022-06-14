@@ -1,10 +1,13 @@
+import "dotenv/config";
+
+import * as routers from "./routers/index.js";
+
 import bodyParser from "body-parser";
 import cors from "cors";
-import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
 
-const username = process.env.USERNAME;
+const username = process.env.USER;
 const password = process.env.PASSWORD;
 const database = process.env.DATABASE;
 const host = process.env.HOST;
@@ -19,6 +22,8 @@ app.use(bodyParser.json({ limit: "30mb" }));
 app.use(bodyParser.urlencoded({ extended: true, limit: "30mb" }));
 app.use(cors());
 
+app.use("/account", routers.account);
+
 mongoose
   .connect(databaseURI, {
     useNewUrlParser: true,
@@ -27,7 +32,7 @@ mongoose
   .then(() => {
     console.log("Database connected");
     app.listen(port, host, () => {
-      console.log(`Server is running on ${host}/${port}`);
+      console.log(`Server is running on ${host}:${port}`);
     });
   })
   .catch((error) => {
