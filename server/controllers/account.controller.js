@@ -3,6 +3,7 @@ import { AccountModel } from "../models/account.model.js";
 export const getAccountByEmail = async (req, res) => {
   try {
     const { email, password } = req.body;
+    
     const account = await AccountModel.findOne({
       email: email,
       password: password,

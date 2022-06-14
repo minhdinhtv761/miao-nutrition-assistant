@@ -13,7 +13,7 @@ export default function* mySaga() {
 function* loginSaga(action) {
   try {
     const auth = yield call(api.loginAuth, action.payload);
-    yield put(actions.authActions.loginSuccess(auth.data.response));
+    yield put(actions.authActions.loginSuccess(auth.data));
   } catch (error) {
     console.log(error.message);
     yield put(actions.authActions.loginFailure(error.message));
@@ -24,16 +24,18 @@ function* loginSaga(action) {
 function* getUserSaga(action) {
   const userByAccountId = yield call(
     api.getUserByAccountID,
-    action.payload.$oid
+    action.payload
   );
-  yield put(actions.getUser.getUserSuccess(userByAccountId.data.response));
+  
+  yield put(actions.getUser.getUserSuccess(userByAccountId.data));
 }
 
 function* updateUserSaga(action) {
   try {
     const user = yield call(api.updateUser, action.payload);
-    console.log(user.data.response);
-    yield put(actions.updateUser.updateUserSuccess(user.data.response));
+
+    yield put(actions.updateUser.updateUserSuccess(user.data));
+    
   } catch (error) {
     console.log(error);
     yield put(actions.updateUser.updateUserFailure(error));
@@ -44,7 +46,9 @@ function* updateUserSaga(action) {
 function* fetchFoodSaga(action) {
   try {
     const food = yield call(api.fetchFood);
-    yield put(actions.fetchFood.fetchFoodSuccess(food.data.response));
+    
+    yield put(actions.fetchFood.fetchFoodSuccess(food.data));
+
   } catch (error) {
     console.log(error);
     yield put(actions.fetchFood.fetchFoodFailure(error));
