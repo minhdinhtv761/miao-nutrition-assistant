@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
+import { MainFoodCompositionSchema } from "../abstract_models/mainFoodComposition.model.js";
+import mealSchema from "./embedded_models/meal.model.js";
 
-const Schema = mongoose.Schema;
+const schema = new MainFoodCompositionSchema();
 
-const schema = new mongoose.Schema({
+schema.add({
   userId: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "users",
     required: true,
   },
@@ -14,58 +16,9 @@ const schema = new mongoose.Schema({
     default: new Date(),
   },
   meals: {
-    type: [
-      {
-        mealType: {
-          type: String,
-          enums: ["breakfast", "lunch", "dinner", "snack"],
-          default: "breakfast",
-        },
-        time: {
-          type: Date,
-          default: new Date(),
-        },
-        mealDetails: {
-          type: [
-            {
-              itemId: {
-                type: Schema.Types.ObjectId,
-                ref: "sample_foods",
-                required: true,
-              },
-              servingSizeQuantity: {
-                type: Number,
-                default: 100,
-              },
-              energy: {
-                type: Number,
-              },
-              carbohydrate: {
-                type: Number,
-              },
-              fat: { type: Number },
-              protein: { type: Number },
-            },
-          ],
-        },
-        energy: {
-          type: Number,
-        },
-        carbohydrate: {
-          type: Number,
-        },
-        fat: { type: Number },
-        protein: { type: Number },
-      },
-    ],
+    type: [mealSchema],
+    default: [],
   },
-  energy: {
-    type: Number,
-  },
-  carbohydrate: {
-    type: Number,
-  },
-  fat: { type: Number },
-  protein: { type: Number },
 });
+
 export const DailyRecordModel = mongoose.model("daily_records", schema);
