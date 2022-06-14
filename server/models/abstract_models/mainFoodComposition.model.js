@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 import util from "util";
 
-export const MainFoodCompositionSchema = () => {
-  //call super
+export function MainFoodCompositionSchema () {
+  // call super
   mongoose.Schema.apply(this, arguments);
-  //add
+  // add
   this.add({
     energy: {
       type: Number,
