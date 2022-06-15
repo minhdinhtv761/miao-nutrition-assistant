@@ -39,23 +39,3 @@ export const updateUser = async (req, res) => {
     return res.status(500).json({ error: error });
   }
 };
-<<<<<<< HEAD:server/controllers/user.controller.js
-=======
-
-// const age = new Date().getFullYear() - user.birthday.getFullYear();
-
-// const bmi = bmiCaculator(weight, height);
-// const bmr = bmrCalculator(percentBodyFat);
-// const tdee = tdeeCalculator(bmr, user.activity);
-
-// let newBodyComposition = {
-//   recordDate: new Date(),
-//   weight: weight,
-//   height: height,
-//   percentBodyFat: percentBodyFat,
-//   BMI: bmi,
-//   BMR: bmr,
-//   TDEE: tdee,
-//   activity: user.activity,
-// }
->>>>>>> 906099a2aee90f38490fb1bc5af62b3a040eb71f:server/src/controllers/user.controller.js
