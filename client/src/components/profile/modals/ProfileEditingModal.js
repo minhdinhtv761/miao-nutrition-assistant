@@ -13,11 +13,11 @@ export const ProfileEditingModal = ({ user }) => {
   const dispatch = useDispatch();
 
   const handleOnSubmit = React.useCallback(() => {
-    let userData = handleUserObject(user);
+    // let userData = handleUserObject(user);
 
-    dispatch(
-      updateUser.updateUserRequest({ userID: user._id, user: userData })
-    );
+    // dispatch(
+    //   updateUser.updateUserRequest({ userID: user._id, user: userData })
+    // );
     
     handleOnClose();
   }, [dispatch, user]);

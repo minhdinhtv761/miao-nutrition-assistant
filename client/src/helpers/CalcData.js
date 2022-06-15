@@ -4,7 +4,7 @@ import moment from "moment";
 
 export const getTodayDailyRecord = (dailyRecord) => {
   let result = dailyRecord.find((item) =>
-    moment(item.recordDate.$date).startOf("day").isSame(moment().startOf("day"))
+    moment(item.recordDate).startOf("day").isSame(moment().startOf("day"))
   );
   return result ? result : defaultNutrition;
 };

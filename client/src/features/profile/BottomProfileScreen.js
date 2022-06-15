@@ -9,20 +9,18 @@ import { ShortNutritionTable } from "./../../components/general/nutritionFact/Sh
 import { Subtitle } from "./../../components/general/typography/Subtitle";
 import { UserBodyInfomation } from "./../../components/profile/UserBodyInfomation";
 import { UserState$ } from "../../redux/selectors";
-import { getLastestElement } from "../../utils/DataFunctions";
 import { useSelector } from "react-redux";
 
 export const BottomProfileScreen = () => {
   const userData = useSelector(UserState$).data;
-  const bodyComposition =
-    userData.bodyCompositions[user.bodyCompositions.length - 1];
+  const { goal, bodyCompositions } = userData;
+  const bodyComposition = bodyCompositions[bodyCompositions.length - 1];
 
   const [user, setUser] = React.useState({
     ...userData,
     weight: bodyComposition.weight,
     height: bodyComposition.height,
   });
-  const { goal } = userData;
 
   return (
     <VStack space={space.m}>

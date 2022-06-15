@@ -38,30 +38,3 @@ export const tdeeCalculator = (bmr, activity) => {
 
   return Math.round(constNumber * bmr);
 };
-
-export const createNewBodyComposition = (user) => {
-  const age = new Date().getFullYear() - user.birthday.getFullYear();
-
-  const bmi = bmiCaculator(user.weight, user.height);
-  const bmr = bmrCalculator(
-    user.percentBodyFat,
-    user.gender,
-    user.weight,
-    user.height,
-    age
-  );
-  const tdee = tdeeCalculator(bmr, user.activity);
-
-  let newBodyComposition = {
-    recordDate: new Date(),
-    weight: user.weight,
-    height: user.height,
-    percentBodyFat: user.percentBodyFat,
-    BMI: bmi,
-    BMR: bmr,
-    TDEE: tdee,
-    activity: user.activity,
-  };
-
-  return newBodyComposition;
-};

@@ -1,6 +1,8 @@
-import mongoose from "mongoose";
-import { MainFoodCompositionSchema } from "../abstract_models/mainFoodComposition.model.js";
+// import { MainFoodCompositionSchema } from "../abstract_models/mainFoodComposition.model.js";
+
+import { MainFoodCompositionSchema } from "./abstract_models/mainFoodComposition.model.js";
 import mealSchema from "./embedded_models/meal.model.js";
+import mongoose from "mongoose";
 
 const schema = new MainFoodCompositionSchema();
 

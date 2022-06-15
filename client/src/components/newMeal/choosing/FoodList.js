@@ -30,6 +30,7 @@ const FoodList = ({ foodList, validationList, onPressIcon, lastElement }) => {
                 id={value._id}
                 title={value.foodName}
                 subtitle={value.servingSizeWeight + value.servingSizeUnit}
+                image={value.images}
                 calo={value.energy}
                 onPress={() => {
                   dispatch(passFoodData(value));

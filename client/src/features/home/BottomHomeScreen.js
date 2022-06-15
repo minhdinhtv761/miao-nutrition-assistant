@@ -9,9 +9,6 @@ import { getCaloriesRecommendPercent } from "../../helpers/CalcData.js";
 import { space } from "./../../styles/layout";
 
 export const BottomHomeScreen = ({ today, goal }) => {
-  const handleMealChoosing = React.useCallback(() => {
-    RootNavigation.push("MealChoosingScreen");
-  }, []);
   const todayMeals =  [];
   const caloRemaining = goal.targetEnergy - today.energy;
   const caloRecommendation =
@@ -19,6 +16,9 @@ export const BottomHomeScreen = ({ today, goal }) => {
       ? caloRemaining * getCaloriesRecommendPercent(todayMeals)
       : 0;
 
+  const handleMealChoosing = React.useCallback(() => {
+    RootNavigation.push("MealChoosingScreen");
+  }, []);
   return (
     <VStack marginY={space.xl} space={space.m} pt={space.l}>
       <MenuTitle title="Bữa ăn" action="Chi tiết" onPressAction={() => {}} />

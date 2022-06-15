@@ -1,5 +1,5 @@
-import { MealType } from "../../constants/enums";
 import { MainFoodCompositionSchema } from "../abstract_models/mainFoodComposition.model.js";
+import { MealType } from "../../constants/enums.js";
 import mealDetailSchema from "./mealDetail.model.js";
 
 const schema = new MainFoodCompositionSchema();

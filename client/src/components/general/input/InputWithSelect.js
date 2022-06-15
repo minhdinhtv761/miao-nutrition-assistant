@@ -32,7 +32,8 @@ const InputWithSelect = (props) => {
             borderWidth="0"
             defaultValue={service}
             borderRadius="full"
-            borderLeftRadius={0}
+            borderTopLeftRadius={0}
+            borderBottomLeftRadius={0}
             bgColor="coolGray.100"
             fontSize={14}
             textAlign="right"
