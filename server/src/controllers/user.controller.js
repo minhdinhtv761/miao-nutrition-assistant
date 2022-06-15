@@ -1,6 +1,5 @@
 import { UserModel } from "../models/user.model.js";
 
-<<<<<<< HEAD
 export const getUserByAccountId = async (req, res) => {
   try {
     const {id} = req.params;
@@ -14,9 +13,6 @@ export const getUserByAccountId = async (req, res) => {
     return res.status(500).json({ error: error });
   }
 };
-=======
-export const getUserByAccountId = async (req, res) => {};
->>>>>>> cce460ccc752271bde5c088299918260fbfdb915
 
 export const updateUser = async (req, res) => {
   try {
@@ -30,9 +26,6 @@ export const updateUser = async (req, res) => {
       }
     );
 
-<<<<<<< HEAD
-    return res.status(200).json(updatedUser);
-=======
     return res
       .status(200)
       .json({
@@ -40,14 +33,11 @@ export const updateUser = async (req, res) => {
         message: "Cập nhật thông tin cá nhân người dùng thành công.",
         data: updatedUser,
       });
->>>>>>> cce460ccc752271bde5c088299918260fbfdb915
   } catch (error) {
     return res.status(500).json({ success: false, message: error });
   }
 };
 
-<<<<<<< HEAD
-=======
 // const age = new Date().getFullYear() - user.birthday.getFullYear();
 
 // const bmi = bmiCaculator(weight, height);
@@ -64,4 +54,3 @@ export const updateUser = async (req, res) => {
 //   TDEE: tdee,
 //   activity: user.activity,
 // }
->>>>>>> cce460ccc752271bde5c088299918260fbfdb915
