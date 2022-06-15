@@ -12,7 +12,6 @@ import { UserState$ } from "../../redux/selectors";
 import { getLastestElement } from "../../utils/DataFunctions";
 import { useSelector } from "react-redux";
 
-s;
 export const BottomProfileScreen = () => {
   const userData = useSelector(UserState$).data;
   const bodyComposition = getLastestElement(userData.bodyCompositions);

@@ -16,7 +16,7 @@ export const ProfileEditingModal = ({ user }) => {
     let userData = handleUserObject(user);
 
     dispatch(
-      updateUser.updateUserRequest({ userID: user._id.$oid, user: userData })
+      updateUser.updateUserRequest({ userID: user._id, user: userData })
     );
     
     handleOnClose();

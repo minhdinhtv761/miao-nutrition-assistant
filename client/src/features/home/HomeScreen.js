@@ -23,7 +23,7 @@ const HomeScreen = () => {
 
   React.useEffect(() => {
     if (data) {
-      setToday(getTodayDailyRecord(data.dailyRecord));
+      setToday(getTodayDailyRecord(data.dailyRecordIds));
     }
     dispatch(fetchFood.fetchFoodRequest());
   }, [dispatch, data]);

@@ -3,24 +3,20 @@ import {
   Center,
   HStack,
   Heading,
-  Skeleton,
   Text,
   VStack,
-  View,
+  View
 } from "native-base";
 import {
   HEADER_HEIGHT,
   SUBBOX_HEIGHT,
-  TOP_BANNER_HEIGHT,
+  TOP_BANNER_HEIGHT
 } from "./../../constants/sizes";
 
 import Colors from "./../../styles/colors";
 import { DetailNutrition } from "../../components/home/DetailNutrition";
-import { Dimensions } from "react-native";
 import { FullNutritionProgress } from "../../components/general/progress/FullNutritionProgress";
-import React from "react";
 import { calcNutritionPercent } from "../../utils/NutritionPercent";
-import { getTodayDailyRecord } from "../../helpers/CalcData";
 import { space } from "./../../styles/layout";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 

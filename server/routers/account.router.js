@@ -8,7 +8,7 @@ import { getUserByAccountId } from "../controllers/user.controller.js";
 
 const router = express.Router();
 
-router.get("/login", getAccountByEmail);
+router.post("/login", getAccountByEmail);
 router.post("/register", createAccount);
 router.get("/:id/user", getUserByAccountId);
 

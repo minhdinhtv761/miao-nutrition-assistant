@@ -4,18 +4,15 @@ import { MealItem } from "./../../components/home/MealItem";
 import { MealTypes } from "../../constants/enums.js";
 import MenuTitle from "../../components/general/typography/MenuTitle";
 import React from "react";
-import { SkeletonItem } from "../../components/general/listItem/SkeletonItem.js";
 import { VStack } from "native-base";
-import { defaultNutrition } from "./../../constants/enums";
 import { getCaloriesRecommendPercent } from "../../helpers/CalcData.js";
-import { getMealToday } from "../../helpers/ConvertData.js";
 import { space } from "./../../styles/layout";
 
 export const BottomHomeScreen = ({ today, goal }) => {
   const handleMealChoosing = React.useCallback(() => {
     RootNavigation.push("MealChoosingScreen");
   }, []);
-  const todayMeals = today !== defaultNutrition ? getMealToday(today) : [];
+  const todayMeals =  [];
   const caloRemaining = goal.targetEnergy - today.energy;
   const caloRecommendation =
     caloRemaining > 0

@@ -4,7 +4,7 @@ import * as api from "../../api";
 import { call, put, takeLatest } from "redux-saga/effects";
 
 export default function* mySaga() {
-  yield takeLatest(actions.getUser.getUserRequest, getUserSaga);
+  yield takeLatest(actions.getUser.getUserRequest, getUserByAccountIdSaga);
   yield takeLatest(actions.updateUser.updateUserRequest, updateUserSaga);
   yield takeLatest(actions.fetchFood.fetchFoodRequest, fetchFoodSaga);
   yield takeLatest(actions.authActions.loginRequest, loginSaga);
@@ -13,7 +13,8 @@ export default function* mySaga() {
 function* loginSaga(action) {
   try {
     const auth = yield call(api.loginAuth, action.payload);
-    yield put(actions.authActions.loginSuccess(auth.data));
+    console.log("auth.message",auth.statusText)
+    yield put(actions.authActions.loginSuccess(auth.data.data));
   } catch (error) {
     console.log(error.message);
     yield put(actions.authActions.loginFailure(error.message));
@@ -21,20 +22,20 @@ function* loginSaga(action) {
 }
 
 /* #region  UserSaga */
-function* getUserSaga(action) {
+function* getUserByAccountIdSaga(action) {
   const userByAccountId = yield call(
     api.getUserByAccountID,
     action.payload
   );
   
-  yield put(actions.getUser.getUserSuccess(userByAccountId.data));
+  yield put(actions.getUser.getUserSuccess(userByAccountId.data.data));
 }
 
 function* updateUserSaga(action) {
   try {
     const user = yield call(api.updateUser, action.payload);
 
-    yield put(actions.updateUser.updateUserSuccess(user.data));
+    yield put(actions.updateUser.updateUserSuccess(user.data.data));
     
   } catch (error) {
     console.log(error);
@@ -47,7 +48,7 @@ function* fetchFoodSaga(action) {
   try {
     const food = yield call(api.fetchFood);
     
-    yield put(actions.fetchFood.fetchFoodSuccess(food.data));
+    yield put(actions.fetchFood.fetchFoodSuccess(food.data.data));
 
   } catch (error) {
     console.log(error);
