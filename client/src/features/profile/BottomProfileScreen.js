@@ -14,7 +14,8 @@ import { useSelector } from "react-redux";
 
 export const BottomProfileScreen = () => {
   const userData = useSelector(UserState$).data;
-  const bodyComposition = getLastestElement(userData.bodyCompositions);
+  const bodyComposition =
+    userData.bodyCompositions[user.bodyCompositions.length - 1];
 
   const [user, setUser] = React.useState({
     ...userData,
@@ -22,7 +23,7 @@ export const BottomProfileScreen = () => {
     height: bodyComposition.height,
   });
   const { goal } = userData;
-  
+
   return (
     <VStack space={space.m}>
       <VStack {...boxStyle} space={space.s}>
