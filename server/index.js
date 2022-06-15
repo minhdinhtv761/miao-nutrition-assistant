@@ -1,6 +1,6 @@
 import "dotenv/config";
 
-import * as routers from "./routers/index.js";
+import * as routers from "./src/routers/index.js";
 
 import bodyParser from "body-parser";
 import cors from "cors";
