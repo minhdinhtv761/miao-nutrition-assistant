@@ -1,6 +1,7 @@
 import { Box, HStack, Heading, Text, VStack } from "native-base";
 import { boxStyle, space } from "../../styles/layout";
 
+import { Activity } from "../../components/profile/Activity";
 import Colors from "../../styles/colors";
 import { HealthInfo } from "./../../components/profile/HealthInfo";
 import MenuTitle from "./../../components/general/typography/MenuTitle";
@@ -14,12 +15,13 @@ import { useSelector } from "react-redux";
 export const BottomProfileScreen = () => {
   const userData = useSelector(UserState$).data;
   const { goal, bodyCompositions } = userData;
-  const bodyComposition = bodyCompositions[bodyCompositions.length - 1];
-
+  // const bodyComposition = bodyCompositions[bodyCompositions.length - 1];
+  const bodyComposition = { weight: 45, height: 154 };
   const [user, setUser] = React.useState({
     ...userData,
     weight: bodyComposition.weight,
     height: bodyComposition.height,
+    activity: bodyComposition.activity,
   });
 
   return (
@@ -53,10 +55,8 @@ export const BottomProfileScreen = () => {
           }}
         />
       </Box>
-      {/* <MenuTitle title="Mức độ vận động" />
-      <Box {...boxStyle} p={0}>
-        <Icon size="md" color={Colors.primary} as={icon.as} name={icon.name} />
-      </Box> */}
+      <MenuTitle title="Mức độ vận động" />
+      <Activity />
 
       {/* <AllergenicFoods /> */}
     </VStack>
