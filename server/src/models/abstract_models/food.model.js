@@ -1,5 +1,5 @@
-import util from "util";
 import { DetailedFoodCompositionSchema } from "./detailedFoodComposition.model.js";
+import util from "util";
 
 export function FoodSchema() {
   // call super
@@ -24,6 +24,10 @@ export function FoodSchema() {
     images: {
       type: String,
       required: true,
+    },
+    barcode: {
+      type: Number,
+      default: null,
     },
   });
 }

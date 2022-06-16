@@ -24,9 +24,9 @@ const FoodList = ({ foodList, validationList, onPressIcon, lastElement }) => {
     <>
       <VStack w="100%" borderRadius="xl" bg="white">
         {list.length
-          ? list.slice(0, 51).map((value, index) => (
+          ? list.map((value, index) => (
               <FoodItem
-                key={index}
+                key={value._id}
                 id={value._id}
                 title={value.foodName}
                 subtitle={value.servingSizeWeight + value.servingSizeUnit}

@@ -26,7 +26,7 @@ app.use("/account", routers.account);
 app.use("/sample-diet", routers.sampleDiet);
 app.use("/sample-food", routers.sampleFood);
 app.use("/user", routers.user);
-app.use("/dailyRecord", routers.dailyRecord);
+// app.use("/dailyRecord", routers.dailyRecord);
 
 mongoose
   .connect(databaseURI, {

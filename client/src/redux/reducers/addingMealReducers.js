@@ -22,10 +22,12 @@ export default function addingMealReducers(state = initState, action) {
       //       value._id === newObject._id ? action.payload : value
       //     )
       //   : [...state.list, action.payload];
-      const newList = [
+      console.log(action.payload)
+      newList = [
         ...state.list.filter((item) => item._id !== action.payload._id),
         action.payload,
       ];
+      console.log(newList);
       return { totalNutrition: calcTotal(newList), list: newList };
     case getType(addingMeal.removeFood):
       newList = state.list.filter((item) => item._id !== action.payload._id);

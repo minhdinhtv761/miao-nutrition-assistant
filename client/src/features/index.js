@@ -8,6 +8,7 @@ import OnBoardingScreen from "./onboarding/OnBoardingScreen";
 import ProfileScreen from "./profile/ProfileScreen";
 import RecipeScreen from "./recipe/RecipeDetailScreen";
 import RegisterScreen from "./auth/RegisterScreen";
+import ScanBarcodeScreen from "./meal/ScanBarcodeScreen";
 
 export {
   LoginScreen,
@@ -20,4 +21,5 @@ export {
   MealAddingScreen,
   IngredientAddingScreen,
   ProfileScreen,
+  ScanBarcodeScreen,
 };
