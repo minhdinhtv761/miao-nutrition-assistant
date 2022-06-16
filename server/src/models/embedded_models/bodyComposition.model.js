@@ -29,7 +29,7 @@ const schema = new mongoose.Schema({
     set: (f) => Math.round(f),
     get: (f) => Math.round(f),
   },
-  acitivity: {
+  activity: {
     type: String,
     required: true,
     enum: [

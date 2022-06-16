@@ -23,7 +23,6 @@ const schema = new mongoose.Schema({
     type: Date,
     required: true,
     default: new Date(),
-    max: Date(),
   },
   backgroundDiseases: {
     type: [String],

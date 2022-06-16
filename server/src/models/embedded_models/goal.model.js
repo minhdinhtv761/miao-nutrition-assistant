@@ -20,6 +20,22 @@ const schema = new mongoose.Schema({
     set: (w) => Math.round(w * 10) / 10,
     get: (w) => Math.round(w * 10) / 10,
   },
+  startPercentBodyFat: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100,
+    set: (f) => Math.round(f * 10) / 10,
+    get: (f) => Math.round(f * 10) / 10,
+  },
+  targetPercentBodyFat: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100,
+    set: (f) => Math.round(f * 10) / 10,
+    get: (f) => Math.round(f * 10) / 10,
+  },
   weightPerWeek: {
     type: Number,
     required: true,
