@@ -9,6 +9,7 @@ import { space } from "./../../../styles/layout";
 export const FoodItem = ({
   title,
   subtitle,
+  image,
   calo,
   onPress,
   iconStatus,
@@ -22,7 +23,7 @@ export const FoodItem = ({
         !createNewFoodButton ? (
           <Image
             source={{
-              uri: "https://wallpaperaccess.com/full/317501.jpg",
+              uri: image,
             }}
             h={widthImage}
             w={widthImage}

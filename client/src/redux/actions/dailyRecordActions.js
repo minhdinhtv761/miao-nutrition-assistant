@@ -1,9 +1,9 @@
 import { createActions } from "redux-actions";
 
-export const fetchDailyRecord = createActions({
-  fetchDailyRecordRequest: undefined,
-  fetchDailyRecordSuccess: (payload) => payload,
-  fetchDailyRecordFailure: (err) => err,
+export const createDailyRecord = createActions({
+  createDailyRecordRequest: undefined,
+  createDailyRecordSuccess: (payload) => payload,
+  createDailyRecordFailure: (err) => err,
 });
 
 export const addingMeal = createActions({

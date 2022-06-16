@@ -16,7 +16,7 @@ import { showProfileEditingModal } from "./../../redux/actions/modalAction";
 export const HealthInfo = ({ user, setUser, bodyComposition }) => {
   const dispatch = useDispatch();
   const userData = useSelector(UserState$).data;
-
+  
   const listItems = {
     gender: {
       title: "Giới tính",
@@ -27,7 +27,7 @@ export const HealthInfo = ({ user, setUser, bodyComposition }) => {
     weight: {
       title: "Cân nặng",
       icon: { as: MaterialCommunityIcons, name: "scale-bathroom" },
-      value: bodyComposition.weight + "kg",
+      value: bodyComposition.weight + " kg",
       component: (
         <WeightHeightModalBody user={user} setUser={setUser} unit="kg" />
       ),
@@ -35,7 +35,7 @@ export const HealthInfo = ({ user, setUser, bodyComposition }) => {
     height: {
       title: "Chiều cao",
       icon: { as: MaterialCommunityIcons, name: "human-male-height" },
-      value: bodyComposition.height + "cm",
+      value: bodyComposition.height + " cm",
       component: (
         <WeightHeightModalBody user={user} setUser={setUser} unit="cm" />
       ),

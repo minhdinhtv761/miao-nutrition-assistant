@@ -7,7 +7,6 @@ import Colors from "../../styles/colors";
 import FoodList from "../../components/newMeal/choosing/FoodList";
 import LayoutWithTabview from "../../components/general/layout/LayoutWithTabview";
 import React from "react";
-import { SkeletonItem } from "./../../components/general/listItem/SkeletonItem";
 import { TurnBackButton } from "./../../components/general/buttons/iconButtons/TurnBackButton";
 import { push } from "../../utils/RootNavigation";
 
@@ -21,8 +20,7 @@ const MealChoosingScreen = () => {
       pressed
         ? dispatch(addingMeal.pushFood(value))
         : dispatch(addingMeal.removeFood(value));
-    },
-    [list.length]
+    },[dispatch]
   );
 
   const goBackAction = React.useCallback(() => {
@@ -79,12 +77,10 @@ const MealChoosingScreen = () => {
   };
 
   return (
-    <>
       <LayoutWithTabview
         topAppBar={topAppBar}
         tabList={tabList}
       />
-    </>
   );
 };
 

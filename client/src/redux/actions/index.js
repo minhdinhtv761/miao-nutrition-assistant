@@ -1,3 +1,4 @@
+import { addingMeal, createDailyRecord } from "./dailyRecordActions";
 import { fetchFood, passFoodData } from "./foodActions";
 import { getUser, updateUser } from "./userActions";
 import {
@@ -7,7 +8,6 @@ import {
   showSnackBarAction,
 } from "./modalAction";
 
-import { addingMeal } from "./dailyRecordActions";
 import { authActions } from "./authActions";
 import { filterActions } from "./filterActions";
 
@@ -24,6 +24,7 @@ export {
   authActions,
   getUser,
   updateUser,
+  createDailyRecord,
   filterActions,
   showProfileEditingModal,
   hideProfileEditingModal,
