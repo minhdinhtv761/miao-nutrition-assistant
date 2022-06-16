@@ -1,8 +1,8 @@
 import express from "express";
-import { getAllSampleDiet } from "../controllers/sampleDiet.controller.js";
+import { getAllSampleDiets } from "../controllers/sampleDiet.controller.js";
 
 const router = express.Router();
 
-router.get("/", getAllSampleDiet);
+router.get("/", getAllSampleDiets);
 
 export default router;

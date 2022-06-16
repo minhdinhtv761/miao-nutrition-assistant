@@ -10,7 +10,7 @@ export const getAccountByEmail = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-        message: "Thông tin đăng nhập không đầy đủ.",
+        message: "Thông tin đăng nhập không đúng.",
       });
     }
 
@@ -43,15 +43,13 @@ export const createAccount = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({
         success: false,
-        message: "Thông tin đăng ký không đầy đủ.",
+        message: "Thông tin đăng ký không đúng.",
       });
     }
 
     const isAccountExist = await AccountModel.findOne({
       email: email,
     });
-
-    console.log(isAccountExist)
 
     if (isAccountExist) {
       return res
@@ -109,7 +107,7 @@ export const updateAccount = async (req, res) => {
     if (!email || !password || !newPassword || !confirmedNewPassword) {
       return res.status(400).json({
         success: false,
-        message: "Thông tin cập nhật mật khẩu không đầy đủ.",
+        message: "Thông tin cập nhật mật khẩu không đúng.",
       });
     }
 

@@ -1,7 +1,12 @@
 import mongoose from "mongoose";
-import { PracticeFrequency } from "../../constants/enums.js";
+import { PracticeFrequency } from "../constants/enums.js";
 
 const schema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
+    required: true,
+  },
   recordDate: {
     type: Date,
     required: true,
@@ -58,4 +63,4 @@ const schema = new mongoose.Schema({
   },
 });
 
-export default schema;
+export const BodyCompositionModel = mongoose.model("bodyCompositions", schema);

@@ -19,7 +19,7 @@ schema.add({
   },
   meals: {
     type: [mealSchema],
-    default: [],
+    required: true,
   },
 });
 

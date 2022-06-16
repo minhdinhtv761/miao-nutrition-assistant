@@ -1,103 +1,169 @@
 import { DailyRecordModel } from "../models/dailyRecord.model.js";
-import { UserModel } from "../models/user.model.js";
-import mongoose from "mongoose";
 
-export const createDailyRecord = async (req, res, next) => {
-  const { id, date } = req.params;
-    const { mealType, time, mealDetails } = req?.body;
+export const getAllDailyRecords = async (req, res) => {
+  try {
+    const { userId } = req?.params;
 
-    // console.log(id, Date(date), req.body);
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: "Tham số trong đường dẫn không đúng.",
+      });
+    }
 
-    const todayDailyRecord = await UserModel.find({
-      accountId: id,
+    const dailyRecords = await DailyRecordModel.find({ userId: userId });
+
+    return res.status(200).json({
+      success: true,
+      message:
+        "Lấy toàn bộ dữ liệu nhật ký dinh dưỡng hằng ngày của người dùng thành công.",
+      data: dailyRecords,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error,
+    });
+  }
+};
+
+export const getOneDailyRecordByFilter = async (req, res) => {
+  try {
+    const filter = req?.body;
+
+    const dailyRecord = await DailyRecordModel.findOne(filter);
+
+    return res.status(200).json({
+      success: true,
+      message:
+        "Lấy dữ liệu nhật ký dinh dưỡng hằng ngày của người dùng thành công.",
+      data: dailyRecord,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error,
+    });
+  }
+};
+
+export const createDailyRecord = async (req, res) => {
+  try {
+    const { userId } = req?.params;
+    const { recordDate, mealType, time, mealDetails } = req?.body;
+
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: "Tham số trong đường dẫn không đúng.",
+      });
+    }
+
+    if (!recordDate || !mealType || !mealDetails.length) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Thông tin tạo bữa ăn cho nhật ký dinh dưỡng hằng ngày không đúng.",
+      });
+    }
+
+    mealDetails.forEach((element) => {
+      if (!element.itemId) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Thông tin tạo bữa ăn cho nhật ký dinh dưỡng hằng ngày không đúng.",
+        });
+      }
     });
 
-    console.log(todayDailyRecord);
-  try {
-    
-    // let today;
-    // if (todayDailyRecord) {
-    //   today = await DailyRecordModel.findByIdAndUpdate(
-    //     todayDailyRecord._id,
-    //     {
-    //       userId: id,
-    //       meals: [
-    //         ...todayDailyRecord.meals,
-    //         {
-    //           mealType,
-    //           time,
-    //           mealDetails: { itemId: "62a8fc0613a99480c5c56e75" },
-    //         },
-    //       ],
-    //     },
-    //     { new: true }
-    //   );
-    // } else {
-    //   today = new DailyRecordModel({
-    //     userId: id,
-    //     meals: [
-    //       {
-    //         mealType,
-    //         time,
-    //         mealDetails: { itemId: "62a8fc0613a99480c5c56e75" },
-    //       },
-    //     ],
-    //   });
+    const meals = [
+      {
+        mealType: mealType,
+        time: time,
+        mealDetails: mealDetails,
+      },
+    ];
 
-    //   today.save();
-    // }
+    const dailyRecord = DailyRecordModel({
+      userId: userId,
+      recordDate: recordDate,
+      meals: meals,
+    });
+    await dailyRecord.save();
 
-    return res.status(200).json(todayDailyRecord);
-    // const todayDailyRecord = await UserModel.findById({ _id: id })
-    //   .populate({
-    //     path: "dailyRecordIds",
-    //   })
-    //   .then((user) => {
-    //     console.log(user);
-    //     return user.dailyRecordIds.find(
-    //       (item) => item.recordDate === new Date().setHours(0, 0, 0, 0)
-    //     );
-    //   });
-
-    // if (todayDailyRecord) {
-    //  const newMeal = await DailyRecordModel.findByIdAndUpdate(
-    //     todayDailyRecord._id,
-    //     {
-    //       meals: [
-    //         ...todayDailyRecord.meals,
-    //         {
-    //           mealType,
-    //           time,
-    //           mealDetails,
-    //         },
-    //       ],
-    //     },
-    //     { new: true }
-    //   );
-    // } else {
-    //   const newDailyRecord = new DailyRecordModel({
-    //     meals: [
-    //       {
-    //         mealType,
-    //         time,
-    //         mealDetails,
-    //       },
-    //     ],
-    //   })
-
-    //   await newDailyRecord.save().then((result) =>
-    //   {
-    //     const user= await UserModel.findByIdAndUpdate({ _id: id },{
-    //     dailyRecordIds: [...user.dailyRecordIds, result]
-    //           })
-
-    //            return res
-    //           .status(200)
-    //           .json({ success: true, message: "Đăng nhập thành công", data: user });
-    //         });
-    // }
+    return res.status(200).json({
+      success: true,
+      message: "Tạo bữa ăn cho nhật ký dinh dưỡng hằng ngày thành công.",
+      data: dailyRecord,
+    });
   } catch (error) {
-    res.status(500).json({ error: error });
-    next();
+    return res.status(500).json({
+      success: false,
+      message: error,
+    });
+  }
+};
+
+export const updateDailyRecord = async (req, res) => {
+  try {
+    const { dailyRecordId, userId } = req?.params;
+    const { recordDate, mealType, time, mealDetails } = req?.body;
+
+    if (!dailyRecordId || !userId) {
+      return res.status(400).json({
+        success: false,
+        message: "Tham số trong đường dẫn không đúng.",
+      });
+    }
+
+    if (!recordDate || !mealType || !mealDetails.length) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Thông tin cập nhật bữa ăn cho nhật ký dinh dưỡng hằng ngày không đúng.",
+      });
+    }
+
+    mealDetails.forEach((element) => {
+      if (!element.itemId) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Thông tin cập nhật bữa ăn cho nhật ký dinh dưỡng hằng ngày không đúng.",
+        });
+      }
+    });
+
+    const dailyRecord = await DailyRecordModel.findOne({
+      userId: userId,
+      _id: dailyRecordId,
+    });
+
+    if (!dailyRecord) {
+      return res.status(400).json({
+        success: false,
+        message: "Nhật ký dinh dưỡng hằng ngày không tồn tại.",
+      });
+    }
+
+    dailyRecord.meals.push({
+      mealType: mealType,
+      time: time,
+      mealDetails: mealDetails,
+    });
+
+    await dailyRecord.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Cập nhật bữa ăn cho nhật ký dinh dưỡng hằng ngày thành công.",
+      data: dailyRecord,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error,
+    });
   }
 };
