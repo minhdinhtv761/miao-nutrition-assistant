@@ -1,6 +1,6 @@
 import { SampleFoodModel } from "../models/sampleFood.model.js";
 
-export const getAllSampleFood = async (req, res) => {
+export const getAllSampleFoods = async (req, res) => {
   try {
     const sampleFoods = await SampleFoodModel.find();
 

@@ -3,16 +3,20 @@ import { MainFoodCompositionSchema } from "../abstract_models/mainFoodCompositio
 
 const schema = new MainFoodCompositionSchema();
 
-schema.add({
-  itemId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "sample_foods",
-    required: true,
+schema.add(
+  {
+    itemId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "sample_foods",
+      required: true,
+    },
+    servingSizeQuantity: {
+      type: Number,
+      default: 100,
+    },
   },
-  servingSizeQuantity: {
-    type: Number,
-    default: 100,
-  },
-});
+);
+
+schema.set("_id", false)
 
 export default schema;

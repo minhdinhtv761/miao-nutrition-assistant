@@ -22,6 +22,7 @@ schema.add({
   },
   mealDetails: {
     type: [mealDetailSchema],
+    required: true,
   },
 });
 

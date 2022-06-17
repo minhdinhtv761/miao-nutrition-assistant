@@ -7,7 +7,7 @@ import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
 
-const username = process.env.USER;
+const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 const database = process.env.DATABASE;
 const host = process.env.HOST;
@@ -26,7 +26,7 @@ app.use("/account", routers.account);
 app.use("/sample-diet", routers.sampleDiet);
 app.use("/sample-food", routers.sampleFood);
 app.use("/user", routers.user);
-app.use("/dailyRecord", routers.dailyRecord);
+app.use("/daily-record", routers.dailyRecord);
 
 mongoose
   .connect(databaseURI, {

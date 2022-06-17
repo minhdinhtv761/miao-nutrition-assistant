@@ -7,7 +7,7 @@ export const getUserByAccountId = async (req, res) => {
     if (!id) {
       return res.status(400).json({
         success: false,
-        message: "Tham số trong đường dẫn không đầy đủ.",
+        message: "Tham số trong đường dẫn không đúng.",
       });
     }
 
@@ -49,7 +49,7 @@ export const createUser = async (req, res) => {
     if (!accountId || !gender || !birthday || !goal) {
       return res.status(200).json({
         success: true,
-        message: "Thông tin tạo người dùng không đầy đủ",
+        message: "Thông tin tạo người dùng không đúng",
         data: user,
       });
     }
@@ -79,23 +79,16 @@ export const createUser = async (req, res) => {
   }
 };
 
+// For update normal user information (include username, gender, birthday, backgroundDiseases)
 export const updateUser = async (req, res) => {
   try {
     const { id } = req?.params;
-    const {
-      username,
-      gender,
-      birthday,
-      backgroundDiseases,
-      bodyCompositions,
-      goal,
-      dailyRecordIds,
-    } = req?.body;
+    const { username, gender, birthday, backgroundDiseases } = req?.body;
 
     if (!id || !gender || !birthday || !goal) {
       return res.status(200).json({
         success: true,
-        message: "Thông tin cập nhật người dùng không đầy đủ.",
+        message: "Thông tin cập nhật người dùng không đúng.",
       });
     }
 
@@ -106,9 +99,6 @@ export const updateUser = async (req, res) => {
         gender: gender,
         birthday: birthday,
         backgroundDiseases: backgroundDiseases,
-        bodyCompositions: bodyCompositions,
-        goal: goal,
-        dailyRecordIds: dailyRecordIds,
       },
       {
         new: true,
@@ -126,4 +116,3 @@ export const updateUser = async (req, res) => {
     return res.status(500).json({ success: false, message: error });
   }
 };
-

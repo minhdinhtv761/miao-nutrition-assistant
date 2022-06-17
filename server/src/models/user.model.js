@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { Gender } from "../constants/enums.js";
-import bodyCompositionSchema from "./embedded_models/bodyComposition.model.js";
 import goalSchema from "./embedded_models/goal.model.js";
 
 const schema = new mongoose.Schema({
@@ -28,22 +27,14 @@ const schema = new mongoose.Schema({
     type: [String],
     default: [],
   },
-  bodyCompositions: {
-    type: [bodyCompositionSchema],
-    default: [],
+  bodyComposition: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "bodyCompositions",
+    unique: true,
   },
   goal: {
     type: goalSchema,
     required: true,
-  },
-  dailyRecordIds: {
-    type: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "daily_records",
-      },
-    ],
-    default: [],
   },
 });
 
