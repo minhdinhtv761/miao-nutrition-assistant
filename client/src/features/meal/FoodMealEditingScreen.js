@@ -47,7 +47,7 @@ const FoodMealEditingScreen = () => {
     <>
       <LayoutWithImage
         topAppBar={topAppBar}
-        uriImage={nutrition.images}
+        uriImage={food.images}
         children={
           <VStack space={space.l}>
             <Heading size="xl" fontWeight="light">
@@ -56,6 +56,7 @@ const FoodMealEditingScreen = () => {
             <InputWithSelect
               label="Nhập lượng nạp vào và đơn vị"
               weight={nutrition.servingSizeWeight}
+              unit={nutrition.servingSizeUnit}
               setWeight={(text) => handleChangeWeight(text)}
             />
             <ShortNutritionTable value={nutrition} />

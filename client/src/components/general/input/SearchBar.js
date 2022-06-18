@@ -1,4 +1,8 @@
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { Icon, Input } from "native-base";
 
 import Colors from "./../../../styles/colors";
@@ -8,19 +12,25 @@ import { space } from "./../../../styles/layout";
 import { useDebounce } from "../../../hooks/useDebounce";
 import { useDispatch } from "react-redux";
 
-const SearchBar = () => {
+const SearchBar = ({ scan, onPressRightIcon }) => {
   const dispatch = useDispatch();
   const [searchText, setSearchText] = React.useState("");
-  const debouncedSearchTerm = useDebounce(searchText, 500);
+  const debouncedSearchTerm = useDebounce(searchText, 300);
 
   const handleSearchTextChange = (text) => {
     setSearchText(text);
   };
 
   React.useEffect(() => {
+<<<<<<< HEAD
     if (debouncedSearchTerm) {
       dispatch(filterActions.searchText(searchText));
     } 
+=======
+    if (debouncedSearchTerm || debouncedSearchTerm === "") {
+      dispatch(filterActions.searchText(searchText));
+    }
+>>>>>>> ScanBarcode
   }, [debouncedSearchTerm]);
 
   return (
@@ -47,12 +57,23 @@ const SearchBar = () => {
         />
       }
       InputRightElement={
-        <Icon
-          mr={space.m}
-          size="5"
-          color={Colors.textLight}
-          as={<AntDesign name="filter" />}
-        />
+        scan ? (
+          <Icon
+            mr={space.m}
+            size="5"
+            color={Colors.textLight}
+            as={<MaterialCommunityIcons name="barcode-scan" />}
+            onPress={onPressRightIcon}
+          />
+        ) : (
+          <Icon
+            mr={space.m}
+            size="5"
+            color={Colors.textLight}
+            as={<AntDesign name="filter" />}
+            onPress={onPressRightIcon}
+          />
+        )
       }
     />
   );

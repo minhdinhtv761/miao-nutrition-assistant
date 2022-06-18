@@ -1,36 +1,22 @@
 import { AddingMealState$, FoodsRemaining$ } from "../../redux/selectors";
 import { Button, Center, Text } from "native-base";
 import { addingMeal, filterActions } from "../../redux/actions";
+import { pop, push } from "../../utils/RootNavigation";
 import { useDispatch, useSelector } from "react-redux";
 
 import Colors from "../../styles/colors";
 import FoodList from "../../components/newMeal/choosing/FoodList";
 import LayoutWithTabview from "../../components/general/layout/LayoutWithTabview";
 import React from "react";
+import SearchBar from "../../components/general/input/SearchBar";
 import { TurnBackButton } from "./../../components/general/buttons/iconButtons/TurnBackButton";
-import { push } from "../../utils/RootNavigation";
 
 const MealChoosingScreen = () => {
+  const [modalVisible, setModalVisible] = React.useState(false);
+
   const dispatch = useDispatch();
   const { list } = useSelector(AddingMealState$);
   const foodList = useSelector(FoodsRemaining$);
-
-  const onAddingFood = React.useCallback(
-    (value, pressed) => {
-      pressed
-        ? dispatch(addingMeal.pushFood(value))
-        : dispatch(addingMeal.removeFood(value));
-    },[dispatch]
-  );
-
-  const goBackAction = React.useCallback(() => {
-    dispatch(addingMeal.resetFoodList());
-    dispatch(filterActions.searchText(""));
-  }, [dispatch]);
-
-  const goNextAction = React.useCallback(() => {
-    push("MealAddingScreen");
-  }, []);
 
   const tabList = [
     {
@@ -68,19 +54,47 @@ const MealChoosingScreen = () => {
   const topAppBar = {
     title: "Thêm bữa ăn",
     backgroundColor: "white",
-    leftIcon: <TurnBackButton goBackAction={goBackAction} />,
+    leftIcon: <TurnBackButton goBackAction={() => goBackAction()} />,
     rightChildren: (
-      <Button variant="ghost" color="primary.500" onPress={goNextAction}>
+      <Button
+        variant="ghost"
+        color="primary.500"
+        onPress={() => goNextAction()}
+      >
         Tiếp
       </Button>
     ),
   };
 
+  const onAddingFood = React.useCallback(
+    (value, pressed) => {
+      pressed
+        ? dispatch(addingMeal.pushFood(value))
+        : dispatch(addingMeal.removeFood(value));
+    },
+    [dispatch]
+  );
+
+  const goBackAction = React.useCallback(() => {
+    dispatch(addingMeal.resetFoodList());
+    dispatch(filterActions.searchText(""));
+  }, [dispatch]);
+
+  const goNextAction = React.useCallback(() => {
+    push("MealAddingScreen");
+  }, [dispatch]);
+
+  const handleOpenScanBarcode = React.useCallback(() => {
+    push("ScanBarcodeScreen");
+  }, [modalVisible]);
   return (
-      <LayoutWithTabview
-        topAppBar={topAppBar}
-        tabList={tabList}
-      />
+    <LayoutWithTabview
+      topAppBar={topAppBar}
+      tabList={tabList}
+      customHeader={
+        <SearchBar scan onPressRightIcon={() => handleOpenScanBarcode()} />
+      }
+    />
   );
 };
 
