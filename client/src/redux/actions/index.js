@@ -1,4 +1,4 @@
-import { addingMeal, createDailyRecord } from "./dailyRecordActions";
+import { addingMeal, createDailyRecord, getDailyRecord } from "./dailyRecordActions";
 import { fetchFood, passFoodData } from "./foodActions";
 import { getUser, updateUser } from "./userActions";
 import {
@@ -24,6 +24,7 @@ export {
   authActions,
   getUser,
   updateUser,
+  getDailyRecord,
   createDailyRecord,
   filterActions,
   showProfileEditingModal,

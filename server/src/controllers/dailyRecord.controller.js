@@ -30,9 +30,8 @@ export const getAllDailyRecords = async (req, res) => {
 export const getOneDailyRecordByFilter = async (req, res) => {
   try {
     const filter = req?.body;
-
     const dailyRecord = await DailyRecordModel.findOne(filter);
-
+    
     return res.status(200).json({
       success: true,
       message:

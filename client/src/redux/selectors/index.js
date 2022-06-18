@@ -6,6 +6,8 @@ export const FoodDataState$ = (state) => state.foodDataReducers;
 
 export const AddingMealState$ = (state) => state.addingMealReducers;
 
+export const DailyRecordState$ = (state) => state.dailyRecordReducers;
+
 export const AuthState$ = (state) => state.authReducers;
 
 export const UserState$ = (state) => state.userReducers;

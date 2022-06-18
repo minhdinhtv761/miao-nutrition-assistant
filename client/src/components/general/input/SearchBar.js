@@ -19,7 +19,7 @@ const SearchBar = () => {
 
   React.useEffect(() => {
     if (debouncedSearchTerm) {
-      dispatch(filterActions.searchText(text));
+      dispatch(filterActions.searchText(searchText));
     } 
   }, [debouncedSearchTerm]);
 

@@ -3,7 +3,6 @@ import { UserModel } from "../models/user.model.js";
 export const getUserByAccountId = async (req, res) => {
   try {
     const { id } = req?.params;
-
     if (!id) {
       return res.status(400).json({
         success: false,
@@ -104,8 +103,6 @@ export const updateUser = async (req, res) => {
         new: true,
       }
     );
-
-    console.log(user);
 
     return res.status(200).json({
       success: true,

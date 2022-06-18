@@ -46,8 +46,8 @@ const LoginScreen = () => {
   if (isLoading) {
     loginForm = <Spinner size="lg" />;
   } else if (account) {
-    navigation.replace("HomeScreen");
     dispatch(getUser.getUserRequest(account._id));
+    navigation.replace("HomeScreen");
   } else {
     loginForm = (
       <Center w="100%">

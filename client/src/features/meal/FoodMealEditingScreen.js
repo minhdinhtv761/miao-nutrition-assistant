@@ -47,7 +47,7 @@ const FoodMealEditingScreen = () => {
     <>
       <LayoutWithImage
         topAppBar={topAppBar}
-        uriImage="https://wallpaperaccess.com/full/317501.jpg"
+        uriImage={nutrition.images}
         children={
           <VStack space={space.l}>
             <Heading size="xl" fontWeight="light">
