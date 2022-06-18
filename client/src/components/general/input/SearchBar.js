@@ -22,15 +22,9 @@ const SearchBar = ({ scan, onPressRightIcon }) => {
   };
 
   React.useEffect(() => {
-<<<<<<< HEAD
-    if (debouncedSearchTerm) {
-      dispatch(filterActions.searchText(searchText));
-    } 
-=======
     if (debouncedSearchTerm || debouncedSearchTerm === "") {
       dispatch(filterActions.searchText(searchText));
     }
->>>>>>> ScanBarcode
   }, [debouncedSearchTerm]);
 
   return (
