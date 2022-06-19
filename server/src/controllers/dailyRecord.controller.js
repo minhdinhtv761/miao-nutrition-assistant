@@ -33,6 +33,13 @@ export const getOneDailyRecordByFilter = async (req, res) => {
 
     const dailyRecord = await DailyRecordModel.findOne(filter);
 
+    if (!dailyRecord) {
+      return res.status(400).json({
+        success: false,
+        message: "Nhật ký dinh dưỡng hằng ngày không tồn tại.",
+      });
+    }
+
     return res.status(200).json({
       success: true,
       message:
@@ -94,70 +101,7 @@ export const createDailyRecord = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "Tạo bữa ăn cho nhật ký dinh dưỡng hằng ngày thành công.",
-      data: dailyRecord,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error,
-    });
-  }
-};
-
-export const updateDailyRecord = async (req, res) => {
-  try {
-    const { dailyRecordId, userId } = req?.params;
-    const { recordDate, mealType, time, mealDetails } = req?.body;
-
-    if (!dailyRecordId || !userId) {
-      return res.status(400).json({
-        success: false,
-        message: "Tham số trong đường dẫn không đúng.",
-      });
-    }
-
-    if (!recordDate || !mealType || !mealDetails.length) {
-      return res.status(400).json({
-        success: false,
-        message:
-          "Thông tin cập nhật bữa ăn cho nhật ký dinh dưỡng hằng ngày không đúng.",
-      });
-    }
-
-    mealDetails.forEach((element) => {
-      if (!element.itemId) {
-        return res.status(400).json({
-          success: false,
-          message:
-            "Thông tin cập nhật bữa ăn cho nhật ký dinh dưỡng hằng ngày không đúng.",
-        });
-      }
-    });
-
-    const dailyRecord = await DailyRecordModel.findOne({
-      userId: userId,
-      _id: dailyRecordId,
-    });
-
-    if (!dailyRecord) {
-      return res.status(400).json({
-        success: false,
-        message: "Nhật ký dinh dưỡng hằng ngày không tồn tại.",
-      });
-    }
-
-    dailyRecord.meals.push({
-      mealType: mealType,
-      time: time,
-      mealDetails: mealDetails,
-    });
-
-    await dailyRecord.save();
-
-    return res.status(200).json({
-      success: true,
-      message: "Cập nhật bữa ăn cho nhật ký dinh dưỡng hằng ngày thành công.",
+      message: "Tạo nhật ký dinh dưỡng hằng ngày thành công.",
       data: dailyRecord,
     });
   } catch (error) {
