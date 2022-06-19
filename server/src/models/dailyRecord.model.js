@@ -14,7 +14,6 @@ schema.add({
   },
   recordDate: {
     type: Date,
-    unique: true,
     required: true,
     default: new Date(),
   },

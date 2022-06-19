@@ -29,9 +29,19 @@ export const getAllDailyRecords = async (req, res) => {
 
 export const getOneDailyRecordByFilter = async (req, res) => {
   try {
+    const { userId } = req?.params;
     const filter = req?.body;
 
-    const dailyRecord = await DailyRecordModel.findOne(filter);
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: "Tham số trong đường dẫn không đúng.",
+      });
+    }
+
+    const dailyRecord = await DailyRecordModel.findOne(filter).where(
+      "userId === userId"
+    );
 
     if (!dailyRecord) {
       return res.status(400).json({
@@ -103,6 +113,43 @@ export const createDailyRecord = async (req, res) => {
       success: true,
       message: "Tạo nhật ký dinh dưỡng hằng ngày thành công.",
       data: dailyRecord,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error,
+    });
+  }
+};
+
+export const RemoveDailyRecord = async (req, res) => {
+  try {
+    const { dailyRecordId, userId } = req?.params;
+
+    if (!dailyRecordId || !userId) {
+      return res.status(400).json({
+        success: false,
+        message: "Tham số trong đường dẫn không đúng.",
+      });
+    }
+
+    const dailyRecord = await DailyRecordModel.findOne({
+      _id: dailyRecordId,
+      userId: userId,
+    });
+
+    if (!dailyRecord) {
+      return res.status(400).json({
+        success: false,
+        message: "Nhật ký dinh dưỡng hằng ngày không tồn tại.",
+      });
+    }
+
+    dailyRecord.remove();
+
+    return res.status(200).json({
+      success: true,
+      message: "Xóa nhật ký dinh dưỡng hằng ngày thành công.",
     });
   } catch (error) {
     return res.status(500).json({

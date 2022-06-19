@@ -92,18 +92,6 @@ export const updateOneMealInDailyRecord = async (req, res) => {
       }
     });
 
-    // const dailyRecord = await DailyRecordModel.findOneAndUpdate(
-    //   { _id: dailyRecordId, "meals._id": mealId },
-    //   {
-    //     $set: {
-    //       "meals.$.mealType": mealType,
-    //       "meals.$.time": time,
-    //       "meals.$.mealDetails": mealDetails,
-    //     },
-    //   },
-    //   { new: true }
-    // );
-
     const dailyRecord = await DailyRecordModel.findOne({ _id: dailyRecordId });
 
     if (!dailyRecord) {
@@ -132,7 +120,7 @@ export const updateOneMealInDailyRecord = async (req, res) => {
     meal.mealType = mealType;
     meal.time = time;
     meal.mealDetails = mealDetails;
-    dailyRecord.save()
+    dailyRecord.save();
 
     return res.status(200).json({
       success: true,
@@ -179,13 +167,23 @@ export const removeOneMealInDailyRecord = async (req, res) => {
     }
 
     meal.remove();
-    dailyRecord.save();
 
-    return res.status(200).json({
-      success: true,
-      message: "Xóa bữa ăn cho nhật ký dinh dưỡng hằng ngày thành công.",
-      data: dailyRecord,
-    });
+    if (dailyRecord.meals.length === 0) {
+      dailyRecord.remove();
+
+      return res.status(200).json({
+        success: true,
+        message: "Xóa nhật ký dinh dưỡng hằng ngày thành công.",
+      });
+    } else {
+      dailyRecord.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "Xóa bữa ăn cho nhật ký dinh dưỡng hằng ngày thành công.",
+        data: dailyRecord,
+      });
+    }
   } catch (error) {
     return res.status(500).json({
       success: false,
