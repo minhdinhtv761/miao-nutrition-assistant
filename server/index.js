@@ -24,6 +24,7 @@ app.use(cors());
 
 app.use("/account", routers.account);
 app.use("/daily-record", routers.dailyRecord);
+app.use("/goal", routers.goal);
 app.use("/meal", routers.meal);
 app.use("/sample-diet", routers.sampleDiet);
 app.use("/sample-food", routers.sampleFood);
