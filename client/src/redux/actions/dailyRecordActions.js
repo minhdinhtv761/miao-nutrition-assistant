@@ -7,7 +7,7 @@ export const getDailyRecord = createActions({
 });
 
 export const createDailyRecord = createActions({
-  createDailyRecordRequest: undefined,
+  createDailyRecordRequest: (payload) => payload,
   createDailyRecordSuccess: (payload) => payload,
   createDailyRecordFailure: (err) => err,
 });
@@ -17,4 +17,3 @@ export const updateDailyRecord = createActions({
   updateDailyRecordSuccess: (payload) => payload,
   updateDailyRecordFailure: (err) => err,
 });
-

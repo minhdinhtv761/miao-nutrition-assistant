@@ -39,7 +39,7 @@ const MealAddingScreen = () => {
   const chooseOtherFoods = React.useCallback(() => {
     pop();
   }, [dispatch]);
-  
+
   const onAddingFood = React.useCallback(
     (value, pressed) => {
       if (pressed) {
@@ -63,6 +63,14 @@ const MealAddingScreen = () => {
       },
     };
     if (dailyRecord.data === null) {
+      dispatch(createDailyRecord.createDailyRecordRequest(payload));
+    } else {
+      dispatch(
+        updateDailyRecord.updateDailyRecordRequest({
+          ...payload,
+          dailyRecordId: dailyRecord._id,
+        })
+      );
     }
 
     onCancel();

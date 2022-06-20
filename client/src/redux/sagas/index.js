@@ -2,13 +2,24 @@ import * as actions from "../actions";
 import * as api from "../../api";
 
 import { call, put, takeLatest } from "redux-saga/effects";
+import { createDailyRecordSaga, getDailyRecordSaga, updateDailyRecordSaga } from "./dailyRecordSagas";
+import { getUserByAccountIdSaga, updateUserSaga } from "./userSagas";
 
 export default function* mySaga() {
   yield takeLatest(actions.getUser.getUserRequest, getUserByAccountIdSaga);
   yield takeLatest(actions.updateUser.updateUserRequest, updateUserSaga);
+  
   yield takeLatest(
     actions.getDailyRecord.getDailyRecordRequest,
     getDailyRecordSaga
+  );
+  yield takeLatest(
+    actions.updateDailyRecord.updateDailyRecordRequest,
+    updateDailyRecordSaga
+  );
+  yield takeLatest(
+    actions.createDailyRecord.createDailyRecordRequest,
+   createDailyRecordSaga
   );
   yield takeLatest(actions.fetchFood.fetchFoodRequest, fetchFoodSaga);
   yield takeLatest(actions.authActions.loginRequest, loginSaga);
@@ -24,28 +35,6 @@ function* loginSaga(action) {
   }
 }
 
-/* #region  UserSaga */
-function* getUserByAccountIdSaga(action) {
-  try {
-    const userByAccountId = yield call(api.getUserByAccountID, action.payload);
-    yield put(actions.getUser.getUserSuccess(userByAccountId.data.data));
-  } catch (error) {
-    console.log(error);
-    yield put(actions.getUser.getUserFailure(error));
-  }
-}
-
-function* updateUserSaga(action) {
-  try {
-    const user = yield call(api.updateUser, action.payload);
-
-    yield put(actions.updateUser.updateUserSuccess(user.data.data));
-  } catch (error) {
-    console.log(error);
-    yield put(actions.updateUser.updateUserFailure(error));
-  }
-}
-/* #endregion */
 function* fetchFoodSaga(action) {
   try {
     const food = yield call(api.fetchFood);
@@ -54,18 +43,5 @@ function* fetchFoodSaga(action) {
   } catch (error) {
     console.log(error);
     yield put(actions.fetchFood.fetchFoodFailure(error));
-  }
-}
-
-function* getDailyRecordSaga(action) {
-  try {
-    const dailyRecord = yield call(api.getDailyRecord, action.payload);
-
-    yield put(
-      actions.getDailyRecord.getDailyRecordSuccess(dailyRecord.data.data)
-    );
-  } catch (error) {
-    console.log(error);
-    yield put(actions.getDailyRecord.getDailyRecordFailure(error));
   }
 }

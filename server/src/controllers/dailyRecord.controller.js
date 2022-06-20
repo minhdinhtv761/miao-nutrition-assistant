@@ -30,9 +30,9 @@ export const getAllDailyRecords = async (req, res) => {
 export const getOneDailyRecordByFilter = async (req, res) => {
   try {
     const filter = req?.body;
-    console.log(filter)
+    console.log(filter);
     const dailyRecord = await DailyRecordModel.findOne(filter);
-    
+
     return res.status(200).json({
       success: true,
       message:
@@ -91,7 +91,7 @@ export const createDailyRecord = async (req, res) => {
       meals: meals,
     });
     await dailyRecord.save();
-
+    console.log("create dailyRecord", dailyRecord);
     return res.status(200).json({
       success: true,
       message: "Tạo bữa ăn cho nhật ký dinh dưỡng hằng ngày thành công.",
@@ -154,6 +154,7 @@ export const updateDailyRecord = async (req, res) => {
     });
 
     await dailyRecord.save();
+    console.log("update dailyRecord", dailyRecord);
 
     return res.status(200).json({
       success: true,
