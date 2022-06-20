@@ -2,12 +2,12 @@ import { Radio } from "native-base";
 import React from "react";
 import { space } from "../../../styles/layout";
 
-export const GenderModalBody = ({ user, setUser }) => {
-  const [state, setState] = React.useState(user.gender);
+export const GenderModalBody = ({ userTemp, setUserTemp }) => {
+  const [state, setState] = React.useState(userTemp.gender);
   const handleOnChange = React.useCallback(
     (nextValue) => {
       setState(nextValue);
-      setUser({ ...user, gender: nextValue });
+      setUserTemp({ ...userTemp, gender: nextValue });
     },
     [state]
   );

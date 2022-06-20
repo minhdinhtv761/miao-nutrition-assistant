@@ -5,6 +5,7 @@ import {
 } from "./dailyRecordActions";
 import { fetchFood, passFoodData } from "./foodActions";
 import { getUser, updateUser } from "./userActions";
+import { hideEdittingUser, showEdittingUser } from './edittingUserActions';
 import {
   hideProfileEditingModal,
   hideSnackBarAction,
@@ -35,4 +36,6 @@ export {
   filterActions,
   showProfileEditingModal,
   hideProfileEditingModal,
+  showEdittingUser,
+  hideEdittingUser
 };

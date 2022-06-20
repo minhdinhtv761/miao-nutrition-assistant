@@ -7,17 +7,14 @@ import { ProfileEditingModalState$ } from "../../../redux/selectors";
 import React from "react";
 import moment from "moment";
 
-export const ProfileEditingModal = ({ user }) => {
+export const ProfileEditingModal = ({ userTemp, setUser }) => {
   const { isShow, component, title } = useSelector(ProfileEditingModalState$);
   const dispatch = useDispatch();
 
   const handleOnSubmit = React.useCallback(() => {
-    // dispatch(
-    //   updateUser.updateUserRequest({ userID: user._id, user: userData })
-    // );
-    
+    setUser(userTemp);
     handleOnClose();
-  }, [dispatch, user]);
+  }, [dispatch, userTemp]);
 
   const handleOnClose = React.useCallback(() =>
     dispatch(hideProfileEditingModal())

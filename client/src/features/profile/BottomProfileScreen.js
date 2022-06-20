@@ -12,17 +12,9 @@ import { UserBodyInfomation } from "./../../components/profile/UserBodyInfomatio
 import { UserState$ } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 
-export const BottomProfileScreen = () => {
-  const userData = useSelector(UserState$).data;
-  const { goal, bodyCompositions } = userData;
-  // const bodyComposition = bodyCompositions[bodyCompositions.length - 1];
+export const BottomProfileScreen = ({ user, setUser }) => {
+  const { goal } = user;
   const bodyComposition = { weight: 45, height: 154 };
-  const [user, setUser] = React.useState({
-    ...userData,
-    weight: bodyComposition.weight,
-    height: bodyComposition.height,
-    activity: bodyComposition.activity,
-  });
 
   return (
     <VStack space={space.m}>
@@ -34,13 +26,12 @@ export const BottomProfileScreen = () => {
         </HStack>
       </VStack>
       <UserBodyInfomation
-        user={{ tdee: bodyComposition.TDEE, bmi: bodyComposition.BMI }}
+        user={{TDEE: 2000, BMI: 19.4}}
       />
       <MenuTitle title="Sức khỏe" />
       <HealthInfo
         user={user}
         setUser={setUser}
-        bodyComposition={bodyComposition}
       />
       <MenuTitle title="Dinh dưỡng" />
       <Box {...boxStyle} p={0}>

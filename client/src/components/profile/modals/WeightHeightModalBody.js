@@ -3,9 +3,9 @@ import { Input, InputGroup, InputRightAddon, Stack } from "native-base";
 import React from "react";
 import { space } from "../../../styles/layout";
 
-export const WeightHeightModalBody = ({ user, setUser, unit }) => {
+export const WeightHeightModalBody = ({ userTemp, setUserTemp, unit }) => {
   const [text, setText] = React.useState(
-    unit === "kg" ? user.weight : user.height
+    unit === "kg" ? userTemp.weight : userTemp.height
   );
 
   const handleOnTextChange = (text) => {
@@ -13,9 +13,9 @@ export const WeightHeightModalBody = ({ user, setUser, unit }) => {
   };
   const handleOnDone = () => {
     if (unit === "kg") {
-      setUser({ ...user, weight: Number(text) });
+      setUserTemp({ ...userTemp, weight: Number(text) });
     } else {
-      setUser({ ...user, height: Number(text) });
+      setUserTemp({ ...userTemp, height: Number(text) });
     }
   };
   return (

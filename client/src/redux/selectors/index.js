@@ -39,3 +39,5 @@ export const FoodByBarcode$ = createSelector(
     return foodList.find((food) => food.barcode === Number(barcode));
   }
 );
+
+export const EdittingUserState$ = (state) => state.edittingUserReducers;

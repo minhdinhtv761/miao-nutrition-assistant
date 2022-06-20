@@ -7,6 +7,36 @@ import { Pressable } from "react-native";
 import React from "react";
 import { Subtitle } from "../general/typography/Subtitle";
 
+export const Activity = () => {
+  const [user, setUser] = React.useState({ activity: "Always" });
+  const handleActivitySelected = React.useCallback((key) => {
+    setUser({ ...user, activity: key });
+  }, []);
+
+  return (
+    <Box {...boxStyle}>
+      <VStack alignItems="center" space={space.m}>
+        <HStack justifyContent="space-between" w="100%">
+          {Object.entries(listItems).map(([key, value], index) => (
+            <Pressable key={key} onPress={() => handleActivitySelected(key)}>
+              <VStack alignItems="center" space={1}>
+                <Element icon={value.icon} isSelected={key === user.activity} />
+                <Text color={key === user.activity ? "black" : "muted.200"}>
+                  {index + 1}
+                </Text>
+              </VStack>
+            </Pressable>
+          ))}
+        </HStack>
+        <VStack alignItems="center" space={1}>
+          <Heading size="sm">{listItems[user.activity].title}</Heading>
+          <Text color={Colors.textLight} textAlign="center">{listItems[user.activity].description}</Text>
+        </VStack>
+      </VStack>
+    </Box>
+  );
+};
+
 const listItems = {
   Rarely: {
     title: "Không hoặc ít vận động",
@@ -40,34 +70,3 @@ const Element = ({ icon, isSelected }) => (
     <Icon size="sm" color="white" as={icon.as} name={icon.name} />
   </Circle>
 );
-
-// export const Activity = ({ user, setUser }) => {
-export const Activity = () => {
-  const [user, setUser] = React.useState({ activity: "Always" });
-  const handleActivitySelected = React.useCallback((key) => {
-    setUser({ ...user, activity: key });
-  }, []);
-
-  return (
-    <Box {...boxStyle}>
-      <VStack alignItems="center" space={space.m}>
-        <HStack justifyContent="space-between" w="100%">
-          {Object.entries(listItems).map(([key, value], index) => (
-            <Pressable key={key} onPress={() => handleActivitySelected(key)}>
-              <VStack alignItems="center" space={1}>
-                <Element icon={value.icon} isSelected={key === user.activity} />
-                <Text color={key === user.activity ? "black" : "muted.200"}>
-                  {index + 1}
-                </Text>
-              </VStack>
-            </Pressable>
-          ))}
-        </HStack>
-        <VStack alignItems="center" space={1}>
-          <Heading size="sm">{listItems[user.activity].title}</Heading>
-          <Text color={Colors.textLight} textAlign="center">{listItems[user.activity].description}</Text>
-        </VStack>
-      </VStack>
-    </Box>
-  );
-};
