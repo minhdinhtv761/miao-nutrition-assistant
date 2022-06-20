@@ -18,7 +18,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 const ScanBarcodeScreen = () => {
   const dispatch = useDispatch();
   const foodData = useSelector(FoodByBarcode$);
-  console.log("foodData", foodData)
 
   const safeArea = useSafeAreaInsets();
   const heightHeader = HEADER_HEIGHT + safeArea.top;

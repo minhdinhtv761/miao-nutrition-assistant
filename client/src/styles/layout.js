@@ -1,7 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
 
-import colors from "./colors";
-import { typography } from "./typography";
 
 export const space = {
   sx: 1,
