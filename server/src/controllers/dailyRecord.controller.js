@@ -29,8 +29,26 @@ export const getAllDailyRecords = async (req, res) => {
 
 export const getOneDailyRecordByFilter = async (req, res) => {
   try {
+    const { userId } = req?.params;
     const filter = req?.body;
-    const dailyRecord = await DailyRecordModel.findOne(filter);
+
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: "Tham số trong đường dẫn không đúng.",
+      });
+    }
+
+    const dailyRecord = await DailyRecordModel.findOne(filter).where(
+      "userId === userId"
+    );
+
+    if (!dailyRecord) {
+      return res.status(400).json({
+        success: false,
+        message: "Nhật ký dinh dưỡng hằng ngày không tồn tại.",
+      });
+    }
 
     return res.status(200).json({
       success: true,
@@ -96,7 +114,7 @@ export const createDailyRecord = async (req, res) => {
    
     return res.status(200).json({
       success: true,
-      message: "Tạo bữa ăn cho nhật ký dinh dưỡng hằng ngày thành công.",
+      message: "Tạo nhật ký dinh dưỡng hằng ngày thành công.",
       data: dailyRecord,
     });
   } catch (error) {
@@ -107,10 +125,9 @@ export const createDailyRecord = async (req, res) => {
   }
 };
 
-export const updateDailyRecord = async (req, res) => {
+export const RemoveDailyRecord = async (req, res) => {
   try {
     const { dailyRecordId, userId } = req?.params;
-    const { recordDate, mealType, time, mealDetails } = req?.body;
 
     if (!dailyRecordId || !userId) {
       return res.status(400).json({
@@ -119,27 +136,9 @@ export const updateDailyRecord = async (req, res) => {
       });
     }
 
-    if (!recordDate || !mealType || !mealDetails.length) {
-      return res.status(400).json({
-        success: false,
-        message:
-          "Thông tin cập nhật bữa ăn cho nhật ký dinh dưỡng hằng ngày không đúng.",
-      });
-    }
-
-    mealDetails.forEach((element) => {
-      if (!element.itemId) {
-        return res.status(400).json({
-          success: false,
-          message:
-            "Thông tin cập nhật bữa ăn cho nhật ký dinh dưỡng hằng ngày không đúng.",
-        });
-      }
-    });
-
     const dailyRecord = await DailyRecordModel.findOne({
-      userId: userId,
       _id: dailyRecordId,
+      userId: userId,
     });
 
     if (!dailyRecord) {
@@ -149,19 +148,11 @@ export const updateDailyRecord = async (req, res) => {
       });
     }
 
-    dailyRecord.meals.push({
-      mealType: mealType,
-      time: time,
-      mealDetails: mealDetails,
-    });
-
-    await dailyRecord.save();
-    console.log("update dailyRecord", dailyRecord);
+    dailyRecord.remove();
 
     return res.status(200).json({
       success: true,
-      message: "Cập nhật bữa ăn cho nhật ký dinh dưỡng hằng ngày thành công.",
-      data: dailyRecord,
+      message: "Xóa nhật ký dinh dưỡng hằng ngày thành công.",
     });
   } catch (error) {
     return res.status(500).json({

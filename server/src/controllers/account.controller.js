@@ -118,23 +118,24 @@ export const updateAccount = async (req, res) => {
       });
     }
 
-    const account = AccountModel.findOne({ email: email, password: password });
+    const account = await AccountModel.findOneAndUpdate(
+      { email: email, password: password },
+      { password: newPassword },
+      { new: true }
+    );
 
     if (account) {
-      account.password = newPassword;
-      account.save();
+      return res.status(200).json({
+        success: true,
+        message: "Cập nhật mật khẩu mới cho tài khoản thành công.",
+        data: account,
+      });
     } else {
       return res.status(400).json({
         success: false,
         message: "Email hoặc mật khẩu không đúng.",
       });
     }
-
-    return res.status(200).json({
-      success: true,
-      message: "Cập nhật mật khẩu mới cho tài khoản thành công.",
-      data: account,
-    });
   } catch (error) {
     return res.status(500).json({ success: false, message: error });
   }
