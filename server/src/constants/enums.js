@@ -15,7 +15,7 @@ export const MealType = {
   BREAKFAST: "Breakfast",
   LUNCH: "Lunch",
   DINNER: "Dinner",
-  OTHERS: "Others",
+  SNACK: "Snack",
 };
 
 export const RecipeLevel = {

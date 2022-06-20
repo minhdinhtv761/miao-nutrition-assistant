@@ -40,9 +40,8 @@ export const createUser = async (req, res) => {
       gender,
       birthday,
       backgroundDiseases,
-      bodyCompositions,
+      bodyComposition,
       goal,
-      dailyRecordIds,
     } = req?.body;
 
     if (!accountId || !gender || !birthday || !goal) {
@@ -59,9 +58,8 @@ export const createUser = async (req, res) => {
       gender: gender,
       birthday: birthday,
       backgroundDiseases: backgroundDiseases,
-      bodyCompositions: bodyCompositions,
+      bodyComposition: bodyComposition,
       goal: goal,
-      dailyRecordIds: dailyRecordIds,
     });
     await user.save();
 
@@ -84,7 +82,7 @@ export const updateUser = async (req, res) => {
     const { id } = req?.params;
     const { username, gender, birthday, backgroundDiseases } = req?.body;
 
-    if (!id || !gender || !birthday || !goal) {
+    if (!id || !gender || !birthday) {
       return res.status(200).json({
         success: true,
         message: "Thông tin cập nhật người dùng không đúng.",

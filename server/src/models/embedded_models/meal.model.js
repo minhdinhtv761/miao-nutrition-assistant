@@ -12,7 +12,7 @@ schema.add({
       MealType.BREAKFAST,
       MealType.LUNCH,
       MealType.DINNER,
-      MealType.OTHERS,
+      MealType.SNACK,
     ],
     default: MealType.BREAKFAST,
   },
