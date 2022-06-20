@@ -1,4 +1,8 @@
-import { addingMeal, createDailyRecord, getDailyRecord } from "./dailyRecordActions";
+import {
+  createDailyRecord,
+  getDailyRecord,
+  updateDailyRecord,
+} from "./dailyRecordActions";
 import { fetchFood, passFoodData } from "./foodActions";
 import { getUser, updateUser } from "./userActions";
 import {
@@ -8,6 +12,7 @@ import {
   showSnackBarAction,
 } from "./modalAction";
 
+import { addingMealActions } from './addingMealActions';
 import { authActions } from "./authActions";
 import { filterActions } from "./filterActions";
 
@@ -18,7 +23,7 @@ export const getType = (reduxAction) => {
 export {
   fetchFood,
   passFoodData,
-  addingMeal,
+  addingMealActions,
   showSnackBarAction,
   hideSnackBarAction,
   authActions,
@@ -26,6 +31,7 @@ export {
   updateUser,
   getDailyRecord,
   createDailyRecord,
+  updateDailyRecord,
   filterActions,
   showProfileEditingModal,
   hideProfileEditingModal,

@@ -5,7 +5,6 @@ import { BottomActionSheet } from "./../../general/actionsheet/BottomActionSheet
 import { Button } from "native-base";
 import { ProfileEditingModalState$ } from "../../../redux/selectors";
 import React from "react";
-import { handleUserObject } from "../../../helpers/dataConvert";
 import moment from "moment";
 
 export const ProfileEditingModal = ({ user }) => {
@@ -13,8 +12,6 @@ export const ProfileEditingModal = ({ user }) => {
   const dispatch = useDispatch();
 
   const handleOnSubmit = React.useCallback(() => {
-    // let userData = handleUserObject(user);
-
     // dispatch(
     //   updateUser.updateUserRequest({ userID: user._id, user: userData })
     // );

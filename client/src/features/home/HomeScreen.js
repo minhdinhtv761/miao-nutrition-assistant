@@ -1,10 +1,10 @@
-import { Center, Icon, Spinner } from "native-base";
 import { DailyRecordState$, UserState$ } from "../../redux/selectors";
-import { fetchFood, getDailyRecord, getUser } from "../../redux/actions";
+import { fetchFood, getDailyRecord } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Animated } from "react-native";
 import { BottomHomeScreen } from "./BottomHomeScreen";
 import Colors from "./../../styles/colors";
+import { Icon } from "native-base";
 import LayoutWithImage from "../../components/general/layout/LayoutWithImage";
 import { LoadingScreen } from "../../components/general/LoadingScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -12,15 +12,14 @@ import { MenuButton } from "../../components/general/buttons/iconButtons/Menu/Me
 import React from "react";
 import { TopHomeScreen } from "./TopHomeScreen";
 import { defaultNutrition } from "./../../constants/enums";
-import { getTodayDailyRecord } from "../../helpers/CalcData";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { startOfDate } from "./../../utils/Date";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const userData = useSelector(UserState$);
   const todayDailyRecord = useSelector(DailyRecordState$);
   const [today, setToday] = React.useState(defaultNutrition);
+  const [dateFilter, setDateFilter] = React.useState(startOfDate(new Date()));
 
   React.useEffect(() => {
     if (userData.data) {
@@ -28,7 +27,7 @@ const HomeScreen = () => {
         dispatch(
           getDailyRecord.getDailyRecordRequest({
             userId: userData.data._id,
-            filter: { recordDate: new Date() },
+            filter: { recordDate: dateFilter },
           })
         );
         dispatch(fetchFood.fetchFoodRequest());
@@ -40,19 +39,11 @@ const HomeScreen = () => {
         }
       }
     }
-  }, [dispatch, userData.data, todayDailyRecord]);
+  }, [dispatch, userData.data, todayDailyRecord, dateFilter]);
 
   const topAppBar = {
     title: "Home",
     backgroundColor: "primary.500",
-    // leftIcon: (
-    //   <Icon
-    //     size="sm"
-    //     as={MaterialCommunityIcons}
-    //     name="menu"
-    //     onPress={() => {}}
-    //   />
-    // ),
     leftIcon: <MenuButton />,
     rightChildren: (
       <Icon size="sm" as={MaterialCommunityIcons} name="calendar-blank" />

@@ -5,7 +5,7 @@ import { MealTypes } from "../../constants/enums.js";
 import MenuTitle from "../../components/general/typography/MenuTitle";
 import React from "react";
 import { VStack } from "native-base";
-import { getCaloriesRecommendPercent } from "../../helpers/CalcData.js";
+import { getCaloriesRecommendPercent } from "../../helpers/dataCalc.js";
 import { space } from "./../../styles/layout";
 
 export const BottomHomeScreen = ({ today, goal }) => {
