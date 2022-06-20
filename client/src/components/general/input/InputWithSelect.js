@@ -5,7 +5,7 @@ import { Subtitle } from "../typography/Subtitle";
 import { space } from "./../../../styles/layout";
 
 const InputWithSelect = (props) => {
-  let [service, setService] = React.useState("g");
+  let [service, setService] = React.useState(props.unit);
   const [value, setValue] = React.useState(props.weight.toString());
   return (
     <VStack space={space.s}>
@@ -42,7 +42,7 @@ const InputWithSelect = (props) => {
             }}
             onValueChange={(itemValue) => setService(itemValue)}
           >
-            <Select.Item label="g" value="g" />
+            <Select.Item label={props.unit} value={props.unit} />
             {/* <Select.Item label="Web Development" value="web" />
             <Select.Item label="Cross Platform Development" value="cross" />
             <Select.Item label="UI Designing" value="ui" />

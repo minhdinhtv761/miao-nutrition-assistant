@@ -7,6 +7,7 @@ import {
   OnBoardingScreen,
   RecipeScreen,
   RegisterScreen,
+  ScanBarcodeScreen,
 } from "./src/features";
 
 import { BottomAppBar } from "./src/components/general/appbar/BottomAppBar";
@@ -45,6 +46,7 @@ const Navigation = () => {
           name="FoodMealEditingScreen"
           component={FoodMealEditingScreen}
         />
+        <Stack.Screen name="ScanBarcodeScreen" component={ScanBarcodeScreen} />
         <Stack.Screen
           name="MealChoosingScreen"
           component={MealChoosingScreen}

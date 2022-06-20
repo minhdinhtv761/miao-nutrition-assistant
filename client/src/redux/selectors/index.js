@@ -6,6 +6,8 @@ export const FoodDataState$ = (state) => state.foodDataReducers;
 
 export const AddingMealState$ = (state) => state.addingMealReducers;
 
+export const DailyRecordState$ = (state) => state.dailyRecordReducers;
+
 export const AuthState$ = (state) => state.authReducers;
 
 export const UserState$ = (state) => state.userReducers;
@@ -23,8 +25,18 @@ export const FoodsRemaining$ = createSelector(
   FilterState$,
   (foodList, filter) => {
     const searchText = filter.searchText.toUpperCase();
-    return foodList.filter((food) =>
-      food.foodName.toUpperCase().includes(searchText)
-    );
+    return foodList
+      .filter((food) => food.foodName.toUpperCase().includes(searchText))
+      .slice(0, 20);
+  }
+);
+
+export const FoodByBarcode$ = createSelector(
+  FoodState$,
+  FilterState$,
+  (foodList, filter) => {
+    const barcode = filter.searchBarcode;
+    console.log(barcode);
+    return foodList.find((food) => food.barcode === Number(barcode));
   }
 );

@@ -1,7 +1,5 @@
 import { authActions, getType } from "../actions";
 
-import { showToast } from "../../hooks/useToast";
-
 const initState = {
   isLoading: false,
   error: "",

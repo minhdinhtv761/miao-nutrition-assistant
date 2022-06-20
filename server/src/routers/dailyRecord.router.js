@@ -1,10 +1,11 @@
-import express from "express";
 import {
   createDailyRecord,
   getAllDailyRecords,
   getOneDailyRecordByFilter,
   RemoveDailyRecord,
 } from "../controllers/dailyRecord.controller.js";
+
+import express from "express";
 
 const router = express.Router();
 

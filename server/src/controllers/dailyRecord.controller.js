@@ -108,7 +108,7 @@ export const createDailyRecord = async (req, res) => {
       meals: meals,
     });
     await dailyRecord.save();
-
+    console.log("create dailyRecord", dailyRecord);
     return res.status(200).json({
       success: true,
       message: "Tạo nhật ký dinh dưỡng hằng ngày thành công.",
