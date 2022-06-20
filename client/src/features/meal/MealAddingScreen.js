@@ -1,3 +1,5 @@
+import * as actions from "../../redux/actions";
+
 import {
   AddingMealState$,
   DailyRecordState$,
@@ -18,9 +20,9 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ShortNutritionTable } from "../../components/general/nutritionFact/ShortNutritionTable";
 import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
-import { addingMealActions } from "../../redux/actions";
 import { covertToMealDetails } from "../../helpers/dailyRecord";
 import { space } from "../../styles/layout";
+import { startOfDate } from './../../utils/Date';
 
 const MealAddingScreen = () => {
   const dispatch = useDispatch();
@@ -28,11 +30,11 @@ const MealAddingScreen = () => {
   const dailyRecord = useSelector(DailyRecordState$);
   const { totalNutrition, list } = useSelector(AddingMealState$);
   const [date, setDate] = React.useState(new Date());
-  const [service, setService] = React.useState("breakfast");
+  const [service, setService] = React.useState("Breakfast");
   const [foodList, setFoodList] = React.useState(list);
 
   const onCancel = React.useCallback(() => {
-    dispatch(addingMealActions.resetFoodList());
+    dispatch(actions.addingMealActions.resetFoodList());
     popToTop();
   }, [dispatch]);
 
@@ -43,30 +45,29 @@ const MealAddingScreen = () => {
   const onAddingFood = React.useCallback(
     (value, pressed) => {
       if (pressed) {
-        dispatch(addingMealActions.pushFood(value));
-      } else dispatch(addingMealActions.removeFood(value));
+        dispatch(actions.addingMealActions.pushFood(value));
+      } else dispatch(actions.addingMealActions.removeFood(value));
     },
     [dispatch, list.length]
   );
 
   const onSubmit = React.useCallback(() => {
-    const meals = covertToMealDetails(list);
-    console.log("meals", meals);
+    const mealDetails = covertToMealDetails(list);
 
     let payload = {
-      userId: user._id,
+      userId: user.data._id,
       data: {
-        recordDate: date,
+        recordDate: startOfDate(date),
         mealType: service,
         time: date,
-        mealDetails: meals,
+        mealDetails: mealDetails,
       },
     };
     if (dailyRecord.data === null) {
-      dispatch(createDailyRecord.createDailyRecordRequest(payload));
+      dispatch(actions.createDailyRecord.createDailyRecordRequest(payload));
     } else {
       dispatch(
-        updateDailyRecord.updateDailyRecordRequest({
+        actions.updateDailyRecord.updateDailyRecordRequest({
           ...payload,
           dailyRecordId: dailyRecord._id,
         })
@@ -74,7 +75,7 @@ const MealAddingScreen = () => {
     }
 
     onCancel();
-  }, [dispatch, list, date, service]);
+  }, [dispatch, list, date, service,]);
 
   const topAppBar = {
     title: "Thêm bữa ăn",

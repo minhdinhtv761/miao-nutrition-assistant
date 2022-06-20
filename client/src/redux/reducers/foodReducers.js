@@ -1,7 +1,7 @@
 import { fetchFood, getType } from "../actions";
 
 const initState = {
-  isLoading: false,
+  isLoading: true,
   data: [],
 };
 

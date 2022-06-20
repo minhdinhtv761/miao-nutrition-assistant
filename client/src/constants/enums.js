@@ -43,10 +43,10 @@ export const NutritionUnit = {
 };
 
 export const MealTypes = {
-  breakfast: "Bữa sáng",
-  lunch: "Bữa trưa",
-  dinner: "Bữa tối",
-  others: "Bữa phụ",
+  Breakfast: "Bữa sáng",
+  Lunch: "Bữa trưa",
+  Dinner: "Bữa tối",
+  Others: "Bữa phụ",
 };
 
 export const defaultNutrition = {

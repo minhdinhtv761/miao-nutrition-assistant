@@ -20,16 +20,16 @@ import { calcNutritionPercent } from "../../utils/NutritionPercent";
 import { space } from "./../../styles/layout";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export const TopHomeScreen = ({ goal, today }) => {
+export const TopHomeScreen = ({ goal, todayDailyRecord }) => {
   const safeArea = useSafeAreaInsets();
   var heightHeader = HEADER_HEIGHT + safeArea.top;
   var heightBox = TOP_BANNER_HEIGHT;
   var heightDetailBox = SUBBOX_HEIGHT;
   const todayValue = calcNutritionPercent({
-    ...today,
+    ...todayDailyRecord,
     energy: goal.targetEnergy,
   });
-  const caloRemaining = goal.targetEnergy - today.energy;
+  const caloRemaining = goal.targetEnergy - todayDailyRecord.energy;
 
   return (
     <View backgroundColor={Colors.background} paddingTop={heightHeader}>
@@ -52,7 +52,7 @@ export const TopHomeScreen = ({ goal, today }) => {
               carbPercent={todayValue["carbohydrate"].percent}
               fatPercent={todayValue["fat"].percent}
               proteinPercent={todayValue["protein"].percent}
-              calories={today.energy}
+              calories={todayDailyRecord.energy}
             />
 
             <TextElement
@@ -71,7 +71,7 @@ export const TopHomeScreen = ({ goal, today }) => {
           right: space.m * 4,
           left: space.m * 4,
         }}
-        value={{ goal: goal, current: today }}
+        value={{ goal: goal, current: todayDailyRecord }}
       />
     </View>
   );

@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get("/user/:userId", getAllDailyRecords);
 router.post("/user/:userId/filter", getOneDailyRecordByFilter);
-router.post("/:dailyRecordId/user/:userId", createDailyRecord);
+// router.post("/:dailyRecordId/user/:userId", createDailyRecord);
 router.post("/user/:userId", createDailyRecord);
 router.patch("/:dailyRecordId/user/:userId", updateDailyRecord);
 

@@ -2,7 +2,8 @@ import { MealTypes, defaultNutrition } from "../constants/enums";
 
 import moment from "moment";
 
-export const getCaloriesRecommendPercent = (mealEattens) => {
+export const getCaloriesRecommendPercent = (meals) => {
+  const mealEattens = meals.map(value => value.mealType);
   const type = Object.keys(MealTypes).find((key) => !mealEattens.includes(key));
   switch (type) {
     case "breakfast":

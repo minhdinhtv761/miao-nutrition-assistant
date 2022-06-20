@@ -6,7 +6,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 export function* getDailyRecordSaga(action) {
   try {
     const dailyRecord = yield call(api.getDailyRecord, action.payload);
-
+    console.log(dailyRecord.data.data)
     yield put(
       actions.getDailyRecord.getDailyRecordSuccess(dailyRecord.data.data)
     );
@@ -31,6 +31,7 @@ export function* updateDailyRecordSaga(action) {
 
 export function* createDailyRecordSaga(action) {
   try {
+    console.log(action.payload);
     const dailyRecord = yield call(api.createDailyRecord, action.payload);
 
     yield put(
