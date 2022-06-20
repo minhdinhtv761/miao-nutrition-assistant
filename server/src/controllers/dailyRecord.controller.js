@@ -116,9 +116,9 @@ export const createDailyRecord = async (req, res) => {
 
       let ratio = 1;
 
-      if (element.servingSizeWeight && element.servingSizeUnit) {
+      if (element.servingSizeQuantity && element.servingSizeUnit) {
         // Handle food have multiple base serving size (weight & unit) later.
-        ratio = element.servingSizeWeight / item.servingSizeWeight;
+        ratio = element.servingSizeQuantity / item.servingSizeWeight;
       }
 
       element.energy = item.energy * ratio;
