@@ -1,6 +1,7 @@
 import { MainFoodCompositionCalculator } from "../calcs/foodComposition.calc.js";
 import { DailyRecordModel } from "../models/dailyRecord.model.js";
 import { SampleFoodModel } from "../models/sampleFood.model.js";
+import { UserModel } from "../models/user.model.js";
 
 export const getAllDailyRecords = async (req, res) => {
   try {
@@ -85,9 +86,7 @@ export const createDailyRecord = async (req, res) => {
       });
     }
 
-    const items = [];
-
-    mealDetails.forEach(async (element, index, array) => {
+    mealDetails.forEach((element) => {
       if (!element.itemId) {
         return res.status(400).json({
           success: false,
@@ -95,7 +94,20 @@ export const createDailyRecord = async (req, res) => {
             "Thông tin tạo bữa ăn cho nhật ký dinh dưỡng hằng ngày không đúng.",
         });
       }
+    });
 
+    const user = await UserModel.findOne({ _id: userId });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Người dùng không tồn tại.",
+      });
+    }
+
+    const items = [];
+
+    for (const element of mealDetails) {
       const item = await SampleFoodModel.findOne({
         _id: element.itemId,
       }).select([
@@ -114,12 +126,11 @@ export const createDailyRecord = async (req, res) => {
         });
       }
 
-      let ratio = 1;
-
-      if (element.servingSizeQuantity && element.servingSizeUnit) {
-        // Handle food have multiple base serving size (weight & unit) later.
-        ratio = element.servingSizeQuantity / item.servingSizeWeight;
-      }
+      // Handle food have multiple base serving size (weight & unit) later.
+      const ratio =
+        element.servingSizeQuantity && element.servingSizeUnit
+          ? element.servingSizeQuantity / item.servingSizeWeight
+          : 1;
 
       element.energy = item.energy * ratio;
       element.protein = item.protein * ratio;
@@ -127,40 +138,38 @@ export const createDailyRecord = async (req, res) => {
       element.carbohydrate = item.carbohydrate * ratio;
 
       items.push(element);
+    }
 
-      if (index === array.length - 1) {
-        const mealFoodComposition = MainFoodCompositionCalculator(items);
+    const mealFoodComposition = MainFoodCompositionCalculator(items);
 
-        const meals = [
-          {
-            mealType: mealType,
-            time: time,
-            mealDetails: mealDetails,
-            energy: mealFoodComposition?.energy,
-            protein: mealFoodComposition?.protein,
-            fat: mealFoodComposition?.fat,
-            carbohydrate: mealFoodComposition?.carbohydrate,
-          },
-        ];
+    const meals = [
+      {
+        mealType: mealType,
+        time: time,
+        mealDetails: mealDetails,
+        energy: mealFoodComposition?.energy,
+        protein: mealFoodComposition?.protein,
+        fat: mealFoodComposition?.fat,
+        carbohydrate: mealFoodComposition?.carbohydrate,
+      },
+    ];
 
-        const dailyRecord = DailyRecordModel({
-          userId: userId,
-          recordDate: recordDate,
-          meals: meals,
-          energy: mealFoodComposition?.energy,
-          protein: mealFoodComposition?.protein,
-          fat: mealFoodComposition?.fat,
-          carbohydrate: mealFoodComposition?.carbohydrate,
-        });
+    const dailyRecord = DailyRecordModel({
+      userId: userId,
+      recordDate: recordDate,
+      meals: meals,
+      energy: mealFoodComposition?.energy,
+      protein: mealFoodComposition?.protein,
+      fat: mealFoodComposition?.fat,
+      carbohydrate: mealFoodComposition?.carbohydrate,
+    });
 
-        await dailyRecord.save();
+    await dailyRecord.save();
 
-        return res.status(200).json({
-          success: true,
-          message: "Tạo nhật ký dinh dưỡng hằng ngày thành công.",
-          data: dailyRecord,
-        });
-      }
+    return res.status(200).json({
+      success: true,
+      message: "Tạo nhật ký dinh dưỡng hằng ngày thành công.",
+      data: dailyRecord,
     });
   } catch (error) {
     return res.status(500).json({
@@ -193,7 +202,7 @@ export const removeDailyRecord = async (req, res) => {
       });
     }
 
-    dailyRecord.remove();
+    await dailyRecord.remove();
 
     return res.status(200).json({
       success: true,

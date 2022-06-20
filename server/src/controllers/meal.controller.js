@@ -1,10 +1,12 @@
+import { MainFoodCompositionCalculator } from "../calcs/foodComposition.calc.js";
 import { DailyRecordModel } from "../models/dailyRecord.model.js";
+import { SampleFoodModel } from "../models/sampleFood.model.js";
 
 export const createOneMealInDailyRecord = async (req, res) => {
   try {
     const { dailyRecordId } = req?.params;
     const { mealType, time, mealDetails } = req?.body;
-    console.log(dailyRecordId, mealType, time, mealDetails);
+
     if (!dailyRecordId) {
       return res.status(400).json({
         success: false,
@@ -41,11 +43,65 @@ export const createOneMealInDailyRecord = async (req, res) => {
       });
     }
 
+    const items = [];
+
+    for (const element of mealDetails) {
+      const item = await SampleFoodModel.findOne({
+        _id: element.itemId,
+      }).select([
+        "energy",
+        "protein",
+        "fat",
+        "carbohydrate",
+        "servingSizeWeight",
+        "servingSizeUnit",
+      ]);
+
+      if (!item) {
+        return res.status(400).json({
+          success: false,
+          message: "Thực phẩm không tồn tại.",
+        });
+      }
+
+      console.log(item);
+
+      // Handle food have multiple base serving size (weight & unit) later.
+      const ratio =
+        element.servingSizeQuantity && element.servingSizeUnit
+          ? element.servingSizeQuantity / item.servingSizeWeight
+          : 1;
+
+      console.log(ratio);
+
+      element.energy = item.energy * ratio;
+      element.protein = item.protein * ratio;
+      element.fat = item.fat * ratio;
+      element.carbohydrate = item.carbohydrate * ratio;
+
+      items.push(element);
+    }
+
+    const mealFoodComposition = MainFoodCompositionCalculator(items);
+
     dailyRecord.meals.push({
       mealType: mealType,
       time: time,
       mealDetails: mealDetails,
+      energy: mealFoodComposition?.energy,
+      protein: mealFoodComposition?.protein,
+      fat: mealFoodComposition?.fat,
+      carbohydrate: mealFoodComposition?.carbohydrate,
     });
+
+    const dailyRecordFoodComposition = MainFoodCompositionCalculator(
+      dailyRecord.meals
+    );
+
+    dailyRecord.energy = dailyRecordFoodComposition?.energy;
+    dailyRecord.protein = dailyRecordFoodComposition?.protein;
+    dailyRecord.fat = dailyRecordFoodComposition?.fat;
+    dailyRecord.carbohydrate = dailyRecordFoodComposition?.carbohydrate;
 
     await dailyRecord.save();
 
@@ -117,10 +173,61 @@ export const updateOneMealInDailyRecord = async (req, res) => {
       });
     }
 
+    const items = [];
+
+    for (const element of mealDetails) {
+      const item = await SampleFoodModel.findOne({
+        _id: element.itemId,
+      }).select([
+        "energy",
+        "protein",
+        "fat",
+        "carbohydrate",
+        "servingSizeWeight",
+        "servingSizeUnit",
+      ]);
+
+      if (!item) {
+        return res.status(400).json({
+          success: false,
+          message: "Thực phẩm không tồn tại.",
+        });
+      }
+
+      // Handle food have multiple base serving size (weight & unit) later.
+      const ratio =
+        element.servingSizeQuantity && element.servingSizeUnit
+          ? element.servingSizeQuantity / item.servingSizeWeight
+          : 1;
+
+      element.energy = item.energy * ratio;
+      element.protein = item.protein * ratio;
+      element.fat = item.fat * ratio;
+      element.carbohydrate = item.carbohydrate * ratio;
+
+      items.push(element);
+    }
+
+    const mealFoodComposition = MainFoodCompositionCalculator(items);
+
     meal.mealType = mealType;
     meal.time = time;
     meal.mealDetails = mealDetails;
-    dailyRecord.save();
+    meal.energy = mealFoodComposition?.energy;
+    meal.protein = mealFoodComposition?.protein;
+    meal.fat = mealFoodComposition?.fat;
+    meal.carbohydrate = mealFoodComposition?.carbohydrate;
+
+    const dailyRecordFoodComposition = MainFoodCompositionCalculator(
+      dailyRecord.meals
+    );
+
+    dailyRecord.energy = dailyRecordFoodComposition?.energy;
+    dailyRecord.protein = dailyRecordFoodComposition?.protein;
+    dailyRecord.fat = dailyRecordFoodComposition?.fat;
+    dailyRecord.carbohydrate = dailyRecordFoodComposition?.carbohydrate;
+
+    await dailyRecord.save();
 
     return res.status(200).json({
       success: true,
@@ -166,17 +273,26 @@ export const removeOneMealInDailyRecord = async (req, res) => {
       });
     }
 
-    meal.remove();
+    await meal.remove();
 
     if (dailyRecord.meals.length === 0) {
-      dailyRecord.remove();
+      await dailyRecord.remove();
 
       return res.status(200).json({
         success: true,
         message: "Xóa nhật ký dinh dưỡng hằng ngày thành công.",
       });
     } else {
-      dailyRecord.save();
+      const dailyRecordFoodComposition = MainFoodCompositionCalculator(
+        dailyRecord.meals
+      );
+
+      dailyRecord.energy = dailyRecordFoodComposition?.energy;
+      dailyRecord.protein = dailyRecordFoodComposition?.protein;
+      dailyRecord.fat = dailyRecordFoodComposition?.fat;
+      dailyRecord.carbohydrate = dailyRecordFoodComposition?.carbohydrate;
+
+      await dailyRecord.save();
 
       return res.status(200).json({
         success: true,
