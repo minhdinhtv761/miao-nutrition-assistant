@@ -1,13 +1,6 @@
-import { MealTypes, defaultNutrition } from "./../constants/enums";
+import { MealTypes, defaultNutrition } from "../constants/enums";
 
 import moment from "moment";
-
-export const getTodayDailyRecord = (dailyRecord) => {
-  let result = dailyRecord.find((item) =>
-    moment(item.recordDate).startOf("day").isSame(moment().startOf("day"))
-  );
-  return result ? result : defaultNutrition;
-};
 
 export const getCaloriesRecommendPercent = (mealEattens) => {
   const type = Object.keys(MealTypes).find((key) => !mealEattens.includes(key));
@@ -25,4 +18,15 @@ export const getCaloriesRecommendPercent = (mealEattens) => {
       0.1;
       break;
   }
+};
+
+export const calcTotalNutrition= (list) => {
+  let result = { energy: 0, carbohydrate: 0, fat: 0, protein: 0 };
+  Object.keys(result).forEach((key) => {
+    list.forEach((element) => {
+      result[key] += element[key];
+      result[key] = Math.round(result[key] * 10) / 10;
+    });
+  });
+  return result;
 };

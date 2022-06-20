@@ -10,7 +10,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ShortNutritionTable } from "../../components/general/nutritionFact/ShortNutritionTable";
 import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
-import { addingMeal } from "../../redux/actions";
+import { addingMealActions } from "../../redux/actions";
 import { pop } from "../../utils/RootNavigation";
 import { space } from "../../styles/layout";
 
@@ -18,16 +18,17 @@ const FoodMealEditingScreen = () => {
   const food = useSelector(FoodDataState$);
   const [nutrition, setNutrition] = React.useState(food);
   const dispatch = useDispatch();
-
+  
   const topAppBar = {
     title: "Chỉnh sửa khẩu phần",
     leftIcon: <TurnBackButton />,
     backgroundColor: "transparent",
   };
+
   const handleChangeWeight = React.useCallback(
     (text) => {
       const ratio = Number(text) / food.servingSizeWeight;
-      let newFoodValue = { ...food, ratio: ratio };
+      let newFoodValue = { ...food};
       Object.entries(newFoodValue).forEach(([key, value]) => {
         if (!isNaN(value)) {
           newFoodValue[key] = Math.round(value * ratio * 10) / 10;
@@ -39,7 +40,7 @@ const FoodMealEditingScreen = () => {
   );
 
   const handleOnSubmit = React.useCallback(() => {
-    dispatch(addingMeal.pushFood(nutrition));
+    dispatch(addingMealActions.pushFood(nutrition));
     pop();
   }, [dispatch, nutrition]);
 

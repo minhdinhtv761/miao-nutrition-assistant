@@ -26,8 +26,13 @@ function* loginSaga(action) {
 
 /* #region  UserSaga */
 function* getUserByAccountIdSaga(action) {
-  const userByAccountId = yield call(api.getUserByAccountID, action.payload);
-  yield put(actions.getUser.getUserSuccess(userByAccountId.data.data));
+  try {
+    const userByAccountId = yield call(api.getUserByAccountID, action.payload);
+    yield put(actions.getUser.getUserSuccess(userByAccountId.data.data));
+  } catch (error) {
+    console.log(error);
+    yield put(actions.getUser.getUserFailure(error));
+  }
 }
 
 function* updateUserSaga(action) {

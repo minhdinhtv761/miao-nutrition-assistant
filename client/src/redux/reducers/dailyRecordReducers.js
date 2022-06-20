@@ -21,6 +21,12 @@ export default function dailyRecordReducers(state = initState, action) {
         isAPICalled: true,
         data: action.payload,
       };
+      case getType(getDailyRecord.getDailyRecordFailure):
+        return {
+          ...state,
+          isLoading: false,
+          isAPICalled: true,
+        };
     default:
       return state;
   }

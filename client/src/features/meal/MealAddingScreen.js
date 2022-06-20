@@ -1,8 +1,12 @@
+import {
+  AddingMealState$,
+  DailyRecordState$,
+  UserState$,
+} from "../../redux/selectors";
 import { Button, Select, VStack } from "native-base";
 import { pop, popToTop } from "./../../utils/RootNavigation";
 import { useDispatch, useSelector } from "react-redux";
 
-import { AddingMealState$ } from "../../redux/selectors";
 import BottomButton from "./../../components/general/buttons/BottomButton";
 import { CustomDatePicker } from "../../components/general/input/CustomDatePicker";
 import { FoodItem } from "../../components/newMeal/choosing/FoodItem";
@@ -14,44 +18,65 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ShortNutritionTable } from "../../components/general/nutritionFact/ShortNutritionTable";
 import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
-import { addingMeal } from "../../redux/actions";
+import { addingMealActions } from "../../redux/actions";
+import { covertToMealDetails } from "../../helpers/dailyRecord";
 import { space } from "../../styles/layout";
 
 const MealAddingScreen = () => {
   const dispatch = useDispatch();
+  const user = useSelector(UserState$);
+  const dailyRecord = useSelector(DailyRecordState$);
   const { totalNutrition, list } = useSelector(AddingMealState$);
   const [date, setDate] = React.useState(new Date());
-
+  const [service, setService] = React.useState("breakfast");
   const [foodList, setFoodList] = React.useState(list);
 
   const onCancel = React.useCallback(() => {
-    dispatch(addingMeal.resetFoodList());
+    dispatch(addingMealActions.resetFoodList());
     popToTop();
   }, [dispatch]);
 
-  const goBackAction = React.useCallback(() => {
+  const chooseOtherFoods = React.useCallback(() => {
     pop();
   }, [dispatch]);
-
+  
   const onAddingFood = React.useCallback(
     (value, pressed) => {
       if (pressed) {
-        dispatch(addingMeal.pushFood(value));
-      } else dispatch(addingMeal.removeFood(value));
+        dispatch(addingMealActions.pushFood(value));
+      } else dispatch(addingMealActions.removeFood(value));
     },
     [dispatch, list.length]
   );
 
+  const onSubmit = React.useCallback(() => {
+    const meals = covertToMealDetails(list);
+    console.log("meals", meals);
+
+    let payload = {
+      userId: user._id,
+      data: {
+        recordDate: date,
+        mealType: service,
+        time: date,
+        mealDetails: meals,
+      },
+    };
+    if (dailyRecord.data === null) {
+    }
+
+    onCancel();
+  }, [dispatch, list, date, service]);
+
   const topAppBar = {
     title: "Thêm bữa ăn",
-    leftIcon: <TurnBackButton goBackAction={goBackAction} />,
+    leftIcon: <TurnBackButton />,
     rightChildren: (
       <Button variant="ghost" color="primary.500" onPress={onCancel}>
         Hủy
       </Button>
     ),
   };
-  let [service, setService] = React.useState("breakfast");
 
   return (
     <>
@@ -94,7 +119,7 @@ const MealAddingScreen = () => {
                   <FoodItem
                     title="Thêm món ăn"
                     subtitle="Gợi ý món ăn 30 kcal"
-                    onPress={goBackAction}
+                    onPress={chooseOtherFoods}
                     createNewFoodButton
                   />
                 }
@@ -103,11 +128,10 @@ const MealAddingScreen = () => {
           </VStack>
         }
       />
-      <BottomButton text="Hoàn tất" onPress={goBackAction}/>
-      <SafeAreaView/>
+      <BottomButton text="Hoàn tất" onPress={onSubmit} />
+      <SafeAreaView />
     </>
   );
 };
 
 export default MealAddingScreen;
-

@@ -14,4 +14,7 @@ export const updateUser = (user) =>
 export const fetchFood = () => axios.get(`${URL}/sample-food`);
 
 export const getDailyRecord = ({ userId, filter }) =>
-  axios.post(`${URL}/daily-record/user/${userId}/filter`, filter);
+{
+  console.log(userId, filter)
+ return axios.post(`${URL}/daily-recor,,d/user/${userId}/filter`, filter);
+}
