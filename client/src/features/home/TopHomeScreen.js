@@ -1,34 +1,31 @@
-import {
-  Box,
-  Center,
-  HStack,
-  Heading,
-  Text,
-  VStack,
-  View
-} from "native-base";
+import { Box, Center, HStack, Heading, Text, VStack, View } from "native-base";
 import {
   HEADER_HEIGHT,
   SUBBOX_HEIGHT,
-  TOP_BANNER_HEIGHT
+  TOP_BANNER_HEIGHT,
 } from "./../../constants/sizes";
 
 import Colors from "./../../styles/colors";
 import { DetailNutrition } from "../../components/home/DetailNutrition";
 import { FullNutritionProgress } from "../../components/general/progress/FullNutritionProgress";
 import { calcNutritionPercent } from "../../utils/NutritionPercent";
+import { defaultNutrition } from "../../constants/enums";
 import { space } from "./../../styles/layout";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export const TopHomeScreen = ({ goal, todayDailyRecord }) => {
+export const TopHomeScreen = ({ goal, dailyRecord }) => {
   const safeArea = useSafeAreaInsets();
   var heightHeader = HEADER_HEIGHT + safeArea.top;
   var heightBox = TOP_BANNER_HEIGHT;
   var heightDetailBox = SUBBOX_HEIGHT;
+
+  const todayDailyRecord = dailyRecord ? dailyRecord : defaultNutrition;
+
   const todayValue = calcNutritionPercent({
     ...todayDailyRecord,
     energy: goal.targetEnergy,
   });
+
   const caloRemaining = goal.targetEnergy - todayDailyRecord.energy;
 
   return (

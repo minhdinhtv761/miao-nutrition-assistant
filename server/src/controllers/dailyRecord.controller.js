@@ -42,7 +42,6 @@ export const getOneDailyRecordByFilter = async (req, res) => {
     const dailyRecord = await DailyRecordModel.findOne(filter).where(
       "userId === userId"
     );
-
     if (!dailyRecord) {
       return res.status(400).json({
         success: false,
@@ -108,7 +107,6 @@ export const createDailyRecord = async (req, res) => {
       meals: meals,
     });
     
-    console.log(dailyRecord);
     await dailyRecord.save();
     
    

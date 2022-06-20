@@ -18,12 +18,10 @@ export const fetchFood = () => axios.get(`${URL}/sample-food`);
 export const getDailyRecord = ({ userId, filter }) =>
   axios.post(`${URL}/daily-record/user/${userId}/filter`, filter);
 
-export const createDailyRecord = ({ userId, data }) => {
-  console.log(userId, data);
-  return axios.post(`${URL}/daily-record/user/${userId}`, data);
-};
+export const createDailyRecord = ({ userId, data }) =>
+  axios.post(`${URL}/daily-record/user/${userId}`, data);
 
-export const updateDailyRecord = ({ userId, dailyRecordId, data }) =>
-  axios.post(`${URL}/daily-record/${dailyRecordId}/user/${userId}`, data);
+export const updateOneMealInDailyRecord = ({ dailyRecordId, userId, data }) =>
+  axios.patch(`${URL}/meal/daily-record/${dailyRecordId}`, data);
 
 /* #endregion */

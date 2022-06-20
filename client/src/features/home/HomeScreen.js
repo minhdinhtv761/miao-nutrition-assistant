@@ -17,11 +17,11 @@ import { startOfDate } from "./../../utils/Date";
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const userData = useSelector(UserState$);
-  const todayDailyRecord = useSelector(DailyRecordState$);
-  const [dateFilter, setDateFilter] = React.useState(startOfDate(new Date()));
-
+  const dailyRecord = useSelector(DailyRecordState$);
+   const [dateFilter, setDateFilter] = React.useState(startOfDate(new Date()));
+   
   React.useEffect(() => {
-    if (userData.data && !todayDailyRecord.isAPICalled) {
+    if (userData.data && !dailyRecord.isAPICalled) {
       dispatch(
         getDailyRecord.getDailyRecordRequest({
           userId: userData.data._id,
@@ -30,7 +30,7 @@ const HomeScreen = () => {
       );
       dispatch(fetchFood.fetchFoodRequest());
     }
-  }, [dispatch, userData.data, todayDailyRecord, dateFilter]);
+  }, [dispatch, userData.data, dailyRecord, dateFilter]);
 
   const topAppBar = {
     title: "Home",
@@ -40,25 +40,21 @@ const HomeScreen = () => {
       <Icon size="sm" as={MaterialCommunityIcons} name="calendar-blank" />
     ),
   };
-  console.log(
-    !userData.isLoading,
-    !todayDailyRecord.isLoading,
-    !userData.isLoading && !todayDailyRecord.isLoading,  todayDailyRecord
-  );
-  return !userData.isLoading && !todayDailyRecord.isLoading ? (
+
+  return !userData.isLoading && !dailyRecord.isLoading ? (
     <>
       <LayoutWithImage
         topAppBar={topAppBar}
         aboveChildren={
           <TopHomeScreen
             goal={userData.data.goal}
-            todayDailyRecord={todayDailyRecord.data}
+            dailyRecord={dailyRecord.data}
           />
         }
         children={
           <BottomHomeScreen
             goal={userData.data.goal}
-            todayDailyRecord={todayDailyRecord.data}
+            dailyRecord={dailyRecord.data}
           />
         }
         backgroundColor={Colors.background}

@@ -2,7 +2,7 @@ import * as actions from "../actions";
 import * as api from "../../api";
 
 import { call, put, takeLatest } from "redux-saga/effects";
-import { createDailyRecordSaga, getDailyRecordSaga, updateDailyRecordSaga } from "./dailyRecordSagas";
+import { createDailyRecordSaga, getDailyRecordSaga, updateOneMealInDailyRecordSaga } from "./dailyRecordSagas";
 import { getUserByAccountIdSaga, updateUserSaga } from "./userSagas";
 
 export default function* mySaga() {
@@ -14,8 +14,8 @@ export default function* mySaga() {
     getDailyRecordSaga
   );
   yield takeLatest(
-    actions.updateDailyRecord.updateDailyRecordRequest,
-    updateDailyRecordSaga
+    actions.updateOneMealInDailyRecord.updateOneMealInDailyRecordRequest,
+    updateOneMealInDailyRecordSaga
   );
   yield takeLatest(
     actions.createDailyRecord.createDailyRecordRequest,

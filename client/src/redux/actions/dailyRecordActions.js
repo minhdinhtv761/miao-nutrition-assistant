@@ -12,8 +12,8 @@ export const createDailyRecord = createActions({
   createDailyRecordFailure: (err) => err,
 });
 
-export const updateDailyRecord = createActions({
-  updateDailyRecordRequest: (payload) => payload,
-  updateDailyRecordSuccess: (payload) => payload,
-  updateDailyRecordFailure: (err) => err,
+export const updateOneMealInDailyRecord = createActions({
+  updateOneMealInDailyRecordRequest: (payload) => payload,
+  updateOneMealInDailyRecordSuccess: (payload) => payload,
+  updateOneMealInDailyRecordFailure: (err) => err,
 });

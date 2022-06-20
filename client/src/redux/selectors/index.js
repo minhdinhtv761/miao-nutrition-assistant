@@ -36,7 +36,6 @@ export const FoodByBarcode$ = createSelector(
   FilterState$,
   (foodList, filter) => {
     const barcode = filter.searchBarcode;
-    console.log(barcode);
     return foodList.find((food) => food.barcode === Number(barcode));
   }
 );

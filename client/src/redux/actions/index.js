@@ -1,7 +1,7 @@
 import {
   createDailyRecord,
   getDailyRecord,
-  updateDailyRecord,
+  updateOneMealInDailyRecord,
 } from "./dailyRecordActions";
 import { fetchFood, passFoodData } from "./foodActions";
 import { getUser, updateUser } from "./userActions";
@@ -31,7 +31,7 @@ export {
   updateUser,
   getDailyRecord,
   createDailyRecord,
-  updateDailyRecord,
+  updateOneMealInDailyRecord,
   filterActions,
   showProfileEditingModal,
   hideProfileEditingModal,

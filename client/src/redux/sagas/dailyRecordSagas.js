@@ -6,7 +6,6 @@ import { call, put, takeLatest } from "redux-saga/effects";
 export function* getDailyRecordSaga(action) {
   try {
     const dailyRecord = yield call(api.getDailyRecord, action.payload);
-    console.log(dailyRecord.data.data)
     yield put(
       actions.getDailyRecord.getDailyRecordSuccess(dailyRecord.data.data)
     );
@@ -16,16 +15,16 @@ export function* getDailyRecordSaga(action) {
   }
 }
 
-export function* updateDailyRecordSaga(action) {
+export function* updateOneMealInDailyRecordSaga(action) {
   try {
-    const dailyRecord = yield call(api.updateDailyRecord, action.payload);
+    const dailyRecord = yield call(api.updateOneMealInDailyRecord, action.payload);
 
     yield put(
-      actions.updateDailyRecord.updateDailyRecordSuccess(dailyRecord.data.data)
+      actions.updateOneMealInDailyRecord.updateOneMealInDailyRecordSuccess(dailyRecord.data.data)
     );
   } catch (error) {
     console.log(error);
-    yield put(actions.updateDailyRecord.updateDailyRecordFailure(error));
+    yield put(actions.updateOneMealInDailyRecord.updateOneMealInDailyRecordFailure(error));
   }
 }
 

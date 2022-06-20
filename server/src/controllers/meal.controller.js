@@ -4,7 +4,7 @@ export const createOneMealInDailyRecord = async (req, res) => {
   try {
     const { dailyRecordId } = req?.params;
     const { mealType, time, mealDetails } = req?.body;
-
+    console.log(dailyRecordId, mealType, time, mealDetails);
     if (!dailyRecordId) {
       return res.status(400).json({
         success: false,

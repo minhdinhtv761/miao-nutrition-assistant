@@ -22,7 +22,7 @@ import { ShortNutritionTable } from "../../components/general/nutritionFact/Shor
 import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
 import { covertToMealDetails } from "../../helpers/dailyRecord";
 import { space } from "../../styles/layout";
-import { startOfDate } from './../../utils/Date';
+import { startOfDate } from "./../../utils/Date";
 
 const MealAddingScreen = () => {
   const dispatch = useDispatch();
@@ -54,28 +54,31 @@ const MealAddingScreen = () => {
   const onSubmit = React.useCallback(() => {
     const mealDetails = covertToMealDetails(list);
 
-    let payload = {
-      userId: user.data._id,
-      data: {
-        recordDate: startOfDate(date),
-        mealType: service,
-        time: date,
-        mealDetails: mealDetails,
-      },
+    let data = {
+      recordDate: startOfDate(date),
+      mealType: service,
+      time: date,
+      mealDetails: mealDetails,
     };
+
     if (dailyRecord.data === null) {
-      dispatch(actions.createDailyRecord.createDailyRecordRequest(payload));
+      dispatch(
+        actions.createDailyRecord.createDailyRecordRequest({
+          userId: user.data._id,
+          data: data,
+        })
+      );
     } else {
       dispatch(
-        actions.updateDailyRecord.updateDailyRecordRequest({
-          ...payload,
-          dailyRecordId: dailyRecord._id,
+        actions.updateOneMealInDailyRecord.updateOneMealInDailyRecordRequest({
+          dailyRecordId: dailyRecord.data._id,
+          data: data,
         })
       );
     }
 
     onCancel();
-  }, [dispatch, list, date, service,]);
+  }, [dispatch, list, date, service]);
 
   const topAppBar = {
     title: "Thêm bữa ăn",

@@ -2,8 +2,10 @@ import {
   createDailyRecord,
   getDailyRecord,
   getType,
-  updateDailyRecord,
+  updateOneMealInDailyRecord,
 } from "../actions";
+
+import defaultNutrition from "./../../constants/enums";
 
 const initState = {
   isLoading: true,
@@ -32,20 +34,20 @@ export default function dailyRecordReducers(state = initState, action) {
         isAPICalled: true,
       };
 
-    case getType(updateDailyRecord.updateDailyRecordRequest):
+    case getType(updateOneMealInDailyRecord.updateOneMealInDailyRecordRequest):
       return {
         ...state,
         isLoading: true,
         isAPICalled: true,
       };
-    case getType(updateDailyRecord.updateDailyRecordSuccess):
+    case getType(updateOneMealInDailyRecord.updateOneMealInDailyRecordSuccess):
       return {
         ...state,
         isLoading: false,
         isAPICalled: true,
         data: action.payload,
       };
-    case getType(updateDailyRecord.updateDailyRecordFailure):
+    case getType(updateOneMealInDailyRecord.updateOneMealInDailyRecordFailure):
       return {
         ...state,
         isLoading: false,

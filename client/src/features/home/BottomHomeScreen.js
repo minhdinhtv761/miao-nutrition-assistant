@@ -1,21 +1,21 @@
 import * as RootNavigation from "../../utils/RootNavigation.js";
 
+import { MealTypes, defaultNutrition } from "../../constants/enums.js";
+
 import { MealItem } from "./../../components/home/MealItem";
-import { MealTypes } from "../../constants/enums.js";
 import MenuTitle from "../../components/general/typography/MenuTitle";
 import React from "react";
 import { VStack } from "native-base";
 import { getCaloriesRecommendPercent } from "../../helpers/dataCalc.js";
 import { space } from "./../../styles/layout";
 
-export const BottomHomeScreen = ({ todayDailyRecord, goal }) => {
-  const meals = todayDailyRecord ? todayDailyRecord.meals : [];
-  console.log(todayDailyRecord, meals)
+export const BottomHomeScreen = ({ dailyRecord, goal }) => {
+  const todayDailyRecord = dailyRecord ? dailyRecord : {...defaultNutrition, meals: []};
+
+  const meals = todayDailyRecord.meals;
   const caloRemaining = goal.targetEnergy - todayDailyRecord.energy;
   const caloRecommendation =
-    caloRemaining > 0
-      ? caloRemaining * getCaloriesRecommendPercent(meals)
-      : 0;
+    caloRemaining > 0 ? caloRemaining * getCaloriesRecommendPercent(meals) : 0;
 
   const handleMealChoosing = React.useCallback(() => {
     RootNavigation.push("MealChoosingScreen");
