@@ -34,6 +34,13 @@ export function DetailedFoodCompositionSchema() {
       set: (s) => Math.round(s * 1000) / 1000,
       get: (s) => Math.round(s * 1000) / 1000,
     },
+    transFattyAcid: {
+      type: Number,
+      default: null,
+      min: 0,
+      set: (s) => Math.round(s * 1000) / 1000,
+      get: (s) => Math.round(s * 1000) / 1000,
+    },
     cholesterol: {
       type: Number,
       default: null,
