@@ -5,6 +5,7 @@ import {
   MealAddingScreen,
   MealChoosingScreen,
   OnBoardingScreen,
+  ProfileEdittingScreen,
   RecipeScreen,
   RegisterScreen,
   ScanBarcodeScreen,
@@ -45,6 +46,10 @@ const Navigation = () => {
         <Stack.Screen
           name="FoodMealEditingScreen"
           component={FoodMealEditingScreen}
+        />
+        <Stack.Screen
+          name="ProfileEdittingScreen"
+          component={ProfileEdittingScreen}
         />
         <Stack.Screen name="ScanBarcodeScreen" component={ScanBarcodeScreen} />
         <Stack.Screen

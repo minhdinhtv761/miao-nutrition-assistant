@@ -7,21 +7,23 @@ import { useDispatch, useSelector } from "react-redux";
 import BirthdayModalBody from "./modals/BirthdayModalBody";
 import Colors from "../../styles/colors";
 import { GenderModalBody } from "./modals/GenderModalBody";
+import MenuTitle from "./../general/typography/MenuTitle";
 import { ProfileEditingModal } from "./modals/ProfileEditingModal";
 import React from "react";
 import { WeightHeightModalBody } from "./modals/WeightHeightModalBody";
 import moment from "moment";
 import { showProfileEditingModal } from "./../../redux/actions/modalAction";
 
-export const HealthInfo = ({ user, setUser }) => {
+export const HealthInfo = ({ user, setUser, isEditting }) => {
+  const dispatch = useDispatch();
   const [userTemp, setUserTemp] = React.useState(user);
-  const isEditting = useSelector(EdittingUserState$);
+  console.log("userTemp", userTemp);
 
   const listItems = {
     gender: {
       title: "Giới tính",
       icon: { as: Ionicons, name: "person" },
-      value: userData.gender === "Female" ? "Nữ" : "Nam",
+      value: user.gender === "Female" ? "Nữ" : "Nam",
       component: (
         <GenderModalBody userTemp={userTemp} setUserTemp={setUserTemp} />
       ),
@@ -29,11 +31,11 @@ export const HealthInfo = ({ user, setUser }) => {
     weight: {
       title: "Cân nặng",
       icon: { as: MaterialCommunityIcons, name: "scale-bathroom" },
-      value: 45 + " kg",
+      value: user.bodyComposition.weight + " kg",
       component: (
         <WeightHeightModalBody
-          user={userTemp}
-          setUser={setUserTemp}
+          userTemp={userTemp}
+          setUserTemp={setUserTemp}
           unit="kg"
         />
       ),
@@ -41,7 +43,7 @@ export const HealthInfo = ({ user, setUser }) => {
     height: {
       title: "Chiều cao",
       icon: { as: MaterialCommunityIcons, name: "human-male-height" },
-      value: 154 + " cm",
+      value: user.bodyComposition.height + " cm",
       component: (
         <WeightHeightModalBody
           userTemp={userTemp}
@@ -53,9 +55,9 @@ export const HealthInfo = ({ user, setUser }) => {
     birthday: {
       title: "Ngày sinh",
       icon: { as: MaterialCommunityIcons, name: "cake-variant" },
-      value: moment(userTemp.birthday).format("DD/MM/YYYY"),
+      value: moment(user.birthday).format("DD/MM/YYYY"),
       component: (
-        <BirthdayModalBody userTemp={userTemp} setUserTemp={setUserTemp} />
+        <BirthdayModalBody user={user} setUser={setUser} />
       ),
     },
   };
@@ -68,29 +70,34 @@ export const HealthInfo = ({ user, setUser }) => {
   );
 
   return (
-    <VStack {...boxStyle}>
-      {Object.entries(listItems).map(([key, value], index) => (
-        <Pressable
-          key={key}
-          onPress={() =>
-            isEditting
-              ? handleOnChangeProfile({
-                  component: value.component,
-                  title: value.title,
-                })
-              : null
-          }
-        >
-          <TextElement
-            title={value.title}
-            text={value.value}
-            icon={value.icon}
-            isDivide={index < Object.entries(listItems).length - 1}
-          />
-        </Pressable>
-      ))}
-      <ProfileEditingModal userTemp={userTemp} setUser={setUser} />
-    </VStack>
+    <>
+      <MenuTitle title="Sức khỏe" />
+      <VStack {...boxStyle} mt={space.m}>
+        {Object.entries(listItems).map(([key, value], index) => (
+          <Pressable
+            key={key}
+            onPress={() =>
+              isEditting
+                ? handleOnChangeProfile({
+                    component: value.component,
+                    title: value.title,
+                  })
+                : null
+            }
+          >
+            <TextElement
+              title={value.title}
+              text={value.value}
+              icon={value.icon}
+              isDivide={index < Object.entries(listItems).length - 1}
+            />
+          </Pressable>
+        ))}
+        {isEditting ? (
+          <ProfileEditingModal userTemp={userTemp} setUser={setUser} />
+        ) : null}
+      </VStack>
+    </>
   );
 };
 

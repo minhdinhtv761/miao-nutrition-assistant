@@ -1,25 +1,24 @@
 import { DailyRecordState$, UserState$ } from "../../redux/selectors";
-import { Icon, Text } from "native-base";
 import { fetchFood, getDailyRecord } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import { BottomHomeScreen } from "./BottomHomeScreen";
 import Colors from "./../../styles/colors";
+import { Icon } from "native-base";
 import LayoutWithImage from "../../components/general/layout/LayoutWithImage";
 import { LoadingScreen } from "../../components/general/LoadingScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MenuButton } from "../../components/general/buttons/iconButtons/Menu/MenuButton";
 import React from "react";
+import { TODAY } from "../../constants/date";
 import { TopHomeScreen } from "./TopHomeScreen";
-import { defaultNutrition } from "./../../constants/enums";
-import { startOfDate } from "./../../utils/Date";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const userData = useSelector(UserState$);
   const dailyRecord = useSelector(DailyRecordState$);
-   const [dateFilter, setDateFilter] = React.useState(startOfDate(new Date()));
-   
+  const [dateFilter, setDateFilter] = React.useState(TODAY);
+  
   React.useEffect(() => {
     if (userData.data && !dailyRecord.isAPICalled) {
       dispatch(

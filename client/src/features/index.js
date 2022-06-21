@@ -5,7 +5,8 @@ import LoginScreen from "./auth/LoginScreen";
 import MealAddingScreen from "./meal/MealAddingScreen";
 import MealChoosingScreen from "./meal/MealChoosingScreen";
 import OnBoardingScreen from "./onboarding/OnBoardingScreen";
-import ProfileScreen from "./profile/ProfileScreen";
+import ProfileEdittingScreen from './profile/ProfileEditing/ProfileEdittingScreen';
+import ProfileScreen from './profile/Profile/ProfileScreen';
 import RecipeScreen from "./recipe/RecipeDetailScreen";
 import RegisterScreen from "./auth/RegisterScreen";
 import ScanBarcodeScreen from "./meal/ScanBarcodeScreen";
@@ -21,5 +22,6 @@ export {
   MealAddingScreen,
   IngredientAddingScreen,
   ProfileScreen,
+  ProfileEdittingScreen,
   ScanBarcodeScreen,
 };

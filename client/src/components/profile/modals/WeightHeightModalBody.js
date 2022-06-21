@@ -4,8 +4,11 @@ import React from "react";
 import { space } from "../../../styles/layout";
 
 export const WeightHeightModalBody = ({ userTemp, setUserTemp, unit }) => {
+  console.log("userTemp 2", userTemp);
   const [text, setText] = React.useState(
-    unit === "kg" ? userTemp.weight : userTemp.height
+    unit === "kg"
+      ? userTemp.bodyComposition.weight
+      : userTemp.bodyComposition.height
   );
 
   const handleOnTextChange = (text) => {
@@ -13,9 +16,15 @@ export const WeightHeightModalBody = ({ userTemp, setUserTemp, unit }) => {
   };
   const handleOnDone = () => {
     if (unit === "kg") {
-      setUserTemp({ ...userTemp, weight: Number(text) });
+      setUserTemp({
+        ...userTemp,
+        bodyComposition: { ...userTemp.bodyComposition, weight: Number(text) },
+      });
     } else {
-      setUserTemp({ ...userTemp, height: Number(text) });
+      setUserTemp({
+        ...userTemp,
+        bodyComposition: { ...userTemp.bodyComposition, height: Number(text) },
+      });
     }
   };
   return (
@@ -32,7 +41,6 @@ export const WeightHeightModalBody = ({ userTemp, setUserTemp, unit }) => {
           keyboardType="numeric"
           value={text.toString()}
           onChangeText={handleOnTextChange}
-          onSubmitEditing={handleOnDone}
           placeholder={unit === "kg" ? "Cân nặng" : "Chiều cao"}
         />
         <InputRightAddon

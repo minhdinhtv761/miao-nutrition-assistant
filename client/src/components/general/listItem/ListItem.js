@@ -21,7 +21,6 @@ export const ListItem = ({
         <Pressable onPress={onPress} maxW="70%">
           <HStack space={space.m} alignItems="center">
             {image}
-
             <TextOfList
               title={title}
               subtile={subtitle}

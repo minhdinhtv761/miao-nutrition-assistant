@@ -7,7 +7,7 @@ import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
 
-const username = process.env.USERNAME;
+const username = process.env.USER;
 const password = process.env.PASSWORD;
 const database = process.env.DATABASE;
 const host = process.env.HOST;

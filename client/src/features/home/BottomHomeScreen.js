@@ -10,7 +10,9 @@ import { getCaloriesRecommendPercent } from "../../helpers/dataCalc.js";
 import { space } from "./../../styles/layout";
 
 export const BottomHomeScreen = ({ dailyRecord, goal }) => {
-  const todayDailyRecord = dailyRecord ? dailyRecord : {...defaultNutrition, meals: []};
+  const todayDailyRecord = dailyRecord
+    ? dailyRecord
+    : { ...defaultNutrition, meals: [] };
 
   const meals = todayDailyRecord.meals;
   const caloRemaining = goal.targetEnergy - todayDailyRecord.energy;
@@ -25,14 +27,25 @@ export const BottomHomeScreen = ({ dailyRecord, goal }) => {
       <MenuTitle title="Bữa ăn" action="Chi tiết" onPressAction={() => {}} />
       <VStack w="100%" borderRadius="xl" bg="white" p={space.m}>
         {meals.length
-          ? meals.map((meal) => (
-              <MealItem
-                title={MealTypes[meal.mealType]}
-                subtitle="Yến mạch, Chuối,..."
-                value={meal.energy}
-                maxValue={goal.targetEnergy}
-              />
-            ))
+          ? meals.map((meal) => {
+              const mealDetails = meal.mealDetails;
+              let foodNames="";
+              mealDetails.map(
+                (meal, index) =>
+                  (foodNames +=
+                    meal.itemId.foodName +
+                    (index < mealDetails.length - 1 ? ", " : ""))
+              );
+              return (
+                <MealItem
+                  key={meal._id}
+                  title={MealTypes[meal.mealType]}
+                  subtitle={foodNames}
+                  value={meal.energy}
+                  maxValue={goal.targetEnergy}
+                />
+              );
+            })
           : null}
         <MealItem
           title="Thêm bữa ăn"

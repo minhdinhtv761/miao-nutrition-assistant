@@ -1,5 +1,5 @@
-import { MainFoodCompositionCalculator } from "../calcs/foodComposition.calc.js";
 import { DailyRecordModel } from "../models/dailyRecord.model.js";
+import { MainFoodCompositionCalculator } from "../calcs/foodComposition.calc.js";
 import { SampleFoodModel } from "../models/sampleFood.model.js";
 import { UserModel } from "../models/user.model.js";
 
@@ -42,9 +42,10 @@ export const getOneDailyRecordByFilter = async (req, res) => {
       });
     }
 
-    const dailyRecord = await DailyRecordModel.findOne(filter).where(
-      "userId === userId"
-    );
+    const dailyRecord = await DailyRecordModel.findOne(filter)
+      .where("userId === userId")
+      .populate("meals.mealDetails.itemId", "foodName");
+
     if (!dailyRecord) {
       return res.status(400).json({
         success: false,
@@ -165,7 +166,9 @@ export const createDailyRecord = async (req, res) => {
     });
 
     await dailyRecord.save();
-
+    
+    dailyRecord.populate("meals.mealDetails.itemId", "foodName");
+    
     return res.status(200).json({
       success: true,
       message: "Tạo nhật ký dinh dưỡng hằng ngày thành công.",

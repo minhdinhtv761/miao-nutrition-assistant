@@ -1,3 +1,5 @@
+import { createAction } from 'redux-actions';
+
 export const showEdittingUser = createAction(
     "SHOW_EDITING_USER"
   );

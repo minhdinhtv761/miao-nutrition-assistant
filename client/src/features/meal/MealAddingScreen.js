@@ -19,6 +19,7 @@ import MenuTitle from "../../components/general/typography/MenuTitle";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ShortNutritionTable } from "../../components/general/nutritionFact/ShortNutritionTable";
+import { TODAY } from "../../constants/date";
 import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
 import { covertToMealDetails } from "../../helpers/dailyRecord";
 import { space } from "../../styles/layout";
@@ -55,7 +56,7 @@ const MealAddingScreen = () => {
     const mealDetails = covertToMealDetails(list);
 
     let data = {
-      recordDate: startOfDate(date),
+      recordDate: TODAY,
       mealType: service,
       time: date,
       mealDetails: mealDetails,

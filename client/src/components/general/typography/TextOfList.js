@@ -15,7 +15,7 @@ const TextOfList = ({ title, primaryColor, subtile }) => {
       >
         {title}
       </Text>
-      <Subtitle text={subtile} />
+      <Subtitle onlyOneLine text={subtile} />
     </VStack>
   );
 };

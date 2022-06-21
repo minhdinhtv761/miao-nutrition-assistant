@@ -30,7 +30,6 @@ export function* updateOneMealInDailyRecordSaga(action) {
 
 export function* createDailyRecordSaga(action) {
   try {
-    console.log(action.payload);
     const dailyRecord = yield call(api.createDailyRecord, action.payload);
 
     yield put(

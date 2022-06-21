@@ -15,13 +15,13 @@ import {
   TOP_BANNER_HEIGHT,
   WIDTH_OF_IMAGE,
   WINDOW_WIDTH,
-} from "./../../constants/sizes";
+} from "./../../../constants/sizes";
 
-import Colors from "./../../styles/colors";
+import Colors from "./../../../styles/colors";
 import { Feather } from "@expo/vector-icons";
 import React from "react";
-import { Subtitle } from "../../components/general/typography/Subtitle";
-import { space } from "./../../styles/layout";
+import { Subtitle } from "../../../components/general/typography/Subtitle";
+import { space } from "./../../../styles/layout";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const TextElement = ({ title, text }) => {

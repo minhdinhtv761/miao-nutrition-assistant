@@ -6,7 +6,7 @@ import { space } from "../../../styles/layout";
 
 const BottomButton = ({ text, onPress }) => {
   return (
-    <View marginX={space.m}>
+    <View marginX={space.m} >
       <Button
         position="absolute"
         bottom={4}
