@@ -1,11 +1,10 @@
 import { UserModel } from "../models/user.model.js";
+import { DateTimeUtil } from "../utils/dateTime.util.js";
 
 export const updateGoal = async (req, res) => {
   try {
     const { userId } = req?.params;
     const {
-      startDate,
-      startWeight,
       targetWeight,
       startPercentBodyFat,
       targetPercentBodyFat,
@@ -20,13 +19,7 @@ export const updateGoal = async (req, res) => {
       });
     }
 
-    if (
-      !startDate ||
-      !startWeight ||
-      !targetWeight ||
-      !weightPerWeek ||
-      !dietId
-    ) {
+    if (!targetWeight || !weightPerWeek || !dietId) {
       return res.status(400).json({
         success: false,
         message: "Thông tin cập nhật mục tiêu sức khỏe không đúng.",
@@ -36,8 +29,7 @@ export const updateGoal = async (req, res) => {
     const user = await UserModel.findOneAndUpdate(
       { _id: userId },
       {
-        "goal.startDate": startDate,
-        "goal.startWeight": startWeight,
+        "goal.startDate": DateTimeUtil.TODAY,
         "goal.targetWeight": targetWeight,
         "goal.startPercentBodyFat": startPercentBodyFat,
         "goal.targetPercentBodyFat": targetPercentBodyFat,
@@ -54,13 +46,14 @@ export const updateGoal = async (req, res) => {
       });
     }
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Cập nhật mục tiêu sức khỏe thành công.",
-        data: user,
-      });
+    user.startWeight = user.bodyComposition.weight;
+    user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Cập nhật mục tiêu sức khỏe thành công.",
+      data: user,
+    });
   } catch (error) {
     return res.status(500).json({ success: false, message: error });
   }
