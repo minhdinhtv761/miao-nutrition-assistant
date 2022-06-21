@@ -5,7 +5,7 @@ import {
 } from "../calcs/bodyComposition.calc.js";
 import { goalTargetCalculator } from "../calcs/goalComposition.calc.js";
 import { DefaulyDietId } from "../constants/enums.js";
-import { BodyCompositionHistoryModel } from "../models/bodyComposition.model.js";
+import { BodyCompositionHistoryModel } from "../models/bodyCompositionRecord.model.js";
 import { SampleDietModel } from "../models/sampleDiet.model.js";
 import { UserModel } from "../models/user.model.js";
 import { DateTimeUtil } from "../utils/dateTime.util.js";
