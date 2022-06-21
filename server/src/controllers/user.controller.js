@@ -1,4 +1,14 @@
+import {
+  BMICalculator,
+  BMRCalculator,
+  TDEECalculator,
+} from "../calcs/bodyComposition.calc.js";
+import { goalTargetCalculator } from "../calcs/goalComposition.calc.js";
+import { DefaulyDietId } from "../constants/enums.js";
+import { BodyCompositionHistoryModel } from "../models/bodyComposition.model.js";
+import { SampleDietModel } from "../models/sampleDiet.model.js";
 import { UserModel } from "../models/user.model.js";
+import { DateTimeUtil } from "../utils/dateTime.util.js";
 
 export const getUserByAccountId = async (req, res) => {
   try {
@@ -32,6 +42,7 @@ export const getUserByAccountId = async (req, res) => {
   }
 };
 
+// Function is always called in createAccount calls and cannot been called in router.
 export const createUser = async (req, res) => {
   try {
     const {
@@ -41,16 +52,72 @@ export const createUser = async (req, res) => {
       birthday,
       backgroundDiseases,
       bodyComposition,
-      goal,
-    } = req?.body;
+    } = req;
 
-    if (!accountId || !gender || !birthday || !goal) {
-      return res.status(200).json({
-        success: true,
-        message: "Thông tin tạo người dùng không đúng",
-        data: user,
-      });
+    if (
+      !accountId ||
+      !gender ||
+      !birthday ||
+      !bodyComposition?.weight ||
+      !bodyComposition?.height ||
+      !bodyComposition?.activity
+    ) {
+      return {
+        statusCode: 400,
+        data: {
+          success: true,
+          message: "Thông tin tạo người dùng không đúng.",
+        },
+      };
     }
+
+    bodyComposition.recordDate = DateTimeUtil.TODAY;
+    bodyComposition.BMR = BMRCalculator(
+      bodyComposition.weight,
+      bodyComposition.height,
+      gender,
+      birthday
+    );
+    bodyComposition.BMI = BMICalculator(
+      bodyComposition.weight,
+      bodyComposition.height
+    );
+    bodyComposition.TDEE = TDEECalculator(
+      bodyComposition.BMR,
+      bodyComposition.activity
+    );
+
+    const diet = await SampleDietModel.findOne({ _id: DefaulyDietId }).select([
+      "percentProtein",
+      "percentFat",
+      "percentCarbohydrate",
+    ]);
+
+    if (!diet) {
+      return {
+        statusCode: 500,
+        data: {
+          success: true,
+          message: "Chế độ ăn mẫu không tồn tại.",
+        },
+      };
+    }
+
+    const goalTarget = goalTargetCalculator(bodyComposition.TDEE, diet);
+
+    const goal = {
+      startDate: DateTimeUtil.TODAY,
+      startWeight: bodyComposition.weight,
+      targetWeight: bodyComposition.weight,
+      startPercentBodyFat: null,
+      targetPercentBodyFat: null,
+      weightPerWeek: 0,
+      targetEnergy: goalTarget.targetEnergy,
+      targetProtein: goalTarget.targetProtein,
+      targetFat: goalTarget.targetFat,
+      targetCarbohydrate: goalTarget.targetCarbohydrate,
+      dietId: DefaulyDietId,
+    };
 
     const user = UserModel({
       accountId: accountId,
@@ -61,18 +128,29 @@ export const createUser = async (req, res) => {
       bodyComposition: bodyComposition,
       goal: goal,
     });
+
     await user.save();
 
-    return res.status(201).json({
-      success: true,
-      message: "Tạo thông tin cá nhân người dùng thành công.",
-      data: user,
+    const bodyCompositionHistory = BodyCompositionHistoryModel({
+      userId: user._id,
+      history: [bodyComposition],
     });
+
+    await bodyCompositionHistory.save();
+
+    return {
+      statusCode: 200,
+      data: {
+        success: true,
+        message: "Tạo thông tin cá nhân người dùng thành công.",
+        data: user,
+      },
+    };
   } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error,
-    });
+    return {
+      statusCode: 500,
+      data: { success: false, message: error },
+    };
   }
 };
 

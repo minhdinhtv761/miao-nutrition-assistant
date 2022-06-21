@@ -1,6 +1,7 @@
 import { Gender } from "../constants/enums.js";
 import { AccountModel } from "../models/account.model.js";
 import { UserModel } from "../models/user.model.js";
+import { createUser } from "./user.controller.js";
 
 // For login
 export const getAccountByEmail = async (req, res) => {
@@ -38,7 +39,16 @@ export const getAccountByEmail = async (req, res) => {
 // For register
 export const createAccount = async (req, res) => {
   try {
-    const { email, password, confirmedPassword } = req?.body;
+    const {
+      email,
+      password,
+      confirmedPassword,
+      username,
+      gender,
+      birthday,
+      backgroundDiseases,
+      bodyComposition,
+    } = req?.body;
 
     if (!email || !password) {
       return res.status(400).json({
@@ -67,32 +77,26 @@ export const createAccount = async (req, res) => {
     const account = new AccountModel({ email: email, password: password });
     await account.save();
 
-    const goal = {
-      startDate: new Date(),
-      startWeight: 0,
-      startHeight: 0,
-      startPercentBodyFat: null,
-      targetPercentBodyFat: null,
-      weightPerWeek: 0,
-      targetEnergy: 0,
-      targetProtein: 0,
-      targetFat: 0,
-      targetCarbohydrate: 0,
-      dietId: "62a4aac5df463f32e2c31d0b",
-    };
-
-    const user = new UserModel({
+    const user = await createUser({
       accountId: account._id,
-      gender: Gender.MALE,
-      birthday: new Date(),
-      goal: goal,
+      username: username,
+      gender: gender,
+      birthday: birthday,
+      backgroundDiseases: backgroundDiseases,
+      bodyComposition: bodyComposition,
     });
-    await user.save();
+
+    console.log(user)
+
+    if (user.data.success === false) {
+      await account.remove();
+      return res.status(user.statusCode).json(user.data);
+    }
 
     return res.status(201).json({
       success: true,
       message: "Đăng ký tài khoản thành công.",
-      data: user,
+      data: user.data.data,
     });
   } catch (error) {
     return res.status(500).json({ success: false, message: error });

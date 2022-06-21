@@ -64,15 +64,11 @@ export const createOneMealInDailyRecord = async (req, res) => {
         });
       }
 
-      console.log(item);
-
       // Handle food have multiple base serving size (weight & unit) later.
       const ratio =
         element.servingSizeQuantity && element.servingSizeUnit
           ? element.servingSizeQuantity / item.servingSizeWeight
           : 1;
-
-      console.log(ratio);
 
       element.energy = item.energy * ratio;
       element.protein = item.protein * ratio;

@@ -23,3 +23,9 @@ export const RecipeLevel = {
   NORMAL: "Normal",
   HARD: "Hard",
 };
+
+export const EnergyToGainOneKilogram = 7000;
+
+export const EnergyToLoseOneKilogram = 7700;
+
+export const DefaulyDietId = "62a4aac5df463f32e2c31d0b";
