@@ -1,4 +1,5 @@
 import FoodMealEditingScreen from "./meal/FoodMealEditingScreen";
+import GoalCreatingScreen from './goal/GoalCreatingScreen';
 import HomeScreen from "./home/HomeScreen";
 import IngredientAddingScreen from "./recipe/IngredientAdding";
 import LoginScreen from "./auth/LoginScreen";
@@ -24,4 +25,5 @@ export {
   ProfileScreen,
   ProfileEdittingScreen,
   ScanBarcodeScreen,
+  GoalCreatingScreen
 };

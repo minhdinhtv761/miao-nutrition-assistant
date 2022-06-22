@@ -5,7 +5,7 @@ import {
 } from "../actions";
 
 const initState = {
-  isShow: false,
+  modalType: null,
   component: null,
   title: null,
 };
@@ -14,7 +14,7 @@ export default function modalReducers(state = initState, action) {
   switch (action.type) {
     case getType(showProfileEditingModal):
       return {
-        isShow: true,
+        modalType: action.payload.modalType,
         title: action.payload.title,
         component: action.payload.component,
       };
@@ -22,7 +22,7 @@ export default function modalReducers(state = initState, action) {
       return {
         title: null,
         component: null,
-        isShow: false,
+        modalType: null,
       };
     default:
       return state;

@@ -3,44 +3,52 @@ import { boxStyle, space } from "../../styles/layout";
 
 import Colors from "../../styles/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import MenuTitle from "../general/typography/MenuTitle";
 import { Pressable } from "react-native";
 import React from "react";
 
 export const Activity = ({ user, setUser, isEditting }) => {
   const activity = user.bodyComposition.activity;
+  
   const handleActivitySelected = React.useCallback((key) => {
     setUser({
       ...user,
       bodyComposition: { ...user.bodyComposition, activity: key },
     });
-  }, []);
+  }, [user]);
+
 
   return (
-    <Box {...boxStyle}>
-      <VStack alignItems="center" space={space.m}>
-        <HStack justifyContent="space-between" w="100%">
-          {Object.entries(listItems).map(([key, value], index) => (
-            <Pressable
-              key={key}
-              onPress={() => (isEditting ? handleActivitySelected(key) : null)}
-            >
-              <VStack alignItems="center" space={1}>
-                <Element icon={value.icon} isSelected={key === activity} />
-                <Text color={key === activity ? "black" : "muted.200"}>
-                  {index + 1}
-                </Text>
-              </VStack>
-            </Pressable>
-          ))}
-        </HStack>
-        <VStack alignItems="center" space={1}>
-          <Heading size="sm">{listItems[activity].title}</Heading>
-          <Text color={Colors.textLight} textAlign="center">
-            {listItems[activity].description}
-          </Text>
+    <>
+      <MenuTitle title="Mức độ vận động" />
+      <Box {...boxStyle} mt={space.m}>
+        <VStack alignItems="center" space={space.m}>
+          <HStack justifyContent="space-between" w="100%">
+            {Object.entries(listItems).map(([key, value], index) => (
+              <Pressable
+                key={key}
+                onPress={() =>
+                  isEditting ? handleActivitySelected(key) : null
+                }
+              >
+                <VStack alignItems="center" space={1}>
+                  <Element icon={value.icon} isSelected={key === activity} />
+                  <Text color={key === activity ? "black" : "muted.200"}>
+                    {index + 1}
+                  </Text>
+                </VStack>
+              </Pressable>
+            ))}
+          </HStack>
+          <VStack alignItems="center" space={1}>
+            <Heading size="sm">{listItems[activity].title}</Heading>
+            <Text color={Colors.textLight} textAlign="center">
+              {listItems[activity].description}
+            </Text>
+          </VStack>
         </VStack>
-      </VStack>
-    </Box>
+      </Box>
+    </>
   );
 };
 

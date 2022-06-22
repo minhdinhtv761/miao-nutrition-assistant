@@ -1,14 +1,16 @@
 import { hideProfileEditingModal, updateUser } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
-import { BottomActionSheet } from "./../../general/actionsheet/BottomActionSheet";
+import { BottomActionSheet } from "./BottomActionSheet";
 import { Button } from "native-base";
 import { ProfileEditingModalState$ } from "../../../redux/selectors";
 import React from "react";
 import moment from "moment";
 
-export const ProfileEditingModal = ({ userTemp, setUser }) => {
-  const { isShow, component, title } = useSelector(ProfileEditingModalState$);
+export const ProfileEditingModal = ({ userTemp, setUser, type }) => {
+  const { modalType, component, title } = useSelector(
+    ProfileEditingModalState$
+  );
   const dispatch = useDispatch();
 
   const handleOnSubmit = React.useCallback(() => {
@@ -25,7 +27,7 @@ export const ProfileEditingModal = ({ userTemp, setUser }) => {
   ) : (
     <BottomActionSheet
       header={title}
-      isOpen={isShow}
+      isOpen={modalType === type}
       onClose={handleOnClose}
       content={component}
       bottom={

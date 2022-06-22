@@ -31,11 +31,10 @@ const ProfileEdittingScreen = () => {
     title: "Chỉnh sửa Cá nhân",
     backgroundColor: "white",
     leftIcon: <TurnBackButton goBackAction={handleOnCancelEditing} />,
-    rightChildren: (
-      <Button variant="solid" onPress={handleOnCancelEditing}>
+    rightChildren: 
+      <Button variant="solid" color="black" onPress={handleOnCancelEditing}>
         Hủy
       </Button>
-    ),
   };
 
   return !isLoading ? (

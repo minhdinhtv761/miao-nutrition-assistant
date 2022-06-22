@@ -8,18 +8,17 @@ import BirthdayModalBody from "./modals/BirthdayModalBody";
 import Colors from "../../styles/colors";
 import { GenderModalBody } from "./modals/GenderModalBody";
 import MenuTitle from "./../general/typography/MenuTitle";
-import { ProfileEditingModal } from "./modals/ProfileEditingModal";
+import { ProfileEditingModal } from "../general/actionsheet/ProfileEditingModal";
 import React from "react";
 import { WeightHeightModalBody } from "./modals/WeightHeightModalBody";
 import moment from "moment";
 import { showProfileEditingModal } from "./../../redux/actions/modalAction";
 
-export const HealthInfo = ({ user, setUser, isEditting }) => {
+export const HealthInfo = ({ user, setUser, isEditting, type }) => {
   const dispatch = useDispatch();
   const [userTemp, setUserTemp] = React.useState(user);
-  console.log("userTemp", userTemp);
 
-  const listItems = {
+  let listItems = {
     gender: {
       title: "Giới tính",
       icon: { as: Ionicons, name: "person" },
@@ -56,45 +55,54 @@ export const HealthInfo = ({ user, setUser, isEditting }) => {
       title: "Ngày sinh",
       icon: { as: MaterialCommunityIcons, name: "cake-variant" },
       value: moment(user.birthday).format("DD/MM/YYYY"),
-      component: (
-        <BirthdayModalBody user={user} setUser={setUser} />
-      ),
+      component: <BirthdayModalBody user={user} setUser={setUser} />,
     },
   };
 
   const handleOnChangeProfile = React.useCallback(
     (payload) => {
-      dispatch(showProfileEditingModal(payload));
+      dispatch(showProfileEditingModal({ ...payload, modalType: "profile" }));
     },
     [dispatch]
   );
 
   return (
     <>
-      <MenuTitle title="Sức khỏe" />
+      <MenuTitle title={type === "goal" ? "Hiện tại" : "Sức khỏe"} />
       <VStack {...boxStyle} mt={space.m}>
-        {Object.entries(listItems).map(([key, value], index) => (
-          <Pressable
-            key={key}
-            onPress={() =>
-              isEditting
-                ? handleOnChangeProfile({
-                    component: value.component,
-                    title: value.title,
-                  })
-                : null
-            }
-          >
-            <TextElement
-              title={value.title}
-              text={value.value}
-              icon={value.icon}
-              isDivide={index < Object.entries(listItems).length - 1}
-            />
-          </Pressable>
-        ))}
+        {Object.entries(listItems).map(([key, value], index) => {
+          let isDivide = index < Object.entries(listItems).length - 1;
+          if (type === "goal") {
+            if (key === "gender" || key == "birthday") return null;
+            if (key === "height") isDivide = false;
+          }
+          return (
+            <Pressable
+              key={key}
+              onPress={() =>
+                isEditting
+                  ? handleOnChangeProfile({
+                      component: value.component,
+                      title: value.title,
+                    })
+                  : null
+              }
+            >
+              <TextElement
+                title={value.title}
+                text={value.value}
+                icon={value.icon}
+                isDivide={isDivide}
+              />
+            </Pressable>
+          );
+        })}
         {isEditting ? (
-          <ProfileEditingModal userTemp={userTemp} setUser={setUser} />
+          <ProfileEditingModal
+            userTemp={userTemp}
+            setUser={setUser}
+            type="profile"
+          />
         ) : null}
       </VStack>
     </>

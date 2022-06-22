@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const bmrCalculator = (percentBodyFat, gender, weight, height, age) => {
   if (percentBodyFat) {
     return 370 + 21.6 * weight * (1 - percentBodyFat / 100);
@@ -37,4 +39,13 @@ export const tdeeCalculator = (bmr, activity) => {
   }
 
   return Math.round(constNumber * bmr);
+};
+
+export const weightRecommendation = (height) => {
+  //height (cm) => height (m)
+  const convertedHeight = height / 100;
+  //normal BMI: 18.5 - 24.9
+  const min = 18.5 * convertedHeight * convertedHeight;
+  const max = 24.9 * convertedHeight * convertedHeight;
+  return { min: Math.round(min * 10) / 10, max: Math.round(max * 10) / 10 };
 };

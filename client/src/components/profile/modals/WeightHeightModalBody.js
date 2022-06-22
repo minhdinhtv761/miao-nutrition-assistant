@@ -41,6 +41,7 @@ export const WeightHeightModalBody = ({ userTemp, setUserTemp, unit }) => {
           keyboardType="numeric"
           value={text.toString()}
           onChangeText={handleOnTextChange}
+          onSubmitEditing={handleOnDone}
           placeholder={unit === "kg" ? "Cân nặng" : "Chiều cao"}
         />
         <InputRightAddon

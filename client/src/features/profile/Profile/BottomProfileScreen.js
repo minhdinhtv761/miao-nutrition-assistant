@@ -4,6 +4,7 @@ import { boxStyle, space } from "../../../styles/layout";
 
 import { Activity } from "../../../components/profile/Activity";
 import Colors from "../../../styles/colors";
+import { CurrentGoal } from "./../../../components/profile/CurrentGoal";
 import { HealthInfo } from "./../../../components/profile/HealthInfo";
 import MenuTitle from "./../../../components/general/typography/MenuTitle";
 import React from "react";
@@ -13,20 +14,14 @@ import { Subtitle } from "./../../../components/general/typography/Subtitle";
 import { UserBodyInfomation } from "./../../../components/profile/UserBodyInfomation";
 import { useSelector } from "react-redux";
 
-export const BottomProfileScreen = ({user}) => {
+export const BottomProfileScreen = ({ user }) => {
   const { goal } = user;
-  
+
   return (
     <VStack space={space.m}>
-      <VStack {...boxStyle} space={space.s}>
-        <Text> Mục tiêu hiện tại</Text>
-        <HStack alignItems="center" justifyContent="space-between">
-          <Heading color={Colors.fatColor}>Giảm mỡ chậm</Heading>
-          <Subtitle text="0.5 kg/tuần" />
-        </HStack>
-      </VStack>
+      <CurrentGoal />
       <UserBodyInfomation user={user.bodyComposition} />
-      <HealthInfo user={user}/>
+      <HealthInfo user={user} />
       <MenuTitle title="Dinh dưỡng" />
       <Box {...boxStyle} p={0}>
         <ShortNutritionTable
@@ -45,7 +40,6 @@ export const BottomProfileScreen = ({user}) => {
           }}
         />
       </Box>
-      <MenuTitle title="Mức độ vận động" />
       <Activity user={user} />
       <SafeAreaView />
       {/* <AllergenicFoods /> */}

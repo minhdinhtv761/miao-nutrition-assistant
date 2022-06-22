@@ -55,3 +55,26 @@ export const defaultNutrition = {
   protein: 0,
   carbohydrate: 0,
 };
+
+export const targetPerWeekLable = {
+  loseFast: {
+    value: -1,
+    label: "Giảm mỡ nhanh",
+  },
+  loseSlow: {
+    value: -0.5,
+    label: "Giảm mỡ chậm",
+  },
+  maintain: {
+    value: 0,
+    label: "Duy trì cân nặng",
+  },
+  gainSlow: {
+    value: 0.5,
+    label: "Tăng cân chậm",
+  },
+  gainFast: {
+    value: 1,
+    label: "Tăng cân nhanh",
+  },
+};
