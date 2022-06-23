@@ -4,8 +4,10 @@ import Colors from "../../../styles/colors";
 import { NutritionLabel } from "../../../constants/enums";
 import React from "react";
 import { Subtitle } from "../typography/Subtitle";
+import { UserState$ } from "../../../redux/selectors";
 import { calcPercent } from "./../../../utils/NutritionPercent";
 import { space } from "../../../styles/layout";
+import { useSelector } from "react-redux";
 
 const InfoItem = ({ type, value, maxValue }) => (
   <VStack space={space.s} alignItems="center">
@@ -22,7 +24,15 @@ const InfoItem = ({ type, value, maxValue }) => (
     <Subtitle text={`${value}/${maxValue}`} color="black" />
   </VStack>
 );
-export const NutritionPerDay = ({ child, parent }) => {
+export const NutritionPerDay = ({ child }) => {
+  const user = useSelector(UserState$);
+  const { goal } = user.data;
+  const parent = {
+    energy: goal.targetEnergy,
+    carbohydrate: goal.targetCarbohydrate,
+    fat: goal.targetFat,
+    protein: goal.targetProtein,
+  };
   return (
     <HStack
       w="100%"

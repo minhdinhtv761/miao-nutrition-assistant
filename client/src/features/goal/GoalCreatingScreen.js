@@ -11,18 +11,23 @@ import { LoadingScreen } from "../../components/general/LoadingScreen";
 import React from "react";
 import { TurnBackButton } from "../../components/general/buttons/iconButtons/TurnBackButton";
 import { UserState$ } from "../../redux/selectors";
+import { updateGoal } from "../../redux/actions";
 
 const GoalCreatingScreen = () => {
   const dispatch = useDispatch();
   const { data, isLoading } = useSelector(UserState$);
   const [user, setUser] = React.useState(data);
-  console.log("user",user)
-    const handleOnCancelEditing = React.useCallback(() => {
-      RootNavigation.pop();
-    }, [dispatch]);
+
+  const handleOnCancelEditing = React.useCallback(() => {
+    RootNavigation.pop();
+  }, [dispatch]);
 
   const handleOnSubmitEditing = React.useCallback(() => {
+    dispatch(
+      updateGoal.updateGoalRequest({ userId: user._id, goal: user.goal })
+    );
     RootNavigation.pop();
+
     // dispatch(updateUser.updateUserRequest(user));
   }, [dispatch, user]);
 
@@ -39,7 +44,11 @@ const GoalCreatingScreen = () => {
 
   return !isLoading ? (
     <>
-      <LayoutWithHeader  backgroundColor={Colors.background} topAppBar={topAppBar} children={<BodyGoalCreating user={user} setUser={setUser}/>} />
+      <LayoutWithHeader
+        backgroundColor={Colors.background}
+        topAppBar={topAppBar}
+        children={<BodyGoalCreating user={user} setUser={setUser} />}
+      />
       <BottomButton text="Hoàn tất" onPress={handleOnSubmitEditing} />
     </>
   ) : (

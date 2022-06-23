@@ -1,5 +1,5 @@
-import { MainFoodCompositionCalculator } from "../calcs/foodComposition.calc.js";
 import { DailyRecordModel } from "../models/dailyRecord.model.js";
+import { MainFoodCompositionCalculator } from "../calcs/foodComposition.calc.js";
 import { SampleFoodModel } from "../models/sampleFood.model.js";
 
 export const createOneMealInDailyRecord = async (req, res) => {
@@ -99,13 +99,21 @@ export const createOneMealInDailyRecord = async (req, res) => {
     dailyRecord.fat = dailyRecordFoodComposition?.fat;
     dailyRecord.carbohydrate = dailyRecordFoodComposition?.carbohydrate;
 
-    await dailyRecord.save();
-
-    return res.status(200).json({
-      success: true,
-      message: "Tạo bữa ăn cho nhật ký dinh dưỡng hằng ngày thành công.",
-      data: dailyRecord,
+    await dailyRecord.save().then((result) => {
+      DailyRecordModel.findById(result._id)
+        .populate("meals.mealDetails.itemId", "foodName")
+        .exec()
+        .then((newResult) =>
+        {
+          res.status(200).json({
+            success: true,
+            message: "Tạo nhật ký dinh dưỡng hằng ngày thành công.",
+            data: newResult,
+          })
+        }
+        );
     });
+
   } catch (error) {
     return res.status(500).json({
       success: false,
@@ -223,13 +231,25 @@ export const updateOneMealInDailyRecord = async (req, res) => {
     dailyRecord.fat = dailyRecordFoodComposition?.fat;
     dailyRecord.carbohydrate = dailyRecordFoodComposition?.carbohydrate;
 
-    await dailyRecord.save();
-
-    return res.status(200).json({
-      success: true,
-      message: "Cập nhật bữa ăn cho nhật ký dinh dưỡng hằng ngày thành công.",
-      data: dailyRecord,
+    await dailyRecord.save().then((result) => {
+      DailyRecordModel.findById(result._id)
+        .populate("meals.mealDetails.itemId", "foodName")
+        .exec()
+        .then((newResult) =>
+        {
+          res.status(200).json({
+            success: true,
+            message: "Tạo nhật ký dinh dưỡng hằng ngày thành công.",
+            data: newResult,
+          })
+        }
+        );
     });
+    // return res.status(200).json({
+    //   success: true,
+    //   message: "Cập nhật bữa ăn cho nhật ký dinh dưỡng hằng ngày thành công.",
+    //   data: dailyRecord,
+    // });
   } catch (error) {
     return res.status(500).json({
       success: false,

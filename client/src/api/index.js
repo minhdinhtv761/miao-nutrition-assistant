@@ -11,6 +11,13 @@ export const getUserByAccountID = (accountId) =>
 export const updateUser = (user) =>
   axios.patch(`${URL}/user/${user._id}`, user);
 
+export const updateGoal = ({userId, goal}) => {
+  console.log(userId, goal);
+  return (
+  axios.patch(`${URL}/goal/user/${userId}`, goal));
+
+}
+
 export const fetchFood = () => axios.get(`${URL}/sample-food`);
 
 /* #region  dailyRecord API */

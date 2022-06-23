@@ -1,7 +1,7 @@
 import * as actions from "../actions";
 import * as api from "../../api";
 
-import { call, put, takeLatest } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 
 export function* getDailyRecordSaga(action) {
   try {

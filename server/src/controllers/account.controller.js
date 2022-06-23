@@ -1,5 +1,5 @@
-import { Gender } from "../constants/enums.js";
 import { AccountModel } from "../models/account.model.js";
+import { Gender } from "../constants/enums.js";
 import { UserModel } from "../models/user.model.js";
 import { createUser } from "./user.controller.js";
 
@@ -86,7 +86,6 @@ export const createAccount = async (req, res) => {
       bodyComposition: bodyComposition,
     });
 
-    console.log(user)
 
     if (user.data.success === false) {
       await account.remove();

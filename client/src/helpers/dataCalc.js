@@ -4,15 +4,16 @@ import moment from "moment";
 
 export const getCaloriesRecommendPercent = (meals) => {
   const mealEattens = meals.map(value => value.mealType);
+  console.log("mealEattens",mealEattens)
   const type = Object.keys(MealTypes).find((key) => !mealEattens.includes(key));
   switch (type) {
-    case "breakfast":
+    case "Breakfast":
       return 0.3;
       break;
-    case "lunch":
+    case "Lunch":
       return 0.35;
       break;
-    case "dinner":
+    case "Dinner":
       return 0.25;
       break;
     default:

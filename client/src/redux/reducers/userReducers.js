@@ -1,4 +1,10 @@
-import { createDailyRecord, getType, getUser, updateUser } from "../actions";
+import {
+  createDailyRecord,
+  getType,
+  getUser,
+  updateGoal,
+  updateUser,
+} from "../actions";
 
 const initState = {
   isLoading: false,
@@ -40,6 +46,19 @@ export default function userReducers(state = initState, action) {
         isLoading: false,
         data: action.payload,
       };
+
+    case getType(updateGoal.updateGoalRequest):
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case getType(updateGoal.updateGoalSuccess):
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload,
+      };
+
     default:
       return state;
   }

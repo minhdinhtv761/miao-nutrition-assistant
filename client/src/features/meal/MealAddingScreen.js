@@ -34,6 +34,8 @@ const MealAddingScreen = () => {
   const [service, setService] = React.useState("Breakfast");
   const [foodList, setFoodList] = React.useState(list);
 
+  const { goal } = user.data;
+
   const onCancel = React.useCallback(() => {
     dispatch(actions.addingMealActions.resetFoodList());
     popToTop();

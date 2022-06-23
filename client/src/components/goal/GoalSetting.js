@@ -16,7 +16,6 @@ export const GoalSetting = ({ user, setUser }) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     if (user) {
-      console.log("user in GoalSetting", user)
       setUserTemp(user);
     }
   }, [user]);

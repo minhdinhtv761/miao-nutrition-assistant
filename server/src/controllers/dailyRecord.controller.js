@@ -165,15 +165,21 @@ export const createDailyRecord = async (req, res) => {
       carbohydrate: mealFoodComposition?.carbohydrate,
     });
 
-    await dailyRecord.save();
-    
-    dailyRecord.populate("meals.mealDetails.itemId", "foodName");
-    
-    return res.status(200).json({
-      success: true,
-      message: "Tạo nhật ký dinh dưỡng hằng ngày thành công.",
-      data: dailyRecord,
+    await dailyRecord.save().then((result) => {
+      DailyRecordModel.findById(result._id)
+        .populate("meals.mealDetails.itemId", "foodName")
+        .exec()
+        .then((newResult) =>
+        {
+          res.status(200).json({
+            success: true,
+            message: "Tạo nhật ký dinh dưỡng hằng ngày thành công.",
+            data: newResult,
+          })
+        }
+        );
     });
+    
   } catch (error) {
     return res.status(500).json({
       success: false,

@@ -17,7 +17,7 @@ const ProfileEdittingScreen = () => {
   const dispatch = useDispatch();
   const { data, isLoading } = useSelector(UserState$);
   const [user, setUser] = React.useState(data);
-  console.log("user", user);
+
   const handleOnCancelEditing = React.useCallback(() => {
     RootNavigation.pop();
   }, [dispatch]);

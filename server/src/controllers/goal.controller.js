@@ -1,5 +1,6 @@
-import { UserModel } from "../models/user.model.js";
 import { DateTimeUtil } from "../utils/dateTime.util.js";
+import { UserModel } from "../models/user.model.js";
+import { goalTargetCalculator } from "../calcs/goalComposition.calc.js";
 
 export const updateGoal = async (req, res) => {
   try {
@@ -25,7 +26,6 @@ export const updateGoal = async (req, res) => {
         message: "Thông tin cập nhật mục tiêu sức khỏe không đúng.",
       });
     }
-
     const user = await UserModel.findOneAndUpdate(
       { _id: userId },
       {
@@ -37,7 +37,7 @@ export const updateGoal = async (req, res) => {
         "goal.dietId": dietId,
       },
       { new: true }
-    );
+    ).populate("goal.dietId");
 
     if (!user) {
       return res.status(400).json({
@@ -45,8 +45,15 @@ export const updateGoal = async (req, res) => {
         message: "Người dùng không tồn tại.",
       });
     }
-
-    user.startWeight = user.bodyComposition.weight;
+    const { weight, TDEE } = user.bodyComposition;
+    const goal = goalTargetCalculator({
+      tdee: TDEE,
+      diet: user.goal.dietId,
+      weightPerWeek: weightPerWeek,
+    });
+    user.goal.startWeight = weight;
+    Object.keys(goal).map((key) => (user.goal[key] = goal[key]));
+    console.log(user)
     user.save();
 
     return res.status(200).json({

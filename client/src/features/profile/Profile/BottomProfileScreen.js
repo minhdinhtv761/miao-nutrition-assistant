@@ -19,7 +19,7 @@ export const BottomProfileScreen = ({ user }) => {
 
   return (
     <VStack space={space.m}>
-      <CurrentGoal />
+      <CurrentGoal goal={goal} />
       <UserBodyInfomation user={user.bodyComposition} />
       <HealthInfo user={user} />
       <MenuTitle title="Dinh dưỡng" />
@@ -31,12 +31,6 @@ export const BottomProfileScreen = ({ user }) => {
             carbohydrate: 250,
             fat: 44.4,
             protein: 150,
-          }}
-          maxValue={{
-            energy: goal.targetEnergy,
-            carbohydrate: goal.targetCarbohydrate,
-            fat: goal.targetFat,
-            protein: goal.targetProtein,
           }}
         />
       </Box>

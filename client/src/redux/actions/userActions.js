@@ -11,3 +11,9 @@ export const updateUser = createActions({
   updateUserSuccess: (payload) => payload,
   updateUserFailure: (err) => err,
 });
+
+export const updateGoal = createActions({
+  updateGoalRequest: (payload) => payload,
+  updateGoalSuccess: (payload) => payload,
+  updateGoalFailure: (err) => err,
+});

@@ -4,8 +4,8 @@ import {
   updateOneMealInDailyRecord,
 } from "./dailyRecordActions";
 import { fetchFood, passFoodData } from "./foodActions";
-import { getUser, updateUser } from "./userActions";
-import { hideEdittingUser, showEdittingUser } from './edittingUserActions';
+import { getUser, updateGoal, updateUser } from "./userActions";
+import { hideEdittingUser, showEdittingUser } from "./edittingUserActions";
 import {
   hideProfileEditingModal,
   hideSnackBarAction,
@@ -13,7 +13,7 @@ import {
   showSnackBarAction,
 } from "./modalAction";
 
-import { addingMealActions } from './addingMealActions';
+import { addingMealActions } from "./addingMealActions";
 import { authActions } from "./authActions";
 import { filterActions } from "./filterActions";
 
@@ -30,6 +30,7 @@ export {
   authActions,
   getUser,
   updateUser,
+  updateGoal,
   getDailyRecord,
   createDailyRecord,
   updateOneMealInDailyRecord,
@@ -37,5 +38,5 @@ export {
   showProfileEditingModal,
   hideProfileEditingModal,
   showEdittingUser,
-  hideEdittingUser
+  hideEdittingUser,
 };

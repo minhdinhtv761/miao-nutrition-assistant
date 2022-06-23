@@ -8,16 +8,20 @@ import {
 import Colors from "./../../styles/colors";
 import { DetailNutrition } from "../../components/home/DetailNutrition";
 import { FullNutritionProgress } from "../../components/general/progress/FullNutritionProgress";
+import { UserState$ } from "../../redux/selectors";
 import { calcNutritionPercent } from "../../utils/NutritionPercent";
 import { defaultNutrition } from "../../constants/enums";
 import { space } from "./../../styles/layout";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useSelector } from "react-redux";
 
-export const TopHomeScreen = ({ goal, dailyRecord }) => {
+export const TopHomeScreen = ({ dailyRecord }) => {
   const safeArea = useSafeAreaInsets();
   var heightHeader = HEADER_HEIGHT + safeArea.top;
   var heightBox = TOP_BANNER_HEIGHT;
   var heightDetailBox = SUBBOX_HEIGHT;
+  const userData = useSelector(UserState$);
+  const { goal } = userData.data;
 
   const todayDailyRecord = dailyRecord ? dailyRecord : defaultNutrition;
 
