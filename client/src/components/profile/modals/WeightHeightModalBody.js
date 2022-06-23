@@ -4,7 +4,6 @@ import React from "react";
 import { space } from "../../../styles/layout";
 
 export const WeightHeightModalBody = ({ userTemp, setUserTemp, unit }) => {
-  console.log("userTemp 2", userTemp);
   const [text, setText] = React.useState(
     unit === "kg"
       ? userTemp.bodyComposition.weight

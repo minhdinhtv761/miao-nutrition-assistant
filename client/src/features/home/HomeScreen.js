@@ -39,14 +39,12 @@ const HomeScreen = () => {
       <Icon size="sm" as={MaterialCommunityIcons} name="calendar-blank" />
     ),
   };
-
   return !userData.isLoading && !dailyRecord.isLoading ? (
     <>
       <LayoutWithImage
         topAppBar={topAppBar}
         aboveChildren={
           <TopHomeScreen
-            goal={userData.data.goal}
             dailyRecord={dailyRecord.data}
           />
         }
